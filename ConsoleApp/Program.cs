@@ -10,9 +10,11 @@ class Program
 
             // manutencao.VerificaNumeroPrimo();
             // manutencao.ExibirNumParImpar();
-            //manutencao.ListarNumerosPositivo();
-            //manutencao.ExibeQtdMultiplosDeTres();
-            manutencao.InformaNumeroMaiorMenor();
+            // manutencao.ListarNumerosPositivo();
+            // manutencao.ExibeQtdMultiplosDeTres();
+            // manutencao.InformaNumeroMaiorMenor();
+
+            manutencao.ExibeMenuInterativo();
         }
         catch (Exception e)
         {

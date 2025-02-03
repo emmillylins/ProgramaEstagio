@@ -9,9 +9,7 @@ class Program
             var manutencao = new Manutencao();
 
             // manutencao.VerificaNumeroPrimo();
-
             // manutencao.ExibirNumParImpar();
-
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             manutencao.InformaNumeroMaiorMenor();

@@ -1,15 +1,19 @@
-﻿using Biblioteca.Validacoes;
+﻿using Biblioteca.Validacao;
+using System.ComponentModel.DataAnnotations;
+using System;
 using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.ConstrainedExecution;
 
-namespace Biblioteca.Manutencoes
+namespace Biblioteca.Manutencao
 {
-    public class Manutencao
+    public class Questoes
     {
         public void VerificaNumeroPrimo()
         {
             try
             {
-                var validacoes = new Validacao();
+                var validacoes = new Validacoes();
 
                 Console.Write("Digite um número: ");
 
@@ -38,7 +42,7 @@ namespace Biblioteca.Manutencoes
         {
             try
             {
-                var validacoes = new Validacao();
+                var validacoes = new Validacoes();
 
 
                 List<string> ordem = ["primeiro", "segundo", "terceiro", "quarto", "quinto"];
@@ -50,7 +54,7 @@ namespace Biblioteca.Manutencoes
                 for (int i = 0; i < ordem.Count; i++)
                 {
                     Console.WriteLine($"Informe o {ordem[i]} número: ");
-                    string numeroInserido = Console.ReadLine();
+                    var numeroInserido = Console.ReadLine();
 
                     if (!int.TryParse(numeroInserido, out var numero))
                     {
@@ -88,7 +92,7 @@ namespace Biblioteca.Manutencoes
             Console.WriteLine("Program que lista somente 7 números pares digitados pelo usuário.");
             try
             {
-                Validacao validacoes = new();
+                Validacoes validacoes = new();
                 List<string> ordem = ["primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto", "sétimo"];
                 List<int> numerosInteiros = [];
 
@@ -115,7 +119,7 @@ namespace Biblioteca.Manutencoes
         //Determine quantos deles são múltiplo de 3
         public void ExibeQtdMultiplosDeTres()
         {
-            var validacoes = new Validacao();
+            var validacoes = new Validacoes();
             try
             {
                 List<int> numerosMultiplos = [];
@@ -153,7 +157,7 @@ namespace Biblioteca.Manutencoes
         {
             try
             {
-                var validacoes = new Validacao();
+                var metodos = new Metodos();
                 var numeros = new List<double>();
 
                 Console.WriteLine("Programa que informa qual dos números é o maior e qual é o menor.");
@@ -181,12 +185,49 @@ namespace Biblioteca.Manutencoes
                     numeros.Add(numero);
                 }
 
-                (double maior, double menor) = validacoes.RetornaNumeroMaiorMenor(numeros);
+                (double maior, double menor) = metodos.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
             }
             catch (Exception) { throw; }
         }
+
+        //Crie um programa que exiba um menu interativo com as seguintes opções:
+        //1 - Cadastrar usuário
+        //2 - Listar usuários cadastrados
+        //3 - Sair
+        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+
+
+
+        //Sistema de Login com Tentativas Limitadas
+        //Crie um programa que simule um sistema de login.
+        //O usuário deve fornecer um nome de usuário e senha.
+        //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
+        //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
+        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
+
+
+
+        //Caixa Eletrônico Simples
+        //Desenvolva um programa que simule um caixa eletrônico.
+        //O usuário começa com um saldo inicial.
+        //Ele pode escolher entre as opções:
+        //1 - Depositar
+        //2 - Sacar
+        //3 - Ver saldo
+        //4 - Sair
+        //Os saques devem ser permitidos apenas se houver saldo suficiente.
+        //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
+
+
+
+        //Cadastro de Produtos com Preços e Cálculo de Total
+        //Crie um programa que permita cadastrar produtos com nome e preço.        //O usuário pode cadastrar quantos produtos desejar.
+        //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
+        //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
+        //Não deve permitir preços negativos.
+
     }
 }
 

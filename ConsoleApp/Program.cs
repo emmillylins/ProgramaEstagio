@@ -1,4 +1,6 @@
-﻿using Biblioteca.Manutencoes;
+﻿
+
+using Biblioteca.Manutencao;
 
 class Program
 {
@@ -6,7 +8,7 @@ class Program
     {
         try
         {
-            var manutencao = new Manutencao();
+            var manutencao = new Questoes();
 
             // manutencao.VerificaNumeroPrimo();
             // manutencao.ExibirNumParImpar();

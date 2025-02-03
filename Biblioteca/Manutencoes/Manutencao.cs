@@ -153,7 +153,7 @@ namespace Biblioteca.Manutencoes
         {
             try
             {
-                var validacao = new Validacao();
+                var validacoes = new Validacao();
                 var numeros = new List<double>();
 
                 Console.WriteLine("Programa que informa qual dos números é o maior e qual é o menor.");
@@ -181,7 +181,7 @@ namespace Biblioteca.Manutencoes
                     numeros.Add(numero);
                 }
 
-                (double maior, double menor) = validacao.RetornaNumeroMaiorMenor(numeros);
+                (double maior, double menor) = validacoes.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
             }

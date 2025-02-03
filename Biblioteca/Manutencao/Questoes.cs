@@ -1,9 +1,5 @@
 ﻿using Biblioteca.Validacao;
-using System.ComponentModel.DataAnnotations;
-using System;
 using System.Globalization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Runtime.ConstrainedExecution;
 
 namespace Biblioteca.Manutencao
 {

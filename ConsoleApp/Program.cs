@@ -1,6 +1,4 @@
-﻿
-
-using Biblioteca.Manutencao;
+﻿using Biblioteca.Manutencao;
 
 class Program
 {

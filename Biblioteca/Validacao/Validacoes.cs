@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Biblioteca.Validacao
+﻿namespace Biblioteca.Validacao
 {
     public class Validacoes
     {

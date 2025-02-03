@@ -12,7 +12,8 @@ class Program
             // manutencao.ExibirNumParImpar();
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
-            manutencao.InformaNumeroMaiorMenor();
+            // manutencao.InformaNumeroMaiorMenor();
+
         }
         catch (Exception e)
         {

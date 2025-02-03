@@ -1,4 +1,6 @@
-﻿namespace Biblioteca.Manutencao
+﻿using static Biblioteca.Manutencao.Metodos;
+
+namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
@@ -16,5 +18,6 @@
             }
             catch (Exception) { throw; }
         }
+
     }
 }

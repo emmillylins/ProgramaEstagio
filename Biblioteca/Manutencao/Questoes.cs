@@ -79,6 +79,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        // Questão de Elton
         // Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
         // apenas os números positivos em uma lista.
         // Se um número negativo for inserido ele deve ser ignorado e o programa deve solicitar
@@ -111,6 +112,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        // Questão de Vanessa
         //Escreva um programa que solicite ao usuario 5 números inteiros
         //Determine quantos deles são múltiplo de 3
         public void ExibeQtdMultiplosDeTres()
@@ -134,18 +136,14 @@ namespace Biblioteca.Manutencao
                     }
                     bool verificaMultiploDeTres = validacoes.ValidaMultiplosDeTres(numero);
 
-                    if (verificaMultiploDeTres == true)
-                        qtdNumerosMultiplos++;
-
+                    if (verificaMultiploDeTres == true) qtdNumerosMultiplos++;
                 }
-
                 Console.WriteLine($"Quantidade de números múltiplos: {qtdNumerosMultiplos}");
-
-
             }
             catch (Exception) { throw; }
         }
 
+        // Questão de Clara
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
         // e qual é o menor digitado
         // Caso o número não seja válido, ele deve pedir novamente.
@@ -219,10 +217,12 @@ namespace Biblioteca.Manutencao
 
 
         //Cadastro de Produtos com Preços e Cálculo de Total
-        //Crie um programa que permita cadastrar produtos com nome e preço.        //O usuário pode cadastrar quantos produtos desejar.
+        //Crie um programa que permita cadastrar produtos com nome e preço.        
+        //O usuário pode cadastrar quantos produtos desejar.
         //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
+
 
     }
 }

@@ -56,9 +56,9 @@ namespace Biblioteca.Manutencao
 
                 foreach (var usuario in usuarios)
                 {
-                    Console.WriteLine(@$"nome: {usuario.Nome}\n 
-                                        E-mail: {usuario.Email}\n
-                                        Senha: {usuario.Senha}\n
+                    Console.WriteLine(@$"nome: {usuario.Nome}
+                                        E-mail: {usuario.Email}
+                                        Senha: {usuario.Senha}
                                         Idade: {usuario.Idade}"
                                         );
                 }

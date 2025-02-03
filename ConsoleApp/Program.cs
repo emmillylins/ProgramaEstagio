@@ -15,8 +15,6 @@ class Program
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             manutencao.InformaNumeroMaiorMenor();
-
-
         }
         catch (Exception e)
         {

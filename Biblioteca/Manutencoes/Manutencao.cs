@@ -83,7 +83,6 @@ namespace Biblioteca.Manutencoes
         // apenas os números positivos em uma lista.
         // Se um número negativo for inserido ele deve ser ignorado e o programa deve solicitar
         // um novo número no lugar, utilize um loop for para receber os 7 números válidos.
-
         public void ListarNumerosPositivo()
         {
             Console.WriteLine("Program que lista somente 7 números pares digitados pelo usuário.");
@@ -114,7 +113,6 @@ namespace Biblioteca.Manutencoes
 
         //Escreva um programa que solicite ao usuario 5 números inteiros
         //Determine quantos deles são múltiplo de 3
-
         public void ExibeQtdMultiplosDeTres()
         {
             var validacoes = new Validacao();
@@ -151,19 +149,19 @@ namespace Biblioteca.Manutencoes
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
         // e qual é o menor digitado
         // Caso o número não seja válido, ele deve pedir novamente.
-
         public void InformaNumeroMaiorMenor()
         {
             try
             {
-                Validacao validacao = new Validacao();
-                List<double> numeros = new List<double>();
+                var validacao = new Validacao();
+                var numeros = new List<double>();
 
                 Console.WriteLine("Programa que informa qual dos números é o maior e qual é o menor.");
 
                 for (int i = 0; i < 5; i++)
                 {
-                    Console.Write("Insira um número: ");
+                    Console.Write($"Insira o {i + 1}° número: ");
+
                     var numeroInserido = Console.ReadLine();
 
                     if (!double.TryParse(numeroInserido, CultureInfo.InvariantCulture, out var numero))
@@ -185,7 +183,7 @@ namespace Biblioteca.Manutencoes
 
                 (double maior, double menor) = validacao.RetornaNumeroMaiorMenor(numeros);
 
-                Console.WriteLine($"O maior número foi {maior} e o menor número foi {menor}");
+                Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
             }
             catch (Exception) { throw; }
         }

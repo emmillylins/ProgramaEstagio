@@ -1,4 +1,5 @@
-﻿using Biblioteca.Validacao;
+﻿using Biblioteca.Classe;
+using Biblioteca.Validacao;
 using System.Globalization;
 
 namespace Biblioteca.Manutencao
@@ -192,39 +193,85 @@ namespace Biblioteca.Manutencao
         //2 - Listar usuários cadastrados
         //3 - Sair
         //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+        public void ExibirMenuInterativo()
+        {
+            try
+            {
+                Metodos metodos = new();
+                Usuario usuario = new();
+
+                // Lista para armazenar os objetos usuários
+                List<Usuario> usuarios = new List<Usuario>();
 
 
 
-        //Sistema de Login com Tentativas Limitadas
-        //Crie um programa que simule um sistema de login.
-        //O usuário deve fornecer um nome de usuário e senha.
-        //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
-        //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
-        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
+                Console.WriteLine("Menu Interativo para Cadastro de Usuários");
+
+                // String para armazenar o menu
+                string menuInterativo = " 1 - Cadastrar usuário \n 2 - Listar usuários cadastrados \n 3 - Sair";
+
+                while (true)
+                {
+                    // Exibindo o menu
+                    Console.WriteLine(menuInterativo);
+
+                    var numeroInserido = Console.ReadLine();
+
+                    if (!int.TryParse(numeroInserido, out var opcaoEscolhida))
+                    {
+                        Console.WriteLine("Valor inválido! \n" + menuInterativo);
+                    }
+
+                    if (opcaoEscolhida == 1)
+                    {
+                        usuario = metodos.CadastrarUsuario();
+                        usuarios.Add(usuario);
+                        Console.WriteLine("Usuário cadastrado com sucesso! \n ");
+                    }
+                    else if (opcaoEscolhida == 2)
+                    {
+                        metodos.ListarUSuarios(usuarios);
+                    }
+                    else if (opcaoEscolhida == 3)
+                    {
+                        break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+
+
+            //Sistema de Login com Tentativas Limitadas
+            //Crie um programa que simule um sistema de login.
+            //O usuário deve fornecer um nome de usuário e senha.
+            //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
+            //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
+            //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
 
 
 
-        //Caixa Eletrônico Simples
-        //Desenvolva um programa que simule um caixa eletrônico.
-        //O usuário começa com um saldo inicial.
-        //Ele pode escolher entre as opções:
-        //1 - Depositar
-        //2 - Sacar
-        //3 - Ver saldo
-        //4 - Sair
-        //Os saques devem ser permitidos apenas se houver saldo suficiente.
-        //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
+            //Caixa Eletrônico Simples
+            //Desenvolva um programa que simule um caixa eletrônico.
+            //O usuário começa com um saldo inicial.
+            //Ele pode escolher entre as opções:
+            //1 - Depositar
+            //2 - Sacar
+            //3 - Ver saldo
+            //4 - Sair
+            //Os saques devem ser permitidos apenas se houver saldo suficiente.
+            //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
 
 
 
-        //Cadastro de Produtos com Preços e Cálculo de Total
-        //Crie um programa que permita cadastrar produtos com nome e preço.        
-        //O usuário pode cadastrar quantos produtos desejar.
-        //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
-        //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
-        //Não deve permitir preços negativos.
+            //Cadastro de Produtos com Preços e Cálculo de Total
+            //Crie um programa que permita cadastrar produtos com nome e preço.        
+            //O usuário pode cadastrar quantos produtos desejar.
+            //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
+            //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
+            //Não deve permitir preços negativos.
 
 
+        }
     }
 }
 

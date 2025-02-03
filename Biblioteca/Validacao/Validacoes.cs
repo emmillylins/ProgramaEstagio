@@ -1,4 +1,6 @@
-﻿namespace Biblioteca.Validacao
+﻿using System.Data.SqlTypes;
+
+namespace Biblioteca.Validacao
 {
     public class Validacoes
     {
@@ -42,6 +44,22 @@
             try
             {
                 if (numero % 3 == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public bool ValidaNumeroPositivoMaiorZero(int numero)
+        {
+            try
+            {
+                if (numero > 0)
                 {
                     return true;
                 }

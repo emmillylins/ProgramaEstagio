@@ -1,4 +1,4 @@
-﻿using Biblioteca.Classe;
+﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
 
@@ -205,15 +205,56 @@ namespace Biblioteca.Manutencao
 
 
 
-                Console.WriteLine("Menu Interativo para Cadastro de Usuários");
+        public void MenuInterativo()
 
-                // String para armazenar o menu
-                string menuInterativo = " 1 - Cadastrar usuário \n 2 - Listar usuários cadastrados \n 3 - Sair";
+        {
+            try
+            {
+                Console.WriteLine("Menu interativo para cadastro de usuários!");
+
+                List <Usuario> usuarios = new List<Usuario>();
+                var usuario = new Usuario();
+                var metodos = new Metodos();
 
                 while (true)
                 {
-                    // Exibindo o menu
-                    Console.WriteLine(menuInterativo);
+
+                    Console.WriteLine(@"1 - Cadastrar usuário
+                    2-Listar usuários cadastrados
+                    3- Sair");
+
+                    var usuarioInserido = Console.ReadLine();
+
+                    if (!int.TryParse(usuarioInserido, out int opcao) || (opcao != 1) && (opcao != 2) && (opcao != 3))
+                    {
+                        throw new Exception("Escolha uma das opções mostradas ! 1 - Cadastrar usuário  2-Listar usuários cadastrados  3- Sair");
+                    }
+
+                    if (opcao == 1)
+                    {
+                        usuario= metodos.CadastrarUsuario();
+                        usuarios.Add(usuario);
+                    }
+                    else if(opcao == 2)
+                    {
+                        metodos.MostrarUsuario(usuarios);
+                    
+                    }
+
+                    else if (opcao == 3)
+                    {
+                        break;
+                    }
+                }
+
+            }
+            catch (Exception) { throw; }
+
+
+
+
+
+        }
 
                     var numeroInserido = Console.ReadLine();
 

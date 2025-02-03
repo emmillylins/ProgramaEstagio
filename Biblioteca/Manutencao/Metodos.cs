@@ -1,6 +1,5 @@
-﻿using System.Threading.Channels;
-using Biblioteca.Classe;
-using Biblioteca.Validacao;
+﻿using Biblioteca.Classes;
+using System.Runtime.Intrinsics.X86;
 
 namespace Biblioteca.Manutencao
 {
@@ -21,58 +20,57 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        // Cadastrar Usuário
+
+        // metodo cadastrar usuário
         public Usuario CadastrarUsuario()
         {
             try
             {
-                var validacoes = new Validacoes();
                 Usuario usuario = new Usuario();
-
-                Console.Write("Informe o nome do usuário: ");
+                Console.WriteLine("Insira seu nome: ");
                 usuario.Nome = Console.ReadLine();
 
-                Console.Write("Informe o email do usuário: ");
+                Console.Write("Insira seu E-mail: ");
                 usuario.Email = Console.ReadLine();
 
-                Console.Write("Informe a idade do usuário: ");
-                
+                Console.Write("Insira sua senha: ");
+                usuario.Senha = Console.ReadLine();
+
+                Console.Write("Insira sua idade: ");
                 if (!int.TryParse(Console.ReadLine(), out var idade))
                 {
-                    Console.WriteLine("Valor para idade inserido inválido");
+                    throw new Exception("Insira apenas valores numéricos!");
                 }
+                usuario.Idade = idade;
 
-                // Verificando se a idade é um número válido
-                bool idadeValida = validacoes.ValidaNumeroPositivoMaiorZero(idade);
-
-                if (idadeValida)
-                {
-                    usuario.Idade = idade;
-                }
-                else
-                {
-                    Console.WriteLine("Insira uma idade válida! \n  ");
-                }
-                    // retornando uma instância da classe usuário
-                    return usuario;
+                return usuario;
             }
             catch (Exception) { throw; }
         }
+        // Método listar Usuário
 
-        // Método para listar usuários 
-        public void ListarUSuarios(List<Usuario> usuarios)
+        public void MostrarUsuario(List<Usuario> usuarios)
         {
-            if (usuarios.Count > 0)
+            try
             {
+
                 foreach (var usuario in usuarios)
                 {
-                    Console.WriteLine($" Nome: {usuario.Nome} \n Idade: {usuario.Idade} \n Email: {usuario.Email}");
+                    Console.WriteLine(@$"nome: {usuario.Nome}
+                                        E-mail: {usuario.Email}
+                                        Senha: {usuario.Senha}
+                                        Idade: {usuario.Idade}"
+                                        );
                 }
+                if (usuarios.Count == 0)
+                {
+                    Console.WriteLine("Nenhum usuario cadastrado");
+                }
+
             }
-            else
-            {
-                return;
-            }
+            catch (Exception) { throw; }
+
         }
+
     }
 }

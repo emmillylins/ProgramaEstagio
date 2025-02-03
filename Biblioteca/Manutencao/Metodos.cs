@@ -1,4 +1,7 @@
-﻿namespace Biblioteca.Manutencao
+﻿using Biblioteca.Classes;
+using System.Runtime.Intrinsics.X86;
+
+namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
@@ -16,5 +19,58 @@
             }
             catch (Exception) { throw; }
         }
+
+
+        // metodo cadastrar usuário
+        public Usuario CadastrarUsuario()
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                Console.WriteLine("Insira seu nome: ");
+                usuario.Nome = Console.ReadLine();
+
+                Console.Write("Insira seu E-mail: ");
+                usuario.Email = Console.ReadLine();
+
+                Console.Write("Insira sua senha: ");
+                usuario.Senha = Console.ReadLine();
+
+                Console.Write("Insira sua idade: ");
+                if (!int.TryParse(Console.ReadLine(), out var idade))
+                {
+                    throw new Exception("Insira apenas valores numéricos!");
+                }
+                usuario.Idade = idade;
+
+                return usuario;
+            }
+            catch (Exception) { throw; }
+        }
+        // Método listar Usuário
+
+        public void MostrarUsuario(List<Usuario> usuarios)
+        {
+            try
+            {
+
+                foreach (var usuario in usuarios)
+                {
+                    Console.WriteLine(@$"nome: {usuario.Nome}\n 
+                                        E-mail: {usuario.Email}\n
+                                        Senha: {usuario.Senha}\n
+                                        Idade: {usuario.Idade}"
+                                        );
+                }
+                if (usuarios.Count == 0)
+                {
+                    Console.WriteLine("Nenhum usuario cadastrado");
+                }
+
+            }
+            catch (Exception) { throw; }
+
+        }
+
     }
 }

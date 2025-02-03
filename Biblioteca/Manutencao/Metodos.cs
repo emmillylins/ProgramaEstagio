@@ -1,4 +1,6 @@
-﻿namespace Biblioteca.Manutencao
+﻿using Biblioteca.Classes;
+
+namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
@@ -13,6 +15,26 @@
                 menor = listaNumeros.Min();
 
                 return (maior, menor);
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Usuario CadastrarUsuario()
+        {
+            var usuario = new Usuario();
+            try
+            {
+                Console.Write("Digite um nome: ");
+                usuario.Nome = Console.ReadLine();
+
+                Console.Write("Digite um email: ");
+                usuario.Email = Console.ReadLine();
+
+                Console.Write("Digite uma idade: ");
+                if (!int.TryParse(Console.ReadLine(), out int numero))
+                    Console.WriteLine("Digite uma idade válida.");
+
+                return usuario;
             }
             catch (Exception) { throw; }
         }

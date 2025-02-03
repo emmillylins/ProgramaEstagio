@@ -174,24 +174,20 @@ namespace Biblioteca.Manutencoes
 
                     if (numeros.Count > 1)
                     {
-                        if (numeros[i-1] == numeros[i - 2])
+                        if (numero == numeros.Last())
                         {
                             Console.WriteLine("O número atual não pode ser igual ao número anterior.");
                             i--;
                         }
                     }
-
                     numeros.Add(numero);
-
                 }
+
                 (double maior, double menor) = validacao.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"O maior número foi {maior} e o menor número foi {menor}");
-
             }
             catch (Exception) { throw; }
-
-
         }
     }
 }

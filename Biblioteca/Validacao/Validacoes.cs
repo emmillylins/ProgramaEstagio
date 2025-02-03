@@ -1,4 +1,6 @@
-﻿namespace Biblioteca.Validacao
+﻿using Biblioteca.Classes;
+
+namespace Biblioteca.Validacao
 {
     public class Validacoes
     {
@@ -49,6 +51,25 @@
                 {
                     return false;
                 }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public bool ValidaUsuarioExistente(string login, string senha)
+        {
+            try
+            {
+                var usuarioPreCadastrado = new Usuario
+                {
+                    Nome = "emy",
+                    NomeUsuario = "emylinda",
+                    Senha = "amogatos"
+                };
+
+                if (login == usuarioPreCadastrado.NomeUsuario && senha == usuarioPreCadastrado.Senha)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception) { throw; }
         }

@@ -13,7 +13,7 @@ class Program
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
-            manutencao.CadastrarUsuarios();
+            manutencao.SistemaLogin();
         }
         catch (Exception e)
         {

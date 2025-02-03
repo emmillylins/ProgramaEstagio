@@ -228,21 +228,68 @@ namespace Biblioteca.Manutencao
                         default:
                             Console.WriteLine("Digite um valor válido");
                             break;
-                    }                   
+                    }
                 }
             }
             catch (Exception) { throw; }
+        }
 
 
-            //Sistema de Login com Tentativas Limitadas
-            //Crie um programa que simule um sistema de login.
-            //O usuário deve fornecer um nome de usuário e senha.
-            //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
-            //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
-            //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
-            //sem descontar tentativas.
+        //Sistema de Login com Tentativas Limitadas
+        //Crie um programa que simule um sistema de login.
+        //O usuário deve fornecer um nome de usuário e senha.
+        //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
+        //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
+        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
+        //sem descontar tentativas.
+        public void SistemaLogin()
+        {
+            try
+            {
+                int tentativas = 3;
+                var validacoes = new Validacoes();
 
-        
+                Console.WriteLine("Sistema de login.");
+
+                for (int i = 0; i < tentativas; i++)
+                {
+                    Console.Write("Insira seu nome de usuário: ");
+                    string nomeUsuario = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(nomeUsuario))
+                    {
+                        Console.WriteLine("O usuário não pode ser nulo.");
+                        i--;
+                    }
+                    else
+                    {
+
+                        Console.Write("Insira sua senha: ");
+                        var senha = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(senha))
+                        {
+                            Console.WriteLine("A senha não pode ser nula.");
+                            i--;
+                        }
+
+                        if (validacoes.ValidaUsuarioExistente(nomeUsuario, senha))
+                        {
+                            Console.WriteLine("Login efetuado com sucesso.");
+                            Console.ReadKey();
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Login ou senha inválidos.");
+                        }
+                    }
+                }
+                Console.WriteLine("Número de tentativas excedido.");
+                Console.ReadKey();
+            }
+            catch (Exception) { throw; };
+
 
 
             //Caixa Eletrônico Simples
@@ -265,8 +312,8 @@ namespace Biblioteca.Manutencao
             //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
             //Não deve permitir preços negativos.
 
-
         }
+
     }
 }
 

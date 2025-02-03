@@ -182,6 +182,7 @@ namespace Biblioteca.Manutencao
                 (double maior, double menor) = metodos.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
+                Console.ReadKey();
             }
             catch (Exception) { throw; }
         }

@@ -191,7 +191,8 @@ namespace Biblioteca.Manutencao
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
         //3 - Sair
-        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista
+        //até escolher a opção de sair.
 
 
 
@@ -200,7 +201,8 @@ namespace Biblioteca.Manutencao
         //O usuário deve fornecer um nome de usuário e senha.
         //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
         //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
-        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
+        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
+        //sem descontar tentativas.
 
 
 

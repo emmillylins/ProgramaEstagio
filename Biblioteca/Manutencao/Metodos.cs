@@ -20,52 +20,22 @@ namespace Biblioteca.Manutencao
         }
 
 
-        // metodo cadastrar usuário
-        public Usuario CadastrarUsuario()
-        {
-            try
-            {
-                Usuario usuario = new Usuario();
-                Console.WriteLine("Insira seu nome: ");
-                usuario.Nome = Console.ReadLine();
-
-                Console.Write("Insira seu E-mail: ");
-                usuario.Email = Console.ReadLine();
-
-                Console.Write("Insira sua senha: ");
-                usuario.Senha = Console.ReadLine();
-
-                Console.Write("Insira sua idade: ");
-                if (!int.TryParse(Console.ReadLine(), out var idade))
-                {
-                    throw new Exception("Insira apenas valores numéricos!");
-                }
-                usuario.Idade = idade;
-
-                return usuario;
-            }
-            catch (Exception) { throw; }
-        }
-        // Método listar Usuário
-
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
             {
-
-                foreach (var usuario in usuarios)
-                {
-                    Console.WriteLine(@$"nome: {usuario.Nome}
-                                        E-mail: {usuario.Email}
-                                        Senha: {usuario.Senha}
-                                        Idade: {usuario.Idade}"
-                                        );
-                }
                 if (usuarios.Count == 0)
+                    Console.WriteLine("\nNenhum usuario cadastrado\n");
+                else
                 {
-                    Console.WriteLine("Nenhum usuario cadastrado");
+                    foreach (var usuario in usuarios)
+                    {
+                        Console.WriteLine($"\nUsuários cadastrados:" +
+                            $"\nNome: {usuario.Nome}" +
+                            $"\nEmail: {usuario.Email}" +
+                            $"\nIdade: {usuario.Idade}");
+                    }
                 }
-
             }
             catch (Exception) { throw; }
 
@@ -83,8 +53,10 @@ namespace Biblioteca.Manutencao
                 usuario.Email = Console.ReadLine();
 
                 Console.Write("Digite uma idade: ");
-                if (!int.TryParse(Console.ReadLine(), out int numero))
+                if (!int.TryParse(Console.ReadLine(), out int idade))
                     Console.WriteLine("Digite uma idade válida.");
+                else
+                    usuario.Idade = idade;
 
                 return usuario;
             }

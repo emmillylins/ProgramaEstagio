@@ -194,38 +194,41 @@ namespace Biblioteca.Manutencao
         //3 - Sair
         //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista
         //até escolher a opção de sair.
-        public void MenuUsuarios()
+        public void CadastrarUsuarios()
         {
-            Metodos metodos = new();
-            Console.WriteLine("Menu interativo para cadastro e exibição de usuários.");
-
             try
             {
+                var metodos = new Metodos();
+                var usuarios = new List<Usuario>();
+
                 while (true)
                 {
-                    Console.WriteLine("MENU" +
-                        "\n1. Cadastro de usuários" +
-                        "\n2. Exibição de usuários" +
-                        "3. Sair");
+                    Console.WriteLine("Menu interativo para cadastro de usuários!");
+                    Console.WriteLine($"\n1. Cadastrar usuário." +
+                        $"\n2. Exibir usuário" +
+                        $"\n3. Sair");
+
+                    Console.Write("\nSua opção: ");
 
                     if (!int.TryParse(Console.ReadLine(), out int opcao))
                     {
-                        Console.WriteLine("Escolha uma opção válida.");
+                        throw new Exception("Digite um valor válido.");
                     }
 
                     switch (opcao)
                     {
                         case 1:
-                            metodos.CadastrarUsuario();
+                            usuarios.Add(metodos.CadastrarUsuario());
                             break;
                         case 2:
+                            metodos.MostrarUsuario(usuarios);
                             break;
                         case 3:
                             return;
                         default:
-                            Console.WriteLine("Escolha uma opção válida.");
+                            Console.WriteLine("Digite um valor válido");
                             break;
-                    }
+                    }                   
                 }
             }
             catch (Exception) { throw; }
@@ -239,56 +242,7 @@ namespace Biblioteca.Manutencao
             //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
             //sem descontar tentativas.
 
-        public void MenuInterativo()
-
-        {
-            try
-            {
-                Console.WriteLine("Menu interativo para cadastro de usuários!");
-
-                List <Usuario> usuarios = new List<Usuario>();
-                var usuario = new Usuario();
-                var metodos = new Metodos();
-
-                while (true)
-                {
-
-                    Console.WriteLine(@"1 - Cadastrar usuário
-                    2-Listar usuários cadastrados
-                    3- Sair");
-
-                    var usuarioInserido = Console.ReadLine();
-
-                    if (!int.TryParse(usuarioInserido, out int opcao) || (opcao != 1) && (opcao != 2) && (opcao != 3))
-                    {
-                        throw new Exception("Escolha uma das opções mostradas ! 1 - Cadastrar usuário  2-Listar usuários cadastrados  3- Sair");
-                    }
-
-                    if (opcao == 1)
-                    {
-                        usuario= metodos.CadastrarUsuario();
-                        usuarios.Add(usuario);
-                    }
-                    else if(opcao == 2)
-                    {
-                        metodos.MostrarUsuario(usuarios);
-                    
-                    }
-
-                    else if (opcao == 3)
-                    {
-                        break;
-                    }
-                }
-
-            }
-            catch (Exception) { throw; }
-
-
-
-
-
-        }
+        
 
 
             //Caixa Eletrônico Simples

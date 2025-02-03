@@ -1,5 +1,4 @@
 ﻿using Biblioteca.Classes;
-using System.Runtime.Intrinsics.X86;
 
 namespace Biblioteca.Manutencao
 {
@@ -72,5 +71,24 @@ namespace Biblioteca.Manutencao
 
         }
 
+        public Usuario CadastrarUsuario()
+        {
+            var usuario = new Usuario();
+            try
+            {
+                Console.Write("Digite um nome: ");
+                usuario.Nome = Console.ReadLine();
+
+                Console.Write("Digite um email: ");
+                usuario.Email = Console.ReadLine();
+
+                Console.Write("Digite uma idade: ");
+                if (!int.TryParse(Console.ReadLine(), out int numero))
+                    Console.WriteLine("Digite uma idade válida.");
+
+                return usuario;
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

@@ -300,65 +300,8 @@ namespace Biblioteca.Manutencao
         //4 - Sair
         //Os saques devem ser permitidos apenas se houver saldo suficiente.
         //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
-        public void CaixaEletronico(double saldoInicial)
-        {
-            try
-            {
-                var metodos = new Metodos();
-                Console.WriteLine("Programa que simula um caixa eletrônico.");
 
-                var saldos = new List<double> { saldoInicial };
-                while (true)
-                {
-                    Console.WriteLine("\nEscolha uma opção:");
-                    Console.WriteLine("1. Depositar\n2. Sacar\n3. Ver saldo\n4. Sair");
-                    Console.Write("\nSua opção: ");
 
-                    if (!int.TryParse(Console.ReadLine(), out int opcao))
-                        Console.WriteLine("\nDigite um valor válido.");
-                    else
-                    {
-                        switch (opcao)
-                        {
-                            case 1:
-                                var saldo = metodos.Depositar();
-                                if (saldo is null)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    saldos.Add(saldo ?? 0);
-                                    Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
-                                    break;
-                                }
-                            case 2:
-                                var saldoComSaque = metodos.Sacar(saldos);
-                                if (saldoComSaque is null)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    saldos = saldoComSaque;
-                                    Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
-                                    break;
-                                }
-                            case 3:
-                                Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
-                                break;
-                            case 4:
-                                Console.WriteLine("\nSaindo...");
-                                return;
-                            default:
-                                Console.WriteLine("\nDigite uma opção válida.");
-                                break;
-                        }
-                    }
-                }
-            }
-            catch (Exception) { throw; }
-        }
 
         //Cadastro de Produtos com Preços e Cálculo de Total
         //Crie um programa que permita cadastrar produtos com nome e preço.        
@@ -366,55 +309,20 @@ namespace Biblioteca.Manutencao
         //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
-        public void CadastroProdutos()
-        {
-            try
-            {
-                var metodos = new Metodos();
-
-                double valorTotal = 0;
-                List<Produto> produtos = [];
-
-                Console.WriteLine("Programa de cadastro de produtos e cálculo de total.");
-
-                while (true)
-                {
-                    Console.WriteLine("\nEscolha uma opção:");
-                    Console.WriteLine("1. Cadastrar produto\n2. Sair");
-                    Console.Write("\nSua opção: ");
-
-                    if (!int.TryParse(Console.ReadLine(), out int opcao))
-                        Console.WriteLine("\nDigite um valor válido.");
-                    else
-                    {
-                        switch (opcao)
-                        {
-                            case 1:
-                                var produto = metodos.CadastrarProduto();
-                                if (produto is null)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    produtos.Add(produto);
-                                    valorTotal += produto.Preco;
-                                    break;
-                                }
-                            case 2:
-                                metodos.ListarProdutos(produtos, valorTotal);
-                                return;
-                            default:
-                                Console.WriteLine("\nDigite uma opção válida.");
-                                break;
-                        }
-                    }
-                }
-            }
-            catch (Exception) { throw; }
-        }
 
 
+
+        //Gerenciamento de Alunos e Notas
+        //Crie um sistema de gerenciamento de alunos e notas.
+        //O sistema deve permitir:
+        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+        //(cada aluno inserido terá id gerado automaticamente)
+        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+        //4. Sair
+        //O sistema deve calcular a média do aluno e exibir se ele está
+        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
     }
 }
 

@@ -1,4 +1,6 @@
-﻿namespace Biblioteca.Validacao
+﻿using Biblioteca.Classes;
+
+namespace Biblioteca.Validacao
 {
     public class Validacoes
     {
@@ -38,7 +40,6 @@
 
         public bool ValidaMultiplosDeTres(int numero)
         {
-
             try
             {
                 if (numero % 3 == 0)
@@ -52,6 +53,29 @@
             }
             catch (Exception) { throw; }
         }
-        
+
+   
+
+
+
+        public bool ValidaUsuarioExistente(string login, string senha)
+        {
+            try
+            {
+                var usuarioPreCadastrado = new Usuario
+                {
+                    Nome = "emy",
+                    NomeUsuario = "emylinda",
+                    Senha = "amogatos"
+                };
+
+                if (login == usuarioPreCadastrado.NomeUsuario && senha == usuarioPreCadastrado.Senha)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

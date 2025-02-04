@@ -14,7 +14,6 @@ class Program
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
             //manutencao.CaixaEletronico(3500.95);
-            manutencao.CadastroProdutos();
 
             Console.ReadKey();
         }

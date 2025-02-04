@@ -8,12 +8,14 @@ class Program
         {
             var manutencao = new Questoes();
 
-            // manutencao.VerificaNumeroPrimo();
-            // manutencao.ExibirNumParImpar();
+            //manutencao.VerificaNumeroPrimo();
+            //manutencao.ExibirNumParImpar();
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
-            manutencao.CadastrarUsuarios();
+            //manutencao.CaixaEletronico(3500.95);
+
+            Console.ReadKey();
         }
         catch (Exception e)
         {

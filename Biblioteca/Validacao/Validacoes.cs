@@ -1,4 +1,4 @@
-﻿using System.Data.SqlTypes;
+﻿using Biblioteca.Classes;
 
 namespace Biblioteca.Validacao
 {
@@ -40,7 +40,6 @@ namespace Biblioteca.Validacao
 
         public bool ValidaMultiplosDeTres(int numero)
         {
-
             try
             {
                 if (numero % 3 == 0)
@@ -55,18 +54,21 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
-        public bool ValidaNumeroPositivoMaiorZero(int numero)
+        public bool ValidaUsuarioExistente(string login, string senha)
         {
             try
             {
-                if (numero > 0)
+                var usuarioPreCadastrado = new Usuario
                 {
+                    Nome = "emy",
+                    NomeUsuario = "emylinda",
+                    Senha = "amogatos"
+                };
+
+                if (login == usuarioPreCadastrado.NomeUsuario && senha == usuarioPreCadastrado.Senha)
                     return true;
-                }
                 else
-                {
                     return false;
-                }
             }
             catch (Exception) { throw; }
         }

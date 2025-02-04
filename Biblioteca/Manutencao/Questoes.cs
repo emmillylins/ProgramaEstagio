@@ -32,7 +32,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        // Questão de João Gabriel
+        //Questão de João Gabriel
         // Escreva um programa C# que solicite ao usuário 5 números inteiros 
         // O programa deve armazenar esses números em uma lista e, ao final,
         // exibir os números pares e a soma dos números ímpares
@@ -81,8 +81,8 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        // Questão de Elton
-        // Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
+        //Questão de Elton
+        //Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
         // apenas os números positivos em uma lista.
         // Se um número negativo for inserido ele deve ser ignorado e o programa deve solicitar
         // um novo número no lugar, utilize um loop for para receber os 7 números válidos.
@@ -116,7 +116,7 @@ namespace Biblioteca.Manutencao
 
         // Questão de Vanessa
         //Escreva um programa que solicite ao usuario 5 números inteiros
-        //Determine quantos deles são múltiplo de 3
+        // Determine quantos deles são múltiplo de 3
         public void ExibeQtdMultiplosDeTres()
         {
             var validacoes = new Validacoes();
@@ -147,8 +147,8 @@ namespace Biblioteca.Manutencao
 
         // Questão de Clara
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
-        // e qual é o menor digitado
-        // Caso o número não seja válido, ele deve pedir novamente.
+        //  e qual é o menor digitado
+        //  Caso o número não seja válido, ele deve pedir novamente.
         public void InformaNumeroMaiorMenor()
         {
             try
@@ -192,27 +192,29 @@ namespace Biblioteca.Manutencao
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
         //3 - Sair
-        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista
-        //até escolher a opção de sair.
-        public void CadastrarUsuarios()
+        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+
+        public void MenuInterativo()
         {
             try
             {
+                Console.WriteLine("Menu interativo para cadastro de usuários!");
+
+                List<Usuario> usuarios = new List<Usuario>();
                 var metodos = new Metodos();
-                var usuarios = new List<Usuario>();
 
                 while (true)
                 {
-                    Console.WriteLine("Menu interativo para cadastro de usuários!");
-                    Console.WriteLine($"\n1. Cadastrar usuário." +
-                        $"\n2. Exibir usuário" +
-                        $"\n3. Sair");
+                    Console.WriteLine(@"1 - Cadastrar usuário
+2 - Listar usuários cadastrados
+3 - Sair");
 
-                    Console.Write("\nSua opção: ");
+                    var usuarioInserido = Console.ReadLine();
 
-                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    if (!int.TryParse(usuarioInserido, out int opcao))
                     {
-                        throw new Exception("Digite um valor válido.");
+                        Console.WriteLine("Escolha uma opção válida!");
+                        continue;
                     }
 
                     switch (opcao)
@@ -231,7 +233,10 @@ namespace Biblioteca.Manutencao
                     }
                 }
             }
-            catch (Exception) { throw; }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+            }
         }
 
 
@@ -366,19 +371,64 @@ namespace Biblioteca.Manutencao
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
 
+        public void ListaProdutoPreco()
+        {
+            try
+            {
+                Console.WriteLine("Cadastro de Produtos e seus preços, realizando o cálculo total");
+                var metodos = new Metodos();
+                var produto = new Produto();
+                List<Produto> produtos = new List<Produto>();
+                double valorTotal = 0;
+
+                while (true)
+                {
+                    Console.WriteLine("\nSelecione a opção: ");
+                    Console.WriteLine("1 - Cadastrar produto\n2 - Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                    {
+                        Console.WriteLine("\nInsira uma opção válida.");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            //todo metodo que retorna algo precisa de uma atribuiçao
+                            produto = metodos.CadastrarProduto();
+                            if (produto != null)
+                            {
+                                produtos.Add(produto);
+                            }
+                            break;
+                        case 2:
+                            //chamar metodo de exibir nome dos produtos
+                            metodos.ExibirListaProdutos(produtos);
+                            valorTotal = metodos.CalcularValorTotal(produtos);
+                            Console.WriteLine($"O valor total de itens é {valorTotal:F2}");
+                            return;
+                        default:
+                            Console.WriteLine("\nInsira uma opção válida!");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
 
-        //Gerenciamento de Alunos e Notas
-        //Crie um sistema de gerenciamento de alunos e notas.
-        //O sistema deve permitir:
-        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
-        //(cada aluno inserido terá id gerado automaticamente)
-        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
-        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
-        //4. Sair
-        //O sistema deve calcular a média do aluno e exibir se ele está
-        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
-        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+            //Gerenciamento de Alunos e Notas
+            //Crie um sistema de gerenciamento de alunos e notas.
+            //O sistema deve permitir:
+            //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+            //(cada aluno inserido terá id gerado automaticamente)
+            //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+            //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+            //4. Sair
+            //O sistema deve calcular a média do aluno e exibir se ele está
+            //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+            //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+        }
     }
-}
 

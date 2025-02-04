@@ -54,6 +54,10 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+   
+
+
+
         public bool ValidaUsuarioExistente(string login, string senha)
         {
             try
@@ -72,5 +76,6 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
     }
 }

@@ -370,7 +370,46 @@ namespace Biblioteca.Manutencao
         {
             try
             {
+                var metodos = new Metodos();
 
+                double valorTotal = 0;
+                List<Produto> produtos = [];
+
+                Console.WriteLine("Programa de cadastro de produtos e cálculo de total.");
+
+                while (true)
+                {
+                    Console.WriteLine("\nEscolha uma opção:");
+                    Console.WriteLine("1. Cadastrar produto\n2. Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        Console.WriteLine("\nDigite um valor válido.");
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                var produto = metodos.CadastrarProduto();
+                                if (produto is null)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    produtos.Add(produto);
+                                    valorTotal += produto.Preco;
+                                    break;
+                                }
+                            case 2:
+                                metodos.ListarProdutos(produtos, valorTotal);
+                                return;
+                            default:
+                                Console.WriteLine("\nDigite uma opção válida.");
+                                break;
+                        }
+                    }
+                }
             }
             catch (Exception) { throw; }
         }

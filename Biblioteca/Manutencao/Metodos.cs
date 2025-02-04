@@ -66,34 +66,85 @@ namespace Biblioteca.Manutencao
 
         public double? Depositar()
         {
-            Console.Write("\nDigite o valor a ser depositado: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valor) || valor < 0)
+            try
             {
-                Console.WriteLine($"\nDigite um valor válido.");
-                return null;
+                Console.Write("\nDigite o valor a ser depositado: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valor)
+                    || valor < 0)
+                {
+                    Console.WriteLine($"\nDigite um valor válido.");
+                    return null;
+                }
+                return valor;
             }
-            return valor;
+            catch (Exception) { throw;  }
         }
 
         public List<double>? Sacar(List<double> saldo)
         {
-            Console.Write("\nDigite o valor a ser sacado: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double saque) || saque < 0)
+            try
             {
-                Console.WriteLine($"\nDigite um valor válido.");
-                return null;
-            }
+                Console.Write("\nDigite o valor a ser sacado: ");
 
-            var saldoComSaque = saldo.Sum() - saque;
-            if (saldoComSaque < 0)
-            {
-                Console.WriteLine($"O saque: {saque} é menor do que o valor disponível: {saldo.Sum()}");
-                return null;
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double saque)
+                    || saque < 0)
+                {
+                    Console.WriteLine($"\nDigite um valor válido.");
+                    return null;
+                }
+
+                var saldoComSaque = saldo.Sum() - saque;
+                if (saldoComSaque < 0)
+                {
+                    Console.WriteLine($"O saque: {saque} é menor do que o valor disponível: {saldo.Sum()}");
+                    return null;
+                }
+                else
+                    return [saldoComSaque];
             }
-            else
-                return [saldoComSaque];
+            catch (Exception) { throw; }
+        }
+
+        public Produto? CadastrarProduto()
+        {
+            try
+            {
+                var produto = new Produto();
+
+                Console.Write("Digite o nome um produto: ");
+                produto.Nome = Console.ReadLine();
+
+                Console.Write("Digite o preço: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double preco)
+                    || preco < 0)
+                {
+                    Console.WriteLine($"\nDigite um valor válido.");
+                    return null;
+                }
+                produto.Preco = preco;
+
+                return produto;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void ListarProdutos(List<Produto> produtos, double valorTotal)
+        {
+            try
+            {
+                int i = 0;
+
+                Console.WriteLine("\nLista de produtos: ");
+                foreach (var produto in produtos)
+                {
+                    Console.WriteLine($"{i + 1}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
+                    i++;
+                }
+                Console.WriteLine($"Valor total da compra: {valorTotal}");
+            }
+            catch (Exception) { throw; }
         }
     }
 }

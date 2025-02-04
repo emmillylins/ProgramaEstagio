@@ -64,6 +64,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #region CaixaEletronico
         public double? Depositar()
         {
             try
@@ -78,7 +79,7 @@ namespace Biblioteca.Manutencao
                 }
                 return valor;
             }
-            catch (Exception) { throw;  }
+            catch (Exception) { throw; }
         }
 
         public List<double>? Sacar(List<double> saldo)
@@ -105,7 +106,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region produtos
         public Produto? CadastrarProduto()
         {
             try
@@ -146,5 +149,59 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region GerenciarNotas
+        public Aluno CadastrarAluno()
+        {
+            try
+            {
+                var aluno = new Aluno();
+
+                Console.Write("Digite o nome um Aluno: ");
+                aluno.Nome = Console.ReadLine();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Console.Write($"Digite a {i + 1}° nota: ");
+
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double nota)
+                        || (nota < 0 || nota > 10))
+                    {
+                        Console.WriteLine($"\nA nota {i + 1} é inválida.");
+                        i--;
+                    }
+                    else
+                    {
+                        aluno.Notas.Add(nota);
+                    }
+                }
+                return aluno;
+            }
+            catch (Exception) { throw; }
+        }
+
+        //public void ExibirALunos(List<Aluno> alunos)
+        //{
+        //    try
+        //    {
+        //        int i = 1, b = 1;
+
+        //        Console.WriteLine("\nLista de alunos cadastrados: ");
+        //        foreach (var aluno in alunos)
+        //        {
+        //            Console.WriteLine($"{i}° aluno:\nNome: {aluno.Nome}n");
+        //            foreach (var nota in aluno.Notas)
+        //            {
+        //                Console.WriteLine($""
+        //            }
+        //            i++;
+        //        }
+        //        Console.WriteLine($"Valor total da compra: {valorTotal}");
+        //    }
+        //    catch (Exception) { throw; }
+        //}
+
+        #endregion
     }
 }

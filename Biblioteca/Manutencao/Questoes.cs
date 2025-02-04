@@ -429,6 +429,7 @@ namespace Biblioteca.Manutencao
         {
             try
             {
+                var i = 1;
                 var metodos = new Metodos();
                 var alunos = new List<Aluno>();
 
@@ -445,7 +446,9 @@ namespace Biblioteca.Manutencao
                     switch (opcao)
                     {
                         case 1:
-                            //Cadastro de Alunos
+                            var aluno = metodos.CadastrarAluno();
+                            aluno.Id = i;
+                            alunos.Add(aluno);
                             break;
                         case 2:
                             //Exibição de todos Alunos e Médias

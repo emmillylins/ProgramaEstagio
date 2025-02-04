@@ -301,7 +301,63 @@ namespace Biblioteca.Manutencao
         //Os saques devem ser permitidos apenas se houver saldo suficiente.
         //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
 
+        public void CaixaEletronico(double saldoInicial)
+        {
+            try
+            {
+                Console.WriteLine("Caixa Eletrônico Simples");
+                List<double> saldo = new List<double>();
+                saldo.Add(saldoInicial);
+                var metodos = new Metodos();
 
+                while (true)
+                {
+                    Console.WriteLine("\nEscolher as opções abaixo: ");
+                    Console.WriteLine("1 - Depositar");
+                    Console.WriteLine("2 - Sacar");
+                    Console.WriteLine("3 - Ver saldo");
+                    Console.WriteLine("4 - Sair");
+
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("\nOpção inválida, tente novamente.");
+                    };
+                    switch (opcao)
+                    {
+                        case 1:
+                            double deposito = metodos.Depositar();
+                            saldo.Add(deposito);
+                            Console.WriteLine($"Saldo depositado: {deposito:F2}");
+                            break;
+                        case 2:
+                            double saque = metodos.Sacar(saldo);
+                            if (saque == 0)
+                            {
+                                Console.WriteLine("Nenhum saque foi efetuado");
+                                break;
+                            }
+                            else
+                            {
+                                double saldoRestante = saldo.Sum() - saque;
+                                saldo = new List<double> { saldoRestante };
+
+                                Console.WriteLine($"Saldo Disponivel apos o saque: {saldoRestante:F2}");
+                                break;
+                            }
+                        case 3:
+                            Console.WriteLine($"Saldo Disponivel: {saldo.Sum():F2}");
+                            break;
+                        case 4:
+                            return;
+                        default:
+                            Console.WriteLine("\nDigite uma opção válida");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
         //Cadastro de Produtos com Preços e Cálculo de Total
         //Crie um programa que permita cadastrar produtos com nome e preço.        

@@ -13,7 +13,7 @@ class Program
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
-            //manutencao.SistemaLogin();
+            manutencao.CaixaEletronico(3500.95);
 
             Console.ReadKey();
         }

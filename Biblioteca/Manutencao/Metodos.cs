@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Classes;
+using System.Globalization;
 
 namespace Biblioteca.Manutencao
 {
@@ -61,6 +62,38 @@ namespace Biblioteca.Manutencao
                 return usuario;
             }
             catch (Exception) { throw; }
+        }
+
+        public double? Depositar()
+        {
+            Console.Write("\nDigite o valor a ser depositado: ");
+
+            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valor) || valor < 0)
+            {
+                Console.WriteLine($"\nDigite um valor válido.");
+                return null;
+            }
+            return valor;
+        }
+
+        public List<double>? Sacar(List<double> saldo)
+        {
+            Console.Write("\nDigite o valor a ser sacado: ");
+
+            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double saque) || saque < 0)
+            {
+                Console.WriteLine($"\nDigite um valor válido.");
+                return null;
+            }
+
+            var saldoComSaque = saldo.Sum() - saque;
+            if (saldoComSaque < 0)
+            {
+                Console.WriteLine($"O saque: {saque} é menor do que o valor disponível: {saldo.Sum()}");
+                return null;
+            }
+            else
+                return [saldoComSaque];
         }
     }
 }

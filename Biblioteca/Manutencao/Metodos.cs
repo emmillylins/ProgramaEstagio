@@ -177,5 +177,71 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
             }
         }
+
+        public Aluno CadastrarAluno()
+        {
+            try
+            {
+                Aluno aluno = new();
+                Console.Clear();
+
+                Console.Write("Digite o nome do aluno: ");
+                aluno.Nome = Console.ReadLine();
+                if(string.IsNullOrEmpty(aluno.Nome))
+                {
+                    Console.WriteLine("O aluno precisa ter um nome");
+                    return null;
+                }
+
+                for(var i = 1; i < 5; i++)
+                {
+                    Console.WriteLine($"Digite a {i}° nota");
+                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    {
+                        Console.WriteLine("Digite uma nota válida");
+                        i--;
+                    }
+
+                    aluno.Notas.Add(nota);
+                }
+
+                return aluno;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+    
+        public void ExibirAlunos(List<Aluno> listaAlunos)
+        {
+            Console.WriteLine("\nLista de Alunos:");
+            foreach(Aluno aluno in listaAlunos)
+            {
+                Console.WriteLine($"Nome do aluno: {aluno.Nome}");
+                Console.WriteLine("Notas: ");
+                foreach(double nota in aluno.Notas)
+                {
+                    Console.WriteLine($"Nota: {nota}");
+                }
+
+                var media = aluno.Notas.Average();
+                Console.WriteLine($"Media: {media}");
+
+                switch(media)
+                {
+                    case >= 7:
+                        Console.WriteLine("Aprovado");
+                        break;
+                    case >= 5 and < 7:
+                        Console.WriteLine("Recuperação");
+                        break;
+                    case < 5:
+                        Console.WriteLine("Reprovado");
+                        break;
+                }
+            }
+        }
     }
 }

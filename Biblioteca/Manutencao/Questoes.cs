@@ -183,7 +183,6 @@ namespace Biblioteca.Manutencao
                 (double maior, double menor) = metodos.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
-                Console.ReadKey();
             }
             catch (Exception) { throw; }
         }
@@ -276,7 +275,6 @@ namespace Biblioteca.Manutencao
                         if (validacoes.ValidaUsuarioExistente(nomeUsuario, senha))
                         {
                             Console.WriteLine("Login efetuado com sucesso.");
-                            Console.ReadKey();
                             return;
                         }
                         else
@@ -286,7 +284,6 @@ namespace Biblioteca.Manutencao
                     }
                 }
                 Console.WriteLine("Número de tentativas excedido.");
-                Console.ReadKey();
             }
             catch (Exception) { throw; };
 

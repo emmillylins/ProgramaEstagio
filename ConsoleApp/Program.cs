@@ -14,6 +14,8 @@ class Program
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
             manutencao.SistemaLogin();
+
+            Console.ReadKey();
         }
         catch (Exception e)
         {

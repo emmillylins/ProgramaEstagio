@@ -192,91 +192,43 @@ namespace Biblioteca.Manutencao
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
         //3 - Sair
-        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
-        public void ExibirMenuInterativo()
+        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista
+        //até escolher a opção de sair.
+        public void CadastrarUsuarios()
         {
             try
             {
-                Metodos metodos = new();
-                Usuario usuario = new();
-
-                // Lista para armazenar os objetos usuários
-                List<Usuario> usuarios = new List<Usuario>();
-
-
-
-        public void MenuInterativo()
-
-        {
-            try
-            {
-                Console.WriteLine("Menu interativo para cadastro de usuários!");
-
-                List <Usuario> usuarios = new List<Usuario>();
-                var usuario = new Usuario();
                 var metodos = new Metodos();
+                var usuarios = new List<Usuario>();
 
                 while (true)
                 {
+                    Console.WriteLine("Menu interativo para cadastro de usuários!");
+                    Console.WriteLine($"\n1. Cadastrar usuário." +
+                        $"\n2. Exibir usuário" +
+                        $"\n3. Sair");
 
-                    Console.WriteLine(@"1 - Cadastrar usuário
-                    2-Listar usuários cadastrados
-                    3- Sair");
+                    Console.Write("\nSua opção: ");
 
-                    var usuarioInserido = Console.ReadLine();
-
-                    if (!int.TryParse(usuarioInserido, out int opcao) || (opcao != 1) && (opcao != 2) && (opcao != 3))
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
                     {
-                        throw new Exception("Escolha uma das opções mostradas ! 1 - Cadastrar usuário  2-Listar usuários cadastrados  3- Sair");
+                        throw new Exception("Digite um valor válido.");
                     }
 
-                    if (opcao == 1)
+                    switch (opcao)
                     {
-                        usuario= metodos.CadastrarUsuario();
-                        usuarios.Add(usuario);
-                    }
-                    else if(opcao == 2)
-                    {
-                        metodos.MostrarUsuario(usuarios);
-                    
-                    }
-
-                    else if (opcao == 3)
-                    {
-                        break;
-                    }
-                }
-
-            }
-            catch (Exception) { throw; }
-
-
-
-
-
-        }
-
-                    var numeroInserido = Console.ReadLine();
-
-                    if (!int.TryParse(numeroInserido, out var opcaoEscolhida))
-                    {
-                        Console.WriteLine("Valor inválido! \n" + menuInterativo);
-                    }
-
-                    if (opcaoEscolhida == 1)
-                    {
-                        usuario = metodos.CadastrarUsuario();
-                        usuarios.Add(usuario);
-                        Console.WriteLine("Usuário cadastrado com sucesso! \n ");
-                    }
-                    else if (opcaoEscolhida == 2)
-                    {
-                        metodos.ListarUSuarios(usuarios);
-                    }
-                    else if (opcaoEscolhida == 3)
-                    {
-                        break;
-                    }
+                        case 1:
+                            usuarios.Add(metodos.CadastrarUsuario());
+                            break;
+                        case 2:
+                            metodos.MostrarUsuario(usuarios);
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            Console.WriteLine("Digite um valor válido");
+                            break;
+                    }                   
                 }
             }
             catch (Exception) { throw; }
@@ -287,8 +239,10 @@ namespace Biblioteca.Manutencao
             //O usuário deve fornecer um nome de usuário e senha.
             //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
             //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
-            //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
+            //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
+            //sem descontar tentativas.
 
+        
 
 
             //Caixa Eletrônico Simples

@@ -329,7 +329,7 @@ namespace Biblioteca.Manutencao
                                 else
                                 {
                                     saldos.Add(saldo ?? 0);
-                                    Console.WriteLine($"Saldo atual: {saldos.Sum():F2}");
+                                    Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
                                     break;
                                 }
                             case 2:
@@ -341,7 +341,7 @@ namespace Biblioteca.Manutencao
                                 else
                                 {
                                     saldos = saldoComSaque;
-                                    Console.WriteLine($"Saldo atual: {saldos.Sum():F2}");
+                                    Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
                                     break;
                                 }
                             case 3:
@@ -366,7 +366,14 @@ namespace Biblioteca.Manutencao
         //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
+        public void CadastroProdutos()
+        {
+            try
+            {
 
+            }
+            catch (Exception) { throw; }
+        }
 
 
     }

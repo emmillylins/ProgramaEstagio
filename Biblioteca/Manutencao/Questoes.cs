@@ -1,5 +1,7 @@
-﻿using Biblioteca.Validacao;
+﻿using Biblioteca.Classes;
+using Biblioteca.Validacao;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -182,7 +184,6 @@ namespace Biblioteca.Manutencao
                 (double maior, double menor) = metodos.RetornaNumeroMaiorMenor(numeros);
 
                 Console.WriteLine($"\nO maior número foi {maior} e o menor número foi {menor}");
-                Console.ReadKey();
             }
             catch (Exception) { throw; }
         }
@@ -191,8 +192,47 @@ namespace Biblioteca.Manutencao
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
         //3 - Sair
-        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+        //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista
+        //até escolher a opção de sair.
+        public void CadastrarUsuarios()
+        {
+            try
+            {
+                var metodos = new Metodos();
+                var usuarios = new List<Usuario>();
 
+                while (true)
+                {
+                    Console.WriteLine("Menu interativo para cadastro de usuários!");
+                    Console.WriteLine($"\n1. Cadastrar usuário." +
+                        $"\n2. Exibir usuário" +
+                        $"\n3. Sair");
+
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        throw new Exception("Digite um valor válido.");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            usuarios.Add(metodos.CadastrarUsuario());
+                            break;
+                        case 2:
+                            metodos.MostrarUsuario(usuarios);
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            Console.WriteLine("Digite um valor válido");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
 
         //Sistema de Login com Tentativas Limitadas
@@ -200,8 +240,54 @@ namespace Biblioteca.Manutencao
         //O usuário deve fornecer um nome de usuário e senha.
         //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
         //O usuário tem no máximo 3 tentativas antes de ser bloqueado.
-        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro sem descontar tentativas.
+        //Caso o usuário insira valores inválidos (ex.: campo vazio), deve ser exibida uma mensagem de erro
+        //sem descontar tentativas.
+        public void SistemaLogin()
+        {
+            try
+            {
+                int tentativas = 3;
+                var validacoes = new Validacoes();
 
+                Console.WriteLine("Sistema de login.");
+
+                for (int i = 0; i < tentativas; i++)
+                {
+                    Console.Write("Insira seu nome de usuário: ");
+                    string nomeUsuario = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(nomeUsuario))
+                    {
+                        Console.WriteLine("O usuário não pode ser nulo.");
+                        i--;
+                    }
+                    else
+                    {
+
+                        Console.Write("Insira sua senha: ");
+                        var senha = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(senha))
+                        {
+                            Console.WriteLine("A senha não pode ser nula.");
+                            i--;
+                        }
+
+                        if (validacoes.ValidaUsuarioExistente(nomeUsuario, senha))
+                        {
+                            Console.WriteLine("Login efetuado com sucesso.");
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Login ou senha inválidos.");
+                        }
+                    }
+                }
+                Console.WriteLine("Número de tentativas excedido.");
+            }
+            catch (Exception) { throw; };
+        }
 
 
         //Caixa Eletrônico Simples
@@ -225,6 +311,18 @@ namespace Biblioteca.Manutencao
         //Não deve permitir preços negativos.
 
 
+
+        //Gerenciamento de Alunos e Notas
+        //Crie um sistema de gerenciamento de alunos e notas.
+        //O sistema deve permitir:
+        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+        //(cada aluno inserido terá id gerado automaticamente)
+        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+        //4. Sair
+        //O sistema deve calcular a média do aluno e exibir se ele está
+        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
     }
 }
 

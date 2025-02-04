@@ -13,9 +13,10 @@ class Program
             //manutencao.ListarNumerosPositivo();
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
-            //manutencao.CaixaEletronico(3500.95);
+            manutencao.CaixaEletronico(3500.95);
 
             Console.ReadKey();
+            
         }
         catch (Exception e)
         {

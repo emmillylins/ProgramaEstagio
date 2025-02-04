@@ -20,7 +20,6 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -64,5 +63,43 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        public double Depositar()
+        {
+            try
+            {
+                Console.WriteLine("Favor informar o valor a depositar");
+                if(!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
+                {
+                    Console.WriteLine("Favor, inserir valor numérico válido");
+                };
+                return saldo;
+            }
+            catch (Exception) { throw; }
+        }
+        public double Sacar(List<double> saldo)
+        {
+            try
+            {
+
+                Console.WriteLine("Por favor informar o saldo a sacar: ");
+                
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saque) || saque < 0)
+                {
+                    Console.WriteLine("Favor inserir valor numérico válido");
+                    return 0;
+
+                }
+                else if (saque <= saldo.Sum())
+                {
+                    return saque;
+                }
+                else
+                {
+                    Console.WriteLine($"O saque {saque} é maior do que o saldo disponivel {saldo.Sum():F2}");
+                    return 0;
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

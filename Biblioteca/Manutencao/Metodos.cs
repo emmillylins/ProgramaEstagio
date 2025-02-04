@@ -73,7 +73,7 @@ namespace Biblioteca.Manutencao
             try
             {
                 Console.WriteLine("Favor informar o valor a depositar");
-                if(!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
                 {
                     Console.WriteLine("Favor, inserir valor numérico válido");
                 };
@@ -88,7 +88,7 @@ namespace Biblioteca.Manutencao
             {
 
                 Console.WriteLine("Por favor informar o saldo a sacar: ");
-                
+
                 if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saque) || saque < 0)
                 {
                     Console.WriteLine("Favor inserir valor numérico válido");
@@ -106,6 +106,76 @@ namespace Biblioteca.Manutencao
                 }
             }
             catch (Exception) { throw; }
+        }
+        public Produto CadastrarProduto()
+        {
+            try
+            {
+                Produto meuProduto = new Produto();
+
+                Console.Write("Insira o nome do produto: ");
+                meuProduto.Nome = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(meuProduto.Nome))
+                {
+                    Console.WriteLine("O nome do produto não pode ser nulo");
+                    return null;
+                }
+                else
+                {
+                    Console.Write("Insira o preço do produto: ");
+
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var preco))
+                    {
+                        Console.WriteLine("Insira o preco válido para o produto.");
+                        return null;
+                    }
+
+                    else if (preco <= 0)
+                    {
+                        Console.WriteLine("O preço do produto não pode ser igual ou menor que zero");
+                        return null;
+                    }
+
+                    meuProduto.Preco = preco;
+
+
+                    return meuProduto;
+                }
+            }
+            catch (Exception) { throw; }
+
+        }
+        public double CalcularValorTotal(List<Produto> produtos)
+        {
+            try
+            {
+                if (produtos.Count == 0)
+                {
+                    Console.WriteLine("Não há produtos na lista.");
+                    return 0;
+                }
+                else
+                {
+                    double valorTotal = 0;
+                    foreach (Produto produto in produtos)
+                    {
+                        valorTotal = valorTotal + produto.Preco;
+                    }
+                    return valorTotal;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void ExibirListaProdutos(List<Produto> produtos)
+        {
+            foreach (Produto produto in produtos)
+            {
+                Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
+            }
         }
     }
 }

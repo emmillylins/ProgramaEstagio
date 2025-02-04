@@ -371,19 +371,64 @@ namespace Biblioteca.Manutencao
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
 
+        public void ListaProdutoPreco()
+        {
+            try
+            {
+                Console.WriteLine("Cadastro de Produtos e seus preços, realizando o cálculo total");
+                var metodos = new Metodos();
+                var produto = new Produto();
+                List<Produto> produtos = new List<Produto>();
+                double valorTotal = 0;
+
+                while (true)
+                {
+                    Console.WriteLine("\nSelecione a opção: ");
+                    Console.WriteLine("1 - Cadastrar produto\n2 - Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                    {
+                        Console.WriteLine("\nInsira uma opção válida.");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            //todo metodo que retorna algo precisa de uma atribuiçao
+                            produto = metodos.CadastrarProduto();
+                            if (produto != null)
+                            {
+                                produtos.Add(produto);
+                            }
+                            break;
+                        case 2:
+                            //chamar metodo de exibir nome dos produtos
+                            metodos.ExibirListaProdutos(produtos);
+                            valorTotal = metodos.CalcularValorTotal(produtos);
+                            Console.WriteLine($"O valor total de itens é {valorTotal:F2}");
+                            return;
+                        default:
+                            Console.WriteLine("\nInsira uma opção válida!");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
 
-        //Gerenciamento de Alunos e Notas
-        //Crie um sistema de gerenciamento de alunos e notas.
-        //O sistema deve permitir:
-        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
-        //(cada aluno inserido terá id gerado automaticamente)
-        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
-        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
-        //4. Sair
-        //O sistema deve calcular a média do aluno e exibir se ele está
-        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
-        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+            //Gerenciamento de Alunos e Notas
+            //Crie um sistema de gerenciamento de alunos e notas.
+            //O sistema deve permitir:
+            //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+            //(cada aluno inserido terá id gerado automaticamente)
+            //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+            //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+            //4. Sair
+            //O sistema deve calcular a média do aluno e exibir se ele está
+            //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+            //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+        }
     }
-}
 

@@ -205,8 +205,8 @@ namespace Biblioteca.Manutencao
                 {
                     Console.WriteLine("Menu interativo para cadastro de usuários!");
                     Console.WriteLine($"\n1. Cadastrar usuário." +
-                        $"\n2. Exibir usuário" +
-                        $"\n3. Sair");
+                                      $"\n2. Exibir usuário" +
+                                      $"\n3. Sair");
 
                     Console.Write("\nSua opção: ");
 
@@ -414,7 +414,55 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        //Gerenciamento de Alunos e Notas
+        //Crie um sistema de gerenciamento de alunos e notas.
+        //O sistema deve permitir:
+            //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+                //(cada aluno inserido terá id gerado automaticamente)
+            //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+            //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+            //4. Sair
+        //O sistema deve calcular a média do aluno e exibir se ele está
+        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+        public void GerenciarNotas()
+        {
+            try
+            {
+                var metodos = new Metodos();
+                var alunos = new List<Aluno>();
 
+                Console.WriteLine("Sistema de gerenciamento de alunos e notas.");
+
+                Console.WriteLine("\nEscolha uma opção:");
+                Console.WriteLine("1. Cadastrar produto\n2. Sair");
+                Console.Write("\nSua opção: ");
+
+                if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    Console.WriteLine("\nDigite um valor válido.");
+                else
+                {
+                    switch (opcao)
+                    {
+                        case 1:
+                            //Cadastro de Alunos
+                            break;
+                        case 2:
+                            //Exibição de todos Alunos e Médias
+                            break;
+                        case 3:
+                            //Exibição de um aluno específico
+                            break;
+                        case 4:
+                            return;
+                        default:
+                            Console.WriteLine("\nDigite uma opção válida.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
 

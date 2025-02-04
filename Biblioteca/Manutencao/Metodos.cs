@@ -134,12 +134,12 @@ namespace Biblioteca.Manutencao
         {
             try
             {
-                int i = 0;
+                int i = 1;
 
                 Console.WriteLine("\nLista de produtos: ");
                 foreach (var produto in produtos)
                 {
-                    Console.WriteLine($"{i + 1}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
+                    Console.WriteLine($"{i}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
                     i++;
                 }
                 Console.WriteLine($"Valor total da compra: {valorTotal}");

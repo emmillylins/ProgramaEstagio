@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -286,31 +287,87 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Número de tentativas excedido.");
             }
             catch (Exception) { throw; };
-
-            //teste alteração
-
-
-            //Caixa Eletrônico Simples
-            //Desenvolva um programa que simule um caixa eletrônico.
-            //O usuário começa com um saldo inicial.
-            //Ele pode escolher entre as opções:
-            //1 - Depositar
-            //2 - Sacar
-            //3 - Ver saldo
-            //4 - Sair
-            //Os saques devem ser permitidos apenas se houver saldo suficiente.
-            //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
-
-
-
-            //Cadastro de Produtos com Preços e Cálculo de Total
-            //Crie um programa que permita cadastrar produtos com nome e preço.        
-            //O usuário pode cadastrar quantos produtos desejar.
-            //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
-            //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
-            //Não deve permitir preços negativos.
-
         }
+
+
+        //Caixa Eletrônico Simples
+        //Desenvolva um programa que simule um caixa eletrônico.
+        //O usuário começa com um saldo inicial.
+        //Ele pode escolher entre as opções:
+        //1 - Depositar
+        //2 - Sacar
+        //3 - Ver saldo
+        //4 - Sair
+        //Os saques devem ser permitidos apenas se houver saldo suficiente.
+        //O programa deve tratar entradas inválidas e continuar rodando até o usuário escolher a opção de sair.
+        public void CaixaEletronico(double saldoInicial)
+        {
+            try
+            {
+                var metodos = new Metodos();
+                Console.WriteLine("Programa que simula um caixa eletrônico.");
+
+                var saldos = new List<double> { saldoInicial };
+                while (true)
+                {
+                    Console.WriteLine("\nEscolha uma opção:");
+                    Console.WriteLine("1. Depositar\n2. Sacar\n3. Ver saldo\n4. Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        Console.WriteLine("\nDigite um valor válido.");
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                var saldo = metodos.Depositar();
+                                if (saldo is null)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    saldos.Add(saldo ?? 0);
+                                    Console.WriteLine($"Saldo atual: {saldos.Sum():F2}");
+                                    break;
+                                }
+                            case 2:
+                                var saldoComSaque = metodos.Sacar(saldos);
+                                if (saldoComSaque is null)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    saldos = saldoComSaque;
+                                    Console.WriteLine($"Saldo atual: {saldos.Sum():F2}");
+                                    break;
+                                }
+                            case 3:
+                                Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
+                                break;
+                            case 4:
+                                Console.WriteLine("\nSaindo...");
+                                return;
+                            default:
+                                Console.WriteLine("\nDigite uma opção válida.");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Cadastro de Produtos com Preços e Cálculo de Total
+        //Crie um programa que permita cadastrar produtos com nome e preço.        
+        //O usuário pode cadastrar quantos produtos desejar.
+        //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
+        //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
+        //Não deve permitir preços negativos.
+
+
 
     }
 }

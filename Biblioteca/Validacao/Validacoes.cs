@@ -40,7 +40,6 @@ namespace Biblioteca.Validacao
 
         public bool ValidaMultiplosDeTres(int numero)
         {
-
             try
             {
                 if (numero % 3 == 0)

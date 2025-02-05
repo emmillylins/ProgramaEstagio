@@ -1,4 +1,6 @@
-﻿using Biblioteca.Classes;
+﻿using System.Text.RegularExpressions;
+using Biblioteca.Classes;
+using Biblioteca.Manutencao;
 
 namespace Biblioteca.Validacao
 {
@@ -54,7 +56,7 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
-   
+
 
 
 
@@ -75,6 +77,29 @@ namespace Biblioteca.Validacao
                     return false;
             }
             catch (Exception) { throw; }
+        }
+
+
+
+        public bool AutenticarSenha(string senha)
+        {
+            // validacao utilizei o regex para validar os campos da senha. (expressões regulares) 
+            var valida = new Metodos();
+            string requisitosSenha = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&.*()_+{}\[\]:;<>?~\-])(?=.*\S).{8,}$";
+
+            return Regex.IsMatch(senha, requisitosSenha);
+        }
+
+        public bool VerificarMultiploDez(int saque)
+        {
+
+            if(saque % 10 == 0)
+            {
+                return true;
+            }
+
+            return false;
+            
         }
 
     }

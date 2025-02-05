@@ -1,8 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -201,7 +199,7 @@ namespace Biblioteca.Manutencao
             {
                 Console.WriteLine("Menu interativo para cadastro de usuários!");
 
-                List<Usuario> usuarios = new List<Usuario>();
+                List<Classes.Usuario> usuarios = new List<Classes.Usuario>();
                 var metodos = new Metodos();
 
                 while (true)
@@ -221,6 +219,7 @@ namespace Biblioteca.Manutencao
                     switch (opcao)
                     {
                         case 1:
+
                             usuarios.Add(metodos.CadastrarUsuario());
                             break;
                         case 2:
@@ -441,7 +440,7 @@ namespace Biblioteca.Manutencao
                 List<Aluno> listaAlunos = [];
                 Metodos metodos = new();
                 var i = 1;
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção");
                     Console.WriteLine("1 - Cadastrar aluno");
@@ -449,17 +448,18 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("3 - Exibir aluno por id");
                     Console.WriteLine("4 - Sair");
 
-                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida!");
-                            
+
                     }
 
-                    switch(opcao) 
+                    switch (opcao)
                     {
                         case 1:
                             var alunoCadastrado = metodos.CadastrarAluno();
-                            if(alunoCadastrado != null) {
+                            if (alunoCadastrado != null)
+                            {
                                 alunoCadastrado.Id = i;
                                 i++;
                                 listaAlunos.Add(alunoCadastrado);
@@ -480,6 +480,297 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        //Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um
+        // número secreto entre 1 e 100?
+        //Regras:
+        //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+        //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+        // Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
+
+
+        public void JogoNumeroAdvinhação()
+        {
+            try
+            {
+                // numeros aleatórios 
+                Random rand = new Random();
+                int numeroSecreto = rand.Next(1, 101);
+
+                // mensagem de inicio do jogo 
+                Console.WriteLine("Seja bem-vindo ao jogo do número secreto!! ");
+                Console.WriteLine("Insira um número de 1 a 100: ");
+
+                // for para a repetição de tentativas do usuário 
+                for (int i = 1; i < 6; i++)
+                {
+                    Console.WriteLine($"Insira o {i}° número: ");
+
+                    // input mais validação caso insira algum texto ou números fora dos parâmetros desejados
+                    if (!int.TryParse(Console.ReadLine(), out int numeroChute) || numeroChute < 0 || numeroChute > 100)
+                    {
+                        Console.WriteLine("Insira uma tentativa válida dentro dos parâmentros esperados (1-100)!");
+                        i--;
+                    }
+                    // validação em relação aos chutes do usuario e o numero secreto
+                    if (numeroChute == numeroSecreto)
+                    {
+                        Console.WriteLine($"Parabéns!! você acertou o numero secreto com {i} tentativas!!");
+                        return;
+                    }
+                    else if (numeroChute < numeroSecreto)
+                    {
+                        Console.WriteLine("O número secreto é maior!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("O número secreto é menor!");
+                    }
+
+                }
+                // mensagem final do jogo
+                Console.WriteLine($"Você não conseguiu acertar! o numero secreto era: {numeroSecreto}");
+
+
+
+
+            }
+            catch (Exception) { throw; }
+        }
+        //Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.  
+
+        public void ListaNumeros()
+        {
+            try
+            {
+
+                //instância para os metodos 
+                var metodos = new Metodos();
+
+                //lista
+                List<int> numeros = new List<int>();
+
+                //mensagem 
+                Console.WriteLine("Programa que mostra os tipos de números inseridos em uma lista! ");
+
+                // loop para que o usuario insira o quanto quiser por isso while 
+                while (true)
+                {
+
+                    Console.WriteLine("\n1-Insira um número\n2-Mostrar números\n3-Sair");
+                    // vaidação e input da opção do usuario 
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Insira apenas as opções mostradas!! ");
+                        continue;
+                    }
+                    // switch case para as devidas opçãos inseridasd
+                    switch (opcao)
+                    {
+                        case 1:
+                            metodos.InserirNumeroLista(numeros);
+                            break;
+                        case 2:
+                            metodos.MostrarNumerosLista(numeros);
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            Console.WriteLine("\nInsira apenas uma das opções mostradas: ");
+                            break;
+
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+
+
+
+
+
+        }
+        // Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
+        //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
+        //O programa deve informar se a senha fornecida atende aos critérios.
+        //Regras: Utilize método para validar a senha inserida.
+
+        public void CadastrarSenha()
+        {
+            try
+            {
+                // instancias 
+                var validacao = new Validacoes();
+                var metodos = new Metodos();
+                // for 
+                while (true)
+                {
+                    // opções 
+                    Console.WriteLine("\nValidador de senha!");
+                    Console.WriteLine("\nEscolha uma das opções: ");
+                    Console.WriteLine("\n1 -Cadastrar Senha: ");
+                    Console.WriteLine("2- Sair");
+                    // validacao
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Insira apenas umas das opções mostradas!");
+                        continue;
+                    }
+                    switch (opcao)
+                    {
+                        case 1:
+                            metodos.ValidarSenha();
+                            break;
+                        case 2:
+                            Console.WriteLine("Saindo do programa...");
+                            return;
+
+                        default:
+                            Console.WriteLine("Insira apenas uma das opções mostradas");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        // Calculadora com Operações Avançadas:
+        //Desenvolva uma calculadora que permita ao usuário realizar 7
+        //operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada)
+        //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+
+        public void CalculadoraAvancada()
+
+        {
+            var metodos = new Metodos();
+            try
+            {
+                Console.WriteLine("Bem vindos a calculadora avançada!!");
+                while (true)
+                {
+                    Console.WriteLine("\nInsira uma das opções: ");
+                    Console.WriteLine("\n1- Soma");
+                    Console.WriteLine("2- Subtração");
+                    Console.WriteLine("3- Divisão");
+                    Console.WriteLine("4- Multiplicação");
+                    Console.WriteLine("5- Potenciação");
+                    Console.WriteLine("6- Raiz Quadrada");
+                    Console.WriteLine("7- Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Insira apenas as opções inseridas!!");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            metodos.Soma();
+                            break;
+                        case 2:
+                            metodos.Subtração();
+                            break;
+                        case 3:
+                            metodos.Divisao();
+                            break;
+                        case 4:
+                            metodos.Multiplicacao();
+                            break;
+                        case 5:
+                            metodos.Potenciacao();
+                            break;
+                        case 6:
+                            metodos.RaizQuadradada();
+                            break;
+                        case 7:
+                            return;
+                        default:
+                            Console.WriteLine("Insira uma opção válida");
+                            break;
+
+                    }
+
+                }
+            }
+            catch (Exception) { throw; }
+
+
+
+        }
+        //Crie um programa que solicita ao usuário um CPF e
+        //valida se ele está no formato correto (11 dígitos numéricos). O programa deve permitir que o
+        //usuário tente novamente caso o formato esteja incorreto.
+        //Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+        public void Cpf()
+        {
+
+
+
+        }
+
+
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
+        //O programa deve:
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+        public void CaixaEletronico()
+        {
+            var validacao = new Validacoes();
+            
+                try
+                {
+                // array para armazenar os tipo de nota e a quantidade 
+                int[] cedulas = [100, 50, 20, 10];
+                int[] quantidade = new int[cedulas.Length];
+                
+                    Console.WriteLine("Bem vindo ao caixa eletrônico");
+                // inserção do saque do usuario 
+                    Console.WriteLine("Insira o valor do saque: ");
+                    if (!int.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out int saque) || saque < 0 )
+                    {
+                        Console.WriteLine("Insira apenas valores válidos!!");
+                       
+                    }
+                    // validação
+                    if(saque % 10 != 0)
+                {
+                    Console.WriteLine("Trabalhamos apenas com multiplos de 10");
+                }
+
+             // calculo 
+                for (int i = 0; i < cedulas.Length; i++)
+                {
+                    quantidade[i] = saque / cedulas[i];
+                    saque = saque % cedulas[i];
+                }
+                Console.WriteLine("Cedulas fornecidas");
+                for (int i = 0; i < quantidade.Length; i++)
+                {
+                    if(quantidade[i] > 0)
+                    {
+                        Console.WriteLine($"Notas de {cedulas[i]}: {quantidade[i]} ");
+                    }
+                }
+
+
+                
+            }
+            catch (Exception) { throw; }
+        }
+        public void Tabuada()
+        {
+
+            Console.WriteLine("Bem vindo a Tabuada!! ");
+
+            Console.WriteLine("Insira umas das tabuadas (1-10)");
+            
+            if(!int.TryParse(Console.ReadLine(), out int numeroTabuada)|| numeroTabuada > 10 || numeroTabuada <= 0)
+            {
+                Console.WriteLine("Insira apenas valores numéricos e dentro do escolpo solicitado!!");
+            }
+
+        }
 
     }
 }

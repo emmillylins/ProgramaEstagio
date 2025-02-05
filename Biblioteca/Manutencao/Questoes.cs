@@ -370,7 +370,6 @@ namespace Biblioteca.Manutencao
 
         //Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
-        //O sistema deve permitir:
         //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
         //(cada aluno inserido terá id gerado automaticamente)
         //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.

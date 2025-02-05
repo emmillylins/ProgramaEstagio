@@ -64,6 +64,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #region CaixaEletronico
         public double? Depositar()
         {
             try
@@ -78,7 +79,7 @@ namespace Biblioteca.Manutencao
                 }
                 return valor;
             }
-            catch (Exception) { throw;  }
+            catch (Exception) { throw; }
         }
 
         public List<double>? Sacar(List<double> saldo)
@@ -105,7 +106,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region produtos
         public Produto? CadastrarProduto()
         {
             try
@@ -134,17 +137,151 @@ namespace Biblioteca.Manutencao
         {
             try
             {
-                int i = 0;
+                int i = 1;
 
                 Console.WriteLine("\nLista de produtos: ");
                 foreach (var produto in produtos)
                 {
-                    Console.WriteLine($"{i + 1}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
+                    Console.WriteLine($"{i}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
                     i++;
                 }
                 Console.WriteLine($"Valor total da compra: {valorTotal}");
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region GerenciarNotas
+        public void ExibeMediaAluno(double media)
+        {
+            try
+            {
+                Console.WriteLine($"Média do aluno: {media:F2}");
+                Console.Write($"Situação: ");
+                switch (media)
+                {
+                    case > 7:
+                        Console.WriteLine("Aprovado");
+                        break;
+                    case < 7 and >= 5:
+                        Console.WriteLine("Em recuperação");
+                        break;
+                    case < 5:
+                        Console.WriteLine("Reprovado.");
+                        break;
+                    default:
+                        Console.WriteLine("Valor inválido");
+                        break;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Aluno? CadastrarAluno()
+        {
+            try
+            {
+                var aluno = new Aluno();
+
+                Console.Write("Digite o nome um aluno: ");
+                aluno.Nome = Console.ReadLine();
+
+                if (aluno.Nome is null)
+                {
+                    Console.WriteLine("Aluno precisa ter um nome.");
+                    return null;
+                }
+                else
+                {
+                    for (int i = 1; i < 5; i++)
+                    {
+                        Console.Write($"Digite a {i}° nota: ");
+
+                        if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double nota)
+                            || (nota < 0 || nota > 10))
+                        {
+                            Console.WriteLine($"\nA {i}º nota é inválida.");
+                            i--;
+                        }
+                        else
+                        {
+                            aluno.Notas.Add(nota);
+                        }
+                    }
+                }
+                return aluno;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void ExibirALunos(List<Aluno> alunos)
+        {
+            try
+            {
+                int i = 1, b = 1;
+
+                if (alunos.Count == 0)
+                    Console.WriteLine("Não existem alunos cadastrado.");
+                else
+                {
+                    Console.WriteLine("\nLista de alunos cadastrados: ");
+                    foreach (var aluno in alunos)
+                    {
+                        Console.WriteLine($"\n{i}° aluno:\nNome: {aluno.Nome}\n");
+                        foreach (var nota in aluno.Notas)
+                        {
+                            Console.WriteLine($"{b}º nota: {nota}");
+                            b++;
+                        }
+
+                        double media = aluno.Notas.Average();
+                        ExibeMediaAluno(media);
+
+                        i++;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void ExibirALunosPorId(List<Aluno> alunos)
+        {
+            try
+            {
+                int i = 1;
+
+                while (true)
+                {
+                    Console.WriteLine("\nDigite o Id do aluno cadastrado: ");
+                    if (!int.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var id))
+                    {
+                        Console.WriteLine("Digite um valor válido;");
+                        break;
+                    }
+
+                    var aluno = alunos.Find(aluno => aluno.Id == id);
+                    if (aluno is null)
+                    {
+                        Console.WriteLine($"Aluno de Id id não existente.");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\nNome do aluno: {aluno.Nome}");
+                        foreach (var nota in aluno.Notas)
+                        {
+                            Console.WriteLine($"{i}º nota: {nota}");
+                            i++;
+                        }
+
+                        double media = aluno.Notas.Average();
+                        ExibeMediaAluno(media);
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        #endregion
     }
 }

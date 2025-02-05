@@ -205,8 +205,8 @@ namespace Biblioteca.Manutencao
                 {
                     Console.WriteLine("Menu interativo para cadastro de usuários!");
                     Console.WriteLine($"\n1. Cadastrar usuário." +
-                        $"\n2. Exibir usuário" +
-                        $"\n3. Sair");
+                                      $"\n2. Exibir usuário" +
+                                      $"\n3. Sair");
 
                     Console.Write("\nSua opção: ");
 
@@ -310,7 +310,32 @@ namespace Biblioteca.Manutencao
         //O programa deve validar entradas inválidas (ex.: nome vazio, preço inválido).
         //Não deve permitir preços negativos.
 
-
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        Console.WriteLine("\nDigite um valor válido.");
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                var produto = metodos.CadastrarProduto();
+                                if (produto is not null)
+                                {
+                                    produtos.Add(produto);
+                                    valorTotal += produto.Preco;
+                                }
+                                break;
+                            case 2:
+                                metodos.ListarProdutos(produtos, valorTotal);
+                                return;
+                            default:
+                                Console.WriteLine("\nDigite uma opção válida.");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
         //Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
@@ -323,6 +348,56 @@ namespace Biblioteca.Manutencao
         //O sistema deve calcular a média do aluno e exibir se ele está
         //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
         //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+        public void GerenciarNotas()
+        {
+            try
+            {
+                var i = 1;
+                var metodos = new Metodos();
+                var alunos = new List<Aluno>();
+
+
+                Console.WriteLine("Sistema de gerenciamento de alunos e notas.");
+                while (true)
+                {
+                    Console.WriteLine("\nEscolha uma opção:");
+                    Console.WriteLine("1. Cadastrar aluno" +
+                                    "\n2. Exibir aluno" +
+                                    "\n3. Exibir aluno por Id" +
+                                    "\n4. Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        Console.WriteLine("\nDigite um valor válido.");
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                var aluno = metodos.CadastrarAluno();
+                                if (aluno is not null)
+                                {
+                                    aluno.Id = i;
+                                    alunos.Add(aluno);
+                                }
+                                break;
+                            case 2:
+                                metodos.ExibirALunos(alunos);
+                                break;
+                            case 3:
+                                metodos.ExibirALunosPorId(alunos);
+                                break;
+                            case 4:
+                                return;
+                            default:
+                                Console.WriteLine("\nDigite uma opção válida.");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
 

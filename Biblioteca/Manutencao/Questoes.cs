@@ -469,7 +469,7 @@ namespace Biblioteca.Manutencao
                             metodos.ExibirAlunos(listaAlunos);
                             break;
                         case 3:
-                            Console.WriteLine("Exibir aluno");
+                            metodos.BuscaAlunoPorId(listaAlunos);
                             break;
                         case 4:
                             return;

@@ -15,8 +15,12 @@ class Program
             //manutencao.InformaNumeroMaiorMenor();
             //manutencao.CaixaEletronico(3500.95);
             // manutencao.ListaProdutoPreco();
-
-            manutencao.GenrenciamentoALunos();
+            //manutencao.GenrenciamentoALunos();
+            //manutencao.JogoAdvinharNumero();
+            //manutencao.ClassificarListaNumero();
+            //manutencao.VerificaSenha();
+            //manutencao.CalculadoraAvancada();
+            //manutencao.ValidarCpf();
 
             Console.ReadKey();
             

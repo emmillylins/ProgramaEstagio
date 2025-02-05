@@ -1,8 +1,10 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
 {
@@ -441,7 +443,7 @@ namespace Biblioteca.Manutencao
                 List<Aluno> listaAlunos = [];
                 Metodos metodos = new();
                 var i = 1;
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção");
                     Console.WriteLine("1 - Cadastrar aluno");
@@ -449,17 +451,18 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("3 - Exibir aluno por id");
                     Console.WriteLine("4 - Sair");
 
-                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida!");
-                            
+
                     }
 
-                    switch(opcao) 
+                    switch (opcao)
                     {
                         case 1:
                             var alunoCadastrado = metodos.CadastrarAluno();
-                            if(alunoCadastrado != null) {
+                            if (alunoCadastrado != null)
+                            {
                                 alunoCadastrado.Id = i;
                                 i++;
                                 listaAlunos.Add(alunoCadastrado);
@@ -480,7 +483,267 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        // Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+        // Regras:
+        // Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+        // Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+        // Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
 
+        public void JogoAdvinharNumero()
+        {
+            Metodos metodos = new Metodos();
+            Console.WriteLine("Bem-vindo ao Jogo de Adivinhação!");
+            Console.WriteLine("O número secreto está entre 1 e 100. Você tem 5 tentativas!");
+
+            // gerar um numero aleatorio entre 1 e 100
+            int numeroSecreto = RandomNumberGenerator.GetInt32(1, 101);
+
+            //variavel contando numero de tentativas
+            int tentativas = 5;
+
+            for (int i = 0; i < tentativas; i++)
+            {
+                Console.Write("\nInsira seu palpite: ");
+
+                if (!int.TryParse(Console.ReadLine(), out var palpiteInserido))
+                {
+                    Console.WriteLine("\nEntrada inválida! Digite um número inteiro entre 1 e 100.");
+                    i--; // não descontar chance inválida
+                    continue;
+                }
+
+                if (palpiteInserido < 1 || palpiteInserido > 100)
+                {
+                    Console.WriteLine("\nNúmero fora do intervalo! Digite um valor entre 1 e 100.");
+                    i--; // não descontar chance inválida
+                    continue;
+                }
+
+                // var booleana p verifcar metodo bool
+                bool acertou = metodos.VerificarPalpite(palpiteInserido, numeroSecreto);
+
+                if (acertou)
+                {
+                    break;
+                }
+
+                Console.WriteLine($"Você ainda possui {tentativas - i - 1} tentativas!");
+            }
+
+            Console.WriteLine($"Você esgotou suas tentativas! O número secreto era {numeroSecreto}. Tente novamente!");
+
+        }
+        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário
+        //e classifique-os em positivos, negativos e zeros.
+
+        public void ClassificarListaNumero()
+        {
+            try
+            {
+                Console.WriteLine("Lista de números e suas classificações");
+                Metodos metodos = new Metodos();
+                List<int> listaNumeros = new List<int>();
+
+                while (true)
+                {
+                    Console.WriteLine("\nInsira uma das opções abaixo: ");
+                    Console.WriteLine("\n1 - Adicionar número\n2 - Classificação\n3 - Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                    {
+                        Console.WriteLine("\nInsira uma opção válida.");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            metodos.AdicionarNumero(listaNumeros);
+                            break;
+                        case 2:
+                            metodos.ExibirNumeroClassificacao(listaNumeros);
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            Console.WriteLine("\nInsira um valor válido");
+                            break;
+                    }
+                }
+            }
+            catch (Exception e) { throw; }
+        }
+        //Questão 3: Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
+        //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
+        //O programa deve informar se a senha fornecida atende aos critérios.
+        //Regras: Utilize método para validar a senha inserida.
+
+        public void VerificaSenha()
+        {
+            Validacoes validacoes = new Validacoes();
+            try
+            {
+                Console.WriteLine("Verificador de Senha!");
+                Console.Write("Crie sua senha: ");
+
+                string senha = Console.ReadLine();
+                if (validacoes.ValidaSenha(senha))
+                {
+                    Console.WriteLine("\nSenha válida!");
+                }
+                else
+                {
+                    Console.WriteLine("\nSenha inválida");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        // CALCULADORA COM FUNCOES AVANAÇADAS
+
+        public void CalculadoraAvancada()
+        {
+            Metodos metodos = new Metodos();
+            try
+            {
+                while (true)
+                {
+                    Console.WriteLine("\nCalculadora");
+                    Console.WriteLine("1 - Adição");
+                    Console.WriteLine("2 - Subtração");
+                    Console.WriteLine("3 - Multiplicação");
+                    Console.WriteLine("4 - Divisão");
+                    Console.WriteLine("5 - Potenciação");
+                    Console.WriteLine("6 - Raiz Quadrada");
+                    Console.WriteLine("7 - Sair");
+
+                    Console.Write("Escolha uma opção entre 1 e 7: ");
+                    string escolha = Console.ReadLine();
+
+                    // Verifica se a escolha é nula ou vazia
+                    if (string.IsNullOrEmpty(escolha))
+                    {
+                        Console.WriteLine("Escolha uma das opções acima.");
+                        continue;
+                    }
+
+                    if (escolha == "7")
+                    {
+                        Console.WriteLine("Saindo da calculadora...");
+                        return;
+                    }
+
+                    double num1 = 0, num2 = 0;
+
+                    if (escolha != "6") // Verificação porque a raiz quadrada só precisa de um número
+                    {
+                        Console.Write("Digite o primeiro número: ");
+                        while (!double.TryParse(Console.ReadLine(), out num1))
+                        {
+                            Console.WriteLine("Entrada inválida! Digite um número válido.");
+                            Console.Write("Digite o primeiro número: ");
+                        }
+
+                        Console.Write("Digite o segundo número: ");
+                        while (!double.TryParse(Console.ReadLine(), out num2))
+                        {
+                            Console.WriteLine("Entrada inválida! Digite um número válido.");
+                            Console.Write("Digite o segundo número: ");
+                        }
+                    }
+                    else
+                    {
+                        Console.Write("Digite o número: ");
+                        while (!double.TryParse(Console.ReadLine(), out num1))
+                        {
+                            Console.WriteLine("Entrada inválida! Digite um número válido.");
+                            Console.Write("Digite o número: ");
+                        }
+                    }
+
+                    switch (escolha)
+                    {
+                        case "1":
+                            Console.WriteLine($"Resultado: {metodos.Adicao(num1, num2)}");
+                            break;
+                        case "2":
+                            Console.WriteLine($"Resultado: {metodos.Subtracao(num1, num2)}");
+                            break;
+                        case "3":
+                            Console.WriteLine($"Resultado: {metodos.Multiplicacao(num1, num2)}");
+                            break;
+                        case "4":
+                            Console.WriteLine($"Resultado: {metodos.Divisao(num1, num2)}");
+                            break;
+                        case "5":
+                            Console.WriteLine($"Resultado: {metodos.Potenciacao(num1, num2)}");
+                            break;
+                        case "6":
+                            Console.WriteLine($"Resultado: {metodos.RaizQuadrada(num1)}");
+                            break;
+                        default:
+                            Console.WriteLine("Opção inválida! Tente novamente.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
+        //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de
+        //exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+
+        //Regras de Validação de CPF
+
+        //O CPF deve ter 11 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é feito da seguinte forma: 
+
+        //Para o primeiro dígito verificador: 
+        //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0;
+        //caso contrário, é 11 menos o resto.
+
+        //Para o segundo dígito verificador: 
+        //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador)
+        //por um peso que começa em 11 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. 
+        //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        public void ValidarCpf()
+        {
+            try
+            {
+                Metodos metodos = new Metodos();
+
+                Console.WriteLine("Validador de CPF");
+                while (true)
+                {
+                    Console.Write("\nInsira seu CPF: ");
+                    string cpf = Console.ReadLine();
+
+                    var validacao = metodos.VerificaCpf(cpf);
+                    if (validacao)
+                    {
+                        Console.WriteLine($"\nSeu CPF: {cpf} é valido!");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("CPF inválido");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
+
+
 

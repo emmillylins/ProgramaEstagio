@@ -188,44 +188,44 @@ namespace Biblioteca.Manutencao
 
                 Console.Write("Digite o nome do aluno: ");
                 aluno.Nome = Console.ReadLine();
-                if(string.IsNullOrEmpty(aluno.Nome))
+                if (string.IsNullOrEmpty(aluno.Nome))
                 {
                     Console.WriteLine("O aluno precisa ter um nome");
                     return null;
                 }
 
-                for(var i = 1; i < 5; i++)
+                for (var i = 1; i < 5; i++)
                 {
                     Console.WriteLine($"Digite a {i}° nota");
-                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    if (!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
                     {
                         Console.WriteLine("Digite uma nota válida");
                         i--;
-                    } 
+                    }
                     else
                     {
                         aluno.Notas.Add(nota);
-                    }                
+                    }
                 }
 
                 return aluno;
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
         }
-    
+
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
-            foreach(Aluno aluno in listaAlunos)
+            foreach (Aluno aluno in listaAlunos)
             {
                 Console.WriteLine($"Id do aluno: {aluno.Id}");
                 Console.WriteLine($"Nome do aluno: {aluno.Nome}");
                 Console.WriteLine("\nNotas: ");
-                foreach(double nota in aluno.Notas)
+                foreach (double nota in aluno.Notas)
                 {
                     Console.WriteLine($"Nota: {nota}");
                 }
@@ -233,7 +233,7 @@ namespace Biblioteca.Manutencao
                 var media = aluno.Notas.Average();
                 Console.WriteLine($"Media: {media}");
 
-                switch(media)
+                switch (media)
                 {
                     case >= 7:
                         Console.WriteLine("Aprovado");
@@ -247,19 +247,19 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
-    
+
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
             Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
-            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            if (!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
             {
                 Console.WriteLine("Insira um id válido");
                 return;
             }
 
             var aluno = alunos.Find(aluno => aluno.Id == id);
-            if(aluno == null)
+            if (aluno == null)
             {
                 Console.WriteLine("O aluno não foi encontrado.");
                 return;
@@ -267,7 +267,7 @@ namespace Biblioteca.Manutencao
 
             Console.WriteLine($"Aluno: {aluno.Nome}");
             var i = 1;
-            foreach(double nota in aluno.Notas) 
+            foreach (double nota in aluno.Notas)
             {
                 Console.WriteLine($"{i}° Nota: {nota}");
                 i++;
@@ -275,7 +275,7 @@ namespace Biblioteca.Manutencao
 
             var media = aluno.Notas.Average();
             Console.WriteLine($"Média: {media}");
-            switch(media)
+            switch (media)
             {
                 case >= 7:
                     Console.WriteLine("Aprovado");
@@ -288,5 +288,173 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+        public bool VerificarPalpite(int palpite, int numeroSecreto)
+        {
+            if (palpite == numeroSecreto)
+            {
+                Console.WriteLine($"\nParabéns! Você acertou, o número secreto era {numeroSecreto}!");
+                return true;
+            }
+            else if (palpite > numeroSecreto)
+            {
+                Console.WriteLine("O número secreto é menor. Tente novamente.");
+            }
+            else
+            {
+                Console.WriteLine("O número secreto é maior. Tente novamente.");
+            }
+            return false;
+        }
+        public void AdicionarNumero(List<int> listaNumeros)
+        {
+            Console.Write("\nDigite o número a ser inserido: ");
+
+            if (!int.TryParse(Console.ReadLine(), out var numero))
+            {
+                Console.WriteLine("\nInsira apenas números inteiros");
+                return;
+            }
+
+            listaNumeros.Add(numero);
+        }
+
+        public void ExibirNumeroClassificacao(List<int> listaNumeros)
+        {
+            Console.WriteLine("\nNúmeros e suas classificações");
+
+            if (listaNumeros.Count == 0) { Console.WriteLine("Não possui números na lista"); }
+            else
+            {
+                foreach (int numero in listaNumeros)
+                {
+                    if (numero > 0)
+                    {
+                        Console.WriteLine($"O número {numero} é positivo");
+                    }
+                    else if (numero < 0)
+                    {
+                        Console.WriteLine($"O número {numero} é negativo");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"O número inserido: {numero} é zero");
+                    }
+                }
+            }
+        }
+
+        public double Adicao(double a, double b)
+        {
+            return a + b;
+        }
+
+        public double Subtracao(double a, double b)
+        {
+            return a - b;
+        }
+
+        public double Multiplicacao(double a, double b)
+        {
+            return a * b;
+        }
+
+        public double Divisao(double a, double b)
+        {
+            if (b == 0)
+            {
+                Console.WriteLine("Não é possível realizar a Divisão por zero!");
+                return double.NaN; // "Not a Number" em caso de divisão por zero
+            }
+            return a / b;
+        }
+
+
+        public double Potenciacao(double a, double b)
+        {
+            return Math.Pow(a, b);
+        }
+
+        public double RaizQuadrada(double a)
+        {
+            if (a < 0)
+            {
+                Console.WriteLine("Não é possível realizar a Raiz quadrada de número negativo!");
+                return double.NaN; // "Not a Number" para raiz de número negativo
+            }
+            return Math.Sqrt(a);
+        }
+
+        // deve ter 11 digitos
+        ////Para o primeiro dígito verificador: 
+        //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0;
+        //caso contrário, é 11 menos o resto.
+
+        //Para o segundo dígito verificador: 
+        //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador)
+        //por um peso que começa em 11 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. 
+        //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        public bool VerificaCpf(string cpf)
+        {
+            // converter pra string só agora pra evitar que entrassem letras anteriormente
+             // garante 11 letras com zero a esquerda se preciso
+
+            if (cpf.Length != 11)
+            {
+                Console.WriteLine("\nO CPF deve ter 11 digitos.");
+                return false;
+            }
+
+            // primeiro digito
+            int soma = 0;
+            for (int i = 0; i < 9; i++) // contador p multiplicar os nove primeiros digitos
+            {
+                soma += int.Parse(cpf[i].ToString()) * (10 - i);
+            }
+
+            int resto = soma % 11;
+            int digito1;
+
+            if (resto < 2)
+            {
+                digito1 = 0;
+            }
+            else
+            {
+                digito1 = 11 - resto;
+            }
+
+            // segundo digito
+            soma = 0;
+            for (int i = 0; i < 10; i++) // multiplica cada um dos dez primeiros digitos
+            {
+                soma += int.Parse(cpf[i].ToString()) * (11 - i);
+            }
+
+            resto = soma % 11;
+            int digito2;
+
+            if (resto < 2) 
+            {
+                digito2 = 0; 
+            } 
+            else 
+            {
+                digito2 = 11 - resto;
+            }
+
+            // verifica se os dígitos verificadores calculados são iguais aos do CPF
+            if (int.Parse(cpf[9].ToString()) == digito1 && int.Parse(cpf[10].ToString()) == digito2)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
     }
 }
+

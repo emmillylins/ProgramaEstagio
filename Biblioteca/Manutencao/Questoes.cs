@@ -429,34 +429,43 @@ namespace Biblioteca.Manutencao
                 var metodos = new Metodos();
                 var alunos = new List<Aluno>();
 
+
                 Console.WriteLine("Sistema de gerenciamento de alunos e notas.");
-
-                Console.WriteLine("\nEscolha uma opção:");
-                Console.WriteLine("1. Cadastrar produto\n2. Sair");
-                Console.Write("\nSua opção: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int opcao))
-                    Console.WriteLine("\nDigite um valor válido.");
-                else
+                while (true)
                 {
-                    switch (opcao)
+                    Console.WriteLine("\nEscolha uma opção:");
+                    Console.WriteLine("1. Cadastrar aluno" +
+                                    "\n2. Exibir aluno" +
+                                    "\n3. Exibir aluno por Id" +
+                                    "\n4. Sair");
+                    Console.Write("\nSua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        Console.WriteLine("\nDigite um valor válido.");
+                    else
                     {
-                        case 1:
-                            var aluno = metodos.CadastrarAluno();
-                            aluno.Id = i;
-                            alunos.Add(aluno);
-                            break;
-                        case 2:
-                            //Exibição de todos Alunos e Médias
-                            break;
-                        case 3:
-                            //Exibição de um aluno específico
-                            break;
-                        case 4:
-                            return;
-                        default:
-                            Console.WriteLine("\nDigite uma opção válida.");
-                            break;
+                        switch (opcao)
+                        {
+                            case 1:
+                                var aluno = metodos.CadastrarAluno();
+                                if (aluno is not null)
+                                {
+                                    aluno.Id = i;
+                                    alunos.Add(aluno);
+                                }
+                                break;
+                            case 2:
+                                metodos.ExibirALunos(alunos);
+                                break;
+                            case 3:
+                                metodos.ExibirALunosPorId(alunos);
+                                break;
+                            case 4:
+                                return;
+                            default:
+                                Console.WriteLine("\nDigite uma opção válida.");
+                                break;
+                        }
                     }
                 }
             }

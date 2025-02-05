@@ -77,5 +77,22 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        // Validação para o jogo do número aleatório
+        public bool ValidaNumeroEntre1e100(int numero)
+        {
+            try
+            {
+                if (numero > 0 &&  numero < 101)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

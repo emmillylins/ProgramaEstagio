@@ -188,44 +188,44 @@ namespace Biblioteca.Manutencao
 
                 Console.Write("Digite o nome do aluno: ");
                 aluno.Nome = Console.ReadLine();
-                if(string.IsNullOrEmpty(aluno.Nome))
+                if (string.IsNullOrEmpty(aluno.Nome))
                 {
                     Console.WriteLine("O aluno precisa ter um nome");
                     return null;
                 }
 
-                for(var i = 1; i < 5; i++)
+                for (var i = 1; i < 5; i++)
                 {
                     Console.WriteLine($"Digite a {i}° nota");
-                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    if (!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
                     {
                         Console.WriteLine("Digite uma nota válida");
                         i--;
-                    } 
+                    }
                     else
                     {
                         aluno.Notas.Add(nota);
-                    }                
+                    }
                 }
 
                 return aluno;
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
         }
-    
+
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
-            foreach(Aluno aluno in listaAlunos)
+            foreach (Aluno aluno in listaAlunos)
             {
                 Console.WriteLine($"Id do aluno: {aluno.Id}");
                 Console.WriteLine($"Nome do aluno: {aluno.Nome}");
                 Console.WriteLine("\nNotas: ");
-                foreach(double nota in aluno.Notas)
+                foreach (double nota in aluno.Notas)
                 {
                     Console.WriteLine($"Nota: {nota}");
                 }
@@ -233,7 +233,7 @@ namespace Biblioteca.Manutencao
                 var media = aluno.Notas.Average();
                 Console.WriteLine($"Media: {media}");
 
-                switch(media)
+                switch (media)
                 {
                     case >= 7:
                         Console.WriteLine("Aprovado");
@@ -247,19 +247,19 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
-    
+
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
             Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
-            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            if (!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
             {
                 Console.WriteLine("Insira um id válido");
                 return;
             }
 
             var aluno = alunos.Find(aluno => aluno.Id == id);
-            if(aluno == null)
+            if (aluno == null)
             {
                 Console.WriteLine("O aluno não foi encontrado.");
                 return;
@@ -267,7 +267,7 @@ namespace Biblioteca.Manutencao
 
             Console.WriteLine($"Aluno: {aluno.Nome}");
             var i = 1;
-            foreach(double nota in aluno.Notas) 
+            foreach (double nota in aluno.Notas)
             {
                 Console.WriteLine($"{i}° Nota: {nota}");
                 i++;
@@ -275,7 +275,7 @@ namespace Biblioteca.Manutencao
 
             var media = aluno.Notas.Average();
             Console.WriteLine($"Média: {media}");
-            switch(media)
+            switch (media)
             {
                 case >= 7:
                     Console.WriteLine("Aprovado");
@@ -287,6 +287,178 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("Reprovado");
                     break;
             }
+        }
+
+        public void Soma()
+        {
+            // Lista para armazenar os números inseridos
+            List<double> numeros = [];
+
+            // Solicitando os números e armazenando na lista
+            for (int i = 1; i < 3; i++)
+            {
+
+                Console.WriteLine($"\nInforme o {i}º número:");
+                Console.Write("Número: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+                {
+                    Console.WriteLine("Informe um valor válido");
+                }
+                else
+                {
+                    numeros.Add(numeroInserido);
+                }
+            }
+
+            double soma = numeros.Sum();
+            Console.WriteLine($"{numeros[0]} + {numeros[1]} = {soma}");
+        }
+
+        public void Subtracao()
+        {
+            // Lista para armazenar os números inseridos
+            List<double> numeros = [];
+
+            // Solicitando os números e armazenando na lista
+            for (int i = 1; i < 3; i++)
+            {
+
+                Console.WriteLine($"\nInforme o {i}º número:");
+                Console.Write("Número: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+                {
+                    Console.WriteLine("Informe um valor válido");
+                }
+                else
+                {
+                    numeros.Add(numeroInserido);
+                }
+            }
+
+            double subtracao = numeros[0] - (numeros[1]);
+            Console.WriteLine($"{numeros[0]} - {numeros[1]} = {subtracao}");
+        }
+
+        public void Multiplicacao()
+        {
+            // Lista para armazenar os números inseridos
+            List<double> numeros = [];
+
+            // Solicitando os números e armazenando na lista
+            for (int i = 1; i < 3; i++)
+            {
+
+                Console.WriteLine($"\nInforme o {i}º número:");
+                Console.Write("Número: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+                {
+                    Console.WriteLine("Informe um valor válido");
+                }
+                else
+                {
+                    numeros.Add(numeroInserido);
+                }
+            }
+
+            double multiplicacao = numeros[0] * (numeros[1]);
+            Console.WriteLine($"{numeros[0]} x {numeros[1]} = {multiplicacao}");
+        }
+
+        public void Divisao()
+        {
+            // Lista para armazenar os números inseridos
+            List<double> numeros = [];
+
+            // Solicitando os números e armazenando na lista
+            for (int i = 1; i < 3; i++)
+            {
+
+                Console.WriteLine($"\nInforme o {i}º número:");
+                Console.Write("Número: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+                {
+                    Console.WriteLine("Informe um valor válido");
+                }
+                else
+                {
+                    numeros.Add(numeroInserido);
+                }
+            }
+
+            double divisao = numeros[0] / numeros[1];
+            Console.WriteLine($"{numeros[0]} / {numeros[1]} = {divisao}");
+        }
+
+        public void Potenciacao()
+        {
+            // Lista para armazenar os números inseridos
+            List<double> numeros = [];
+
+            // Solicitando os números e armazenando na lista
+            for (int i = 1; i < 3; i++)
+            {
+
+                Console.WriteLine($"\nInforme o {i}º número:");
+                Console.Write("Número: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+                {
+                    Console.WriteLine("Informe um valor válido");
+                }
+                else
+                {
+                    numeros.Add(numeroInserido);
+                }
+            }
+
+            double potenciacao = Math.Pow(numeros[0], numeros[1]);
+            Console.WriteLine($"{numeros[0]} ^ {numeros[1]} = {potenciacao}");
+        }
+
+        public void Raiz()
+        {
+            Console.WriteLine($"\nInforme o número:");
+            Console.Write("Número: ");
+
+            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double numeroInserido))
+            {
+                Console.WriteLine("Informe um valor válido");
+            }
+            else
+            {
+                double raizQuadrada = Math.Sqrt(numeroInserido);
+                Console.WriteLine($"Raiz quadrada de {numeroInserido} = {raizQuadrada}");
+            }
+        }
+
+        public void ExibeTabuada()
+        {
+            try
+            {
+                // Solicitando o número ao usuário
+                Console.WriteLine("Informe o número desejado.");
+                Console.Write("Número: ");
+
+                // Convertendo o número para inteiro
+                if (!int.TryParse(Console.ReadLine(), out var numeroInserido) || numeroInserido > 10 || numeroInserido < 1)
+                {
+                    Console.WriteLine("Valor informado inválido! Insira um número inteiro de 1 a 10.");
+                }
+                else
+                {
+                    // Exibindo a tabuada do número escolhido
+                    Console.WriteLine($"Tabuada do {numeroInserido}");
+                    for (int i = 1; i < 11; i++)
+                    {
+                        Console.WriteLine($"{i} x {numeroInserido} = {i * numeroInserido}");
+                    }
+                }
+            }
+            catch (Exception) { throw; }
         }
     }
 }

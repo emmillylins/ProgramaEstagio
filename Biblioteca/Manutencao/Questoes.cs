@@ -1,8 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -201,7 +199,7 @@ namespace Biblioteca.Manutencao
             {
                 Console.WriteLine("Menu interativo para cadastro de usuários!");
 
-                List<Usuario> usuarios = new List<Usuario>();
+                List<Classes.Usuario> usuarios = new();
                 var metodos = new Metodos();
 
                 while (true)
@@ -441,7 +439,7 @@ namespace Biblioteca.Manutencao
                 List<Aluno> listaAlunos = [];
                 Metodos metodos = new();
                 var i = 1;
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção");
                     Console.WriteLine("1 - Cadastrar aluno");
@@ -449,17 +447,18 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("3 - Exibir aluno por id");
                     Console.WriteLine("4 - Sair");
 
-                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida!");
-                            
+
                     }
 
-                    switch(opcao) 
+                    switch (opcao)
                     {
                         case 1:
                             var alunoCadastrado = metodos.CadastrarAluno();
-                            if(alunoCadastrado != null) {
+                            if (alunoCadastrado != null)
+                            {
                                 alunoCadastrado.Id = i;
                                 i++;
                                 listaAlunos.Add(alunoCadastrado);
@@ -479,6 +478,376 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        //Questão 1: Como posso criar um jogo simples de adivinhação em C#
+        //onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+        //Regras:
+        //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+        //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+        //Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
+        public void JogoAdivinhacao()
+        {
+            try
+            {
+                // Instanciando a validação
+                Validacoes validacao = new();
+
+                // Instância para utilizar o número aleatório
+                Random random = new();
+                int numeroAleatorio = random.Next(1, 101);
+
+                Console.WriteLine(numeroAleatorio); // Apenas para teste
+
+                // Declarando o número de tentativas
+                int tentativas = 5;
+
+                // Título
+                Console.WriteLine("Jogo de Adivinhação.");
+
+                // Estrutura de repetição para rodar de acordo com a quantidade de tentativas
+                for (int i = 0; 0 < tentativas; i++)
+                {
+                    Console.WriteLine("\nEscolha um número entre 1 e 100.");
+                    Console.Write("Sua escolha: ");
+
+                    // Convertendo o valor de entrada para um número inteiro
+                    if (!int.TryParse(Console.ReadLine(), out int numeroInserido))
+                    {
+                        Console.WriteLine("\nInsira um valor válido!");
+                        Console.WriteLine($"Você tem {tentativas} tentativas!");
+                    }
+                    else
+                    {
+                        // Chamando a validação 
+                        bool resultadoValidacao = validacao.ValidaNumeroEntre1e100(numeroInserido);
+
+                        // Verificando o resultado da validação
+                        if (!resultadoValidacao) // igual a false
+                        {
+                            Console.WriteLine("Insira um número entre 1 e 100!");
+                            Console.WriteLine($"Você tem {tentativas} tentativas!");
+                        }
+                        else
+                        {
+                            // Verificando se o número inserido é maior ou menor que o número aleatório
+                            if (numeroInserido == numeroAleatorio)
+                            {
+                                Console.WriteLine($"\nParabéns! Você acertou o número secreto: {numeroAleatorio}!");
+                                return;
+                            }
+                            else if (numeroInserido < numeroAleatorio)
+                            {
+                                tentativas--;
+                                Console.WriteLine("\nO número aleatório é maior. Tente novamente!");
+                                Console.WriteLine($"Você tem {tentativas} tentativas!");
+
+                            }
+                            else if (numeroInserido > numeroAleatorio)
+                            {
+                                tentativas--;
+                                Console.WriteLine("\nO número aleatório é menor. Tente novamente!");
+                                Console.WriteLine($"Você tem {tentativas} tentativas!");
+
+                            }
+                        }
+
+                    }
+
+
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+
+        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
+        public void ClassificacaoNumeros()
+        {
+            try
+            {
+                // Listas necessárias
+                List<int> numerosPositivos = [];
+                List<int> numerosNegativos = [];
+                List<int> zeros = [];
+
+                Console.WriteLine("Lista e Classificação dos números informados.");
+
+                Console.WriteLine("\nQuantos números deseja informar?");
+                Console.Write("Quantidade desejada: ");
+
+                if (!int.TryParse(Console.ReadLine(), out var quantidade) || quantidade < 1)
+                {
+                    Console.WriteLine("Valor inserido inválido!");
+                }
+                else
+                {
+                    for (int i = 0; i < quantidade; i++)
+                    {
+                        Console.WriteLine($"\nInforme o {i + 1}º número");
+                        Console.Write("Número: ");
+
+                        if (!int.TryParse(Console.ReadLine(), out var numero))
+                        {
+                            Console.WriteLine("Insira um número válido!");
+                            i--;
+                        }
+                        else
+                        {
+                            if (numero > 0)
+                            {
+                                numerosPositivos.Add(numero);
+                            }
+                            else if (numero < 0)
+                            {
+                                numerosNegativos.Add(numero);
+                            }
+                            else
+                            {
+                                zeros.Add(numero);
+                            }
+                        }
+                    }
+
+                    Console.WriteLine($"\nQuantidade de números na lista: {quantidade}");
+
+                    // Exibindo números positivos
+                    Console.WriteLine($"\nQuantidade de números positivos: {numerosPositivos.Count}");
+                    Console.WriteLine("Lista dos números:");
+
+                    foreach (int numero in numerosPositivos)
+                    {
+                        Console.WriteLine(numero);
+                    }
+
+                    // Exibindo números negativos
+                    Console.WriteLine($"\nQuantidade de números negativos: {numerosNegativos.Count}");
+                    Console.WriteLine("Lista dos números:");
+
+                    foreach (int numero in numerosNegativos)
+                    {
+                        Console.WriteLine(numero);
+                    }
+
+                    // Exibindo zeros
+                    Console.WriteLine($"\nQuantidade de zeros: {zeros.Count}");
+                    Console.WriteLine("Lista dos números:");
+
+                    foreach (int numero in zeros)
+                    {
+                        Console.WriteLine(numero);
+                    }
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 3: Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula,
+        //uma letra minúscula e um caractere especial.O programa deve informar se a senha fornecida atende aos critérios.
+        //Regras: Utilize método para validar a senha inserida.
+
+
+        //Questão 4: Calculadora com Operações Avançadas:
+        //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
+        //e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+        public void CalculadoraAvancada()
+        {
+            try
+            {
+                Metodos metodos = new();
+
+                Console.WriteLine("Calculadora com Operações Avançadas.");
+
+                while (true)
+                {
+                    Console.WriteLine("\nEscolha a operação.");
+                    Console.WriteLine("\nSoma digite 1 \nSubtração digite 2\nMultiplicação digite 3 \nDivisão digite 4 " +
+                                        "\nPotenciação digite 5 \nRaiz quadrada digite 6 \nSair digite 0");
+                    Console.Write("\nOpção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcaoInserida) || opcaoInserida > 6 || opcaoInserida < 0)
+                    {
+                        Console.WriteLine("Insira uma opcão válida!");
+                    }
+                    else
+                    {
+                        switch (opcaoInserida)
+                        {
+                            case 0:
+                                return;
+                            case 1:
+                                metodos.Soma();
+                                break;
+                            case 2:
+                                metodos.Subtracao();
+                                break;
+                            case 3:
+                                metodos.Multiplicacao();
+                                break;
+                            case 4:
+                                metodos.Divisao();
+                                break;
+                            case 5:
+                                metodos.Potenciacao();
+                                break;
+                            case 6:
+                                metodos.Raiz();
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+
+        //Questão 5: Validação de CPF
+        //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
+        //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.
+        //Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+        //Regras de Validação de CPF
+        //O CPF deve ter 11 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é feito da seguinte forma: 
+        //Para o primeiro dígito verificador: 
+        //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        //Para o segundo dígito verificador: 
+        //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. 
+        //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
+
+        //Questão 6: Simulador de Caixa Eletrônico
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
+        //O programa deve:
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+        public void SimuladorCaixaEletronico()
+        {
+            // Variável para armazenar a quantidade de notas necessárias para o saque
+            int notasNecessarias = 0;
+
+            Console.WriteLine("Simulador de Caixa Eletrônico");
+
+            Console.WriteLine("Informe o valor que deseja sacar:");
+            Console.Write("Valor: R$");
+
+            // Convertendo o valor para double
+            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valorSaque) || valorSaque < 1)
+            {
+                Console.WriteLine("Insira um valor válido!");
+            }
+            else
+            {
+                // Verificando se o valor do saque é múltiplo de 10
+                if (valorSaque % 10 == 0)
+                {
+                    // Enquanto o valor do saque não zerar, continuará contando as notas
+                    while (valorSaque != 0)
+                    {
+                        if (valorSaque >= 100)
+                        {
+                            valorSaque -= 100;
+                            notasNecessarias++;
+                        }
+                        else if (valorSaque >= 50)
+                        {
+                            valorSaque -= 50;
+                            notasNecessarias++;
+                        }
+                        else if (valorSaque >= 20)
+                        {
+                            valorSaque -= 20;
+                            notasNecessarias++;
+                        }
+                        else if (valorSaque >= 10)
+                        {
+                            valorSaque -= 10;
+                            notasNecessarias++;
+                        }
+                    }
+
+                    Console.WriteLine($"O número de notas necessárias para o saque é: {notasNecessarias}");
+                }
+                else
+                {
+                    Console.WriteLine("O caixa eletrônico só trabalha com notas de 10, 20, 50 e 100! Insira um valor múltiplo de 10.");
+                }
+
+            }
+        }
+
+
+        //Questão 7: Jogo da Forca
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra,
+        //letra por letra.O usuário tem 6 tentativas para acertar a palavra.
+        //O programa deve:
+        //Exibir o progresso do usuário (letras acertadas e letras faltando). 
+        //Contar as tentativas restantes.
+        //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+
+
+        //Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
+        //O programa deve:
+        //Solicitar ao usuário um número inteiro entre 1 e 10. 
+        //Validar se o número está dentro do intervalo permitido.
+        //Gerar a tabuada do número, exibindo os resultados de 1 a 10. 
+        //Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.). 
+        //Permitir que o usuário gere outra tabuada ou encerre o programa.
+        public void GeradorTabuada()
+        {
+            try
+            {
+                Metodos metodos = new();
+
+                Console.WriteLine("Gerador de Tabuada.");
+
+                // Utilizando estrutura de repetição para sair do programa apenas quando o usuário quiser
+                while (true)
+                {
+                    Console.WriteLine("\n1 para Nova tabuada \n2 para Sair");
+                    Console.Write("Opcão: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out var opcao) || opcao < 1 || opcao > 2)
+                    {
+                        Console.WriteLine("Valor inserido inválido!");
+                    }
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                metodos.ExibeTabuada();
+                                break;
+                            case 2:
+                                return;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception) { throw; }
+
+        }
+
+
+        //Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.O CNPJ deve ter 14 dígitos,
+        //e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+        //Regras de Validação de CNPJ:
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
 
 
     }

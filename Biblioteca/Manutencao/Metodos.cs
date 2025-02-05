@@ -400,7 +400,7 @@ namespace Biblioteca.Manutencao
         public bool VerificaCpf(string cpf)
         {
             // converter pra string só agora pra evitar que entrassem letras anteriormente
-             // garante 11 letras com zero a esquerda se preciso
+            // garante 11 letras com zero a esquerda se preciso
 
             if (cpf.Length != 11)
             {
@@ -409,10 +409,13 @@ namespace Biblioteca.Manutencao
             }
 
             // primeiro digito
+
             int soma = 0;
-            for (int i = 0; i < 9; i++) // contador p multiplicar os nove primeiros digitos
+            for (int i = 0; i < 9; i++) // passa pelos 9 primeiros digitos
             {
-                soma += int.Parse(cpf[i].ToString()) * (10 - i);
+                int digito = int.Parse(cpf[i].ToString()); // pega o digito
+                int peso = 10 - i; // peso 10 e vai diminuindo até 2
+                soma += digito * peso; // digito vezes peso e adicao com soma
             }
 
             int resto = soma % 11;
@@ -428,20 +431,23 @@ namespace Biblioteca.Manutencao
             }
 
             // segundo digito
-            soma = 0;
-            for (int i = 0; i < 10; i++) // multiplica cada um dos dez primeiros digitos
+            soma = 0; // 
+            for (int i = 0; i < 10; i++) // passa pelos 10 primeiros digitos
             {
-                soma += int.Parse(cpf[i].ToString()) * (11 - i);
+                int digito = int.Parse(cpf[i].ToString()); 
+                int peso = 11 - i; //peso descendo de 11 e diminui até 2)
+                soma += digito * peso; //peso x digito e adiciona à soma
             }
+
 
             resto = soma % 11;
             int digito2;
 
-            if (resto < 2) 
+            if (resto < 2)
             {
-                digito2 = 0; 
-            } 
-            else 
+                digito2 = 0;
+            }
+            else
             {
                 digito2 = 11 - resto;
             }

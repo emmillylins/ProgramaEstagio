@@ -20,7 +20,7 @@ class Program
             //manutencao.ClassificarListaNumero();
             //manutencao.VerificaSenha();
             //manutencao.CalculadoraAvancada();
-            //manutencao.ValidarCpf();
+            manutencao.ValidarCpf();
 
             Console.ReadKey();
             

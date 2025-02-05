@@ -76,6 +76,23 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
-
+        public static bool VerificarPalpite(int palpite, int numeroSecreto)
+        {
+            if (palpite > numeroSecreto)
+            {
+                Console.WriteLine("O seu palpite é muito alto! Tente um número menor.");
+                return false;
+            }
+            else if (palpite < numeroSecreto)
+            {
+                Console.WriteLine("O seu palpite é muito baixo! Tente um número maior.");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Parabéns! Você acertou o número secreto!");
+                return true;
+            }
+        }
     }
 }

@@ -15,11 +15,17 @@ class Program
             //manutencao.InformaNumeroMaiorMenor();
             //manutencao.CaixaEletronico(3500.95);
             // manutencao.ListaProdutoPreco();
+            //manutencao.GenrenciamentoALunos();
 
-            manutencao.GenrenciamentoALunos();
+            //forms3
+            //manutencao.CriarJogoAdivinhacao(); //Questão 1
+            //manutencao.LeiaListaNumerosInteiros(); //Questão 2
+            //manutencao.ProgramaDeValidarSenha(); //Questão 3
+            //manutencao.ProgramaDeValidarSenha(); //Questão 4
+
 
             Console.ReadKey();
-            
+
         }
         catch (Exception e)
         {

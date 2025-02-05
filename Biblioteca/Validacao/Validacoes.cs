@@ -53,11 +53,6 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
-
-   
-
-
-
         public bool ValidaUsuarioExistente(string login, string senha)
         {
             try
@@ -77,5 +72,12 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        public bool ValidaAdivinhacao (List<double> listaAdvinhacao)
+        {
+            Random aleatorio = new Random();
+            double numeroGerado = aleatorio.Next(1, 101);
+
+            return true;
+        }
     }
 }

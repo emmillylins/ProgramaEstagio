@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
+using System.Xml;
 
 
 namespace Biblioteca.Manutencao
@@ -288,5 +289,166 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+
+        public void ExibirMenu()
+        {
+            Console.WriteLine("\nSelecione uma opcao abaixo: ");
+            Console.WriteLine("1 - Insira numero(s) inteiro(s)");
+            Console.WriteLine("2 - Classificação dos numeros");
+            Console.WriteLine("3 - Sair\n");
+            Console.Write("Digite a opção escolhida: ");
+        }
+        public void ExibirMenuCalculadora()
+        {
+            Console.WriteLine("Calculadora avançada com Operações Avançadas");
+            Console.WriteLine("Escolha abaixo o tipo de operação desejada: ");
+            Console.WriteLine("1 - Adição");
+            Console.WriteLine("2 - Subtração");
+            Console.WriteLine("3 - Multiplicação");
+            Console.WriteLine("4 - Divisão");
+            Console.WriteLine("5 - Potenciação");
+            Console.WriteLine("6 - Raiz Quadrada");
+            Console.WriteLine("7 - Sair");
+            Console.Write("\nEntrar no menu: ");
+        }
+        public double MenuCalculadoraSoma(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Adição");
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    {
+                        Console.WriteLine("Digite apenas numeros validos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                return lista.Sum();
+            }
+            catch (Exception) { throw; }
+        }
+        public double MenuCalculadoraSubtracao(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Subtração");
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    {
+                        Console.WriteLine("Digite apenas numeros validos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                double resultadoSubtracao = lista[0] - lista[1];
+                return resultadoSubtracao;
+            }
+            catch (Exception) { throw; }
+        }
+        public double MenuCalculadoraMultiplicacao(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Multiplicação");
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    {
+                        Console.WriteLine("Digite apenas numeros validos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                double resultadoMultiplicacao = lista[0] * lista[1];
+                return resultadoMultiplicacao;
+            }
+            catch (Exception) { throw; }
+        }
+        public double MenuCalculadoraDivisao(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Divisão");
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    {
+                        Console.WriteLine("Digite apenas numeros validos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                double resultadoDivisao = lista[0] / lista[1];
+                return resultadoDivisao;
+            }
+            catch (Exception) { throw; }
+        }
+        public double MenuCalculadoraPotenciacao(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Potenciação");
+                Console.WriteLine("Sendo o 1º numero a base e o 2º numero o expoente");
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    {
+                        Console.WriteLine("Digite apenas numeros validos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                double resultadoPotenciacao = Math.Pow(lista[0] , lista[1]);
+                return resultadoPotenciacao;
+            }
+            catch (Exception) { throw; }
+        }
+        public double MenuCalculadoraRaizQuadrada(List<double> lista)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Menu Raiz Quadrada");
+
+                for (int i = 0; i < 1; i++)
+                {
+                    Console.Write("Digite o numero: ");
+                    if (!double.TryParse(Console.ReadLine(), out var num) || num < 0)
+                    {
+                        Console.WriteLine("Digite apenas numeros validos e positivos");
+                        i--;
+                        continue;
+                    }
+                    lista.Add(num);
+                }
+                double resultadoRaizQuadrada = Math.Sqrt(lista[0] );
+                return resultadoRaizQuadrada;
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

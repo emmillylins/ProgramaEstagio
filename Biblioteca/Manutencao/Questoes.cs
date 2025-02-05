@@ -1,7 +1,9 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using Microsoft.VisualBasic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
@@ -440,7 +442,7 @@ namespace Biblioteca.Manutencao
                 List<Aluno> listaAlunos = [];
                 Metodos metodos = new();
                 var i = 1;
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção");
                     Console.WriteLine("1 - Cadastrar aluno");
@@ -448,17 +450,18 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("3 - Exibir aluno por id");
                     Console.WriteLine("4 - Sair");
 
-                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida!");
-                            
+
                     }
 
-                    switch(opcao) 
+                    switch (opcao)
                     {
                         case 1:
                             var alunoCadastrado = metodos.CadastrarAluno();
-                            if(alunoCadastrado != null) {
+                            if (alunoCadastrado != null)
+                            {
                                 alunoCadastrado.Id = i;
                                 i++;
                                 listaAlunos.Add(alunoCadastrado);
@@ -474,6 +477,221 @@ namespace Biblioteca.Manutencao
                             return;
                     }
 
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário
+        ////tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+
+        //Regras:
+        //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+        //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+        //Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
+        public void JogoAdvinhacao()
+        {
+            try
+            {
+                Console.WriteLine("Jogo de adivinhação");
+
+                Random aleatorio = new Random();
+
+                int numeroGerado = aleatorio.Next(1, 101);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine($"Informe o {i + 1}º numero desejado: ");
+                    if (!int.TryParse(Console.ReadLine(), out int opcao) || opcao <= 0 || opcao > 100)
+                    {
+                        Console.WriteLine("Favor inserir numeros inteiros, positivos e validos entre 1 e 100.");
+                        i--;
+                        continue;
+                    }
+
+                    if (opcao < numeroGerado)
+                    {
+                        Console.WriteLine("Numero gerado é maior que o informado!");
+                    }
+                    else if (opcao > numeroGerado)
+                    {
+                        Console.WriteLine("Numero gerado é menor que o informado!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Voce acertou!");
+                        return;
+                    }
+                }
+                Console.WriteLine($"\nVoce errou! O numero gerado foi {numeroGerado}");
+            }
+            catch (Exception) { throw; }
+        }
+
+
+        //Questão 2: Crie um programa que leia uma 
+        //lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
+
+        public void LerListaNumeros()
+        {
+            try
+            {
+                Console.WriteLine("Lista de numeros inteiros");
+                List<int> lista = new List<int>();
+                Metodos metodos = new Metodos();
+
+                while (true)
+                {
+                    metodos.ExibirMenu();
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Digite apenas numeros do menu, tente novamente");
+                        continue;
+                    }
+
+                    if (opcao == 1)
+                    {
+                        Console.Write("Digite quantos numeros voce deseja inserir: ");
+                        if (!int.TryParse(Console.ReadLine(), out int quantidade) || quantidade <= 0)
+                        {
+                            Console.WriteLine("Quantidade invalida. Digite um numero maior que zero.");
+                            continue;
+                        }
+
+                        for (int i = 0; i < quantidade; i++)
+                        {
+                            Console.WriteLine($"Insira o {i + 1}º numero inteiro:");
+
+                            if (!int.TryParse(Console.ReadLine(), out int numero))
+                            {
+                                Console.WriteLine("Digite apenas numeros inteiros. Tente novamente.");
+                                i--;
+                                continue;
+                            }
+
+                            lista.Add(numero);
+                        }
+                    }
+                    else if (opcao == 2)
+                    {
+                        Console.Clear();
+                        if (lista.Count == 0)
+                        {
+                            Console.WriteLine("Nenhum número foi inserido ainda.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Classificação dos Numeros\n");
+                            foreach (int i in lista)
+                            {
+                                string classificacao = "Zero";
+                                if (i > 0)
+                                {
+                                    classificacao = "Positivo";
+                                }
+                                else if (i < 0)
+                                {
+                                    classificacao = "Negativo";
+                                }
+                                Console.WriteLine($"O numero {i} é {classificacao}");
+                            }
+                        }
+                    }
+                    else if (opcao == 3)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opcao invalida, insira apenas as opcoes do menu");
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 3: Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
+        //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
+        //O programa deve informar se a senha fornecida atende aos critérios.
+        //Regras: Utilize método para validar a senha inserida.
+
+        public void ValidarSenha()
+        {
+            try
+            {
+                Console.WriteLine("Validação de Senha");
+
+            }
+            catch (Exception) { throw; }
+        }
+
+
+        //Questão 4: Calculadora com Operações Avançadas:
+        //Desenvolva uma calculadora que permita ao usuário realizar operações básicas
+        //(adição, subtração, multiplicação, divisão)
+        //e operações avançadas(potenciação, raiz quadrada)
+        //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+
+        public void CalculadoraAvancada()
+        {
+            try
+            {
+                while (true)
+                {
+                    List<double> lista = new List<double>();
+                    Metodos metodo = new Metodos();
+
+                    metodo.ExibirMenuCalculadora();
+
+                    if (!double.TryParse(Console.ReadLine(), out double val) || val < 1 || val > 7)
+                    {
+                        Console.WriteLine("Numero de menu invalido, tentar novamente");
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                    }
+                    switch (val)
+                    {
+                        case 1:
+                            double resultadoSoma = metodo.MenuCalculadoraSoma(lista);
+                            Console.WriteLine($"O resultado da soma é {resultadoSoma:F2}");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case 2:
+                            double resultadoSubtracao = metodo.MenuCalculadoraSubtracao(lista);
+                            Console.WriteLine($"O resultado da subtração é {resultadoSubtracao:F2}");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case 3:
+                            double resultadoMultiplicacao = metodo.MenuCalculadoraMultiplicacao(lista);
+                            Console.WriteLine($"O resultado da multiplicação é {resultadoMultiplicacao:F2}");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case 4:
+                            double resultadoDivisao = metodo.MenuCalculadoraDivisao(lista);
+                            Console.WriteLine($"O resultado da divisão é {resultadoDivisao:F2}");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case 5:
+                            double resultadoPotenciacao = metodo.MenuCalculadoraPotenciacao(lista);
+                            Console.WriteLine($"O resultado da potenciação é {resultadoPotenciacao:F2}");
+                            Console.ReadKey();
+                            Console.Clear ();
+                            break;
+                        case 6:
+                            double resultadoRaizQuadrada = metodo.MenuCalculadoraRaizQuadrada(lista);
+                            Console.WriteLine($"O resultado da raiz quadrada é {resultadoRaizQuadrada:F2}");
+                            Console.ReadKey();
+                            Console.Clear ();
+                            break;
+                        case 7:
+                            return;
+                    }
                 }
             }
             catch (Exception) { throw; }

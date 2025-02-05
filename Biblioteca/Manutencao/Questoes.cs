@@ -1,7 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {

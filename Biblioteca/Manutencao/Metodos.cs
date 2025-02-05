@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
 
 
 namespace Biblioteca.Manutencao
@@ -175,6 +176,116 @@ namespace Biblioteca.Manutencao
             foreach (Produto produto in produtos)
             {
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
+            }
+        }
+
+        public Aluno CadastrarAluno()
+        {
+            try
+            {
+                Aluno aluno = new();
+                Console.Clear();
+
+                Console.Write("Digite o nome do aluno: ");
+                aluno.Nome = Console.ReadLine();
+                if(string.IsNullOrEmpty(aluno.Nome))
+                {
+                    Console.WriteLine("O aluno precisa ter um nome");
+                    return null;
+                }
+
+                for(var i = 1; i < 5; i++)
+                {
+                    Console.WriteLine($"Digite a {i}° nota");
+                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    {
+                        Console.WriteLine("Digite uma nota válida");
+                        i--;
+                    } 
+                    else
+                    {
+                        aluno.Notas.Add(nota);
+                    }                
+                }
+
+                return aluno;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+    
+        public void ExibirAlunos(List<Aluno> listaAlunos)
+        {
+            Console.WriteLine("\nLista de Alunos:");
+            foreach(Aluno aluno in listaAlunos)
+            {
+                Console.WriteLine($"Id do aluno: {aluno.Id}");
+                Console.WriteLine($"Nome do aluno: {aluno.Nome}");
+                Console.WriteLine("\nNotas: ");
+                foreach(double nota in aluno.Notas)
+                {
+                    Console.WriteLine($"Nota: {nota}");
+                }
+
+                var media = aluno.Notas.Average();
+                Console.WriteLine($"Media: {media}");
+
+                switch(media)
+                {
+                    case >= 7:
+                        Console.WriteLine("Aprovado");
+                        break;
+                    case >= 5 and < 7:
+                        Console.WriteLine("Recuperação");
+                        break;
+                    case < 5:
+                        Console.WriteLine("Reprovado");
+                        break;
+                }
+            }
+        }
+    
+        public void BuscaAlunoPorId(List<Aluno> alunos)
+        {
+            Console.WriteLine("\nBusca aluno pelo seu Id.");
+            Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
+            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            {
+                Console.WriteLine("Insira um id válido");
+                return;
+            }
+
+            var aluno = alunos.Find(aluno => aluno.Id == id);
+            if(aluno == null)
+            {
+                Console.WriteLine("O aluno não foi encontrado.");
+                return;
+            }
+
+            Console.WriteLine($"Aluno: {aluno.Nome}");
+            var i = 1;
+            foreach(double nota in aluno.Notas) 
+            {
+                Console.WriteLine($"{i}° Nota: {nota}");
+                i++;
+            }
+
+            var media = aluno.Notas.Average();
+            Console.WriteLine($"Média: {media}");
+            switch(media)
+            {
+                case >= 7:
+                    Console.WriteLine("Aprovado");
+                    break;
+                case > 5 and < 7:
+                    Console.WriteLine("Recuperação");
+                    break;
+                case < 5:
+                    Console.WriteLine("Reprovado");
+                    break;
             }
         }
     }

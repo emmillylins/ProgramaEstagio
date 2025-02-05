@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
+using Microsoft.VisualBasic;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 
@@ -291,7 +292,8 @@ namespace Biblioteca.Manutencao
                 }
                 Console.WriteLine("Número de tentativas excedido.");
             }
-            catch (Exception) { throw; };
+            catch (Exception) { throw; }
+            ;
         }
 
 
@@ -327,7 +329,8 @@ namespace Biblioteca.Manutencao
                     if (!int.TryParse(Console.ReadLine(), out int opcao))
                     {
                         Console.WriteLine("\nOpção inválida, tente novamente.");
-                    };
+                    }
+                    ;
                     switch (opcao)
                     {
                         case 1:
@@ -418,17 +421,66 @@ namespace Biblioteca.Manutencao
         }
 
 
-            //Gerenciamento de Alunos e Notas
-            //Crie um sistema de gerenciamento de alunos e notas.
-            //O sistema deve permitir:
-            //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
-            //(cada aluno inserido terá id gerado automaticamente)
-            //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
-            //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
-            //4. Sair
-            //O sistema deve calcular a média do aluno e exibir se ele está
-            //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
-            //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+        //Gerenciamento de Alunos e Notas
+        //Crie um sistema de gerenciamento de alunos e notas.
+        //O sistema deve permitir:
+        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+        //(cada aluno inserido terá id gerado automaticamente)
+        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+        //4. Sair
+        //O sistema deve calcular a média do aluno e exibir se ele está
+        //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
+        //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+
+        public void GenrenciamentoALunos()
+        {
+            try
+            {
+                Console.WriteLine("Gerenciamento de Alunos e notas");
+                List<Aluno> listaAlunos = [];
+                Metodos metodos = new();
+                var i = 1;
+                while(true)
+                {
+                    Console.WriteLine("\nEscolha uma opção");
+                    Console.WriteLine("1 - Cadastrar aluno");
+                    Console.WriteLine("2 - Exibir alunos e médias");
+                    Console.WriteLine("3 - Exibir aluno por id");
+                    Console.WriteLine("4 - Sair");
+
+                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    {
+                        Console.WriteLine("Insira uma opção válida!");
+                            
+                    }
+
+                    switch(opcao) 
+                    {
+                        case 1:
+                            var alunoCadastrado = metodos.CadastrarAluno();
+                            if(alunoCadastrado != null) {
+                                alunoCadastrado.Id = i;
+                                i++;
+                                listaAlunos.Add(alunoCadastrado);
+                            }
+                            break;
+                        case 2:
+                            metodos.ExibirAlunos(listaAlunos);
+                            break;
+                        case 3:
+                            metodos.BuscaAlunoPorId(listaAlunos);
+                            break;
+                        case 4:
+                            return;
+                    }
+
+                }
+            }
+            catch (Exception) { throw; }
         }
+
+
     }
+}
 

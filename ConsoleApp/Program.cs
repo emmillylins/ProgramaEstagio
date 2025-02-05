@@ -14,12 +14,18 @@ class Program
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
             //manutencao.CaixaEletronico(3500.95);
-            // manutencao.ListaProdutoPreco();
-
-            manutencao.GenrenciamentoALunos();
+            //manutencao.ListaProdutoPreco();
+            //manutencao.GenrenciamentoALunos();
+            //manutencao.JogoAdivinhacao();
+            //manutencao.VerificaNumerosInseridos();
+            //manutencao.VerificarSenha();
+            //manutencao.Calculadora();
+            //manutencao.VerificarCpf();
+            //manutencao.SimuladorCaixaEletronico();
+            //manutencao.JogoDaForca();
 
             Console.ReadKey();
-            
+
         }
         catch (Exception e)
         {

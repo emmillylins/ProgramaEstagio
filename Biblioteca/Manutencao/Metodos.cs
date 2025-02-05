@@ -188,44 +188,44 @@ namespace Biblioteca.Manutencao
 
                 Console.Write("Digite o nome do aluno: ");
                 aluno.Nome = Console.ReadLine();
-                if(string.IsNullOrEmpty(aluno.Nome))
+                if (string.IsNullOrEmpty(aluno.Nome))
                 {
                     Console.WriteLine("O aluno precisa ter um nome");
                     return null;
                 }
 
-                for(var i = 1; i < 5; i++)
+                for (var i = 1; i < 5; i++)
                 {
                     Console.WriteLine($"Digite a {i}° nota");
-                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    if (!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
                     {
                         Console.WriteLine("Digite uma nota válida");
                         i--;
-                    } 
+                    }
                     else
                     {
                         aluno.Notas.Add(nota);
-                    }                
+                    }
                 }
 
                 return aluno;
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
         }
-    
+
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
-            foreach(Aluno aluno in listaAlunos)
+            foreach (Aluno aluno in listaAlunos)
             {
                 Console.WriteLine($"Id do aluno: {aluno.Id}");
                 Console.WriteLine($"Nome do aluno: {aluno.Nome}");
                 Console.WriteLine("\nNotas: ");
-                foreach(double nota in aluno.Notas)
+                foreach (double nota in aluno.Notas)
                 {
                     Console.WriteLine($"Nota: {nota}");
                 }
@@ -233,7 +233,7 @@ namespace Biblioteca.Manutencao
                 var media = aluno.Notas.Average();
                 Console.WriteLine($"Media: {media}");
 
-                switch(media)
+                switch (media)
                 {
                     case >= 7:
                         Console.WriteLine("Aprovado");
@@ -247,19 +247,19 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
-    
+
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
             Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
-            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            if (!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
             {
                 Console.WriteLine("Insira um id válido");
                 return;
             }
 
             var aluno = alunos.Find(aluno => aluno.Id == id);
-            if(aluno == null)
+            if (aluno == null)
             {
                 Console.WriteLine("O aluno não foi encontrado.");
                 return;
@@ -267,7 +267,7 @@ namespace Biblioteca.Manutencao
 
             Console.WriteLine($"Aluno: {aluno.Nome}");
             var i = 1;
-            foreach(double nota in aluno.Notas) 
+            foreach (double nota in aluno.Notas)
             {
                 Console.WriteLine($"{i}° Nota: {nota}");
                 i++;
@@ -275,7 +275,7 @@ namespace Biblioteca.Manutencao
 
             var media = aluno.Notas.Average();
             Console.WriteLine($"Média: {media}");
-            switch(media)
+            switch (media)
             {
                 case >= 7:
                     Console.WriteLine("Aprovado");
@@ -286,6 +286,69 @@ namespace Biblioteca.Manutencao
                 case < 5:
                     Console.WriteLine("Reprovado");
                     break;
+            }
+        }
+        public void Calcular(int numeroMenu)
+        {
+            //Pedindo o primeiro número a ser calculado
+            Console.Write("\nDigite um número: ");
+            string? primeiroNumeroInserido = Console.ReadLine();
+            if (!double.TryParse(primeiroNumeroInserido, CultureInfo.InvariantCulture, out double primeiroNumero))
+            {
+                Console.WriteLine("Número inválido!");
+            }
+            else
+            {
+                //If com a radiciação pois precisa somente de 1 valor.
+                if (numeroMenu == 6)
+                {
+                    Console.WriteLine($"O resultado da radiciação é {(Math.Sqrt(primeiroNumero)):F2}.");
+                }
+                else
+                {
+                    Console.Write("\nDigite o segundo número: ");
+                    string? segundoNumeroInserido = Console.ReadLine();
+                    if (!double.TryParse(segundoNumeroInserido, CultureInfo.InvariantCulture, out double segundoNumero))
+                    {
+                        Console.WriteLine("Número inválido!");
+                    }
+                    else
+                    {
+                        //SWITCH recebendo o número inserido no menu para realizar devido calculo.
+                        switch (numeroMenu)
+                        {
+                            case 1:
+                                Console.WriteLine($"O resultado da adição é {(primeiroNumero + segundoNumero):F2}");
+                                break;
+                            case 2:
+                                Console.WriteLine($"O resultado da subtração é {(primeiroNumero - segundoNumero):F2}");
+                                break;
+                            case 3:
+                                Console.WriteLine($"O resultado da multiplicação é {(primeiroNumero * segundoNumero):F2}");
+                                break;
+                            case 4:
+                                Console.WriteLine($"O resultado da divisão é {(primeiroNumero / segundoNumero):F2}");
+                                break;
+                            case 5:
+                                Console.WriteLine($"O resultado da exponeciação é {(Math.Pow(primeiroNumero, segundoNumero)):F2}");
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        public string PalavraMisteriosa()
+        {
+            try
+            {
+                string[] nomes = ["navio", "fonte", "colar", "pente", "moto", "lugar", "amor", "sapo", "vento", "mesa"];
+                Random numeroRandom = new Random();
+                int indiceRandom = numeroRandom.Next(0, 11);
+                return nomes[indiceRandom];
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

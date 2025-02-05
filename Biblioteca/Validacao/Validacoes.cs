@@ -1,4 +1,5 @@
-﻿using Biblioteca.Classes;
+﻿using System.Reflection.PortableExecutable;
+using Biblioteca.Classes;
 
 namespace Biblioteca.Validacao
 {
@@ -54,7 +55,22 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
-   
+        //Validador para saber se número é múltiplo de dez.
+        public bool ValidaMultiploDeDez(double valorSaque)
+        {
+            try
+            {
+                if (valorSaque % 10 == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
 
 
@@ -76,6 +92,120 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+        public bool ValidarSenha(string senha)
+        {
+            try
+            {
+                //Verificações se senha possui tamanho maior ou igual a 8.
+                if (senha.Length < 8)
+                {
+                    Console.WriteLine("É necessário que a senha possua ao menos 8 caracteres!");
+                    return false;
+                }
 
+                //Método Any para percorres todos caracteres da string inserida pelo usuário e verificando se possui letras.
+                if (!senha.Any(letras => Char.IsLetter(letras)))
+                {
+                    Console.WriteLine("É necessário ao menos 1 letra.");
+                    return false;
+                }
+
+                //Verifica se possui alguma letra maiúscula.
+                if (!senha.Any(letras => Char.IsUpper(letras)))
+                {
+                    Console.WriteLine("É necessário ao menos 1 letra maiúscula.");
+                    return false;
+                }
+
+                //Verifica se possui alguma letra minúscula.
+                if (!senha.Any(letras => Char.IsLower(letras)))
+                {
+                    Console.WriteLine("É necessário ao menos 1 letra minúscula.");
+                    return false;
+                }
+
+                //Verifica se possui algum caracter especial.
+                if (!senha.Any(letras => Char.IsPunctuation(letras)))
+                {
+                    Console.WriteLine("É necessário ao menos 1 caracter especial.");
+                    return false;
+                }
+
+                //Caso não entre em nenhuma das condições acima, senha se enquadra nos critérios e retorna um boolean;
+                return true;
+            }
+            catch (Exception) { throw; }
+        }
+        public bool ValidarCpf(string cpf)
+        {
+            try
+            {
+                if (cpf.Length < 11 || cpf.Length > 11)
+                {
+                    Console.WriteLine("O CPF deve possuir 11 caracteres.");
+                    return false;
+                }
+                if (cpf.Any(letras => Char.IsLetter(letras)) || cpf.Any(letras => Char.IsPunctuation(letras)))
+                {
+                    Console.WriteLine("O CPF só pode possuir números.");
+                    return false;
+                }
+                int[] cpfSeparado = cpf.Select(numeros => (int)Char.GetNumericValue(numeros)).ToArray();
+                //Primeira Verificação do Enunciado da questão
+
+                int peso = 10;
+                int valorTotalSoma = 0;
+                int compararPrimeiroNumero = 0;
+                for (int i = 0; i <= (cpfSeparado.Length - 3); i++)
+                {
+                    int valor = cpfSeparado[i] * peso;
+                    valorTotalSoma += valor;
+                    peso--;
+                }
+                if ((valorTotalSoma % 11) < 2)
+                {
+                    compararPrimeiroNumero = 0;
+                }
+                else
+                {
+                    compararPrimeiroNumero = (11 - (valorTotalSoma % 11));
+                }
+
+                //Segunda Verificação do Enunciado da questão
+                if (compararPrimeiroNumero == cpfSeparado[9])
+                {
+                    int novoPeso = 11;
+                    int novoValorTotalSoma = 0;
+                    int compararSegundoNumero = 0;
+                    for (int i = 0; i <= (cpfSeparado.Length - 2); i++)
+                    {
+                        int valor = (cpfSeparado[i]) * novoPeso;
+                        novoValorTotalSoma += valor;
+                        novoPeso--;
+                    }
+                    if ((novoValorTotalSoma % 11) < 2)
+                    {
+                        compararSegundoNumero = 0;
+                    }
+                    else
+                    {
+                        compararSegundoNumero = (11 - (novoValorTotalSoma % 11));
+                    }
+
+                    //Ultima verificação
+
+                    if (compararPrimeiroNumero == cpfSeparado[9] && compararSegundoNumero == cpfSeparado[10])
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else { return false; }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

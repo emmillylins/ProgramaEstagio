@@ -161,14 +161,14 @@ namespace Biblioteca.Manutencao
                 Console.Write("Digite o nome um Aluno: ");
                 aluno.Nome = Console.ReadLine();
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 1; i < 5; i++)
                 {
-                    Console.Write($"Digite a {i + 1}° nota: ");
+                    Console.Write($"Digite a {i}° nota: ");
 
                     if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double nota)
                         || (nota < 0 || nota > 10))
                     {
-                        Console.WriteLine($"\nA nota {i + 1} é inválida.");
+                        Console.WriteLine($"\nA {i}º nota é inválida.");
                         i--;
                     }
                     else
@@ -181,26 +181,78 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //public void ExibirALunos(List<Aluno> alunos)
-        //{
-        //    try
-        //    {
-        //        int i = 1, b = 1;
+        public void ExibeMediaAluno(double media)
+        {
+            try
+            {
+                Console.WriteLine($"Média do aluno: {media:F2}");
+                Console.Write($"Situação: ");
+                switch (media)
+                {
+                    case > 7:
+                        Console.WriteLine("Aprovado");
+                        break;
+                    case < 7 and >= 5:
+                        Console.WriteLine("Em recuperação");
+                        break;
+                    case < 5:
+                        Console.WriteLine("Reprovado.");
+                        break;
+                    default:
+                        Console.WriteLine("Valor inválido");
+                        break;
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
-        //        Console.WriteLine("\nLista de alunos cadastrados: ");
-        //        foreach (var aluno in alunos)
-        //        {
-        //            Console.WriteLine($"{i}° aluno:\nNome: {aluno.Nome}n");
-        //            foreach (var nota in aluno.Notas)
-        //            {
-        //                Console.WriteLine($""
-        //            }
-        //            i++;
-        //        }
-        //        Console.WriteLine($"Valor total da compra: {valorTotal}");
-        //    }
-        //    catch (Exception) { throw; }
-        //}
+        public void ExibirALunos(List<Aluno> alunos)
+        {
+            try
+            {
+                int i = 1, b = 1;
+
+                Console.WriteLine("\nLista de alunos cadastrados: ");
+                foreach (var aluno in alunos)
+                {
+                    Console.WriteLine($"{i}° aluno:\nNome: {aluno.Nome}n");
+                    foreach (var nota in aluno.Notas)
+                    {
+                        Console.WriteLine($"");
+                    }
+
+                    double media = aluno.Notas.Average();
+                    ExibeMediaAluno(media);
+
+                    i++;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void ExibirALunosPorId(List<Aluno> alunos)
+        {
+            try
+            {
+                int i = 1, b = 1;
+
+                Console.WriteLine("\nLista de alunos cadastrados: ");
+                foreach (var aluno in alunos)
+                {
+                    Console.WriteLine($"{i}° aluno:\nNome: {aluno.Nome}n");
+                    foreach (var nota in aluno.Notas)
+                    {
+                        Console.WriteLine($"");
+                    }
+
+                    double media = aluno.Notas.Average();
+                    ExibeMediaAluno(media);
+
+                    i++;
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
         #endregion
     }

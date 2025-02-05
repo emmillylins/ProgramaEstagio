@@ -391,16 +391,12 @@ namespace Biblioteca.Manutencao
                         {
                             case 1:
                                 var produto = metodos.CadastrarProduto();
-                                if (produto is null)
-                                {
-                                    break;
-                                }
-                                else
+                                if (produto is not null)
                                 {
                                     produtos.Add(produto);
                                     valorTotal += produto.Preco;
-                                    break;
                                 }
+                                break;
                             case 2:
                                 metodos.ListarProdutos(produtos, valorTotal);
                                 return;
@@ -417,11 +413,11 @@ namespace Biblioteca.Manutencao
         //Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
         //O sistema deve permitir:
-            //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
-                //(cada aluno inserido terá id gerado automaticamente)
-            //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
-            //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
-            //4. Sair
+        //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
+        //(cada aluno inserido terá id gerado automaticamente)
+        //2. Exibição de todos Alunos e Médias: O sistema deve exibir a lista de alunos cadastrados, mostrar suas 4 notas e a média.
+        //3. Exibição de um aluno específico, passando o id dele, mostrar suas 4 notas e a média
+        //4. Sair
         //O sistema deve calcular a média do aluno e exibir se ele está
         //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
         //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.

@@ -1,5 +1,7 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
+
 
 namespace Biblioteca.Manutencao
 {
@@ -19,7 +21,6 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
 
         public void MostrarUsuario(List<Usuario> usuarios)
         {
@@ -44,107 +45,248 @@ namespace Biblioteca.Manutencao
 
         public Usuario CadastrarUsuario()
         {
-            var usuario = new Usuario();
             try
             {
-                Console.Write("Digite um nome: ");
+                Usuario usuario = new Usuario();
+                Console.WriteLine("Insira seu nome: ");
                 usuario.Nome = Console.ReadLine();
 
-                Console.Write("Digite um email: ");
+                Console.Write("Insira seu E-mail: ");
                 usuario.Email = Console.ReadLine();
 
-                Console.Write("Digite uma idade: ");
-                if (!int.TryParse(Console.ReadLine(), out int idade))
-                    Console.WriteLine("Digite uma idade válida.");
-                else
-                    usuario.Idade = idade;
+                Console.Write("Insira sua senha: ");
+                usuario.Senha = Console.ReadLine();
+
+                Console.Write("Insira sua idade: ");
+                if (!int.TryParse(Console.ReadLine(), out var idade))
+                {
+                    throw new Exception("Insira apenas valores numéricos!");
+                }
+                usuario.Idade = idade;
 
                 return usuario;
             }
             catch (Exception) { throw; }
         }
 
-        public double? Depositar()
+        public double Depositar()
         {
             try
             {
-                Console.Write("\nDigite o valor a ser depositado: ");
-
-                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valor)
-                    || valor < 0)
+                Console.WriteLine("Favor informar o valor a depositar");
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
                 {
-                    Console.WriteLine($"\nDigite um valor válido.");
-                    return null;
-                }
-                return valor;
+                    Console.WriteLine("Favor, inserir valor numérico válido");
+                };
+                return saldo;
             }
-            catch (Exception) { throw;  }
-        }
+            catch (Exception) { throw; }
 
-        public List<double>? Sacar(List<double> saldo)
+        }
+        public double Sacar(List<double> saldo)
         {
             try
             {
-                Console.Write("\nDigite o valor a ser sacado: ");
 
-                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double saque)
-                    || saque < 0)
+                Console.WriteLine("Por favor informar o saldo a sacar: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saque) || saque < 0)
                 {
-                    Console.WriteLine($"\nDigite um valor válido.");
-                    return null;
+                    Console.WriteLine("Favor inserir valor numérico válido");
+                    return 0;
+
                 }
-
-                var saldoComSaque = saldo.Sum() - saque;
-                if (saldoComSaque < 0)
+                else if (saque <= saldo.Sum())
                 {
-                    Console.WriteLine($"O saque: {saque} é menor do que o valor disponível: {saldo.Sum()}");
+                    return saque;
+                }
+                else
+                {
+                    Console.WriteLine($"O saque {saque} é maior do que o saldo disponivel {saldo.Sum():F2}");
+                    return 0;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        public Produto CadastrarProduto()
+        {
+            try
+            {
+                Produto meuProduto = new Produto();
+
+                Console.Write("Insira o nome do produto: ");
+                meuProduto.Nome = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(meuProduto.Nome))
+                {
+                    Console.WriteLine("O nome do produto não pode ser nulo");
                     return null;
                 }
                 else
-                    return [saldoComSaque];
+                {
+                    Console.Write("Insira o preço do produto: ");
+
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var preco))
+                    {
+                        Console.WriteLine("Insira o preco válido para o produto.");
+                        return null;
+                    }
+
+                    else if (preco <= 0)
+                    {
+                        Console.WriteLine("O preço do produto não pode ser igual ou menor que zero");
+                        return null;
+                    }
+
+                    meuProduto.Preco = preco;
+
+
+                    return meuProduto;
+                }
             }
             catch (Exception) { throw; }
-        }
 
-        public Produto? CadastrarProduto()
+        }
+        public double CalcularValorTotal(List<Produto> produtos)
         {
             try
             {
-                var produto = new Produto();
-
-                Console.Write("Digite o nome um produto: ");
-                produto.Nome = Console.ReadLine();
-
-                Console.Write("Digite o preço: ");
-
-                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double preco)
-                    || preco < 0)
+                if (produtos.Count == 0)
                 {
-                    Console.WriteLine($"\nDigite um valor válido.");
+                    Console.WriteLine("Não há produtos na lista.");
+                    return 0;
+                }
+                else
+                {
+                    double valorTotal = 0;
+                    foreach (Produto produto in produtos)
+                    {
+                        valorTotal = valorTotal + produto.Preco;
+                    }
+                    return valorTotal;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void ExibirListaProdutos(List<Produto> produtos)
+        {
+            foreach (Produto produto in produtos)
+            {
+                Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
+            }
+        }
+
+        public Aluno CadastrarAluno()
+        {
+            try
+            {
+                Aluno aluno = new();
+                Console.Clear();
+
+                Console.Write("Digite o nome do aluno: ");
+                aluno.Nome = Console.ReadLine();
+                if(string.IsNullOrEmpty(aluno.Nome))
+                {
+                    Console.WriteLine("O aluno precisa ter um nome");
                     return null;
                 }
-                produto.Preco = preco;
 
-                return produto;
-            }
-            catch (Exception) { throw; }
-        }
-
-        public void ListarProdutos(List<Produto> produtos, double valorTotal)
-        {
-            try
-            {
-                int i = 0;
-
-                Console.WriteLine("\nLista de produtos: ");
-                foreach (var produto in produtos)
+                for(var i = 1; i < 5; i++)
                 {
-                    Console.WriteLine($"{i + 1}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
-                    i++;
+                    Console.WriteLine($"Digite a {i}° nota");
+                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    {
+                        Console.WriteLine("Digite uma nota válida");
+                        i--;
+                    } 
+                    else
+                    {
+                        aluno.Notas.Add(nota);
+                    }                
                 }
-                Console.WriteLine($"Valor total da compra: {valorTotal}");
+
+                return aluno;
             }
-            catch (Exception) { throw; }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+    
+        public void ExibirAlunos(List<Aluno> listaAlunos)
+        {
+            Console.WriteLine("\nLista de Alunos:");
+            foreach(Aluno aluno in listaAlunos)
+            {
+                Console.WriteLine($"Id do aluno: {aluno.Id}");
+                Console.WriteLine($"Nome do aluno: {aluno.Nome}");
+                Console.WriteLine("\nNotas: ");
+                foreach(double nota in aluno.Notas)
+                {
+                    Console.WriteLine($"Nota: {nota}");
+                }
+
+                var media = aluno.Notas.Average();
+                Console.WriteLine($"Media: {media}");
+
+                switch(media)
+                {
+                    case >= 7:
+                        Console.WriteLine("Aprovado");
+                        break;
+                    case >= 5 and < 7:
+                        Console.WriteLine("Recuperação");
+                        break;
+                    case < 5:
+                        Console.WriteLine("Reprovado");
+                        break;
+                }
+            }
+        }
+    
+        public void BuscaAlunoPorId(List<Aluno> alunos)
+        {
+            Console.WriteLine("\nBusca aluno pelo seu Id.");
+            Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
+            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            {
+                Console.WriteLine("Insira um id válido");
+                return;
+            }
+
+            var aluno = alunos.Find(aluno => aluno.Id == id);
+            if(aluno == null)
+            {
+                Console.WriteLine("O aluno não foi encontrado.");
+                return;
+            }
+
+            Console.WriteLine($"Aluno: {aluno.Nome}");
+            var i = 1;
+            foreach(double nota in aluno.Notas) 
+            {
+                Console.WriteLine($"{i}° Nota: {nota}");
+                i++;
+            }
+
+            var media = aluno.Notas.Average();
+            Console.WriteLine($"Média: {media}");
+            switch(media)
+            {
+                case >= 7:
+                    Console.WriteLine("Aprovado");
+                    break;
+                case > 5 and < 7:
+                    Console.WriteLine("Recuperação");
+                    break;
+                case < 5:
+                    Console.WriteLine("Reprovado");
+                    break;
+            }
         }
     }
 }

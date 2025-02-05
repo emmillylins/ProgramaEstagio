@@ -1,6 +1,8 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
+using System;
 using System.Globalization;
+using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
@@ -379,6 +381,134 @@ namespace Biblioteca.Manutencao
         //O sistema deve calcular a média do aluno e exibir se ele está
         //Aprovado(média ≥ 7), Recuperação(média entre 5 e 6.9) ou Reprovado(média < 5).
         //Validação: O sistema deve impedir a inserção de notas negativas ou acima de 10.
+
+        //Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+
+        public void JogoAdivinhacao()
+        {
+            try
+            {
+                Console.WriteLine("Jogo de Adivinhação!");
+                Console.WriteLine("Você tem 5 tentativas.");
+                var metodos = new Metodos();
+                int numeroAleatorio = metodos.GerarNumero();
+                int tentativas = 5;
+
+                for (int i = 0; i < tentativas;)
+                {
+                    Console.Write("\nDigite seu palpite: ");
+                    string numeroDigitado = Console.ReadLine();
+
+                    if (!int.TryParse(numeroDigitado, out int palpite) || palpite < 0 || palpite > 100)
+                    {
+                        Console.WriteLine("Digite um número válido entre 1 e 100!");
+                        continue;
+                    }
+
+                    i++;
+
+                    if (palpite == numeroAleatorio)
+                    {
+                        Console.WriteLine($"Você acertou o número secreto, que é {numeroAleatorio}.");
+                        return;
+                    }
+                    else if (palpite > numeroAleatorio)
+                    {
+                        Console.WriteLine("Seu palpite é maior que o número secreto!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Seu palpite é menor que o número secreto!");
+                    }
+
+                }
+
+                Console.WriteLine($"Você gastou todas as suas tentativas! O número secreto era {numeroAleatorio}.");
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
+
+        public void ProgramaLeitorNumeros()
+        {
+            try
+            {
+                var metodos = new Metodos();
+                List<int> listaNumeros = new List<int>();
+
+                Console.WriteLine("Programa para classificar números inteiros em positivos, negativos e zeros.");
+
+                while (true)
+                {
+                    Console.WriteLine("\nEscolha uma opção:");
+                    Console.WriteLine("1 - Inserir número na lista");
+                    Console.WriteLine("2 - Ler números da lista");
+                    Console.WriteLine("3 - Sair");
+
+                    var escolha = Console.ReadLine();
+
+                    switch (escolha)
+                    {
+                        case "1":
+                            Console.WriteLine("Digite o número que você quer inserir: ");
+                            var numeroInserido = Console.ReadLine();
+
+                            if (int.TryParse(numeroInserido, out int numero))
+                            {
+                                listaNumeros.Add(numero);
+                                Console.WriteLine($"Número {numero} adicionado à lista.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Digite apenas números inteiros.");
+                            }
+                            break;
+
+                        case "2":
+                            metodos.ClassificarNumeros(listaNumeros);
+                            break;
+
+                        case "3":
+                            Console.WriteLine("Você saiu do programa.");
+                            return;
+
+                        default:
+                            Console.WriteLine("Opção inválida! Tente novamente.");
+                            break;
+                    }
+
+
+                }
+            }
+            catch (Exception) { throw; }
+        }
+//        Questão 3: Validação de Senha:
+//Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial. O programa deve informar se a senha fornecida atende aos critérios.
+//        Regras: Utilize método para validar a senha inserida.
+
+        public void ProgramaValidarSenha()
+        {
+            var metodos = new Metodos();
+            Console.WriteLine("\nPrograma para validação de senhas!\nAs regras são: Sua senha precisa ter pelo menos 8 caracteres,\npelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.");
+            Console.Write("Insira sua senha: ");
+            var senhaInserida = Console.ReadLine();
+
+            bool senhaValida = metodos.ValidacaoSenhas(senhaInserida);
+
+            if (senhaValida)
+            {
+                Console.WriteLine("Senha válida!");
+            }
+            else
+            {
+                Console.WriteLine("Senha inválida.");
+            }
+
+        }
+
+
     }
 }
 

@@ -68,7 +68,7 @@ namespace Biblioteca.Manutencao
             try
             {
                 Console.WriteLine("Favor informar o valor a depositar");
-                if(!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saldo) || saldo <= 0)
                 {
                     Console.WriteLine("Favor, inserir valor numérico válido");
                 };
@@ -82,7 +82,7 @@ namespace Biblioteca.Manutencao
             {
 
                 Console.WriteLine("Por favor informar o saldo a sacar: ");
-                
+
                 if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var saque) || saque < 0)
                 {
                     Console.WriteLine("Favor inserir valor numérico válido");
@@ -100,6 +100,75 @@ namespace Biblioteca.Manutencao
                 }
             }
             catch (Exception) { throw; }
+        }
+
+        public int GerarNumero()
+        {
+            try
+            {
+                Random random = new Random();
+                int numeroSecreto = random.Next(1, 101);
+                return numeroSecreto;
+            }
+            catch (Exception) { throw; }
+        }
+        public void ClassificarNumeros(List<int> listaNumeros)
+        {
+            List<int> positivos = new List<int>();
+            List<int> negativos = new List<int>();
+            List<int> zeros = new List<int>();
+
+            foreach (var numero in listaNumeros)
+            {
+                if (numero > 0)
+                {
+                    positivos.Add(numero);
+                }
+                else if (numero < 0)
+                {
+                    negativos.Add(numero);
+                }
+                else
+                {
+                    zeros.Add(numero);
+                }
+            }
+
+            Console.WriteLine("\nClassificação dos números:");
+            Console.WriteLine("Positivos: " + string.Join(", ", positivos));
+            Console.WriteLine("Negativos: " + string.Join(", ", negativos));
+            Console.WriteLine("Zeros: " + string.Join(", ", zeros));
+        }
+
+        public bool ValidacaoSenhas(string senhaInserida)
+        {
+            string caracteresPermitidos = "@#/.!')<>(&%$*+-?`´[]^~;:";
+
+            if (senhaInserida.Length < 8)
+            {
+                Console.WriteLine("Sua senha precisa ter no mínimo 8 caracteres.");
+                return false;
+            }
+
+            if (!senhaInserida.Any(char.IsUpper))
+            {
+                Console.WriteLine("Sua senha precisa ter pelo menos uma letra maiúscula.");
+                return false;
+            }
+
+            if (!senhaInserida.Any(char.IsLower))
+            {
+                Console.WriteLine("Sua senha precisa ter pelo menos uma letra minúscula.");
+                return false;
+            }
+
+            if (!senhaInserida.Any(c => caracteresPermitidos.Contains(c)))
+            {
+                Console.WriteLine("Sua senha precisa ter pelo menos um caractere.");
+                return false;
+            }
+            return true;
+
         }
     }
 }

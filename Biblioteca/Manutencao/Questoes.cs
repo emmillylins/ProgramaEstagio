@@ -441,7 +441,7 @@ namespace Biblioteca.Manutencao
                 List<Aluno> listaAlunos = [];
                 Metodos metodos = new();
                 var i = 1;
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção");
                     Console.WriteLine("1 - Cadastrar aluno");
@@ -449,17 +449,18 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("3 - Exibir aluno por id");
                     Console.WriteLine("4 - Sair");
 
-                    if(!int.TryParse(Console.ReadLine(), out var opcao))
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida!");
-                            
+
                     }
 
-                    switch(opcao) 
+                    switch (opcao)
                     {
                         case 1:
                             var alunoCadastrado = metodos.CadastrarAluno();
-                            if(alunoCadastrado != null) {
+                            if (alunoCadastrado != null)
+                            {
                                 alunoCadastrado.Id = i;
                                 i++;
                                 listaAlunos.Add(alunoCadastrado);
@@ -481,6 +482,215 @@ namespace Biblioteca.Manutencao
         }
 
 
+        /* 
+            Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+
+            Regras:
+            Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+
+            Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+
+            Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
+        */
+
+        public void JogoAdivinhacao()
+        {
+            try
+            {
+                var validacoes = new Validacoes();
+
+                Random numeroSecreto = new();
+                var resultado = numeroSecreto.Next(1, 100);
+
+                Console.WriteLine("\nJogo da adivinhação");
+                Console.WriteLine("\nAdivinhe o número");
+
+                for (var i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("\nDigite um número entre 1 e 100");
+                    if (!int.TryParse(Console.ReadLine(), out int numeroInserido) || numeroInserido < 1 || numeroInserido > 100)
+                    {
+                        Console.WriteLine("Número inválido, digite um valor numérico entre um e cem");
+                        i--;
+                        continue;
+                    }
+
+                    if (validacoes.VerificaNumerosIguais(numeroInserido, resultado))
+                    {
+                        return;
+                    }
+                }
+
+                Console.Clear();
+                Console.WriteLine($"Suas chances esgotaram");
+            }
+            catch (Exception) { throw; }
+
+        }
+
+        /* 
+            Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros. 
+        */
+        public void ClassificaNumeros()
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Lista de números inteiros.");
+                Console.WriteLine("Adicione cinco números a lista e vamos organizar eles pra você.");
+
+                List<int> listaNumerosPositivos = [];
+                List<int> listaNumerosNegativos = [];
+                int valorZero = -1;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.Write($"Adicione o {i + 1}° número: ");
+                    if (!int.TryParse(Console.ReadLine(), out int numeroAdicionado))
+                    {
+                        Console.WriteLine("O valor precisa ser numérico.");
+                        i--;
+                        continue;
+                    }
+
+                    if (numeroAdicionado > 0)
+                    {
+                        listaNumerosPositivos.Add(numeroAdicionado);
+                    }
+                    else if (numeroAdicionado < 0)
+                    {
+                        listaNumerosNegativos.Add(numeroAdicionado);
+                    }
+                    else
+                    {
+                        valorZero = numeroAdicionado;
+                    }
+                }
+
+                Console.Clear();
+
+                if (listaNumerosPositivos.Count > 0)
+                {
+                    Console.WriteLine("Seus números positivos");
+
+                    foreach (var numerosPositivos in listaNumerosPositivos)
+                    {
+                        Console.WriteLine(numerosPositivos);
+                    }
+                }
+
+                if (listaNumerosNegativos.Count > 0)
+                {
+                    Console.WriteLine("Seus números negativos");
+
+                    foreach (var numerosNegativos in listaNumerosNegativos)
+                    {
+                        Console.WriteLine(numerosNegativos);
+                    }
+                }
+
+                if (valorZero == 0)
+                {
+                    Console.WriteLine("Existe um valor zero: " + valorZero);
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        /* 
+            Questão 3: Validação de Senha:
+            Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, 
+            pelo menos uma letra maiúscula, 
+            uma letra minúscula e um caractere especial. 
+            O programa deve informar se a senha fornecida atende aos critérios.
+
+            Regras: Utilize método para validar a senha inserida.
+        */
+        public void ValidaSenha() 
+        {
+            try
+            {
+                Console.WriteLine("Sistema de validação de senha");
+            }
+            catch (Exception) { throw; }
+        }
+
+        /* 
+            Desenvolva uma calculadora que permita ao usuário realizar operações básicas (adição, subtração, multiplicação, divisão) e 
+            operações avançadas (potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle (switch/case).
+       
+        */
+        public void Calculadora()
+        {
+            try
+            {
+                Console.Clear();
+
+                Console.WriteLine("Calculadora");
+
+                Console.WriteLine("\nEscolha operação matemática que você deseja.");
+                Console.WriteLine("1 - Adição");
+                Console.WriteLine("2 - Subtração");
+                Console.WriteLine("3 - Multiplicação");
+                Console.WriteLine("4 - Divisão");
+                Console.WriteLine("5 - Potencialização");
+                Console.WriteLine("6 - Radiciação");
+                Console.WriteLine("7 - Sair");
+
+                var metodos = new Metodos();
+
+                var condicao =  true;
+
+                while(condicao)
+                {
+                    
+                    if(!int.TryParse(Console.ReadLine(), out int operação) || operação < 1 || operação > 5)
+                    {
+                        Console.WriteLine("Digite um valor numérico válido");
+                        continue;
+                    }
+
+                    Console.Clear();
+
+                    switch(operação)
+                    {
+                        case 1:
+                            Console.Write("Adição");
+                            var (numero1, numero2) = metodos.PegaDoisNumeros();
+                            Console.WriteLine($"{numero1} + {numero2} = {numero1 + numero2}");
+                            break;
+                        case 2:
+                            Console.WriteLine("Subtração");
+                            var (numero3, numero4) = metodos.PegaDoisNumeros();
+                            Console.WriteLine($"{numero3} + {numero4} = {numero3 - numero4}");
+                            break;
+                        case 3:
+                            Console.WriteLine("Multiplicação");
+                            var (numero5, numero6) = metodos.PegaDoisNumeros();
+                            Console.WriteLine($"{numero5} + {numero6} = {numero5 * numero6}");
+                            break;
+                        case 4:
+                            Console.WriteLine("Divisão");
+                            var (numero7, numero8) = metodos.PegaDoisNumeros();
+                            Console.WriteLine($"{numero7} + {numero8} = {numero7 / numero8}");
+                            break;
+                        case 5:
+                            Console.WriteLine("Potência");
+                            metodos.Potencialização();
+                            break;
+                        case 6:
+                            Console.WriteLine("Radiciação");
+                            metodos.Radiciação();
+                            break;
+                        case 7:
+                            return;
+                    }
+
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
 

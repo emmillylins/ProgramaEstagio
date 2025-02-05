@@ -288,5 +288,60 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+    
+        public (int, int) PegaDoisNumeros()
+        {
+            Console.Write("Digite o primeiro número: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            Console.Write("Digite o segundo número: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero2))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            return (numero1, numero2);
+        }
+
+        public void Potencialização()
+        {
+            Console.Write("Digite o número a ser elevado / numero base: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            Console.Write("Digite a potência: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero2))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            var resultado = Math.Pow(numero1, numero2);
+
+            Console.WriteLine($"O número {numero1} elevado a {numero2}° é {resultado}");            
+        }
+
+        public void Radiciação()
+        {
+            Console.Write("Digite o número / radical: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            Console.Write("Digite o indice: ");
+            if(!int.TryParse(Console.ReadLine(), out int numero2))
+            {
+                Console.WriteLine("Digite um valor numérico válido");
+            }
+
+            var resultado = Math.Sqrt(numero1 / numero2);
+
+            Console.WriteLine($"O número {numero1} elevado a {numero2}° é {resultado}");            
+        }
     }
 }

@@ -77,5 +77,20 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        public bool VerificaNumerosIguais(int numeroUsuario, int numeroSecreto)
+        {
+
+            if (numeroSecreto == numeroUsuario) 
+            {
+                Console.WriteLine($"Parabéns o numero é {numeroSecreto} e você inseriu {numeroUsuario}");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"Você errou, o número não é {numeroUsuario}");
+                return false;
+            }
+        }
+
     }
 }

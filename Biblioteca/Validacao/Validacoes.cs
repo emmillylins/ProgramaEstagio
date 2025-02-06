@@ -72,5 +72,28 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
+        public bool ValidarSenha(string senha)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(senha) || senha.Length < 8)
+                    return false;
+
+                bool temMaiuscula = false, temMinuscula = false, temEspecial = false;
+
+                foreach (char c in senha)
+                {
+                    if (char.IsUpper(c)) temMaiuscula = true;
+                    else if (char.IsLower(c)) temMinuscula = true;
+                    else if (!char.IsLetterOrDigit(c)) temEspecial = true;
+
+                    if (temMaiuscula && temMinuscula && temEspecial)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

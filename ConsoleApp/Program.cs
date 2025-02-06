@@ -8,7 +8,7 @@ class Program
         {
             var manutencao = new Questoes();
 
-
+            manutencao.ClassificaNumeros();
             Console.ReadKey();
         }
         catch (Exception e)

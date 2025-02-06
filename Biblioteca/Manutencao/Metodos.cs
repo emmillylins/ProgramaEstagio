@@ -21,6 +21,7 @@ namespace Biblioteca.Manutencao
         }
 
 
+        #region usuario
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -62,6 +63,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
         #region CaixaEletronico
         public double Depositar()
@@ -283,5 +285,65 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
         #endregion
+
+        /// <summary>
+        /// calcula números de acordo com a opção envidada. As opções são:
+        /// 1 - Adição; 2 - Subtração; 3 - Multiplicação; 4 - Divisão; 5 - Potenciação; 6 - Raiz Quadrada;
+        /// </summary>
+        /// <param name="opcao"></param>
+        public void CalculaNumeros(int opcao)
+        {
+            try
+            {
+                double num1, num2 = 0;
+                Console.Write("Digite o primeiro número: ");
+
+                if (!double.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Entrada inválida!");
+                    return;
+                }
+
+                if (opcao != 6) // Raiz quadrada só precisa de um número	
+                {
+                    Console.Write("Digite o segundo número: ");
+                    if (!double.TryParse(Console.ReadLine(), out num2))
+                    {
+                        Console.WriteLine("Entrada inválida!");
+                        return;
+                    }
+                }
+
+                double resultado = 0;
+                switch (opcao)
+                {
+                    case 1: 
+                        resultado = num1 + num2; 
+                        break;
+                    case 2: 
+                        resultado = num1 - num2; 
+                        break;
+                    case 3: 
+                        resultado = num1 * num2; 
+                        break;
+                    case 4:
+                        if (num2 == 0)
+                        {
+                            Console.WriteLine("Erro: divisão por zero não permitida.");
+                            return;
+                        }
+                        resultado = num1 / num2;
+                        break;
+                    case 5:
+                        resultado = Math.Pow(num1, num2);
+                        break;
+                    case 6:
+                        resultado = Math.Sqrt(num1);
+                        break;
+                }
+                Console.WriteLine($"Resultado: {resultado}");
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

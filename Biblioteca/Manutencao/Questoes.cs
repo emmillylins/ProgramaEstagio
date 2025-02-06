@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -474,12 +475,85 @@ namespace Biblioteca.Manutencao
         //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
         //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
         //Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
-       
+        public void JogoAdivinhacao()
+        {
+            try
+            {
+                Random random = new Random();
+                int numeroSecreto = random.Next(1, 101);
+                int tentativas = 5;
+                bool acertou = false;
+                Console.WriteLine("Jogo de Adivinhação! Tente adivinhar o número entre 1 e 100.");
+
+                for (int i = 0; i < tentativas; i++)
+                {
+                    Console.Write("Digite seu palpite: ");
+                    if (!int.TryParse(Console.ReadLine(), out int palpite))
+                    {
+                        Console.WriteLine("Por favor, digite um número válido.");
+                        i--; // Não contar tentativa inválida
+                        continue;
+                    }
+                    if (palpite < numeroSecreto)
+                    {
+                        Console.WriteLine("Tente um número maior.");
+                    }
+                    else if (palpite > numeroSecreto)
+                    {
+                        Console.WriteLine("Tente um número menor.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Parabéns! Você acertou!");
+                        acertou = true;
+                        break;
+                    }
+                }
+                if (!acertou)
+                {
+                    Console.WriteLine($"Você perdeu! O número era {numeroSecreto}.");
+                }
+            }
+            catch (Exception) { throw; }
+        }
 
 
         //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário
         //e classifique-os em positivos, negativos e zeros.
+        public void ClassificaNumeros()
+        {
+            try
+            {
+                List<int> positivos = [], negativos = [], zeros = [];
 
+                Console.Write("Digite números separados por espaço: ");
+                string[] entradas = Console.ReadLine().Split(' ');
+
+                for (int i = 0; i < entradas.Length; i++)
+                {
+                    int numero;
+                    while (!int.TryParse(entradas[i], out numero))
+                    {
+                        Console.Write($"\nErro: '{entradas[i]}' não é um número válido." +
+                                       "\nDigite um número válido para substituí-lo: ");
+                        entradas[i] = Console.ReadLine();
+                    }
+
+                    if (numero > 0)
+                        positivos.Add(numero);
+                    else if (numero < 0)
+                        negativos.Add(numero);
+                    else
+                        zeros.Add(numero);
+                }
+
+                Console.WriteLine("\nNumeros classificados:");
+                Console.WriteLine($"Positivos: {string.Join(", ", positivos)}");
+                Console.WriteLine($"Negativos: {string.Join(", ", negativos)}");
+                Console.WriteLine($"Zeros: {string.Join(", ", zeros)}");
+            }
+            catch (Exception) { throw; }
+        }
 
 
         //Questão 3: Validação de Senha:
@@ -489,14 +563,51 @@ namespace Biblioteca.Manutencao
         //e um caractere especial.
         //O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
+        public void ValidaSenha()
+        {
+            try
+            {
+                var validacoes = new Validacoes();
 
+                Console.Write("Digite uma senha: ");
+                string senha = Console.ReadLine();
+
+                if (validacoes.ValidarSenha(senha))
+                    Console.WriteLine("Senha válida!");
+                else
+                    Console.WriteLine("Senha inválida! A senha deve conter pelo menos 8 caracteres, " +
+                        "uma letra maiúscula, uma letra minúscula e um caractere especial.");
+            }
+            catch (Exception) { throw; };
+        }
 
 
         //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
         //e operações avançadas(potenciação, raiz quadrada)
         //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+        public void CalculadoraAvancada()
+        {
+            try
+            {
+                var metodos = new Metodos();
 
+                Console.WriteLine("Escolha uma operação:");
+                Console.WriteLine("1 - Adição (+)");
+                Console.WriteLine("2 - Subtração (-)");
+                Console.WriteLine("3 - Multiplicação (*)");
+                Console.WriteLine("4 - Divisão (/)");
+                Console.WriteLine("5 - Potenciação (^)");
+                Console.WriteLine("6 - Raiz Quadrada (√)");
+
+                if (int.TryParse(Console.ReadLine(), out int opcao) && opcao >= 1 && opcao <= 6)
+                    metodos.CalculaNumeros(opcao);
+                else
+                    Console.WriteLine("Opção inválida!");
+
+            }
+            catch (Exception) { throw; }
+        }
 
 
         //Questão 5: Validação de CPF

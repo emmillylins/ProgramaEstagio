@@ -21,8 +21,10 @@ class Program
             //manutencao.VerificaSenha();
             //manutencao.CalculadoraAvancada();
             //manutencao.ValidarCpf();
-            manutencao.SimuladorCaixaEletronico();
-
+            //manutencao.SimuladorCaixaEletronico();
+            //manutencao.JogoForca();
+            //manutencao.GeradorTabuada();
+            
             Console.ReadKey();
         }
         catch (Exception e)

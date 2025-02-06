@@ -1,6 +1,5 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
-using System.Reflection.Metadata.Ecma335;
 
 
 namespace Biblioteca.Manutencao
@@ -527,12 +526,24 @@ namespace Biblioteca.Manutencao
             }
         }
 
-        
 
 
+        public void GerarTabuada()
+        {
+            Console.WriteLine("Digite o número para gerar a tabuada: ");
+            if (!int.TryParse(Console.ReadLine(), out int numero))
+            {
+                Console.WriteLine("Digite um número válido.");
+                return;
+            }
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine($"{numero} x {i} = {numero * i}");
+            }
+
+
+        }
     }
-
-
 }
 
 

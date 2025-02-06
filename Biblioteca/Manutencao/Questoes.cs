@@ -1,9 +1,7 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
@@ -807,6 +805,56 @@ namespace Biblioteca.Manutencao
         //Contar as tentativas restantes.
         //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
 
+        public void JogoForca()
+        {
+
+        }
+
+        //Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
+
+        //O programa deve:
+
+        //Solicitar ao usuário um número inteiro entre 1 e 10. 
+        //Validar se o número está dentro do intervalo permitido.
+        //Gerar a tabuada do número, exibindo os resultados de 1 a 10. 
+        //Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.). 
+        //Permitir que o usuário gere outra tabuada ou encerre o programa.
+
+        public void GeradorTabuada()
+        {
+            try
+            {
+                Metodos metodos = new Metodos();
+                while (true)
+                {
+                    Console.WriteLine("Gerador de Tabuada Personalizado");
+                    Console.WriteLine("Insira uma das opções abaixos");
+                    Console.WriteLine("\n1 - Gerar tabuada\n2 - Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Insira uma opção válida.");
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1: 
+                            metodos.GerarTabuada();
+                            break;
+                        case 2:
+                            Console.WriteLine("Saindo...");
+                            return;
+
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

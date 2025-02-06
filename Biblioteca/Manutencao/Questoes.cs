@@ -657,22 +657,22 @@ namespace Biblioteca.Manutencao
                         case 1:
                             Console.Write("Adição");
                             var (numero1, numero2) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"{numero1} + {numero2} = {numero1 + numero2}");
+                            Console.WriteLine($"Resultado: {numero1} + {numero2} = {numero1 + numero2}");
                             break;
                         case 2:
                             Console.WriteLine("Subtração");
                             var (numero3, numero4) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"{numero3} + {numero4} = {numero3 - numero4}");
+                            Console.WriteLine($"Resultado: {numero3} + {numero4} = {numero3 - numero4}");
                             break;
                         case 3:
                             Console.WriteLine("Multiplicação");
                             var (numero5, numero6) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"{numero5} + {numero6} = {numero5 * numero6}");
+                            Console.WriteLine($"Resultado: {numero5} + {numero6} = {numero5 * numero6}");
                             break;
                         case 4:
                             Console.WriteLine("Divisão");
                             var (numero7, numero8) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"{numero7} + {numero8} = {numero7 / numero8}");
+                            Console.WriteLine($"Resultado: {numero7} + {numero8} = {numero7 / numero8}");
                             break;
                         case 5:
                             Console.WriteLine("Potência");
@@ -690,6 +690,65 @@ namespace Biblioteca.Manutencao
 
             }
             catch (Exception) { throw; }
+        }
+
+        /* 
+            Questão 5: Validação de CPF
+            Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto (11 dígitos numéricos). 
+            O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto. 
+            Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+
+            Regras de Validação de CPF
+
+            O CPF deve ter 11 dígitos. 
+            Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+            O cálculo dos dígitos verificadores é feito da seguinte forma: 
+
+            Para o primeiro dígito verificador: 
+            Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+            Soma-se os resultados. 
+            O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto. 
+
+            Para o segundo dígito verificador: 
+            Multiplica-se cada um dos 10 primeiros dígitos (9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
+            Soma-se os resultados. 
+            O dígito verificador é o resto da divisão dessa soma por 11. 
+            Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.       
+        */
+        public void ValidacaoCPF()
+        {
+            Console.Clear();
+            Console.WriteLine("Validador de CPF");
+
+            Console.Write("Digite seu cpf: ");
+            var cpf = Console.ReadLine()!;
+
+            if (cpf.Length != 11 || !cpf.All(char.IsDigit)) 
+            {
+                Console.WriteLine("O CPF deve ter 11 caracteres");
+                return;
+            }
+
+            var penultimoDigito = cpf[9];
+            var ultimoDIgito = cpf[10];
+
+            string noveCaracteresCpf = cpf[..9]; // Esta variavel armazena os nove primeiros caracteres.
+            string dezCaracteresCpf = cpf[..10]; // Esta variavel armazena os nove primeiros caracteres.
+
+            List<int> resultado = []; // primeira validação             
+            int resultadoMultiplicacaoDigitoPeso = 0;// vai armazenar a soma da multiplicacao do digito pelo peso
+
+            int peso = 10;
+
+            
+            for(int i = 0; i < noveCaracteresCpf.Length; i++) 
+            {
+                var numeroInteiro = int.Parse(noveCaracteresCpf[i].ToString());
+                resultadoMultiplicacaoDigitoPeso = numeroInteiro * peso;
+                resultado.Add(resultadoMultiplicacaoDigitoPeso);
+                peso--;
+            }                     
+            Console.WriteLine(resultado.Sum() % 11);
         }
     }
 }

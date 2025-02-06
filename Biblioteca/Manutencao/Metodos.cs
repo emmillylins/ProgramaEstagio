@@ -289,59 +289,86 @@ namespace Biblioteca.Manutencao
             }
         }
     
-        public (int, int) PegaDoisNumeros()
+        public (int?, int?) PegaDoisNumeros()
         {
-            Console.Write("Digite o primeiro número: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            int num1, num2;
+            while (true) 
             {
-                Console.WriteLine("Digite um valor numérico válido");
+                Console.Write("\nDigite o primeiro número: ");
+                if(!int.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+                Console.Write("Digite o segundo número: ");
+                if(!int.TryParse(Console.ReadLine(), out num2))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+                break;
             }
 
-            Console.Write("Digite o segundo número: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero2))
-            {
-                Console.WriteLine("Digite um valor numérico válido");
-            }
-
-            return (numero1, numero2);
+            return (num1, num2);
         }
 
         public void Potencialização()
         {
-            Console.Write("Digite o número a ser elevado / numero base: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            int num1, num2;
+            while(true) 
             {
-                Console.WriteLine("Digite um valor numérico válido");
+                Console.Write("Digite o número a ser elevado / numero base: ");
+                if(!int.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+
+                Console.Write("Digite a potência: ");
+                if(!int.TryParse(Console.ReadLine(), out num2))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+
+                break;
             }
 
-            Console.Write("Digite a potência: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero2))
-            {
-                Console.WriteLine("Digite um valor numérico válido");
-            }
+            var resultado = Math.Pow(num1, num2);
 
-            var resultado = Math.Pow(numero1, numero2);
-
-            Console.WriteLine($"O número {numero1} elevado a {numero2}° é {resultado}");            
+            Console.WriteLine($"O número {num1} elevado a {num2}° é {resultado}");            
         }
 
         public void Radiciação()
         {
-            Console.Write("Digite o número / radical: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero1))
+            int num1, num2;
+            while(true)
             {
-                Console.WriteLine("Digite um valor numérico válido");
+                Console.Write("Digite o número / radical: ");
+                if(!int.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+
+                Console.Write("Digite o indice: ");
+                if(!int.TryParse(Console.ReadLine(), out num2))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                    continue;
+                }
+
+                break;
             }
 
-            Console.Write("Digite o indice: ");
-            if(!int.TryParse(Console.ReadLine(), out int numero2))
-            {
-                Console.WriteLine("Digite um valor numérico válido");
-            }
+            var resultado = Math.Sqrt(num1 / num2);
 
-            var resultado = Math.Sqrt(numero1 / numero2);
+            Console.WriteLine($"O número {num1} elevado a {num2}° é {resultado}");            
+        }
 
-            Console.WriteLine($"O número {numero1} elevado a {numero2}° é {resultado}");            
+        public void ValidaCPF(int peso, string cadeiaDeCaracteres)
+        {
+
         }
     }
 }

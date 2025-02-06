@@ -1,11 +1,18 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Globalization;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region Apresentação
         public void VerificaNumeroPrimo()
         {
             try
@@ -464,6 +471,106 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Teste 3
+        //Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha
+        //5 tentativas para adivinhar um número secreto entre 1 e 100?
+        //Regras
+        //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
+        //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
+        //Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
+       
+
+
+        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário
+        //e classifique-os em positivos, negativos e zeros.
+
+
+
+        //Questão 3: Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
+        //pelo menos uma letra maiúscula,
+        //uma letra minúscula
+        //e um caractere especial.
+        //O programa deve informar se a senha fornecida atende aos critérios.
+        //Regras: Utilize método para validar a senha inserida.
+
+
+
+        //Questão 4: Calculadora com Operações Avançadas:
+        //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
+        //e operações avançadas(potenciação, raiz quadrada)
+        //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+
+
+
+        //Questão 5: Validação de CPF
+        //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
+        //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.
+        //Uilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+        //Regras de Validação de CPF
+        //1. O CPF deve ter 11 dígitos.
+        //2. Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos.
+        //3. O cálculo dos dígitos verificadores é feito da seguinte forma:
+        //    - Para o **primeiro dígito verificador**:
+        //        - Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2.
+        //        - Soma-se os resultados.
+        //        - O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0;
+        //        caso contrário, é 11 menos o resto.
+        //    - Para o **segundo dígito verificador**:
+        //        - Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador)
+        //        por um peso que começa em 11 e diminui até 2.
+        //        - Soma-se os resultados.
+        //        - O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0;
+        //        caso contrário, é 11 menos o resto.
+
+
+
+        //Questão 6: Simulador de Caixa Eletrônico*
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.O programa deve:
+        //1. Solicitar o valor do saque.
+        //2. Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //3. Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //4. Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+
+
+        //Questão 7: Jogo da Forca
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista
+        //e o usuário tenta adivinhar a palavra, letra por letra.
+        //O usuário tem 6 tentativas para acertar a palavra.
+        //O programa deve:
+        //1. Exibir o progresso do usuário(letras acertadas e letras faltando).
+        //2. Contar as tentativas restantes.
+        //3. Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+
+
+
+        //Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.O programa deve:
+        //1. Solicitar ao usuário um número inteiro entre 1 e 10.
+        //2. Validar se o número está dentro do intervalo permitido.
+        //3. Gerar a tabuada do número, exibindo os resultados de 1 a 10.
+        //4. Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.).
+        //5. Permitir que o usuário gere outra tabuada ou encerre o programa.
+
+
+
+        //Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+        //Regras de Validação de CNPJ:
+        //1. O CNPJ deve ter 14 dígitos.
+        //2. Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //3. O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes:
+        //    - Para o **primeiro dígito verificador**, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+        //    - Para o **segundo dígito verificador**, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+
+
+
+        #endregion
     }
 }
 

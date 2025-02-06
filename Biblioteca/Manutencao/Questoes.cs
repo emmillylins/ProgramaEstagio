@@ -587,7 +587,7 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        #region Questão 4: Calculadora com Operações Avançadas:
+        #region Questão 4: Calculadora com Operações Avançadas
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
         //e operações avançadas(potenciação, raiz quadrada)
         //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).

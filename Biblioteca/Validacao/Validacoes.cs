@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Classes;
+using Biblioteca.Manutencao;
 
 namespace Biblioteca.Validacao
 {
@@ -73,7 +74,7 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
-        public bool ValidarSenha(string senha)
+        public bool ValidarSenha(string? senha)
         {
             try
             {
@@ -94,6 +95,27 @@ namespace Biblioteca.Validacao
                 return false;
             }
             catch (Exception) { throw; }
+        }
+
+        public void ValidacaoBasicasCpf(string? cpf)
+        {
+            try
+            {
+                var metodos = new Metodos();
+
+                // Verifica se o CPF tem 11 dígitos e contém apenas números
+                if (string.IsNullOrEmpty(cpf) || cpf.Length != 11 || !long.TryParse(cpf, out _))
+                {
+                    throw new Exception("\nCPF inválido. Deve conter exatamente 11 dígitos numéricos.");
+                }
+
+                // Verifica se todos os dígitos são iguais (CPF inválido)
+                if (metodos.TodosDigitosIguais(cpf))
+                {
+                    throw new Exception("\nCPF inválido. Todos os dígitos são iguais.");
+                }
+            }
+            catch (Exception) { throw; };
         }
     }
 }

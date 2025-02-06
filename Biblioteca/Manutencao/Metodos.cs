@@ -345,5 +345,40 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Verifica se todos os dígitos do CPF são iguais
+        /// </summary>
+        /// <param name="cpf"></param>
+        /// <returns></returns>
+        public bool TodosDigitosIguais(string cpf)
+        {
+            for (int i = 1; i < cpf.Length; i++)
+            {
+                if (cpf[i] != cpf[0])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        /// <summary>
+        /// Calcula o dígito verificador de um CPF
+        /// </summary>
+        /// <param name="digitos"></param>
+        /// <param name="pesoInicial"></param>
+        /// <returns></returns>
+        public int CalcularDigitoVerificador(int[] digitos, int pesoInicial)
+        {
+            int soma = 0;
+            for (int i = 0; i < pesoInicial - 1; i++)
+            {
+                soma += digitos[i] * (pesoInicial - i);
+            }
+
+            int resto = soma % 11;
+            return resto < 2 ? 0 : 11 - resto;
+        }
     }
 }

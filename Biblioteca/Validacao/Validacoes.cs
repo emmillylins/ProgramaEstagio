@@ -207,5 +207,77 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+        public bool ValidarCnpj(string cnpj)
+        {
+            try
+            {
+                int[] pesosPrimeiraVerificacao = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                int[] pesosSegundaVerificacao = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                if (cnpj.Length < 14 || cnpj.Length > 14)
+                {
+                    Console.WriteLine("O CNPJ deve possuir 14 caracteres.\n");
+                    return false;
+                }
+                if (int.TryParse(cnpj, out int a))
+                {
+                    Console.WriteLine("O CNPJ só pode possuir números.\n");
+                    return false;
+                }
+                else
+                {
+                    int[] cnpjSeparado = cnpj.Select(numeros => (int)Char.GetNumericValue(numeros)).ToArray();
+                    //Primeira Verificação do Enunciado da questão
+                    int valorSomaPrimeiraVerificacao = 0;
+                    int compararPrimeiroNumero = 0;
+                    for (int i = 0; i < pesosPrimeiraVerificacao.Length; i++)
+                    {
+                        int valor = cnpjSeparado[i] * pesosPrimeiraVerificacao[i];
+                        valorSomaPrimeiraVerificacao += valor;
+                    }
+                    if ((valorSomaPrimeiraVerificacao % 11) < 2)
+                    {
+                        compararPrimeiroNumero = 0;
+                    }
+                    else
+                    {
+                        compararPrimeiroNumero = (11 - (valorSomaPrimeiraVerificacao % 11));
+                    }
+
+                    //Segunda Verificação do Enunciado da questão
+                    if (compararPrimeiroNumero == cnpjSeparado[12])
+                    {
+                        int novoValorSomaSegundaVerificacao = 0;
+                        int compararSegundoNumero = 0;
+                        for (int i = 0; i < pesosSegundaVerificacao.Length; i++)
+                        {
+                            int valor = cnpjSeparado[i] * pesosSegundaVerificacao[i];
+                            novoValorSomaSegundaVerificacao += valor;
+                        }
+                        if ((novoValorSomaSegundaVerificacao % 11) < 2)
+                        {
+                            compararSegundoNumero = 0;
+                        }
+                        else
+                        {
+                            compararSegundoNumero = (11 - (novoValorSomaSegundaVerificacao % 11));
+                        }
+
+                        //Ultima verificação
+
+                        if (compararPrimeiroNumero == cnpjSeparado[12] && compararSegundoNumero == cnpjSeparado[13])
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else { return false; }
+                }
+            }
+            catch (Exception) { throw; }
+
+        }
     }
 }

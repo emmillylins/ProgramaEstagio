@@ -351,5 +351,13 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        public void GerarTabuada(int numeroInserido)
+        {
+            Console.WriteLine($"Tabuada do {numeroInserido}\n");
+            for (int i = 0; i <= 10; i++)
+            {
+                Console.WriteLine($"{numeroInserido} x {i} = {(numeroInserido * i)}");
+            }
+        }
     }
 }

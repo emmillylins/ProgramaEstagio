@@ -836,44 +836,70 @@ namespace Biblioteca.Manutencao
             try
             {
                 Metodos metodos = new Metodos();
-                string? palavaMisteriosa = metodos.PalavraMisteriosa();
+                string? palavraMisteriosa = metodos.PalavraMisteriosa();
+                int numeroAcertos = 0;
+                int numeroDeLetras = palavraMisteriosa.Length;
+                char[] palavraInserida = palavraMisteriosa.ToCharArray();
+                for (int i = 0; i < palavraInserida.Length; i++)
+                {
+                    palavraInserida[i] = '_';
+                }
                 Console.WriteLine("Jogo da Forca");
                 Console.WriteLine("\nTente advinhar a palavra.");
-                Console.WriteLine($"Dica: a palavra misteriosa possui {palavaMisteriosa.Length} letras.");
-                int numeroAcertos = 0;
-                int numeroDeLetras = palavaMisteriosa.Length;
-                string?[] palavraInserida = new string[numeroDeLetras];
+                Console.WriteLine($"Palavra misteriosa {string.Join(" ", palavraInserida)}");
+                char caracter = ';';
                 for (int i = 0; i < 6; i++)
                 {
                     Console.Write("\nDigite uma letra: ");
                     string? letraInserida = Console.ReadLine();
+                    char.TryParse(letraInserida, out char letra);
                     if (!(letraInserida.Length > 1))
                     {
                         //usar try parse para verificar letra inserida. 
-
-                        if (palavraInserida.Contains(letraInserida))
+                        if (int.TryParse(letraInserida, out int letra1) || Char.IsPunctuation(letra))
                         {
-                            Console.WriteLine($"A letra {letraInserida}, já foi inserida. ");
-                            i--;
+                            Console.WriteLine("Digite somente letras.");
                         }
+
                         else
                         {
-                            if ((palavaMisteriosa.IndexOf(letraInserida)) != -1)
+                            if (palavraInserida.Contains(letra))
                             {
-                                palavraInserida[palavaMisteriosa.IndexOf(letraInserida)] = letraInserida;
-                                numeroAcertos++;
-                                numeroDeLetras--;
-                                Console.WriteLine($"Você acertou {numeroAcertos} letras, ainda faltam {numeroDeLetras} letras.");
+                                Console.WriteLine($"A letra {letraInserida}, já foi inserida. ");
+                                i--;
                             }
                             else
                             {
-                                Console.WriteLine($"A palavra não possui a letra {letraInserida}.");
+                                if ((palavraMisteriosa.IndexOf(letraInserida)) != -1)
+                                {
+                                    bool condicao = true;
+                                    for (i = 0; condicao; i++)
+                                    {
+                                        if ((palavraMisteriosa.IndexOf(letraInserida)) != -1)
+                                        {
+                                            palavraInserida[palavraMisteriosa.IndexOf(letraInserida)] = letra;
+                                            palavraMisteriosa = palavraMisteriosa.Remove(palavraMisteriosa.IndexOf(letraInserida), 1).Insert(palavraMisteriosa.IndexOf(letraInserida), caracter.ToString());
+                                            numeroAcertos++;
+                                            numeroDeLetras--;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine($"Você acertou {numeroAcertos} letras.");
+                                            Console.WriteLine(string.Join(" ", palavraInserida));
+                                            condicao = false;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"A palavra não possui a letra {letraInserida}. Acertou {numeroAcertos} letras, Errou{numeroDeLetras} letras.");
+                                }
                             }
-                        }
-                        if (numeroAcertos == palavaMisteriosa.Length)
-                        {
-                            Console.WriteLine($"Parabêns você acertou, a palavra misteriosa era {palavaMisteriosa}");
-                            return;
+                            if (numeroAcertos == palavraMisteriosa.Length)
+                            {
+                                Console.WriteLine($"Parabêns você acertou, a palavra misteriosa era {new string(palavraInserida)}.");
+                                return;
+                            }
                         }
                     }
                     else
@@ -882,11 +908,86 @@ namespace Biblioteca.Manutencao
                         i--;
                     }
                 }
-                Console.WriteLine($"Infelizmente você perdeu a palavra misteriosa era {palavaMisteriosa}.");
+                Console.WriteLine($"Infelizmente você perdeu a palavra misteriosa era {new string(palavraInserida)}.");
             }
             catch (Exception)
             {
 
+            }
+        }
+        //        Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
+        //O programa deve:
+        //Solicitar ao usuário um número inteiro entre 1 e 10. 
+        //Validar se o número está dentro do intervalo permitido.
+        //Gerar a tabuada do número, exibindo os resultados de 1 a 10. 
+        //Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.). 
+        //Permitir que o usuário gere outra tabuada ou encerre o programa.
+        public void GeradorTabuada()
+        {
+            try
+            {
+                Console.WriteLine("Gerador de Tabuada");
+                Metodos metodos = new Metodos();
+                while (true)
+                {
+                    Console.Write("\nDigite um número de 1 a 10 a qual será gerada a tabuada ou digite (sair) caso queira sair: \n");
+                    string? numeroInserido = Console.ReadLine().ToLower();
+                    if (numeroInserido == "sair")
+                    {
+                        return;
+                    }
+                    else if (!int.TryParse(numeroInserido, out int numero) || numero < 1 || numero > 10)
+                    {
+                        if (numero < 1 || numero > 10)
+                        {
+                            Console.WriteLine("Número fora do invervalo.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Digite somente números inteiros.");
+                        }
+                    }
+                    else
+                    {
+                        metodos.GerarTabuada(numero);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        //        Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+        //Regras de Validação de CNPJ:
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+
+        public void VerificaCnpj()
+        {
+            try
+            {
+                Validacoes validacao = new Validacoes();
+                Console.WriteLine("Validador de CNPJ");
+                Console.Write("\nDigite o CNPJ a ser verificado: ");
+                string? cnpjInserido = Console.ReadLine();
+                if (validacao.ValidarCnpj(cnpjInserido))
+                {
+                    Console.WriteLine($"O CNPJ {cnpjInserido} é válido.");
+                }
+                else
+                {
+                    Console.WriteLine($"O CNPJ {cnpjInserido} é inválido.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

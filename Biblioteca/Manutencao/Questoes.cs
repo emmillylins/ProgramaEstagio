@@ -1,12 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 using System.Globalization;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Intrinsics.X86;
-using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
 {

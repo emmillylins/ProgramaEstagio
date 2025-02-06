@@ -293,205 +293,452 @@ namespace Biblioteca.Manutencao
         // metodo para inserir numero na lista
         public void InserirNumeroLista(List<int> listaInteiros)
         {
-            Console.WriteLine("\nInsira um número na lista: ");
-            if (!int.TryParse(Console.ReadLine(), out int numeroInserido))
+            try
             {
-                Console.WriteLine("\nInsira apenas valores numéricos");
-                return;
+                Console.WriteLine("\nInsira um número na lista: ");
+                if (!int.TryParse(Console.ReadLine(), out int numeroInserido))
+                {
+                    Console.WriteLine("\nInsira apenas valores numéricos");
+                    return;
+                }
+                listaInteiros.Add(numeroInserido);
+                Console.WriteLine("\nNúmero inserido na lista!");
             }
-            listaInteiros.Add(numeroInserido);
-            Console.WriteLine("\nNúmero inserido na lista!");
+            catch (Exception ex) { throw; }
 
         }
         // metodo para mostrar o numero na lista e seus tipos 
         public void MostrarNumerosLista(List<int> listaInteiros)
         {
-            if (listaInteiros.Count == 0)
+            try
             {
-                Console.WriteLine("\nNenhum número inserido na lista!");
-            }
-            else
-            {
-
-                foreach (int numero in listaInteiros)
+                if (listaInteiros.Count == 0)
+                {
+                    Console.WriteLine("\nNenhum número inserido na lista!");
+                }
+                else
                 {
 
-                    String sinal;
-                    if (numero < 0)
+                    foreach (int numero in listaInteiros)
                     {
-                        sinal = "negativo";
+
+                        String sinal;
+                        if (numero < 0)
+                        {
+                            sinal = "negativo";
+                        }
+                        else if (numero > 0)
+                        {
+                            sinal = "positivo";
+                        }
+                        else
+                        {
+                            sinal = "Zero";
+                        }
+                        Console.WriteLine($"{numero}, {sinal}");
                     }
-                    else if (numero > 0)
-                    {
-                        sinal = "positivo";
-                    }
-                    else
-                    {
-                        sinal = "Zero";
-                    }
-                    Console.WriteLine($"{numero}, {sinal}");
                 }
             }
+            catch (Exception ex) { throw; }
         }
 
         public void ValidarSenha()
         {
-            var metodos = new Validacoes();
-
-            Console.WriteLine("Insira sua senha: ");
-            String? senha = Console.ReadLine();
-
-            if (metodos.AutenticarSenha(senha))
+            try
             {
-                Console.WriteLine("Senha Cadastrada com sucesso com sucesso!");
+                var metodos = new Validacoes();
+
+                Console.WriteLine("Insira sua senha: ");
+                String? senha = Console.ReadLine();
+
+                if (metodos.AutenticarSenha(senha))
+                {
+                    Console.WriteLine("Senha Cadastrada com sucesso com sucesso!");
+                }
+                else
+                {
+
+                    Console.WriteLine("\nSenha inválida.");
+                    Console.WriteLine("\nA senha deve ter:");
+                    Console.WriteLine("-Pelo menos 8 caracteres");
+                    Console.WriteLine("-Pelo menos uma letra maiúscula");
+                    Console.WriteLine("-Pelo menosuma letra minúscula");
+                    Console.WriteLine("-Pelo menos uma caractere especial");
+                }
+
             }
-            else
-            {
-
-                Console.WriteLine("\nSenha inválida.");
-                Console.WriteLine("\nA senha deve ter:");
-                Console.WriteLine("-Pelo menos 8 caracteres");
-                Console.WriteLine("-Pelo menos uma letra maiúscula");
-                Console.WriteLine("-Pelo menosuma letra minúscula");
-                Console.WriteLine("-Pelo menos uma caractere especial");
-            }
-
-
+            catch (Exception ex) { throw; }
 
         }
         public double? Soma()
         {
-
-            Console.WriteLine("Insira o primeiro numero para a soma: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            Console.WriteLine("Insira o segundo numero para a soma: ");
+                Console.WriteLine("Insira o primeiro numero para a soma: ");
 
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
-            {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            var soma = primeiroNumero + segundoNumero;
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                Console.WriteLine("Insira o segundo numero para a soma: ");
 
-            Console.WriteLine($"O resultado da operação é: {soma}");
-            return soma;
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                var soma = primeiroNumero + segundoNumero;
+
+                Console.WriteLine($"O resultado da operação é: {soma}");
+                return soma;
+            }
+            catch (Exception ex) { throw; }
         }
 
         public double? Subtração()
         {
-            Console.WriteLine("Insira o primeiro numero para a subtração: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
+                Console.WriteLine("Insira o primeiro numero para a subtração: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                Console.WriteLine("Insira o segundo numero para a subtração: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                var subtracao = primeiroNumero - segundoNumero;
+
+                Console.WriteLine($"O resultado da operação é: {subtracao}");
+                return subtracao;
+
             }
-            Console.WriteLine("Insira o segundo numero para a subtração: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
-            {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            var subtracao = primeiroNumero - segundoNumero;
-
-            Console.WriteLine($"O resultado da operação é: {subtracao}");
-            return subtracao;
-
-
+            catch (Exception ex) { throw; }
         }
 
         public double? Divisao()
         {
-
-            Console.WriteLine("Insira o dividendo para a divisão: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            Console.WriteLine("Insira o divisor para a divisão: ");
 
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
-            {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            var divisao = primeiroNumero / segundoNumero;
+                Console.WriteLine("Insira o dividendo para a divisão: ");
 
-            Console.WriteLine($"O resultado da operação é: {divisao}");
-            return divisao;
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                Console.WriteLine("Insira o divisor para a divisão: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                var divisao = primeiroNumero / segundoNumero;
+
+                Console.WriteLine($"O resultado da operação é: {divisao}");
+                return divisao;
+            }
+            catch (Exception e) { throw; }
         }
         public double? Multiplicacao()
         {
-
-
-            Console.WriteLine("Insira o primeiro numero para a multiplicação: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            Console.WriteLine("Insira o segundo numero para a multiplicação: ");
 
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
-            {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            var multiplicacao = primeiroNumero * segundoNumero;
 
-            Console.WriteLine($"O resultado da operação é: {multiplicacao}");
-            return multiplicacao;
+                Console.WriteLine("Insira o primeiro numero para a multiplicação: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                Console.WriteLine("Insira o segundo numero para a multiplicação: ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                var multiplicacao = primeiroNumero * segundoNumero;
+
+                Console.WriteLine($"O resultado da operação é: {multiplicacao}");
+                return multiplicacao;
+            }
+            catch (Exception e) { throw; }
         }
 
 
 
         public double? Potenciacao()
         {
-            Console.WriteLine("Insira a base: ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            Console.WriteLine("Insira o expoente: ");
+                Console.WriteLine("Insira a base: ");
 
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
-            {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
-            }
-            var potenciacao = Math.Pow(primeiroNumero,segundoNumero);
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                Console.WriteLine("Insira o expoente: ");
 
-            Console.WriteLine($"O resultado da operação é: {potenciacao}");
-            return potenciacao;
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var segundoNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+                var potenciacao = Math.Pow(primeiroNumero, segundoNumero);
+
+                Console.WriteLine($"O resultado da operação é: {potenciacao}");
+                return potenciacao;
+            }
+            catch (Exception) { throw; }
 
         }
         public double? RaizQuadradada()
         {
-            Console.WriteLine("Insira um numero para realizar a operação ");
-
-            if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+            try
             {
-                Console.WriteLine("Insira apenas valores númericos");
-                return null;
+                Console.WriteLine("Insira um numero para realizar a operação ");
+
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var primeiroNumero))
+                {
+                    Console.WriteLine("Insira apenas valores númericos");
+                    return null;
+                }
+
+                var resultadoRaizQuadrada = Math.Sqrt(primeiroNumero);
+
+                Console.WriteLine($"O resultado da operação é: {resultadoRaizQuadrada}");
+                return resultadoRaizQuadrada;
             }
-
-            var raizQuadradada = Math.Sqrt(primeiroNumero);
-
-            Console.WriteLine($"O resultado da operação é: {raizQuadradada}");
-            return raizQuadradada;
+            catch (Exception) { throw; }
         }
 
+        public void Tabuada()
+        {
+            try
+            {
 
+                if (!int.TryParse(Console.ReadLine(), out int numeroTabuada) || numeroTabuada > 10 || numeroTabuada <= 0)
+                {
+                    Console.WriteLine("\nInsira apenas valores numéricos e dentro do escolpo solicitado!!");
+                    return;
+                }
+
+                for (int i = 1; i < 11; i++)
+                {
+
+                    Console.WriteLine($"{numeroTabuada}  X  {i} = {numeroTabuada * i}");
+                }
+            }
+            catch (Exception) { throw; }
+
+
+        }
+        public void ValidarEntradaUsuario()
+        {
+            var metodos = new Validacoes();
+            var valida = new Metodos();
+            try
+            {
+                Console.WriteLine("Insira tentativa! ");
+                String? tentativa = Console.ReadLine();
+
+                if (metodos.limitarLetras(tentativa))
+                {
+                    Console.WriteLine("Insira apenas uma palavra por vez!!");
+                }
+                else
+                {
+                    Console.WriteLine("Boaaa");
+                }
+
+            }
+            catch (Exception) { throw; }
+
+
+        }
+
+        public void ValidarCpf(String cpf)
+        {
+
+
+            try
+            {
+
+                int[] multiplicadorPrimerioDigito = { 10, 9, 8, 7, 6, 5, 4, 3, 2, };
+                int[] multiplicadorSegundoDigito = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, };
+                String noveDigitosCpf;
+                String digito;
+                int resto = 0;
+                int soma = 0;
+                cpf = cpf.Trim();
+                cpf = cpf.Replace(".", "").Replace("-", "");
+                if (cpf.Distinct().Count() == 1)
+                {
+
+                    throw new Exception("Insira apenas CPF válidos");
+                }
+
+
+                noveDigitosCpf = cpf.Substring(0, 9);
+
+
+                if (cpf.Length != 11)
+                {
+                    throw new Exception("Insira um CPF válido!!");
+                }
+
+
+                for (int i = 0; i < 9; i++)
+                {
+
+                    soma += (int.Parse(noveDigitosCpf[i].ToString())) * multiplicadorPrimerioDigito[i];
+                }
+
+                resto = soma % 11;
+
+                if (resto < 2)
+                {
+                    resto = 0;
+                }
+                else
+                {
+                    resto = 11 - resto;
+                }
+
+                digito = resto.ToString();
+                noveDigitosCpf = noveDigitosCpf + digito;
+
+                soma = 0;
+                for (int i = 0; i < 10; i++)
+                {
+
+                    soma += int.Parse(noveDigitosCpf[i].ToString()) * multiplicadorSegundoDigito[i];
+                }
+
+                resto = soma % 11;
+
+                if (resto < 2)
+                {
+                    resto = 0;
+                }
+                else
+                {
+                    resto = 11 - resto;
+                }
+
+                noveDigitosCpf = noveDigitosCpf + resto;
+
+
+                if (cpf == noveDigitosCpf)
+                {
+
+                    Console.WriteLine("O CPF inserido é válido");
+                }
+                else
+                {
+                    Console.WriteLine("O CPF inserido é inválido");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void ValidarCnpj(string cnpj)
+        {
+
+
+            int[] multiplicadorPrimerioDigito = { 5,4,3,2,9,8,7,6,5,4,3,2};
+            int[] multiplicadorSegundoDigito = { 6,5,4,3,2,9,8,7,6,5,4,3,2 };
+            String tempcnpj;
+            String digito;
+            int resto = 0;
+            int soma = 0;
+            cnpj = cnpj.Trim();
+            cnpj = cnpj.Replace(".", "").Replace("-", "");
+
+
+            if (cnpj.Distinct().Count() == 1)
+            {
+
+                throw new Exception("Insira um CNPJ válido!!");
+            }
+
+
+            tempcnpj = cnpj.Substring(0, 12);
+            soma = 0;
+
+
+            if (cnpj.Length != 14)
+            {
+                throw new Exception("Insira um CNPJ válido!!");
+            }
+
+
+            for (int i = 0; i < 12; i++)
+            {
+
+                soma += (int.Parse(tempcnpj[i].ToString())) * multiplicadorPrimerioDigito[i];
+            }
+
+            resto = soma % 11;
+
+            if (resto < 2)
+            {
+                resto = 0;
+            }
+            else
+            {
+                resto = 11 - resto;
+            }
+
+            digito = resto.ToString();
+            tempcnpj = tempcnpj + digito;
+
+            soma = 0;
+            for (int i = 0; i < 13; i++)
+            {
+
+                soma += int.Parse(tempcnpj[i].ToString()) * multiplicadorSegundoDigito[i];
+            }
+
+            resto = soma % 11;
+
+            if (resto < 2)
+            {
+                resto = 0;
+            }
+            else
+            {
+                resto = 11 - resto;
+            }
+
+            tempcnpj = tempcnpj + resto;
+
+
+            if (cnpj == tempcnpj)
+            {
+
+                Console.WriteLine("O inserido CNPJ é válido");
+            }
+            else
+            {
+                Console.WriteLine("O inserido CNPJ é inválido");
+            }
+
+
+        }
     }
 }

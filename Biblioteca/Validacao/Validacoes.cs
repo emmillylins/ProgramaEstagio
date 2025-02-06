@@ -102,5 +102,15 @@ namespace Biblioteca.Validacao
             
         }
 
+        public bool limitarLetras(String tentativa)
+        {
+            var metodos = new Validacoes();
+            var valida = new Metodos();
+            string requisitosTentativas = @"^(?=.*[a-z]){1}$";
+
+            return Regex.IsMatch(tentativa, requisitosTentativas);
+
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
+using System.Runtime.Intrinsics.X86;
 
 namespace Biblioteca.Manutencao
 {
@@ -701,6 +702,22 @@ namespace Biblioteca.Manutencao
         //Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
         public void Cpf()
         {
+            var metodos = new Metodos();
+            try
+            {
+
+
+                Console.WriteLine("Programa que valida CPF");
+
+                Console.WriteLine("\nInsira seu CPF: ");
+
+
+                string cpf = Console.ReadLine();
+
+                metodos.ValidarCpf(cpf);
+
+            }
+            catch (Exception) { throw; }
 
 
 
@@ -717,61 +734,143 @@ namespace Biblioteca.Manutencao
         public void CaixaEletronico()
         {
             var validacao = new Validacoes();
-            
-                try
-                {
-                // array para armazenar os tipo de nota e a quantidade 
+
+            try
+            {
+                // array para armazenar os tipo de nota 
                 int[] cedulas = [100, 50, 20, 10];
+                // armazena quuantas vezes foi usada
+
                 int[] quantidade = new int[cedulas.Length];
-                
-                    Console.WriteLine("Bem vindo ao caixa eletrônico");
+
+                Console.WriteLine("Bem vindo ao caixa eletrônico");
                 // inserção do saque do usuario 
-                    Console.WriteLine("Insira o valor do saque: ");
-                    if (!int.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out int saque) || saque < 0 )
-                    {
-                        Console.WriteLine("Insira apenas valores válidos!!");
-                       
-                    }
-                    // validação
-                    if(saque % 10 != 0)
+                Console.WriteLine("Insira o valor do saque: ");
+                if (!int.TryParse(Console.ReadLine(), out int saque) || saque < 0)
+                {
+                    Console.WriteLine("Insira apenas valores válidos!!");
+
+                }
+                // validação
+                if (!validacao.VerificarMultiploDez(saque))
                 {
                     Console.WriteLine("Trabalhamos apenas com multiplos de 10");
+                    return;
                 }
+                else
+                {
 
-             // calculo 
-                for (int i = 0; i < cedulas.Length; i++)
-                {
-                    quantidade[i] = saque / cedulas[i];
-                    saque = saque % cedulas[i];
-                }
-                Console.WriteLine("Cedulas fornecidas");
-                for (int i = 0; i < quantidade.Length; i++)
-                {
-                    if(quantidade[i] > 0)
+                    // calculo 
+                    for (int i = 0; i < cedulas.Length; i++)
                     {
-                        Console.WriteLine($"Notas de {cedulas[i]}: {quantidade[i]} ");
+                        quantidade[i] = saque / cedulas[i];
+                        saque = saque % cedulas[i];
                     }
+                    Console.WriteLine("Cedulas fornecidas");
+                    for (int i = 0; i < quantidade.Length; i++)
+                    {
+                        if (quantidade[i] > 0)
+                        {
+                            Console.WriteLine($"Notas de {cedulas[i]}: {quantidade[i]} ");
+                        }
+                    }
+
+
                 }
-
-
-                
             }
             catch (Exception) { throw; }
         }
         public void Tabuada()
         {
-
-            Console.WriteLine("Bem vindo a Tabuada!! ");
-
-            Console.WriteLine("Insira umas das tabuadas (1-10)");
-            
-            if(!int.TryParse(Console.ReadLine(), out int numeroTabuada)|| numeroTabuada > 10 || numeroTabuada <= 0)
+            while (true)
             {
-                Console.WriteLine("Insira apenas valores numéricos e dentro do escolpo solicitado!!");
+                try
+                {
+                    var metodos = new Metodos();
+
+                    Console.WriteLine("Bem vindo a Tabuada!! ");
+
+
+
+                    Console.WriteLine("\nInsira uma das opções\n1-Inserir tabuada\n2-Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Insira uma das opções mostradas");
+                    }
+                    switch (opcao)
+                    {
+                        case 1:
+                            Console.WriteLine("\nInsira a tabuada desejada entre 1 e 10:   ");
+                            metodos.Tabuada();
+                            break;
+                        case 2:
+                            Console.WriteLine("Saindo do programa...");
+                            return;
+                        default:
+                            Console.WriteLine("Insira umas das opções mostradas!");
+                            break;
+
+
+                    }
+
+                }
+                catch (Exception) { throw; }
             }
+        }
+
+
+
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista
+        //e o usuário tenta adivinhar a palavra, letra por letra.O usuário tem 6 tentativas para acertar a palavra.
+        //O programa deve:
+        // Exibir o progresso do usuário(letras acertadas e letras faltando).
+        //Contar as tentativas restantes.
+        //Tratar exceções para entradas inválidas(mais de uma letra, caracteres não alfabéticos, etc.).
+
+        public void JogoForca()
+        {
+            var validacao = new Validacoes();
+            var metodos = new Metodos();
+            try
+            {
+                List<String> palavrasJogoForca = ["Almoço", "Garota", "Gato", "Dado", "Prato"];
+
+                Console.WriteLine("Bem vindos ao jogo da Forca!!");
+
+                metodos.ValidarEntradaUsuario();
+
+
+
+
+            }
+            catch (Exception) { throw; }
+
+
 
         }
 
+        public void Cnpj()
+        {
+            var metodos = new Metodos();
+            try
+            {
+                Console.WriteLine("Validador CNPJ!");
+
+                Console.WriteLine("\nInsira um CNPJ para a validação: ");
+                String? cnpj = Console.ReadLine();
+
+                metodos.ValidarCnpj(cnpj);
+
+            }
+            catch (Exception) { throw; }
+
+
+
+
+
+
+        }
     }
 }
 

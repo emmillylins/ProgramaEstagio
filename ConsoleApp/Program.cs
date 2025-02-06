@@ -16,12 +16,19 @@ class Program
             //manutencao.CaixaEletronico(3500.95);
             // manutencao.ListaProdutoPreco();
             //manutencao.GenrenciamentoALunos();
-            // manutencao.JogoNumeroAdvinhação();
+
+
+            //QUESTIONARIO 3
+
+            //manutencao.JogoNumeroAdvinhação();
             //manutencao.ListaNumeros();
-            // manutencao.CadastrarSenha();
+             //manutencao.CadastrarSenha();
             //manutencao.CalculadoraAvancada();
-            //manutencao.CaixaEletronico();
-            manutencao.Tabuada();
+            manutencao.CaixaEletronico();
+            //manutencao.Tabuada();
+            //manutencao.JogoForca();
+            //manutencao.Cpf();
+            //manutencao.Cnpj();
 
 
             Console.ReadKey();

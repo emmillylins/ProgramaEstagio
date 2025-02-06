@@ -1,6 +1,5 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
-using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
 
 
@@ -397,7 +396,9 @@ namespace Biblioteca.Manutencao
             // Usa regex para verificar se a senha atende ao padrão
             Regex regex = new Regex(padraoSenha);
 
-            return regex.IsMatch(senha);
+            return regex.IsMatch(senha); 
+            //o método IsMatch retorna um valor Booleano e é necessário informar,
+            //neste caso, apenas o texto e a sintaxe da expressão regular
         }
         //NÃO FINALIZADA
         //Questão 4: Calculadora com Operações Avançadas:
@@ -405,73 +406,67 @@ namespace Biblioteca.Manutencao
         // multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas
         //usando um menu e estruturas de controle(switch/case).
 
-        // Método para Adição
-        public double Adicao(double num1, double num2)
+        static void CalculadoraAvancada()
         {
+
             try
             {
-                return num1 + num2;
-            }
-            catch (Exception) { throw; }
-        }
-
-        // Método para Subtração
-        public double Subtracao(double num1, double num2)
-        {
-            try
+                while (true)
             {
-                return num1 - num2;
+                int numero;
 
-            }
-            catch (Exception) { throw; }
-        }
+                Console.Write("Digite um número entre 1 e 10 para gerar a tabuada: ");
+                string input = Console.ReadLine();
 
-        //Método para Multiplicação
-        public double Multiplicacao(double num1, double num2)
-        {
-            try
-            {
-                return num1 * num2;
-            }
-            catch (Exception) { throw; }
-        }
-
-        //Método para Divisão
-        public double Divisao(double num1, double num2)
-        {
-            try
-            {
-                if (num2 == 0)
+                try
                 {
-                    throw new DivideByZeroException("Divisão por zero não permitida.");
+                    // Tenta converter o input para um número inteiro
+                    if (!int.TryParse(input, out numero))
+                    {
+                        throw new FormatException("Entrada inválida! Por favor, insira um número inteiro.");
+                    }
+
+                    // Verifica se o número está dentro do intervalo permitido
+                    if (numero < 1 || numero > 10)
+                    {
+                        throw new ArgumentOutOfRangeException("O número deve estar entre 1 e 10.");
+                    }
+
+                    // Gerar e exibir a tabuada do número
+                    Console.WriteLine($"Tabuada do {numero}:");
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        Console.WriteLine($"{numero} x {i} = {numero * i}");
+                    }
+
+                    // Pergunta se o usuário deseja gerar outra tabuada
+                    Console.Write("Deseja gerar outra tabuada? (s/n): ");
+                    string resposta = Console.ReadLine().ToLower();
+
+                    if (resposta != "s")
+                    {
+                        Console.WriteLine("Programa encerrado.");
+                        break;
+                    }
                 }
-                return num1 / num2;
-            }
-          catch (Exception) { throw; }
-          
-        }
-
-        //Método para Potenciação
-        public double Potenciacao(double baseNum, double expoente)
-        {
-            try
-            {
-                return Math.Pow(baseNum, expoente);
-            }
-            catch (Exception) { throw; }
-        }
-
-        //Método para Raiz Quadrada
-        public double RaizQuadrada(double num)
-        {
-            try
-            {
-                if (num < 0)
+                catch (FormatException ex)
                 {
-                    throw new InvalidOperationException("Não é possível calcular a raiz quadrada de um número negativo.");
+                    // Captura exceção de formato e exibe mensagem
+                    Console.WriteLine(ex.Message);
                 }
-                return Math.Sqrt(num);
-            } catch (Exception) { throw; }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    // Captura exceção caso o número não esteja no intervalo permitido
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    // Captura qualquer outra exceção não esperada
+                    Console.WriteLine($"Erro inesperado: {ex.Message}");
+                }
+            }
+            }catch (Exception) { throw; }
+            
         }
 
 
@@ -495,31 +490,39 @@ namespace Biblioteca.Manutencao
         //Soma-se os resultados.
         //O dígito verificador é o resto da divisão dessa soma por 11. 
         //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        // Método para validar o formato do CPF
 
-
-        // Método para validar o CPF
-        public static bool ValidarCpf(string cpf)
+        public static bool ValidarCpfFormatado(string cpf)
         {
             try
             {
-                //Verifica se o CPF contém exatamente 11 dígitos numéricos
-                bool cpfFormatoCorreto = cpf.Length == 11 && long.TryParse(cpf, out _);
-                if (!cpfFormatoCorreto)
+                //Verifica se o CPF contém exatamente 11 dígitos
+                if (cpf.Length != 11) //length para o tamanho 
                 {
-                    return false; // CPF inválido se não tiver 11 dígitos ou contiver caracteres não numéricos
+                    Console.WriteLine("O CPF deve ter 11 dígitos.");
+                    return false;
                 }
+
+                //Tenta converter o CPF para números, e verifica se é composto apenas por números
+                if (!long.TryParse(cpf, out _))
+                {
+                    Console.WriteLine("O CPF deve conter apenas números.");
+                    return false;
+                }
+
                 //Chama o método para validar os dois dígitos verificadores
                 return VerificarDigitosVerificadores(cpf);
             }
             catch (Exception) { throw; }
+
         }
 
-//Método para calcular e verificar os dois dígitos verificadores
-private static bool VerificarDigitosVerificadores(string cpf)
+        //Método para calcular e verificar os dois dígitos verificadores
+        public static bool VerificarDigitosVerificadores(string cpf)
         {
             try
             {
-                // Pesos utilizados para o cálculo dos dígitos verificadores
+                //Pesos utilizados para o cálculo dos dígitos verificadores
                 int[] pesosPrimeiroDigito = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
                 int[] pesosSegundoDigito = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
@@ -529,7 +532,7 @@ private static bool VerificarDigitosVerificadores(string cpf)
                 {
                     somaPrimeiroDigito += (cpf[i] - '0') * pesosPrimeiroDigito[i]; //Converte cada caractere para seu valor numérico
                 }
-                // Calcula o primeiro dígito verificador com base no resto da divisão
+                //Calcula o primeiro dígito verificador com base no resto da divisão
                 int primeiroDigitoVerificador = somaPrimeiroDigito % 11 < 2 ? 0 : 11 - (somaPrimeiroDigito % 11);
 
                 // Calcula o segundo dígito verificador
@@ -538,14 +541,44 @@ private static bool VerificarDigitosVerificadores(string cpf)
                 {
                     somaSegundoDigito += (cpf[i] - '0') * pesosSegundoDigito[i];
                 }
-                //Calcula o segundo dígito verificador com base no resto da divisão
+                // Calcula o segundo dígito verificador com base no resto da divisão
                 int segundoDigitoVerificador = somaSegundoDigito % 11 < 2 ? 0 : 11 - (somaSegundoDigito % 11);
 
-                //Verifica se os dígitos verificadores calculados coincidem com os últimos dois dígitos do CPF
+                // Verifica se os dígitos verificadores calculados coincidem com os últimos dois dígitos do CPF
                 return cpf[9] == (primeiroDigitoVerificador + '0') && cpf[10] == (segundoDigitoVerificador + '0');
             }
             catch (Exception) { throw; }
+
         }
+        //Questão 6: Simulador de Caixa Eletrônico
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
+        //O programa deve:
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+
+
+
+        //Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+        //Regras de Validação de CNPJ:
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
+
+       
 
     }
 }
+
+
+
+
+
+//

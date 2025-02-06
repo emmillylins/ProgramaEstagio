@@ -1,10 +1,6 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-
-namespace Biblioteca.Classes
+﻿namespace Biblioteca.Classes
 {
-     class Cpf
+    class Cpf
     {
         public string Numero { get; private set; }
 

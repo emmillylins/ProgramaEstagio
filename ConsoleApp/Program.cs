@@ -21,15 +21,20 @@ class Program
             //manutencao.CriarJogoAdivinhacao(); //Questão 1
             //manutencao.LeiaListaNumerosInteiros(); //Questão 2
             //manutencao.ProgramaDeValidarSenha(); //Questão 3
-            //manutencao.ProgramaDeValidarSenha(); //Questão 4
+            //manutencao.CalculadoraAvancada(); //Questão 4 - Não realizada
+            //manutencao.ValidarCpf(); //Questão 5
+            //manutencao.SimularSaque();//Questão 6 - Não está funcionando corretamente
+            //manutencao.JogoForca(); //Questão 7 - Não realizada
+            //manutencao.CriarTabuada(); //Questão 8 
+            //manutencao.ValidacaoDeCNPJ(); //Questão 9 
+
+
 
 
             Console.ReadKey();
 
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
+        catch (Exception){ throw; }
+        
     }
 }

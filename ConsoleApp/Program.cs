@@ -23,7 +23,6 @@ class Program
             manutencao.ValidarCpf();
 
             Console.ReadKey();
-            
         }
         catch (Exception e)
         {

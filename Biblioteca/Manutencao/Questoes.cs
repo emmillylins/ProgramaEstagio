@@ -1,8 +1,12 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System;
+using System.Diagnostics.Metrics;
 using System.Globalization;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
@@ -508,6 +512,117 @@ namespace Biblioteca.Manutencao
 
         }
 
+//        Questão 4: Calculadora com Operações Avançadas:
+
+//Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+//COMECEI MAS NAO CONSEGUI TERMINAR
+
+        public void CalculadoraAvancada()
+        {
+            try
+            {
+                Console.WriteLine("Calculadora avançada!");
+
+                while (true)
+                {
+                    Console.Write("Insira o primeiro número: ");
+                    var primeiroNumeroInserido = Console.ReadLine();
+
+                    Console.Write("Insira o segundo número: ");
+                    var segundoNumeroInserido = Console.ReadLine();
+
+                    Console.WriteLine("\nEscolha uma operação:");
+                    Console.WriteLine("+ - Soma");
+                    Console.WriteLine("- - Subtração");
+                    Console.WriteLine("/ - Divisão");
+                    Console.WriteLine("* - Multiplicação");
+                    Console.WriteLine("* - Multiplicação");
+
+                    
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+//Questão 5: Validação de CPF
+
+//Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+
+//Regras de Validação de CPF
+//        O CPF deve ter 11 dígitos.
+//Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+//O cálculo dos dígitos verificadores é feito da seguinte forma: 
+
+//Para o primeiro dígito verificador: 
+//Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+//Soma-se os resultados.
+//O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
+//Para o segundo dígito verificador: 
+//Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
+//Soma-se os resultados.
+//O dígito verificador é o resto da divisão dessa soma por 11. 
+//Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
+        public void ProgramaValidarCPF()
+        {
+            try
+            {
+                var validacao = new Validacoes();
+                Console.WriteLine("Programa para validar CPF!");
+                Console.Write("Insira um CPF válido, com 11 dígitos numéricos: ");
+                var cpfInserido = Console.ReadLine();
+
+
+                bool ValidarCPF = validacao.ValidarCPF(cpfInserido);
+
+                if (ValidarCPF)
+                {
+                    Console.WriteLine("CPF válido!");
+                }
+                else
+                {
+                    Console.WriteLine("CPF inválido.");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        //        Questão 9: Validação de CNPJ
+
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+
+        //Regras de Validação de CNPJ:
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        public void ProgramaValidarCNPJ()
+        {
+            try
+            {
+                var validacao = new Validacoes();
+                Console.WriteLine("Programa para validar CNPJ!");
+                Console.Write("Insira um CNPJ válido, com 14 dígitos numéricos: ");
+                var cnpjInserido = Console.ReadLine();
+
+
+                bool ValidarCNPJ = validacao.ValidarCNPJ(cnpjInserido);
+
+                if (ValidarCNPJ)
+                {
+                    Console.WriteLine("CNPJ válido!");
+                }
+                else
+                {
+                    Console.WriteLine("CNPJ inválido.");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
 
     }
 }

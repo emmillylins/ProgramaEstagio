@@ -16,7 +16,9 @@ class Program
             //manutencao.CaixaEletronico(3500.95);
             //manutencao.JogoAdivinhacao();
             //manutencao.ProgramaLeitorNumeros();
-            manutencao.ProgramaValidarSenha();
+            //manutencao.ProgramaValidarSenha();
+            //manutencao.ProgramaValidarCPF();
+            manutencao.ProgramaValidarCNPJ();
 
             Console.ReadKey();
         }

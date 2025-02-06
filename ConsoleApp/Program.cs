@@ -22,9 +22,10 @@ class Program
             //manutencao.CalculadoraAvancada();
             //manutencao.ValidarCpf();
             //manutencao.SimuladorCaixaEletronico();
-            //manutencao.JogoForca();
+            manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
-            
+            //manutencao.ValidarCnpj();
+
             Console.ReadKey();
         }
         catch (Exception e)

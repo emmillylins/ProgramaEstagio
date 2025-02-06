@@ -2,6 +2,8 @@
 using Biblioteca.Validacao;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
@@ -805,9 +807,38 @@ namespace Biblioteca.Manutencao
         //Contar as tentativas restantes.
         //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
 
-        public void JogoForca()
-        {
 
+        public void JogoDaForca()
+        {
+            try
+            {
+                Metodos metodos = new Metodos();
+                Console.WriteLine("Bem-vindo ao Jogo de Forca!");
+
+                List<string> palavras = new List<string> { "boi", "vaca", "gato", "peixe", "zebra" };
+                Random random = new Random();
+                string palavraEscolhida = palavras[random.Next(palavras.Count)];
+
+                char[] progresso = new string('_', palavraEscolhida.Length).ToCharArray();
+                int tentativasRestantes = 6;
+                List<char> letrasTentadas = new List<char>();
+
+                metodos.ProcessarTentativa(palavraEscolhida, progresso, letrasTentadas, ref tentativasRestantes);
+                // ref para passar um argumento por referência para um método, inves de passar o seu valor
+
+                if (!progresso.Contains('_'))
+                {
+                    Console.WriteLine($"\nParabéns! Você acertou a palavra: {palavraEscolhida}");
+                }
+                else
+                {
+                    Console.WriteLine($"\nVocê perdeu! A palavra era: {palavraEscolhida}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+            }
         }
 
         //Questão 8: Gerador de Tabuada Personalizado
@@ -839,7 +870,7 @@ namespace Biblioteca.Manutencao
 
                     switch (opcao)
                     {
-                        case 1: 
+                        case 1:
                             metodos.GerarTabuada();
                             break;
                         case 2:
@@ -855,7 +886,47 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        //Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
 
+        //Regras de Validação de CNPJ:
+
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
+        public void ValidarCnpj()
+        {
+            try
+            {
+                Metodos metodos = new Metodos();
+
+                Console.WriteLine("Validador de CNPJ!");
+                while (true)
+                {
+                    Console.Write("\nInsira seu CNPJ: ");
+                    string cnpj = Console.ReadLine();
+
+                    var validacao = metodos.VerificaCnpj(cnpj);
+                    if (validacao)
+                    {
+                        Console.WriteLine($"\nSeu CNPJ: {cnpj} é valido!");
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("CNPJ inválido");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 

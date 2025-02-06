@@ -540,11 +540,129 @@ namespace Biblioteca.Manutencao
             {
                 Console.WriteLine($"{numero} x {i} = {numero * i}");
             }
+        }
+
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+
+        //Regras de Validação de CNPJ:
+
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
+
+        public bool VerificaCnpj(string cnpj)
+        {
+            List<int> primeiroPeso = new List<int> { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            List<int> segundoPeso = new List<int> { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 
+            if (cnpj.Length != 14)
+            {
+                Console.WriteLine("O CNPJ deve conter 14 dígitos numéricos.");
+                return false;
+            }
+
+            // Primeiro dígito verificador
+            int soma = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                int digito = int.Parse(cnpj[i].ToString());
+                soma += digito * primeiroPeso[i];
+            }
+
+            int resto = soma % 11;
+            int digito1;
+            if (resto < 2)
+            {
+                digito1 = 0;
+            }
+            else
+            {
+                digito1 = 11 - resto;
+            }
+
+
+            // Segundo dígito verificador
+            soma = 0;
+            for (int i = 0; i < 13; i++)
+            {
+                int digito = int.Parse(cnpj[i].ToString());
+                soma += digito * segundoPeso[i];
+            }
+
+            resto = soma % 11;
+            int digito2;
+            if (resto < 2)
+            {
+                digito2 = 0;
+            }
+            else
+            {
+                digito2 = 11 - resto;
+            }
+
+            // Verifica se os dígitos verificadores calculados são iguais aos do CNPJ
+            if (int.Parse(cnpj[12].ToString()) == digito1 && int.Parse(cnpj[13].ToString()) == digito2)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+
+
+        public void ProcessarTentativa(string palavraEscolhida, char[] progresso, List<char> letrasTentadas, ref int tentativasRestantes)
+        {
+            while (tentativasRestantes > 0 && progresso.Contains('_'))
+            {
+                Console.WriteLine($"\nPalavra: {new string(progresso)}");
+                Console.WriteLine($"Tentativas restantes: {tentativasRestantes}");
+                Console.Write("Digite uma letra: ");
+                string entrada = Console.ReadLine().ToLower();
+
+                if (entrada.Length != 1 || !char.IsLetter(entrada[0]))
+                {
+                    Console.WriteLine("Entrada inválida. Digite apenas uma letra.");
+                    continue;
+                }
+
+                char letra = entrada[0];
+
+                if (letrasTentadas.Contains(letra))
+                {
+                    Console.WriteLine("Você já tentou essa letra. Tente outra.");
+                    continue;
+                }
+
+                letrasTentadas.Add(letra);
+
+                if (palavraEscolhida.Contains(letra))
+                {
+                    for (int i = 0; i < palavraEscolhida.Length; i++)
+                    {
+                        if (palavraEscolhida[i] == letra)
+                        {
+                            progresso[i] = letra;
+                        }
+                    }
+                }
+                else
+                {
+                    tentativasRestantes--;
+                    Console.WriteLine("Letra incorreta.");
+                }
+            }
         }
     }
 }
+
+
 
 
 

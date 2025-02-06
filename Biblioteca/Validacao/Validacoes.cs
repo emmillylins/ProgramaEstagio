@@ -109,7 +109,7 @@ namespace Biblioteca.Validacao
                 {
                     temMinuscula = true;
                 }
-                else if (!char.IsLetterOrDigit(caractere))
+                else if (!char.IsLetterOrDigit(caractere)) 
                 {
                     temCaractereEspecial = true;
                 }

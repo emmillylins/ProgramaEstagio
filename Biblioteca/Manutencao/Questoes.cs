@@ -742,6 +742,72 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        //Questão 6: Simulador de Caixa Eletrônico
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
+
+        //O programa deve:
+
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+        public void SimuladorCaixaEletronico()
+        {
+            try
+            {
+                Metodos metodos = new Metodos();
+                double saldoInicial = 1000; // Saldo inicial
+                double saldoTotal = saldoInicial;
+
+                while (true)
+                {
+                    Console.WriteLine("\nCaixa Eletrônico");
+                    Console.WriteLine("Escolha uma das opções abaixo:");
+                    Console.WriteLine("1 - Sacar");
+                    Console.WriteLine("2 - Ver saldo");
+                    Console.WriteLine("3 - Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("Escolha uma opção válida!");
+                        continue;
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            saldoTotal = metodos.Sacar(saldoTotal);
+                            break;
+                        case 2:
+                            Console.WriteLine($"Saldo atual: {saldoTotal:C}");
+                            break;
+                        case 3:
+                            Console.WriteLine("Saindo...");
+                            return;
+                        default:
+                            Console.WriteLine("Opção inválida. Tente novamente.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+            }
+        }
+
+        //Questão 7: Jogo da Forca
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra, letra por letra.O usuário tem 6 tentativas para acertar a palavra.
+
+        //O programa deve:
+
+        //Exibir o progresso do usuário (letras acertadas e letras faltando). 
+        //Contar as tentativas restantes.
+        //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+
+
     }
 }
 

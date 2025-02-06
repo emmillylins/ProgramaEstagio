@@ -14,13 +14,14 @@ class Program
             //manutencao.ExibeQtdMultiplosDeTres();
             //manutencao.InformaNumeroMaiorMenor();
             //manutencao.CaixaEletronico(3500.95);
-            // manutencao.ListaProdutoPreco();
+            //manutencao.ListaProdutoPreco();
             //manutencao.GenrenciamentoALunos();
             //manutencao.JogoAdvinharNumero();
             //manutencao.ClassificarListaNumero();
             //manutencao.VerificaSenha();
             //manutencao.CalculadoraAvancada();
-            manutencao.ValidarCpf();
+            //manutencao.ValidarCpf();
+            manutencao.SimuladorCaixaEletronico();
 
             Console.ReadKey();
         }
@@ -29,4 +30,6 @@ class Program
             Console.WriteLine(e.Message);
         }
     }
+
+
 }

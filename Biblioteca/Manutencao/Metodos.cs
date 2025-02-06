@@ -210,7 +210,7 @@ namespace Biblioteca.Manutencao
 
                 return aluno;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
                 throw;
@@ -397,6 +397,7 @@ namespace Biblioteca.Manutencao
         //Soma-se os resultados.
         //O dígito verificador é o resto da divisão dessa soma por 11. 
         //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
         public bool VerificaCpf(string cpf)
         {
             // converter pra string só agora pra evitar que entrassem letras anteriormente
@@ -434,7 +435,7 @@ namespace Biblioteca.Manutencao
             soma = 0; // 
             for (int i = 0; i < 10; i++) // passa pelos 10 primeiros digitos
             {
-                int digito = int.Parse(cpf[i].ToString()); 
+                int digito = int.Parse(cpf[i].ToString());
                 int peso = 11 - i; //peso descendo de 11 e diminui até 2)
                 soma += digito * peso; //peso x digito e adiciona à soma
             }
@@ -461,6 +462,79 @@ namespace Biblioteca.Manutencao
             return false;
 
         }
+
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+
+        public double Sacar(double saldoTotal)
+        {
+            Console.WriteLine("Digite o valor do saque: ");
+            if (!double.TryParse(Console.ReadLine(), out double saque) || saque <= 0)
+            {
+                Console.WriteLine("Digite um valor válido.");
+                return saldoTotal;
+            }
+            else if (saque > saldoTotal)
+            {
+                Console.WriteLine("Saldo insuficiente.");
+                return saldoTotal;
+            }
+            else if (saque % 10 != 0)
+            {
+                Console.WriteLine("O valor do saque deve ser múltiplo de 10.");
+                return saldoTotal;
+            }
+            else
+            {
+                saldoTotal -= saque;
+                Console.WriteLine("Saque realizado com sucesso!");
+                ExibirNotas(saque);
+                return saldoTotal;
+            }
+        }
+
+        public void ExibirNotas(double valorSaque)
+        {
+            int[] notas = new int[] { 100, 50, 20, 10 };
+            int[] quantidadeNotas = new int[notas.Length];
+
+            for (int i = 0; i < notas.Length; i++)
+            {
+                if (valorSaque >= notas[i])
+                {
+                    quantidadeNotas[i] = (int)(valorSaque / notas[i]);
+                    valorSaque %= notas[i];
+                }
+            }
+
+            if (valorSaque == 0)
+            {
+                Console.WriteLine("\nNotas necessárias para o saque:");
+                for (int i = 0; i < notas.Length; i++)
+                {
+                    if (quantidadeNotas[i] > 0)
+                    {
+                        Console.WriteLine($"Notas de {notas[i]}: {quantidadeNotas[i]}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Não foi possível realizar o saque com as notas disponíveis.");
+            }
+        }
+
+        
+
+
     }
+
+
 }
+
+
+
 

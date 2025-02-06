@@ -8,7 +8,7 @@ class Program
         {
             var manutencao = new Questoes();
 
-            manutencao.JogoForca();
+            manutencao.SimuladorCaixaEletronico();
             Console.ReadKey();
         }
         catch (Exception e)

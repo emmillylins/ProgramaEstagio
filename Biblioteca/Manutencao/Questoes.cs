@@ -518,7 +518,7 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        #region Questão 2: Programa que lê uma lista de números inteiros do usuário
+        #region Questão 2: Programa que lê e classifica uma lista de números inteiros
         //Crie um programa que leia uma lista de números inteiros do usuário 
         //classifique-os em positivos, negativos e zeros.
         public void ClassificaNumeros()
@@ -713,14 +713,16 @@ namespace Biblioteca.Manutencao
                         int quantidade = valor / notas[i];
                         if (quantidade > 0)
                         {
+                            Console.Clear();
+                            Console.WriteLine("\nSaque realizado com sucesso!");
                             Console.WriteLine($"{quantidade} nota(s) de {notas[i]}");
                             valor = valor % notas[i];
                         }
                     }
                     saqueRealizado = true;
                 }
-                catch (FormatException) { throw new Exception("Erro: Entrada inválida. Digite apenas números."); }
-                catch (Exception) { throw; }
+                catch (FormatException) { Console.WriteLine("\nErro: Entrada inválida. Digite apenas números."); }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
         #endregion

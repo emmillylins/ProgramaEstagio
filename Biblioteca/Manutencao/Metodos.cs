@@ -189,44 +189,44 @@ namespace Biblioteca.Manutencao
 
                 Console.Write("Digite o nome do aluno: ");
                 aluno.Nome = Console.ReadLine();
-                if(string.IsNullOrEmpty(aluno.Nome))
+                if (string.IsNullOrEmpty(aluno.Nome))
                 {
                     Console.WriteLine("O aluno precisa ter um nome");
                     return null;
                 }
 
-                for(var i = 1; i < 5; i++)
+                for (var i = 1; i < 5; i++)
                 {
                     Console.WriteLine($"Digite a {i}° nota");
-                    if(!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
+                    if (!double.TryParse(Console.ReadLine()!, CultureInfo.InvariantCulture, out var nota) || nota < 0 || nota > 10)
                     {
                         Console.WriteLine("Digite uma nota válida");
                         i--;
-                    } 
+                    }
                     else
                     {
                         aluno.Notas.Add(nota);
-                    }                
+                    }
                 }
 
                 return aluno;
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
         }
-    
+
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
-            foreach(Aluno aluno in listaAlunos)
+            foreach (Aluno aluno in listaAlunos)
             {
                 Console.WriteLine($"Id do aluno: {aluno.Id}");
                 Console.WriteLine($"Nome do aluno: {aluno.Nome}");
                 Console.WriteLine("\nNotas: ");
-                foreach(double nota in aluno.Notas)
+                foreach (double nota in aluno.Notas)
                 {
                     Console.WriteLine($"Nota: {nota}");
                 }
@@ -234,7 +234,7 @@ namespace Biblioteca.Manutencao
                 var media = aluno.Notas.Average();
                 Console.WriteLine($"Media: {media}");
 
-                switch(media)
+                switch (media)
                 {
                     case >= 7:
                         Console.WriteLine("Aprovado");
@@ -248,19 +248,19 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
-    
+
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
             Console.WriteLine("Digite o id do aluno que você deseja buscar: ");
-            if(!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
+            if (!int.TryParse(Console.ReadLine(), out var id) || id <= 0)
             {
                 Console.WriteLine("Insira um id válido");
                 return;
             }
 
             var aluno = alunos.Find(aluno => aluno.Id == id);
-            if(aluno == null)
+            if (aluno == null)
             {
                 Console.WriteLine("O aluno não foi encontrado.");
                 return;
@@ -268,7 +268,7 @@ namespace Biblioteca.Manutencao
 
             Console.WriteLine($"Aluno: {aluno.Nome}");
             var i = 1;
-            foreach(double nota in aluno.Notas) 
+            foreach (double nota in aluno.Notas)
             {
                 Console.WriteLine($"{i}° Nota: {nota}");
                 i++;
@@ -276,7 +276,7 @@ namespace Biblioteca.Manutencao
 
             var media = aluno.Notas.Average();
             Console.WriteLine($"Média: {media}");
-            switch(media)
+            switch (media)
             {
                 case >= 7:
                     Console.WriteLine("Aprovado");
@@ -297,6 +297,31 @@ namespace Biblioteca.Manutencao
             Console.WriteLine("2 - Classificação dos numeros");
             Console.WriteLine("3 - Sair\n");
             Console.Write("Digite a opção escolhida: ");
+        }
+
+        public bool ValidarSenha(string senha)
+        {
+            if (senha.Length < 8)
+            {
+                Console.WriteLine("Precisa ter ao menos 8 caracteres");
+                return false;
+            }
+            if(!senha.Any(char.IsUpper))
+            {
+                Console.WriteLine("Precisa ter ao menos uma letra maiuscula");
+                return false;
+            }
+            if (!senha.Any(char.IsLower)) 
+            {
+                Console.WriteLine("Precisa ter ao menos uma letra minuscula");
+                return false;
+            }
+            if (!senha.Any(c => !char.IsLetterOrDigit(c)))
+            {
+                Console.WriteLine("Precisa ter caracteres especiais");
+                return false;
+            }
+            return true;
         }
         public void ExibirMenuCalculadora()
         {
@@ -421,7 +446,7 @@ namespace Biblioteca.Manutencao
                     }
                     lista.Add(num);
                 }
-                double resultadoPotenciacao = Math.Pow(lista[0] , lista[1]);
+                double resultadoPotenciacao = Math.Pow(lista[0], lista[1]);
                 return resultadoPotenciacao;
             }
             catch (Exception) { throw; }
@@ -444,11 +469,50 @@ namespace Biblioteca.Manutencao
                     }
                     lista.Add(num);
                 }
-                double resultadoRaizQuadrada = Math.Sqrt(lista[0] );
+                double resultadoRaizQuadrada = Math.Sqrt(lista[0]);
                 return resultadoRaizQuadrada;
             }
             catch (Exception) { throw; }
         }
+        public int SacarCedulas(double saldoAtual)
+        {
+            Console.WriteLine("Digite o valor do saque: ");
+            Console.WriteLine("(Multiplos de 10)");
 
+            if(!int.TryParse(Console.ReadLine(),out var valorSaque) || valorSaque <= 0 || valorSaque % 10 != 0)
+            {
+                Console.WriteLine("Valor invalido, favor digite um valor valido e positivo");
+                return 0;
+            }
+
+            if (valorSaque > saldoAtual)
+            {
+                Console.WriteLine("Saldo insuficiente");
+                return 0;
+            }
+
+            Metodos metodos = new Metodos();
+            metodos.CalcularNotas(valorSaque);
+                
+            return valorSaque;
+        }
+        public void CalcularNotas (int valorSaque)
+        {
+            List<int> notas = new List<int> { 100, 50, 20, 10};
+
+            Console.WriteLine("Notas disponiveis");
+
+            for (int i = 0; i < notas.Count; i++)
+            {
+                int quantidade = valorSaque / notas[i];
+
+                valorSaque = valorSaque - (quantidade * notas[i]);
+
+                if (quantidade > 0)
+                {
+                    Console.WriteLine($"{quantidade} notas de {notas[i]} reais");
+                }
+            }
+        }
     }
 }

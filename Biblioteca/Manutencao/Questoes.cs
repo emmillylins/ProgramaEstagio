@@ -2,9 +2,16 @@
 using Biblioteca.Validacao;
 using Microsoft.VisualBasic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
+using System.Drawing;
 using System.Globalization;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Biblioteca.Manutencao
 {
@@ -262,7 +269,7 @@ namespace Biblioteca.Manutencao
                 for (int i = 0; i < tentativas; i++)
                 {
                     Console.Write("Insira seu nome de usuário: ");
-                    string nomeUsuario = Console.ReadLine();
+                    string nomeUsuario = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(nomeUsuario))
                     {
@@ -281,7 +288,7 @@ namespace Biblioteca.Manutencao
                             i--;
                         }
 
-                        if (validacoes.ValidaUsuarioExistente(nomeUsuario, senha))
+                        if (validacoes.ValidaUsuarioExistente(nomeUsuario, senha!))
                         {
                             Console.WriteLine("Login efetuado com sucesso.");
                             return;
@@ -617,12 +624,25 @@ namespace Biblioteca.Manutencao
         //O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
 
-        public void ValidarSenha()
+        public void ValidacaoSenha()
         {
             try
             {
                 Console.WriteLine("Validação de Senha");
+                Console.WriteLine("\nDigite uma senha de pelo menos 8 caracteres");
+                Console.WriteLine("(deve ter pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial. ");
 
+                string senha = Console.ReadLine()!;
+                Metodos metodos = new Metodos();
+
+                if (metodos.ValidarSenha(senha))
+                {
+                    Console.WriteLine("senha valida");
+                }
+                else
+                {
+                    Console.WriteLine("senha invalida, tente novamente.");
+                }
             }
             catch (Exception) { throw; }
         }
@@ -681,13 +701,13 @@ namespace Biblioteca.Manutencao
                             double resultadoPotenciacao = metodo.MenuCalculadoraPotenciacao(lista);
                             Console.WriteLine($"O resultado da potenciação é {resultadoPotenciacao:F2}");
                             Console.ReadKey();
-                            Console.Clear ();
+                            Console.Clear();
                             break;
                         case 6:
                             double resultadoRaizQuadrada = metodo.MenuCalculadoraRaizQuadrada(lista);
                             Console.WriteLine($"O resultado da raiz quadrada é {resultadoRaizQuadrada:F2}");
                             Console.ReadKey();
-                            Console.Clear ();
+                            Console.Clear();
                             break;
                         case 7:
                             return;
@@ -697,7 +717,229 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        //Questão 5: Validação de CPF
+        //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto
+        //(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o
+        //formato esteja incorreto.
+        //Utilize tratamento de exceções para garantir que o CPF contenha apenas números e
+        //tenha o tamanho correto.
 
+        //Regras de Validação de CPF
+
+        //O CPF deve ter 11 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é feito da seguinte forma: 
+
+        //Para o primeiro dígito verificador: 
+        //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2,
+        //o dígito é 0; caso contrário, é 11 menos o resto.
+
+        //Para o segundo dígito verificador: 
+        //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador)
+        //por um peso que começa em 11 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. 
+        //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
+        public void ValidacaoCpf()
+        {
+            try
+            {
+                Console.WriteLine("Validação de CPF");
+
+
+
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 6: Simulador de Caixa Eletrônico
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
+        //O programa deve:
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+        public void SolicitarSaque(double saldoInicial)
+        {
+            try
+            {
+                Console.WriteLine("Solicitar Saque");
+                double saldoAtual = saldoInicial;
+                var metodos = new Metodos();
+
+                while (true)
+                {
+                    Console.WriteLine("\nEscolher as opções abaixo: ");
+                    Console.WriteLine("1 - Sacar");
+                    Console.WriteLine("2 - Ver saldo");
+                    Console.WriteLine("3 - Sair");
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("\nOpção inválida, tente novamente.");
+                    };
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            double saque = metodos.SacarCedulas(saldoAtual);
+                            if (saque == 0)
+                            {
+                                Console.WriteLine("Nenhum saque foi efetuado");
+                                break;
+                            }
+                            else
+                            {
+                                saldoAtual -= saque;
+                                Console.WriteLine($"Saldo Disponivel apos o saque: {saldoAtual:F2}");
+                                break;
+                            }
+                        case 2:
+                            Console.WriteLine($"Saldo Disponivel: {saldoAtual:F2}");
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            Console.WriteLine("\nDigite uma opção válida");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 7: Jogo da Forca
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de
+        //uma lista e o usuário tenta adivinhar a palavra, letra por letra.
+        //O usuário tem 6 tentativas para acertar a palavra.
+
+        //O programa deve:
+
+        //Exibir o progresso do usuário (letras acertadas e letras faltando). 
+        //Contar as tentativas restantes.
+        //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+
+        public void JogoForca()
+        {
+            try
+            {
+                Console.WriteLine("Jogo da Forca");
+                List<string> lista = new List<string> { "Xuxa", "Dao", "csharp" };
+
+                Random aleatorio = new Random();
+                string palavra = lista[aleatorio.Next(lista.Count)].ToLower();
+                string[] resultado = new string[palavra.Length];
+                int erros = 0, acertos = 0;
+
+                for (int i = 0; i < resultado.Length; i++)
+                {
+                    resultado[i] = "_ ";
+                }
+
+                Console.WriteLine("Digite uma letra: ");
+
+                while (erros < 7)
+                {
+                    Console.WriteLine(string.Join("", resultado));
+                    Console.WriteLine($"\nErros: {erros} | Acertos: {acertos}");
+
+                    char letra = char.ToLower(Console.ReadLine()![0]);
+
+                    if (palavra.Contains(letra))
+                    {
+                        for (int i = 0; i < palavra.Length; i++)
+                        {
+                            //palavra[i] = letra.ToString();
+                            acertos++;
+                        }
+                    }
+                    else
+                    {
+                        erros++;
+                    }
+
+                    if (!resultado.Contains("_ "))
+                    {
+                        Console.WriteLine(string.Join("", resultado));
+                        Console.WriteLine("Você ganhou!");
+                        return;
+                    }
+                }
+                Console.WriteLine($"Você perdeu! A palavra era: {palavra}");
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
+
+        //O programa deve:
+        //Solicitar ao usuário um número inteiro entre 1 e 10. 
+        //Validar se o número está dentro do intervalo permitido.
+        //Gerar a tabuada do número, exibindo os resultados de 1 a 10. 
+        //Tratar exceções para entradas inválidas (números fora do intervalo,
+        //caracteres não numéricos, etc.). 
+        //Permitir que o usuário gere outra tabuada ou encerre o programa.
+
+        public void GeradorTabuadaPersonalizado()
+        {
+            try
+            {
+                while (true)
+                {
+                    Console.WriteLine("Gerador de Tabuada Personalizado");
+                    Console.Write("\nDigite um número inteiro entre 1 e 10: ");
+                    string input = Console.ReadLine()!;
+
+                    if (!int.TryParse(input, out int numero) || numero < 1 || numero > 10)
+                    {
+                        Console.WriteLine("Entrada inválida. Por favor, insira um número entre 1 e 10.");
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                        continue;
+                    }
+
+                    Console.WriteLine($"\nTabuada do {numero}: ");
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        Console.WriteLine($"{numero} x {i} = {numero * i}");
+                    }
+
+                    Console.Write("\n1 - Voltar OU qualquer tecla para Sair: ");
+                    string escolha = Console.ReadLine()!;
+
+                    if (escolha == "1")
+                    {
+                        Console.WriteLine("Encerrando o programa...");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opção inválida. O programa será reiniciado.");
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+
+        //Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores,
+        //calculados com base nos 12 primeiros dígitos. O programa deve permitir que o usuário insira
+        //o CNPJ e informe se ele é válido ou inválido.
+
+        //Regras de Validação de CNPJ:
+
+        //O CNPJ deve ter 14 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
     }
 }
-

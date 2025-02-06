@@ -19,7 +19,11 @@ class Program
             //manutencao.JogoAdvinhacao();
             //manutencao.LerListaNumeros();
             //manutencao.LerListaNumeros();
-            manutencao.CalculadoraAvancada();
+            //manutencao.CalculadoraAvancada();
+            //manutencao.ValidacaoSenha();
+            //manutencao.SolicitarSaque(3500.50);
+            //manutencao.GeradorTabuadaPersonalizado();
+            manutencao.JogoForca();
             Console.ReadKey();
             
         }

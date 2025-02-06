@@ -5,23 +5,7 @@ namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
-        //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
-        public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
-        {
-            try
-            {
-                double maior = 0, menor = 0;
-
-                maior = listaNumeros.Max();
-                menor = listaNumeros.Min();
-
-                return (maior, menor);
-            }
-            catch (Exception) { throw; }
-        }
-
-
-        #region usuario
+        #region Usuario
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -109,7 +93,7 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        #region produtos
+        #region Produtos
         public Produto? CadastrarProduto()
         {
             try
@@ -286,66 +270,7 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        /// <summary>
-        /// calcula números de acordo com a opção envidada. As opções são:
-        /// 1 - Adição; 2 - Subtração; 3 - Multiplicação; 4 - Divisão; 5 - Potenciação; 6 - Raiz Quadrada;
-        /// </summary>
-        /// <param name="opcao"></param>
-        public void CalculaNumeros(int opcao)
-        {
-            try
-            {
-                double num1, num2 = 0;
-                Console.Write("Digite o primeiro número: ");
-
-                if (!double.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("Entrada inválida!");
-                    return;
-                }
-
-                if (opcao != 6) // Raiz quadrada só precisa de um número	
-                {
-                    Console.Write("Digite o segundo número: ");
-                    if (!double.TryParse(Console.ReadLine(), out num2))
-                    {
-                        Console.WriteLine("Entrada inválida!");
-                        return;
-                    }
-                }
-
-                double resultado = 0;
-                switch (opcao)
-                {
-                    case 1: 
-                        resultado = num1 + num2; 
-                        break;
-                    case 2: 
-                        resultado = num1 - num2; 
-                        break;
-                    case 3: 
-                        resultado = num1 * num2; 
-                        break;
-                    case 4:
-                        if (num2 == 0)
-                        {
-                            Console.WriteLine("Erro: divisão por zero não permitida.");
-                            return;
-                        }
-                        resultado = num1 / num2;
-                        break;
-                    case 5:
-                        resultado = Math.Pow(num1, num2);
-                        break;
-                    case 6:
-                        resultado = Math.Sqrt(num1);
-                        break;
-                }
-                Console.WriteLine($"Resultado: {resultado}");
-            }
-            catch (Exception) { throw; }
-        }
-
+        #region CPF/CNPJ
         /// <summary>
         /// Verifica se todos os dígitos do CPF são iguais
         /// </summary>
@@ -378,7 +303,143 @@ namespace Biblioteca.Manutencao
             }
 
             int resto = soma % 11;
-            return resto < 2 ? 0 : 11 - resto;
+
+            if (resto < 2)
+                return 0;
+            else
+                return 11 - resto;
         }
+
+        /// <summary>
+        /// Calcula o dígito verificador do CNPJ
+        /// </summary>
+        /// <param name="digitos"></param>
+        /// <param name="posicao"></param>
+        /// <returns></returns>
+        public int CalcularDigitoVerificadorCNPJ(int[] digitos, int posicao)
+        {
+            int[] pesos;
+
+            if (posicao == 12)
+                pesos = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+            else
+                pesos = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+            int soma = 0;
+
+            for (int i = 0; i < pesos.Length; i++)
+            {
+                soma += digitos[i] * pesos[i];
+            }
+
+            int resto = soma % 11;
+
+            if (resto < 2)
+                return 0;
+            else
+                return 11 - resto;
+        }
+        #endregion
+
+        #region Calculos
+        /// <summary>
+        /// O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
+        /// </summary>
+        /// <param name="listaNumeros"></param>
+        /// <returns></returns>
+        public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
+        {
+            try
+            {
+                double maior = 0, menor = 0;
+
+                maior = listaNumeros.Max();
+                menor = listaNumeros.Min();
+
+                return (maior, menor);
+            }
+            catch (Exception) { throw; }
+        }
+
+        /// <summary>
+        /// calcula números de acordo com a opção envidada. As opções são:
+        /// 1 - Adição; 2 - Subtração; 3 - Multiplicação; 4 - Divisão; 5 - Potenciação; 6 - Raiz Quadrada;
+        /// </summary>
+        /// <param name="opcao"></param>
+        public void CalculaNumeros(int opcao)
+        {
+            try
+            {
+                double num1, num2 = 0;
+                Console.Write("Digite o primeiro número: ");
+
+                if (!double.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Entrada inválida!");
+                    return;
+                }
+
+                if (opcao != 6) // Raiz quadrada só precisa de um número	
+                {
+                    Console.Write("Digite o segundo número: ");
+                    if (!double.TryParse(Console.ReadLine(), out num2))
+                    {
+                        Console.WriteLine("Entrada inválida!");
+                        return;
+                    }
+                }
+
+                double resultado = 0;
+                switch (opcao)
+                {
+                    case 1:
+                        resultado = num1 + num2;
+                        break;
+                    case 2:
+                        resultado = num1 - num2;
+                        break;
+                    case 3:
+                        resultado = num1 * num2;
+                        break;
+                    case 4:
+                        if (num2 == 0)
+                        {
+                            Console.WriteLine("Erro: divisão por zero não permitida.");
+                            return;
+                        }
+                        resultado = num1 / num2;
+                        break;
+                    case 5:
+                        resultado = Math.Pow(num1, num2);
+                        break;
+                    case 6:
+                        resultado = Math.Sqrt(num1);
+                        break;
+                }
+                Console.WriteLine($"Resultado: {resultado}");
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void CalculaTabuada(string entrada)
+        {
+            try
+            {
+                int numero = int.Parse(entrada);
+
+                if (numero < 1 || numero > 10)
+                {
+                    throw new Exception("Número fora do intervalo permitido. Digite um número entre 1 e 10.");
+                }
+
+                Console.WriteLine($"\nTabuada do {numero}:");
+                for (int i = 1; i <= 10; i++)
+                {
+                    Console.WriteLine($"{numero} x {i} = {numero * i}");
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
     }
 }

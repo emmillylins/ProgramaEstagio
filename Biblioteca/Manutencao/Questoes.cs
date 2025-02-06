@@ -1,7 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
@@ -469,8 +468,9 @@ namespace Biblioteca.Manutencao
         #endregion
 
         #region Teste 3
-        //Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha
-        //5 tentativas para adivinhar um número secreto entre 1 e 100?
+
+        #region Questão 1: Jogo de adivinhação
+        //Crie um programa onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100
         //Regras
         //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
         //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
@@ -516,10 +516,11 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-
-        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário
-        //e classifique-os em positivos, negativos e zeros.
+        #region Questão 2: Programa que lê uma lista de números inteiros do usuário
+        //Crie um programa que leia uma lista de números inteiros do usuário 
+        //classifique-os em positivos, negativos e zeros.
         public void ClassificaNumeros()
         {
             try
@@ -556,9 +557,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-
-        //Questão 3: Validação de Senha:
+        #region Questão 3: Validação de Senha
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
         //pelo menos uma letra maiúscula,
         //uma letra minúscula
@@ -584,9 +585,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; };
         }
+        #endregion
 
-
-        //Questão 4: Calculadora com Operações Avançadas:
+        #region Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
         //e operações avançadas(potenciação, raiz quadrada)
         //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
@@ -614,9 +615,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-
-        //Questão 5: Validação de CPF
+        #region Questão 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
         //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.
         //Uilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
@@ -681,52 +682,215 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Questão 6: Simulador de Caixa Eletrônico
+        //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.O programa deve:
+        //1. Solicitar o valor do saque.
+        //2. Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //3. Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //4. Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+        public void SimuladorCaixaEletronico()
+        {
+            int[] notas = { 100, 50, 20, 10 };
+            bool saqueRealizado = false;
 
-            //Questão 6: Simulador de Caixa Eletrônico*
-            //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.O programa deve:
-            //1. Solicitar o valor do saque.
-            //2. Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
-            //3. Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
-            //4. Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+            Console.WriteLine("Programa que simula um caixa eletônico.");
 
+            while (!saqueRealizado)
+            {
+                try
+                {
+                    Console.Write("\nDigite o valor do saque (múltiplo de 10): ");
+                    int valor = int.Parse(Console.ReadLine());
 
+                    if (valor <= 0) throw new Exception("\nValor inválido. O saque deve ser maior que zero.");
+                    if (valor % 10 != 0) throw new Exception("\nValor inválido. O saque deve ser múltiplo de 10.");
 
-            //Questão 7: Jogo da Forca
-            //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista
-            //e o usuário tenta adivinhar a palavra, letra por letra.
-            //O usuário tem 6 tentativas para acertar a palavra.
-            //O programa deve:
-            //1. Exibir o progresso do usuário(letras acertadas e letras faltando).
-            //2. Contar as tentativas restantes.
-            //3. Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
-
-
-
-            //Questão 8: Gerador de Tabuada Personalizado
-            //Crie um programa que gera a tabuada de um número fornecido pelo usuário.O programa deve:
-            //1. Solicitar ao usuário um número inteiro entre 1 e 10.
-            //2. Validar se o número está dentro do intervalo permitido.
-            //3. Gerar a tabuada do número, exibindo os resultados de 1 a 10.
-            //4. Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.).
-            //5. Permitir que o usuário gere outra tabuada ou encerre o programa.
-
-
-
-            //Questão 9: Validação de CNPJ
-            //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
-            //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
-            //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
-            //Regras de Validação de CNPJ:
-            //1. O CNPJ deve ter 14 dígitos.
-            //2. Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
-            //3. O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes:
-            //    - Para o **primeiro dígito verificador**, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
-            //    - Para o **segundo dígito verificador**, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
-
-
-
-            #endregion
+                    Console.WriteLine("\nNotas necessárias:");
+                    for (int i = 0; i < notas.Length; i++)
+                    {
+                        int quantidade = valor / notas[i];
+                        if (quantidade > 0)
+                        {
+                            Console.WriteLine($"{quantidade} nota(s) de {notas[i]}");
+                            valor = valor % notas[i];
+                        }
+                    }
+                    saqueRealizado = true;
+                }
+                catch (FormatException) { throw new Exception("Erro: Entrada inválida. Digite apenas números."); }
+                catch (Exception) { throw; }
+            }
         }
+        #endregion
+
+        #region Questão 7: Jogo da Forca
+        //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista
+        //e o usuário tenta adivinhar a palavra, letra por letra.
+        //O usuário tem 6 tentativas para acertar a palavra.
+        //O programa deve:
+        //1. Exibir o progresso do usuário(letras acertadas e letras faltando).
+        //2. Contar as tentativas restantes.
+        //3. Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+        public void JogoForca()
+        {
+            List<string> palavras = ["banana", "computador", "elefante", "girassol", "programacao"];
+            Random random = new();
+            string palavra = palavras[random.Next(palavras.Count)];
+            char[] palavraEscondida = new string('_', palavra.Length).ToCharArray();
+            int tentativasRestantes = 6;
+            HashSet<char> letrasTentadas = [];
+
+            Console.WriteLine("Bem-vindo ao Jogo da Forca!");
+
+            while (tentativasRestantes > 0 && new string(palavraEscondida) != palavra)
+            {
+                try
+                {
+                    Console.WriteLine($"\nPalavra: {new string(palavraEscondida)}");
+                    Console.WriteLine($"Tentativas restantes: {tentativasRestantes}");
+                    Console.Write("\nDigite uma letra: ");
+                    char letra = Console.ReadLine()!.ToLower()[0];
+
+                    if (letrasTentadas.Contains(letra))
+                        throw new Exception("\nLetra já tentada. Tente outra.");
+
+                    if (!char.IsLetter(letra))
+                        throw new Exception("\nEntrada inválida. Digite apenas letras.");
+
+                    letrasTentadas.Add(letra);
+
+                    if (palavra.Contains(letra))
+                    {
+                        for (int i = 0; i < palavra.Length; i++)
+                        {
+                            if (palavra[i] == letra)
+                            {
+                                palavraEscondida[i] = letra;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tentativasRestantes--;
+                        Console.WriteLine("\nLetra incorreta!");
+                    }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+
+            if (new string(palavraEscondida) == palavra)
+                Console.WriteLine($"Parabéns! Você acertou a palavra: {palavra}");
+            else
+                Console.WriteLine($"Você perdeu! A palavra era: {palavra}");
+        }
+        #endregion
+
+        #region Questão 8: Gerador de Tabuada Personalizado
+        //Crie um programa que gera a tabuada de um número fornecido pelo usuário.O programa deve:
+        //1. Solicitar ao usuário um número inteiro entre 1 e 10.
+        //2. Validar se o número está dentro do intervalo permitido.
+        //3. Gerar a tabuada do número, exibindo os resultados de 1 a 10.
+        //4. Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.).
+        //5. Permitir que o usuário gere outra tabuada ou encerre o programa.
+        public void GeradorTabuada()
+        {
+            var metodos = new Metodos();
+            bool executando = true;
+
+            while (executando)
+            {
+                try
+                {
+                    Console.Write("Digite um número entre 1 e 10 para gerar a tabuada (ou 'sair' para encerrar): ");
+                    string entrada = Console.ReadLine();
+
+                    if (entrada.ToLower() == "sair")
+                    {
+                        executando = false;
+                        Console.WriteLine("Encerrando o programa...");
+                        continue;
+                    }
+
+                    metodos.CalculaTabuada(entrada);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Erro: Entrada inválida. Digite apenas números ou a palavra 'sair'.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
+            }
+        }
+        #endregion
+
+        #region Questão 9: Validação de CNPJ
+        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+        //Regras de Validação de CNPJ:
+        //1. O CNPJ deve ter 14 dígitos.
+        //2. Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+        //3. O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes:
+        //    - Para o **primeiro dígito verificador**, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+        //    - Para o **segundo dígito verificador**, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+        public void ValidaCnpj()
+        {
+            var metodos = new Metodos();
+            bool cnpjValido = false;
+
+            while (!cnpjValido)
+            {
+                try
+                {
+                    Console.Write("Digite o CNPJ (apenas números): ");
+                    var cnpj = Console.ReadLine();
+
+                    // Verifica se o CNPJ tem 14 dígitos e contém apenas números
+                    if (string.IsNullOrEmpty(cnpj) || cnpj.Length != 14 || !long.TryParse(cnpj, out _))
+                    {
+                        throw new Exception("\nCNPJ inválido. Deve conter exatamente 14 dígitos numéricos.");
+                    }
+
+                    // Verifica se todos os dígitos são iguais (CNPJ inválido)
+                    if (metodos.TodosDigitosIguais(cnpj))
+                    {
+                        throw new Exception("\nCNPJ inválido. Todos os dígitos são iguais.");
+                    }
+
+                    // Calcula os dígitos verificadores
+                    int[] digitos = new int[14];
+                    for (int i = 0; i < 14; i++)
+                    {
+                        digitos[i] = int.Parse(cnpj[i].ToString());
+                    }
+
+                    int primeiroDigitoVerificador = metodos.CalcularDigitoVerificadorCNPJ(digitos, 12);
+                    int segundoDigitoVerificador = metodos.CalcularDigitoVerificadorCNPJ(digitos, 13);
+
+                    // Verifica se os dígitos verificadores estão corretos
+                    if (digitos[12] == primeiroDigitoVerificador && digitos[13] == segundoDigitoVerificador)
+                    {
+                        cnpjValido = true;
+                        Console.WriteLine("\nCNPJ válido!");
+                    }
+                    else
+                    {
+                        throw new Exception("\nCNPJ inválido. Dígitos verificadores incorretos.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
+            }
+        }
+        #endregion
+
+        #endregion
     }
+}
 

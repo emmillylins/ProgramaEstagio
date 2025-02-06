@@ -310,7 +310,11 @@ namespace Biblioteca.Manutencao
                 while (true)
                 {
                     Console.WriteLine("\nEscolha uma opção:");
-                    Console.WriteLine("1. Depositar\n2. Sacar\n3. Ver saldo\n4. Sair");
+                    Console.WriteLine("1. Depositar" +
+                                    "\n2. Sacar" +
+                                    "\n3. Ver saldo" +
+                                    "\n4. Sair");
+
                     Console.Write("\nSua opção: ");
 
                     if (!int.TryParse(Console.ReadLine(), out int opcao))
@@ -320,29 +324,21 @@ namespace Biblioteca.Manutencao
                         switch (opcao)
                         {
                             case 1:
-                                var saldo = metodos.Depositar();
-                                if (saldo is null)
+                                var deposito = metodos.Depositar();
+                                if (deposito > 0)
                                 {
-                                    break;
-                                }
-                                else
-                                {
-                                    saldos.Add(saldo ?? 0);
+                                    saldos.Add(deposito);
                                     Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
-                                    break;
                                 }
+                                break;
                             case 2:
                                 var saldoComSaque = metodos.Sacar(saldos);
-                                if (saldoComSaque is null)
-                                {
-                                    break;
-                                }
-                                else
+                                if (saldoComSaque is not null)
                                 {
                                     saldos = saldoComSaque;
                                     Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
-                                    break;
                                 }
+                                break;
                             case 3:
                                 Console.WriteLine($"\nSeu saldo atual é de: {saldos.Sum():F2}");
                                 break;
@@ -427,7 +423,6 @@ namespace Biblioteca.Manutencao
                 var i = 1;
                 var metodos = new Metodos();
                 var alunos = new List<Aluno>();
-
 
                 Console.WriteLine("Sistema de gerenciamento de alunos e notas.");
                 while (true)

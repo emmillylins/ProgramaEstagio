@@ -39,7 +39,6 @@ namespace Biblioteca.Manutencao
                 }
             }
             catch (Exception) { throw; }
-
         }
 
         public Usuario CadastrarUsuario()
@@ -65,17 +64,17 @@ namespace Biblioteca.Manutencao
         }
 
         #region CaixaEletronico
-        public double? Depositar()
+        public double Depositar()
         {
             try
             {
                 Console.Write("\nDigite o valor a ser depositado: ");
 
                 if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valor)
-                    || valor < 0)
+                    || valor <= 0)
                 {
                     Console.WriteLine($"\nDigite um valor válido.");
-                    return null;
+                    return 0;
                 }
                 return valor;
             }
@@ -142,7 +141,9 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("\nLista de produtos: ");
                 foreach (var produto in produtos)
                 {
-                    Console.WriteLine($"{i}° produto:\nNome: {produto.Nome}\nPreço: {produto.Preco}\n");
+                    Console.WriteLine($"{i}° produto:" +
+                                    $"\nNome: {produto.Nome}" +
+                                    $"\nPreço: {produto.Preco}\n");
                     i++;
                 }
                 Console.WriteLine($"Valor total da compra: {valorTotal}");
@@ -186,7 +187,7 @@ namespace Biblioteca.Manutencao
                 Console.Write("Digite o nome um aluno: ");
                 aluno.Nome = Console.ReadLine();
 
-                if (aluno.Nome is null)
+                if (string.IsNullOrEmpty(aluno.Nome))
                 {
                     Console.WriteLine("Aluno precisa ter um nome.");
                     return null;
@@ -281,7 +282,6 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
         #endregion
     }
 }

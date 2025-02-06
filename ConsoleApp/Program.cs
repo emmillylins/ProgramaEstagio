@@ -20,9 +20,12 @@ class Program
             // Formulário 3
             //manutencao.JogoAdivinhacao(); //1
             //manutencao.ClassificacaoNumeros(); //2
+            //manutencao.VerificaSenha(); //3
             //manutencao.CalculadoraAvancada(); //4
+            manutencao.VerificaCPF(); //5
             //manutencao.SimuladorCaixaEletronico(); //6
-            manutencao.GeradorTabuada(); //8
+            //manutencao.GeradorTabuada(); //8
+            
 
             Console.ReadKey();
 

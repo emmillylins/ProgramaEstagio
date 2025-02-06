@@ -479,6 +479,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+
+
+        // FORMULÁRIO C# 3
+
         //Questão 1: Como posso criar um jogo simples de adivinhação em C#
         //onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
         //Regras:
@@ -646,7 +650,38 @@ namespace Biblioteca.Manutencao
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula,
         //uma letra minúscula e um caractere especial.O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
+        public void VerificaSenha()
+        {
+            try
+            {
+                Validacoes validacao = new();
 
+                // Título
+                Console.WriteLine("Validação de Senha.");
+
+                // Solicitando a senha ao usuário
+                Console.WriteLine("Insira sua senha.");
+                Console.Write("Senha: ");
+
+                // Armazenando a senha inserida na variável
+                string senhaInserida = Console.ReadLine();
+
+                // Chamar validação da senha
+                bool resultadoValidacao = validacao.ValidaSenha(senhaInserida);
+
+                if (resultadoValidacao)
+                {
+                    Console.WriteLine("\nSenha aprovada!");
+                }
+                else
+                {
+                    throw new Exception("\nSua senha deve possuir: \nPelo menos 8 caracteres; " +
+                        "\nPelo menos uma letra maiúscula; \nUma letra minúscula;\nUm caractere especial!");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
 
         //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
@@ -713,12 +748,53 @@ namespace Biblioteca.Manutencao
         //Para o primeiro dígito verificador: 
         //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
         //Soma-se os resultados.
+
         //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+
         //Para o segundo dígito verificador: 
         //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
         //Soma-se os resultados.
         //O dígito verificador é o resto da divisão dessa soma por 11. 
         //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        public void VerificaCPF()
+        {
+            try
+            {
+                Validacoes validacao = new();
+
+                Console.WriteLine("Validação de CPF");
+
+                while (true)
+                {  
+                    Console.WriteLine("\nInforme o CPF.");
+                    Console.Write("CPF: ");
+
+                    string cpfInserido = Console.ReadLine();
+
+                    if (!int.TryParse(cpfInserido, out var cpfConvertido))
+                    {
+                        // Chamar validação para o CPF
+                        bool resultadoValidacaoCPF = validacao.ValidaCPF(cpfInserido);
+
+                        // Verificando o resultado da validação do cpf
+                        if (resultadoValidacaoCPF)
+                        {
+                            Console.WriteLine("CPF válido!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("CPF inválido!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nValor inválido!");
+                    }
+                }
+                
+            }
+            catch (Exception) { throw; }
+        }
 
 
         //Questão 6: Simulador de Caixa Eletrônico
@@ -741,7 +817,7 @@ namespace Biblioteca.Manutencao
             // Convertendo o valor para double
             if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out double valorSaque) || valorSaque < 1)
             {
-                Console.WriteLine("Insira um valor válido!");
+                throw new Exception("Insira um valor válido!");
             }
             else
             {
@@ -777,9 +853,8 @@ namespace Biblioteca.Manutencao
                 }
                 else
                 {
-                    Console.WriteLine("O caixa eletrônico só trabalha com notas de 10, 20, 50 e 100! Insira um valor múltiplo de 10.");
+                    throw new Exception("O caixa eletrônico só trabalha com notas de 10, 20, 50 e 100!");
                 }
-
             }
         }
 

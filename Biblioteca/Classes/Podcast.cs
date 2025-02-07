@@ -1,8 +1,10 @@
 ﻿using System;
 
-public class Podcasts(string nomePodcast)
+public class Podcast
 {
-    List<Podcasts> NumeroEpisodio { get; set; }
+    public Podcast() { }
+    List<Podcast> NumeroEpisodio { get; set; }
+
     public string Nome { get; set; }
     public double Duracao { get; set; }
     public string Resumo { get; set; }

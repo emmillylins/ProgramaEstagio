@@ -170,5 +170,44 @@ namespace Biblioteca.Manutencao
             return true;
 
         }
+
+        public void AdicionarEpisódio()
+        {
+
+        }
+
+        public void ExibirDetalhes(Podcast podcast)
+        {
+            try
+            {
+                Console.WriteLine($"Nome do podcast: {podcast.Nome} - Apresentador: {podcast.Apresentador}\n");
+                var episodios = podcast.Episodios.OrderBy(e => e.Numero).ToList();
+
+                if (episodios.Count == 0)
+                {
+                    Console.WriteLine("Não existem episódios neste podcast.");
+                    return;
+                }
+
+                foreach (var episodio in episodios)
+                {
+                    Console.WriteLine("");
+                }
+
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void AdicionarConvidados()
+        {
+            try
+            {
+                Console.WriteLine("Insira o nome do convidado: ");
+                string nomeConvidado = Console.ReadLine();
+
+                if 
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

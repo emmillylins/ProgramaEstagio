@@ -460,5 +460,14 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        public void AdicionarConvidados()
+        {
+            try
+            {
+
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

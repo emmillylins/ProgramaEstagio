@@ -1,9 +1,9 @@
-﻿namespace Biblioteca.Classes
+﻿
+namespace Biblioteca.Classes
 {
     public class Podcast
     {
-        private List<Epsodio> epsodios = new();
-
+        public Podcast() { }
         public Podcast(string nome, string apresentador)
         {
             Nome = nome;
@@ -12,7 +12,9 @@
 
         public string Nome { get; }
         public string Apresentador { get; }
+        private List<Epsodio> Epsodios = new();
 
-        public int DuracaoTotal => epsodios.Sum();
+        public int DuracaoTotal => Epsodios.Sum(epsodio => epsodio.DuracaoSegundos);
+        public int TotalEpsodios => Epsodios.Max(epsodio => epsodio.Numero);
     }
 }

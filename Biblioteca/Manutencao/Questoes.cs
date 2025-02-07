@@ -1,17 +1,6 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.Design;
-using System.Drawing;
 using System.Globalization;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.Intrinsics.X86;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Biblioteca.Manutencao
 {
@@ -854,8 +843,10 @@ namespace Biblioteca.Manutencao
                     {
                         for (int i = 0; i < palavra.Length; i++)
                         {
-                            //palavra[i] = letra.ToString();
-                            acertos++;
+                            if(palavra[i] == letra)
+                            {
+                                //palavra[i] = letra
+                            }
                         }
                     }
                     else

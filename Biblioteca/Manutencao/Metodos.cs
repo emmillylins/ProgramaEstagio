@@ -1,4 +1,6 @@
 ﻿using Biblioteca.Classes;
+using Biblioteca.Classes.Questao_do_mestre;
+using System.Drawing;
 using System.Globalization;
 
 namespace Biblioteca.Manutencao
@@ -287,7 +289,7 @@ namespace Biblioteca.Manutencao
             }
             return true;
         }
-        
+
         /// <summary>
         /// Calcula o dígito verificador de um CPF
         /// </summary>
@@ -441,5 +443,68 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
         #endregion
+
+        #region Podcast
+        public Episodio AdicionarEpisodio(int sequencia)
+        {
+            Console.Clear();
+
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Adicionando episódio\n");
+                    Console.Write("Digite o Título: ");
+
+                    var titulo = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(titulo))
+                    {
+
+                    }
+
+                    return new Episodio();
+                }
+                catch (Exception) { }
+
+            }
+        }
+
+
+        //deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //seguido pela lista de episódios ordenados por numero e por fim o total de episódios.
+        public void ExibirDetalhes(Podcast podcast)
+        {
+            try
+            {
+                Console.WriteLine($"Nome do podcast: {podcast.Nome} - Apresentador: {podcast.Apresentador}\n");
+
+                var episodios = podcast.Episodios.OrderBy(e => e.Numero).ToList();
+
+                if (episodios.Count == 0)
+                {
+                    Console.WriteLine("Não há episódios nesse Podcast.");
+                    return;
+                }
+
+                foreach (var episodio in episodios)
+                {
+                    Console.WriteLine($"Episódio {episodio.Numero}\nNome: {episodio.Titulo}\nDuração: {TimeSpan.FromSeconds(episodio.Duracao)}");
+
+                    if (episodio.Convidados.Count > 0 && episodio.Convidados.Count == episodio.TotalConvidados)
+                    {
+                        Console.WriteLine("\nConvidados:");
+                        foreach (var convidado in episodio.Convidados)
+                        {
+                            Console.WriteLine($"{convidado.Codigo} - {convidado.Nome}");
+                        }
+                    }
+                }
+                Console.WriteLine($"Total de episódios: {podcast.TotalEpisodios}");
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
     }
 }
+

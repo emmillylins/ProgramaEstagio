@@ -898,11 +898,12 @@ namespace Biblioteca.Manutencao
 
         #endregion
 
-        //Questão do mestre
+        #region  Questão do mestre
         //crie três classes para manter podcasts, episódios e convidados.
         //convidado deve ter um Codigo e um Nome
         //O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
         //O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
+
         //Um podcast nasce com um nome e um apresentador definido.
         //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
         //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
@@ -914,6 +915,12 @@ namespace Biblioteca.Manutencao
         //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
         //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
         //e também se precisamos utilizar get e set para todos os valores.
+        public void GerarPodcast()
+        {
+
+        }
+
+        #endregion
     }
 }
 

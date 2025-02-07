@@ -659,6 +659,12 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
+
+        public void AdicionarEpisodios()
+        {
+            
+
+        }
     }
 }
 

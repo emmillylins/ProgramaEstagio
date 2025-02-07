@@ -743,6 +743,31 @@ namespace Biblioteca.Manutencao
 
         #region METODOS PARA O DESAFIOS POO
         
+        public void AdicionarEpisodio()
+        {
+
+
+
+        }
+
+
+        public static void ExibirDetalhes(Podcasts podcats1)
+        {
+            try
+            {
+                Console.WriteLine(podcats1.NomePodcast, podcats1.ApresentadorPodcast);
+
+                var episodios =  podcats1.Episodio.OrderBy(podcats1 = )
+
+
+
+
+
+            }catch (Exception) { throw; }
+          
+
+           
+        }
 
 
 

@@ -532,7 +532,7 @@ namespace Biblioteca.Manutencao
                 }
                 // mensagem final do jogo
                 Console.WriteLine($"Você não conseguiu acertar! o numero secreto era: {numeroSecreto}");
-                
+
 
 
 
@@ -886,33 +886,62 @@ namespace Biblioteca.Manutencao
 
 
         }
-        
+
+
+        #endregion
+
+
+
+
+        #region POO ALURA DESAFIO 
+
+        //Questão do mestre
+        //crie três classes para manter podcasts, episódios e convidados.
+        //convidado deve ter um Codigo e um Nome
+        //O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
+
+
+        //O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
+
+
+        //Um podcast nasce com um nome e um apresentador definido.
+
+        //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+        //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
+        //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+        //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
+        //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
+
+        //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
+        //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
+        //e também se precisamos utilizar get e set para todos os valores.
+        #endregion
+
+
+
+        public void GerarPodcast()
+        {
+            try
+            {
+                Podcasts podcast1 = new("SemLogica", "Loca");
+                var metodos = new Metodos();
+
+                
+
+
+
+
+
+
+            }
+            catch (Exception) { throw; }
+        }
     }
-    #endregion
-
-
-
-
-    #region POO ALURA DESAFIO 
-
-    //Questão do mestre
-    //crie duas classes para manter podcasts e episódios.
-    //O podcast possui um nome, um apresentador e um total de episódios.
-    //Um podcast nasce com um nome e um apresentador definido.
-    //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
-    //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
-    //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
-    //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
-    //O episódio deve ter um número, um título, uma duração e um resumo.
-    //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
-    //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
-
-    //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
-    //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
-    //e também se precisamos utilizar get e set para todos os valores.
-
-    #endregion
 }
+
+    
+
 
 
 

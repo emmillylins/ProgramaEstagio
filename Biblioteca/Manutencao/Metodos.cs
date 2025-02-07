@@ -287,7 +287,7 @@ namespace Biblioteca.Manutencao
             }
             return true;
         }
-        
+
         /// <summary>
         /// Calcula o dígito verificador de um CPF
         /// </summary>
@@ -440,6 +440,93 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Teste 4
+
+        #region Funcionario
+        public Funcionario AdicionarFuncionario()
+        {
+            while (true)
+            {
+                Console.WriteLine("\nCadastrar funcionário\n");
+                try
+                {
+                    Console.Write("Nome: ");
+                    var nome = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(nome))
+                        throw new Exception("\nO nome não pode estar vazio!");
+
+                    Console.Write("Cargo: ");
+                    var cargo = Console.ReadLine();
+
+                    Console.Write("Salário: ");
+
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var salario)
+                        || salario <= 0)
+                        throw new Exception("\nO salário deve ser um valor positivo!");
+
+                    Console.WriteLine("\nFuncionário cadastrado com sucesso!");
+                    return new Funcionario(nome, cargo, salario);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public void ListarFuncionarios(List<Funcionario> funcionarios)
+        {
+            try
+            {
+                Console.Clear();
+                if (funcionarios.Count == 0)
+                {
+                    Console.WriteLine("\nNenhum funcionário cadastrado.");
+                    return;
+                }
+
+                Console.WriteLine("\nLista de Funcionários:");
+                foreach (var f in funcionarios)
+                    Console.WriteLine($"Nome: {f.Nome}\nCargo: {f.Cargo}\nSalário: {f.Salario}\n");
+            }
+            catch (Exception) { throw; }
+        }
+
+        public void CalcularMediaSalarial(List<Funcionario> funcionarios)
+        {
+            try
+            {
+                Console.Clear();
+                if (funcionarios.Count == 0)
+                {
+                    Console.WriteLine("Nenhum funcionário para calcular a média.");
+                    return;
+                }
+
+                var salarios = funcionarios.Select(f => f.Salario).ToList();
+
+                Console.WriteLine($"Média salarial: {salarios.Average():F2}");
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
+
+        #region ContaBancaria
+        public void ExibirSaldo(ContaBancaria contaBancaria)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Minha conta bancária");
+                Console.WriteLine($"\nTitular: {contaBancaria.Titular} - Numero da conta: {contaBancaria.NumeroConta}");
+                Console.WriteLine($"Saldo: {contaBancaria.Saldo}:C");
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
+
         #endregion
     }
 }

@@ -8,7 +8,7 @@ class Program
         {
             var questoes = new Questoes();
 
-            questoes.SimuladorCaixaEletronico();
+            questoes.SistemaContaBancaria();
             Console.ReadKey();
         }
         catch (Exception e)

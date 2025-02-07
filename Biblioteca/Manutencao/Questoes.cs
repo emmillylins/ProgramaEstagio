@@ -1,6 +1,9 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
+using System;
 using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.ConstrainedExecution;
 
 namespace Biblioteca.Manutencao
 {
@@ -625,12 +628,12 @@ namespace Biblioteca.Manutencao
         //1. O CPF deve ter 11 dígitos.
         //2. Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos.
         //3. O cálculo dos dígitos verificadores é feito da seguinte forma:
-        //    - Para o **primeiro dígito verificador**:
+        //    - Para o primeiro dígito verificador:
         //        - Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2.
         //        - Soma-se os resultados.
         //        - O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0;
         //        caso contrário, é 11 menos o resto.
-        //    - Para o **segundo dígito verificador**:
+        //    - Para o segundo dígito verificador:
         //        - Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador)
         //        por um peso que começa em 11 e diminui até 2.
         //        - Soma-se os resultados.
@@ -837,8 +840,8 @@ namespace Biblioteca.Manutencao
         //1. O CNPJ deve ter 14 dígitos.
         //2. Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
         //3. O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes:
-        //    - Para o **primeiro dígito verificador**, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
-        //    - Para o **segundo dígito verificador**, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+        //    - Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+        //    - Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
         public void ValidaCnpj()
         {
             var metodos = new Metodos();
@@ -888,6 +891,126 @@ namespace Biblioteca.Manutencao
                 {
                     Console.WriteLine($"Erro: {ex.Message}");
                 }
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Teste 4
+
+        #region Questão 1: Sistema de Gerenciamento de Funcionários
+        //Crie um programa que gerencie funcionários.
+        //- Cada funcionário deve ter um Nome, Cargo e Salário.
+        //- O programa deve permitir adicionar e listar funcionários e calcular a média salarial.
+        //- Utilize uma classe `Funcionario` para representar os funcionários.
+        //- Valide a entrada de dados, garantindo que o nome não esteja vazio e o salário seja um número positivo.
+        public void GerenciamentoFuncionarios()
+        {
+            var metodos = new Metodos();
+            var funcionarios = new List<Funcionario>();
+
+            Console.WriteLine("Programa que gerencia funcionários");
+
+            while (true)
+            {
+                Console.WriteLine("\n Menu ");
+                Console.WriteLine("1 - Adicionar Funcionário");
+                Console.WriteLine("2 - Listar Funcionários");
+                Console.WriteLine("3 - Calcular Média Salarial");
+                Console.WriteLine("4 - Sair");
+                Console.Write("Sua opção: ");
+
+                try
+                {
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                        throw new Exception("Digite um valor inteiro.");
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            funcionarios.Add(metodos.AdicionarFuncionario());
+                            break;
+                        case 2:
+                            metodos.ListarFuncionarios(funcionarios);
+                            break;
+                        case 3:
+                            metodos.CalcularMediaSalarial(funcionarios);
+                            break;
+                        case 4:
+                            Console.WriteLine("Saindo...");
+                            return;
+                        default:
+                            Console.WriteLine("Opção inválida! Tente novamente.");
+                            break;
+                    }
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); }
+            }
+        }
+        #endregion
+
+        #region Questão 2: Sistema de Conta Bancária
+        //Crie um programa que simule uma conta bancária.
+        //- Utilize uma classe `ContaBancaria` com os atributos: Titular, Número da Conta e Saldo.
+        //- Mostre o nome do titular e o numero da conta (mockado) antes do Menu
+        //- Permita depositar, sacar e exibir saldo.
+        //- Valide entradas inválidas e trate exceções.
+        //- O saque só deve ser permitido se houver saldo suficiente.
+        public void SistemaContaBancaria()
+        {
+            var metodos = new Metodos();
+            var contaBancaria = new ContaBancaria()
+            {
+                Titular = "Emmilly",
+                NumeroConta = "1234",
+                Saldo = 3500
+            };
+
+            Console.WriteLine("Minha conta bancária");
+            Console.WriteLine($"Titular: {contaBancaria.Titular} - Numero da conta: {contaBancaria.NumeroConta}");
+
+            while (true)
+            {
+                Console.WriteLine("\n Menu ");
+                Console.WriteLine("1 - Depositar");
+                Console.WriteLine("2 - Sacar");
+                Console.WriteLine("3 - Exibir Saldo");
+                Console.WriteLine("4 - Sair");
+                Console.Write("Sua opção: ");
+
+                try
+                {
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                        throw new Exception("\nDigite um valor inteiro.");
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            var deposito = metodos.Depositar();
+                            if (deposito > 0)
+                            {
+                                contaBancaria.Saldo += deposito;
+                                Console.WriteLine($"\nSeu saldo atual é de: {contaBancaria.Saldo:C}");
+                            }
+                            break;
+                        case 2:
+                            var saldoComSaque = metodos.Sacar([contaBancaria.Saldo]);
+                            if (saldoComSaque is not null)
+                                Console.WriteLine($"\nSeu saldo atual é de: {saldoComSaque.Sum():C}");
+                            break;
+                        case 3:
+                            metodos.ExibirSaldo(contaBancaria);
+                            break;
+                        case 4:
+                            Console.WriteLine("Saindo...");
+                            return;
+                        default:
+                            Console.WriteLine("\nOpção inválida! Tente novamente.");
+                            break;
+                    }
+                }
+                catch (Exception e) { Console.WriteLine(e.Message); }
             }
         }
         #endregion

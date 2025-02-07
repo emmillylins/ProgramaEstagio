@@ -22,7 +22,7 @@ class Program
 
             //manutencao.JogoNumeroAdvinhação();
             //manutencao.ListaNumeros();
-             //manutencao.CadastrarSenha();
+            //manutencao.CadastrarSenha();
             //manutencao.CalculadoraAvancada();
             manutencao.CaixaEletronico();
             //manutencao.Tabuada();
@@ -31,8 +31,8 @@ class Program
             //manutencao.Cnpj();
 
 
-            Console.ReadKey();
-            
+
+
         }
         catch (Exception e)
         {

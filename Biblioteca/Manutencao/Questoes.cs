@@ -488,7 +488,9 @@ namespace Biblioteca.Manutencao
         //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
         // Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
 
+        #region Forms 3
 
+        #region QUESTÃO 1
         public void JogoNumeroAdvinhação()
         {
             try
@@ -530,13 +532,15 @@ namespace Biblioteca.Manutencao
                 }
                 // mensagem final do jogo
                 Console.WriteLine($"Você não conseguiu acertar! o numero secreto era: {numeroSecreto}");
-
+                
 
 
 
             }
             catch (Exception) { throw; }
         }
+        #endregion
+        #region QUESTÃO 2
         //Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.  
 
         public void ListaNumeros()
@@ -589,6 +593,8 @@ namespace Biblioteca.Manutencao
 
 
         }
+        #endregion
+        #region QUESTÃO 3
         // Validação de Senha:
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
         //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
@@ -633,6 +639,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+        #region QUESTÃO 4
         // Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar 7
         //operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada)
@@ -696,6 +704,8 @@ namespace Biblioteca.Manutencao
 
 
         }
+        #endregion
+        #region QUESTÃO 5
         //Crie um programa que solicita ao usuário um CPF e
         //valida se ele está no formato correto (11 dígitos numéricos). O programa deve permitir que o
         //usuário tente novamente caso o formato esteja incorreto.
@@ -722,7 +732,8 @@ namespace Biblioteca.Manutencao
 
 
         }
-
+        #endregion
+        #region QUESTÃO 6
 
         //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         //O programa deve:
@@ -780,6 +791,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+        # region QUESTÃO 7
         public void Tabuada()
         {
             while (true)
@@ -818,7 +831,8 @@ namespace Biblioteca.Manutencao
                 catch (Exception) { throw; }
             }
         }
-
+        #endregion
+        #region QUESTÃO 8
 
 
         //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista
@@ -849,7 +863,8 @@ namespace Biblioteca.Manutencao
 
 
         }
-
+        #endregion
+        #region QUESTÃO 9
         public void Cnpj()
         {
             var metodos = new Metodos();
@@ -866,11 +881,13 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
 
-
+            #endregion
 
 
 
         }
+        
     }
+    #endregion
 }
 

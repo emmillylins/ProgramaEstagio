@@ -93,13 +93,13 @@ namespace Biblioteca.Validacao
         public bool VerificarMultiploDez(int saque)
         {
 
-            if(saque % 10 == 0)
+            if (saque % 10 == 0)
             {
                 return true;
             }
 
             return false;
-            
+
         }
 
         public bool limitarLetras(String tentativa)

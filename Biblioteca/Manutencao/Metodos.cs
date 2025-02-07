@@ -660,8 +660,8 @@ namespace Biblioteca.Manutencao
         {
 
 
-            int[] multiplicadorPrimerioDigito = { 5,4,3,2,9,8,7,6,5,4,3,2};
-            int[] multiplicadorSegundoDigito = { 6,5,4,3,2,9,8,7,6,5,4,3,2 };
+            int[] multiplicadorPrimerioDigito = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicadorSegundoDigito = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
             String tempcnpj;
             String digito;
             int resto = 0;

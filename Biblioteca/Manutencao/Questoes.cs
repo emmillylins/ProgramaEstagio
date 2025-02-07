@@ -819,6 +819,7 @@ namespace Biblioteca.Manutencao
                 Random random = new Random();
                 string palavraEscolhida = palavras[random.Next(palavras.Count)];
 
+
                 char[] progresso = new string('_', palavraEscolhida.Length).ToCharArray();
                 int tentativasRestantes = 6;
                 List<char> letrasTentadas = new List<char>();

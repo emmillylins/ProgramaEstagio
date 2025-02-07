@@ -22,7 +22,7 @@ class Program
             //manutencao.CalculadoraAvancada();
             //manutencao.ValidarCpf();
             //manutencao.SimuladorCaixaEletronico();
-            manutencao.JogoDaForca();
+            //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
             //manutencao.ValidarCnpj();
 
@@ -31,6 +31,7 @@ class Program
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            Console.ReadKey();
         }
     }
 

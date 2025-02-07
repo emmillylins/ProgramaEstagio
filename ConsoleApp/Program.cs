@@ -6,14 +6,15 @@ class Program
     {
         try
         {
-            var manutencao = new Questoes();
+            var questoes = new Questoes();
 
-            manutencao.SimuladorCaixaEletronico();
+            questoes.SimuladorCaixaEletronico();
             Console.ReadKey();
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            Console.ReadKey();
         }
     }
 }

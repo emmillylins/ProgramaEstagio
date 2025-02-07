@@ -373,7 +373,7 @@ namespace Biblioteca.Manutencao
                 double num1, num2 = 0;
                 Console.Write("Digite o primeiro número: ");
 
-                if (!double.TryParse(Console.ReadLine(), out num1))
+                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out num1))
                 {
                     Console.WriteLine("Entrada inválida!");
                     return;
@@ -382,7 +382,7 @@ namespace Biblioteca.Manutencao
                 if (opcao != 6) // Raiz quadrada só precisa de um número	
                 {
                     Console.Write("Digite o segundo número: ");
-                    if (!double.TryParse(Console.ReadLine(), out num2))
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out num2))
                     {
                         Console.WriteLine("Entrada inválida!");
                         return;

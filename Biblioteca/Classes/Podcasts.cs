@@ -2,12 +2,23 @@
 
 namespace Biblioteca.Classes
 {
-    class Podcasts
+    public class Podcasts
     {
-        string nomePodcast {  get; set; }
-        string apresentadorPodcast {  get; set; }
+        public Podcasts()
+        {
+
+        }
+
+
+        public string NomePodcast { get; set; }
+        public string ApresentadorPodcast { get; set; }
+        public List<Episodios> NumeroEpisodio { get; set; }
+
+
+
+
 
     }
 
-    
+
 }

@@ -14,7 +14,7 @@ namespace Biblioteca.Classes
         public string Nome { get; set; }
         public string Apresentador { get; set; }
         public int TotalEpisodios { get; set; }
-        public List<Episodio> Episodios { get; set; }
+        public List<Episodio> Episodios { get; set; } = [];
 
     }
 }

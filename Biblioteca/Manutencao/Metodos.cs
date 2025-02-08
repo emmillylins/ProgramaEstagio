@@ -457,32 +457,33 @@ namespace Biblioteca.Manutencao
             {
                 try
                 {
-                    Console.WriteLine("Adicionando episódio\n");
+                    Console.WriteLine("------- Adicionando episódio -------\n");
                     Console.Write("Digite o Título: ");
 
                     var titulo = Console.ReadLine();
 
                     if (string.IsNullOrEmpty(titulo))
-                        throw new Exception("Titulo não pode ser nulo");
+                        throw new Exception("\nTitulo não pode ser nulo.\n");
 
                     Console.Write("Digite a Duração: ");
                     if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var duracao))
-                        throw new Exception("Digite uma duração válida.");
+                        throw new Exception("\nDigite uma duração válida.\n");
 
                     while (true)
                     {
-                        Console.WriteLine("Deseja adicionar convidados?" +
+                        Console.WriteLine("\nDeseja adicionar convidados?" +
                                         "\n1. Sim" +
                                         "\n2. Não");
+                        Console.Write("Sua opção: ");
 
                         if (!int.TryParse(Console.ReadLine(), out var opcao) || opcao < 1 || opcao > 2)
                         {
-                            Console.WriteLine("Digite uma opção válida");
+                            Console.WriteLine("\nDigite uma opção válida");
                             continue;
                         }
 
                         if (opcao == 1)
-                            convidados.Add(AdicionarConvidados(codigoConvidado));
+                            convidados.Add(AdicionarConvidado(codigoConvidado));
                         else
                             break;
 
@@ -493,12 +494,12 @@ namespace Biblioteca.Manutencao
 
                     if (totalConvidados > 0)
                     {
-                        resumo += "\nLista de convidados:";
+                        resumo += "\n------- Lista de convidados -------";
                         foreach (var convidado in convidados)
                         {
                             resumo += $"\nConvidado {convidado.Codigo}: {convidado.Nome}";
                         }
-                    }                    
+                    }
 
                     return new Episodio(sequencia, titulo, duracao, resumo)
                     {
@@ -506,16 +507,23 @@ namespace Biblioteca.Manutencao
                         Convidados = convidados
                     };
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Thread.Sleep(3000); // Espera 3 segundos (3000 milissegundos)
+                    Console.Clear();
+                }
             }
         }
 
-        public Convidado AdicionarConvidados(int codigo)
+        public Convidado AdicionarConvidado(int codigo)
         {
             try
             {
-                Console.Write("Digite o nome do convidado: ");
-                string nome = Console.ReadLine() ?? "Anônimo";
+                Console.Write("\nDigite o nome do convidado: ");
+                var nome = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(nome)) nome = "Anônimo";
 
                 return new Convidado(codigo, nome);
             }
@@ -530,19 +538,19 @@ namespace Biblioteca.Manutencao
             try
             {
                 Console.Clear();
-                Console.WriteLine($"Nome do podcast: {podcast.Nome} - Apresentador: {podcast.Apresentador}\n");
+                Console.WriteLine($"Nome do podcast: {podcast.Nome} - Apresentador: {podcast.Apresentador}");
 
                 var episodios = podcast.Episodios.OrderBy(e => e.Numero).ToList();
 
                 if (episodios.Count == 0)
                 {
-                    Console.WriteLine("Não há episódios nesse Podcast.\n");
+                    Console.WriteLine("\nNão há episódios nesse Podcast.\n");
                     return;
                 }
 
                 foreach (var episodio in episodios)
                 {
-                    Console.WriteLine($"Episódio {episodio.Numero}\nNome: {episodio.Titulo}\nDuração: {TimeSpan.FromSeconds(episodio.Duracao)}");
+                    Console.WriteLine($"\nEpisódio {episodio.Numero}\nNome: {episodio.Titulo}\nDuração: {TimeSpan.FromSeconds(episodio.Duracao)}");
 
                     if (episodio.Convidados.Count > 0 && episodio.Convidados.Count == episodio.TotalConvidados)
                     {
@@ -553,7 +561,7 @@ namespace Biblioteca.Manutencao
                         }
                     }
                 }
-                Console.WriteLine($"Total de episódios: {podcast.TotalEpisodios}");
+                Console.WriteLine($"\nTotal de episódios: {podcast.TotalEpisodios}\n");
             }
             catch (Exception) { throw; }
         }

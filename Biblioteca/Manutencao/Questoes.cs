@@ -926,7 +926,7 @@ namespace Biblioteca.Manutencao
                 try
                 {
                     Console.WriteLine($"Podcast {podcast.Nome}\n");
-                    Console.WriteLine("Menu" +
+                    Console.WriteLine("------- Menu -------" +
                                     "\n1. Adicionar episódio" +
                                     "\n2. Ver detalhes" +
                                     "\n3. Sair");
@@ -939,6 +939,7 @@ namespace Biblioteca.Manutencao
                     {
                         case 1:
                             podcast.Episodios.Add(metodos.AdicionarEpisodio(numeroPodcast));
+                            numeroPodcast++;
                             break;
                         case 2:
                             podcast.TotalEpisodios = podcast.Episodios.Count;
@@ -950,9 +951,12 @@ namespace Biblioteca.Manutencao
                         default:
                             throw new Exception("\nDigite uma opção válida.\n");
                     }
-                    numeroPodcast++;
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Thread.Sleep(3000); // Espera 3 segundos (3000 milissegundos)
+                }
             }
         }
 

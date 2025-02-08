@@ -956,6 +956,7 @@ namespace Biblioteca.Manutencao
                 {
                     Console.WriteLine(ex.Message);
                     Thread.Sleep(3000); // Espera 3 segundos (3000 milissegundos)
+                    Console.Clear();
                 }
             }
         }

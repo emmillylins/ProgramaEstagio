@@ -1,6 +1,5 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Classes.QuestaoDoMestre;
-using System.Drawing;
 using System.Globalization;
 
 namespace Biblioteca.Manutencao

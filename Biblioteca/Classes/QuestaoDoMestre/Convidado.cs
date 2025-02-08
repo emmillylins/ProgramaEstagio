@@ -1,4 +1,4 @@
-﻿namespace Biblioteca.Classes.Questao_do_mestre
+﻿namespace Biblioteca.Classes.QuestaoDoMestre
 {
     public class Convidado
     {

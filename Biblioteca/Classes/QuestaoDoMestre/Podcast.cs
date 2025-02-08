@@ -1,4 +1,4 @@
-﻿using Biblioteca.Classes.Questao_do_mestre;
+﻿using Biblioteca.Classes.QuestaoDoMestre;
 
 namespace Biblioteca.Classes
 {

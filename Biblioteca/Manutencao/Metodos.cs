@@ -1,5 +1,5 @@
 ﻿using Biblioteca.Classes;
-using Biblioteca.Classes.Questao_do_mestre;
+using Biblioteca.Classes.QuestaoDoMestre;
 using System.Drawing;
 using System.Globalization;
 

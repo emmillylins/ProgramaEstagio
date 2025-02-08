@@ -917,7 +917,43 @@ namespace Biblioteca.Manutencao
         //e também se precisamos utilizar get e set para todos os valores.
         public void GerarPodcast()
         {
+            var metodos = new Metodos();
+            var podcast = new Podcast("Sem Lógica", "Emmy Linda");
+            int numeroPodcast = 1;
 
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine($"Podcast {podcast.Nome}\n");
+                    Console.WriteLine("Menu" +
+                                    "\n1. Adicionar episódio" +
+                                    "\n2. Ver detalhes" +
+                                    "\n3. Sair");
+                    Console.Write("Sua opção: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                        throw new Exception("\nDigite um número inteiro.\n");
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            podcast.Episodios.Add(metodos.AdicionarEpisodio(numeroPodcast));
+                            break;
+                        case 2:
+                            podcast.TotalEpisodios = podcast.Episodios.Count;
+                            metodos.ExibirDetalhes(podcast);
+                            break;
+                        case 3:
+                            Console.WriteLine("\nSaindo...");
+                            return;
+                        default:
+                            throw new Exception("\nDigite uma opção válida.\n");
+                    }
+                    numeroPodcast++;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
         }
 
         #endregion

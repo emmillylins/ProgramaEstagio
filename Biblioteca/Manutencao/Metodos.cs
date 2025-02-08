@@ -445,9 +445,13 @@ namespace Biblioteca.Manutencao
         #endregion
 
         #region Podcast
+        //todo episódio possui um método AdicionarConvidados()
+        //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
         public Episodio AdicionarEpisodio(int sequencia)
         {
             Console.Clear();
+            var codigoConvidado = 1;
+            var convidados = new List<Convidado>();
 
             while (true)
             {
@@ -459,15 +463,63 @@ namespace Biblioteca.Manutencao
                     var titulo = Console.ReadLine();
 
                     if (string.IsNullOrEmpty(titulo))
+                        throw new Exception("Titulo não pode ser nulo");
+
+                    Console.Write("Digite a Duração: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var duracao))
+                        throw new Exception("Digite uma duração válida.");
+
+                    while (true)
                     {
+                        Console.WriteLine("Deseja adicionar convidados?" +
+                                        "\n1. Sim" +
+                                        "\n2. Não");
 
+                        if (!int.TryParse(Console.ReadLine(), out var opcao) || opcao < 1 || opcao > 2)
+                        {
+                            Console.WriteLine("Digite uma opção válida");
+                            continue;
+                        }
+
+                        if (opcao == 1)
+                            convidados.Add(AdicionarConvidados(codigoConvidado));
+                        else
+                            break;
+
+                        codigoConvidado++;
                     }
+                    var totalConvidados = convidados.Count;
+                    var resumo = $"Episódio {sequencia}: {titulo}\nDuração: {TimeSpan.FromSeconds(duracao)}";
 
-                    return new Episodio();
+                    if (totalConvidados > 0)
+                    {
+                        resumo += "\nLista de convidados:";
+                        foreach (var convidado in convidados)
+                        {
+                            resumo += $"\nConvidado {convidado.Codigo}: {convidado.Nome}";
+                        }
+                    }                    
+
+                    return new Episodio(sequencia, titulo, duracao, resumo)
+                    {
+                        TotalConvidados = totalConvidados,
+                        Convidados = convidados
+                    };
                 }
-                catch (Exception) { }
-
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
+        }
+
+        public Convidado AdicionarConvidados(int codigo)
+        {
+            try
+            {
+                Console.Write("Digite o nome do convidado: ");
+                string nome = Console.ReadLine() ?? "Anônimo";
+
+                return new Convidado(codigo, nome);
+            }
+            catch (Exception) { throw; }
         }
 
 
@@ -477,13 +529,14 @@ namespace Biblioteca.Manutencao
         {
             try
             {
+                Console.Clear();
                 Console.WriteLine($"Nome do podcast: {podcast.Nome} - Apresentador: {podcast.Apresentador}\n");
 
                 var episodios = podcast.Episodios.OrderBy(e => e.Numero).ToList();
 
                 if (episodios.Count == 0)
                 {
-                    Console.WriteLine("Não há episódios nesse Podcast.");
+                    Console.WriteLine("Não há episódios nesse Podcast.\n");
                     return;
                 }
 

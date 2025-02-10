@@ -882,9 +882,10 @@ namespace Biblioteca.Manutencao
                         }
 
 
-                        podcasts.AdicionarEpisodio(novoEpisodio);
-                        Console.WriteLine("Episódio adicionado com sucesso!");
+                       
                     }
+                    podcasts.AdicionarEpisodio(novoEpisodio);
+                    Console.WriteLine("Episódio adicionado com sucesso!");
                 }
             }
             catch (Exception ex) { throw; }
@@ -915,6 +916,7 @@ namespace Biblioteca.Manutencao
 
         }
         #endregion
+
 
 
         #endregion

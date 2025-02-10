@@ -6,6 +6,8 @@ namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
+
+        #region Metodo para ver qual número é maior
         //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
@@ -21,6 +23,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Metodos usando POO e classe usuário
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -41,6 +46,8 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+
+        
 
         public Usuario CadastrarUsuario()
         {
@@ -68,6 +75,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Metodos para o sistema de banco
         public double Depositar()
         {
             try
@@ -107,6 +117,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Metodos para cadastro de produtos POO
         public Produto CadastrarProduto()
         {
             try
@@ -178,6 +192,9 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
+
+        #region Metodos para cadastrar alunos e exibi-los
         public Aluno CadastrarAluno()
         {
             try
@@ -287,6 +304,10 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+
+        #endregion
+
+        #region Metodos para verificar se o numero inserido é maior ou menor que o número aleatório
         public bool VerificarPalpite(int palpite, int numeroSecreto)
         {
             if (palpite == numeroSecreto)
@@ -304,6 +325,10 @@ namespace Biblioteca.Manutencao
             }
             return false;
         }
+
+        #endregion
+
+        #region Adicionar números a uma lista
         public void AdicionarNumero(List<int> listaNumeros)
         {
             Console.Write("\nDigite o número a ser inserido: ");
@@ -317,6 +342,9 @@ namespace Biblioteca.Manutencao
             listaNumeros.Add(numero);
         }
 
+        #endregion
+
+        #region Adiciona numero a uma lista e retorna se é positivo, negativo e etc
         public void ExibirNumeroClassificacao(List<int> listaNumeros)
         {
             Console.WriteLine("\nNúmeros e suas classificações");
@@ -341,6 +369,10 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
+
+        #endregion
+
+        #region Metodos calculadora
 
         public double Adicao(double a, double b)
         {
@@ -382,6 +414,10 @@ namespace Biblioteca.Manutencao
             }
             return Math.Sqrt(a);
         }
+
+        #endregion
+
+        #region Metodos para validação de CPF/CNPJ
 
         // deve ter 11 digitos
         ////Para o primeiro dígito verificador: 
@@ -462,86 +498,6 @@ namespace Biblioteca.Manutencao
 
         }
 
-        //Solicitar o valor do saque.
-        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
-        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
-        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
-
-
-        public double Sacar(double saldoTotal)
-        {
-            Console.WriteLine("Digite o valor do saque: ");
-            if (!double.TryParse(Console.ReadLine(), out double saque) || saque <= 0)
-            {
-                Console.WriteLine("Digite um valor válido.");
-                return saldoTotal;
-            }
-            else if (saque > saldoTotal)
-            {
-                Console.WriteLine("Saldo insuficiente.");
-                return saldoTotal;
-            }
-            else if (saque % 10 != 0)
-            {
-                Console.WriteLine("O valor do saque deve ser múltiplo de 10.");
-                return saldoTotal;
-            }
-            else
-            {
-                saldoTotal -= saque;
-                Console.WriteLine("Saque realizado com sucesso!");
-                ExibirNotas(saque);
-                return saldoTotal;
-            }
-        }
-
-        public void ExibirNotas(double valorSaque)
-        {
-            int[] notas = new int[] { 100, 50, 20, 10 };
-            int[] quantidadeNotas = new int[notas.Length];
-
-            for (int i = 0; i < notas.Length; i++)
-            {
-                if (valorSaque >= notas[i])
-                {
-                    quantidadeNotas[i] = (int)(valorSaque / notas[i]);
-                    valorSaque %= notas[i];
-                }
-            }
-
-            if (valorSaque == 0)
-            {
-                Console.WriteLine("\nNotas necessárias para o saque:");
-                for (int i = 0; i < notas.Length; i++)
-                {
-                    if (quantidadeNotas[i] > 0)
-                    {
-                        Console.WriteLine($"Notas de {notas[i]}: {quantidadeNotas[i]}");
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("Não foi possível realizar o saque com as notas disponíveis.");
-            }
-        }
-
-
-
-        public void GerarTabuada()
-        {
-            Console.WriteLine("Digite o número para gerar a tabuada: ");
-            if (!int.TryParse(Console.ReadLine(), out int numero))
-            {
-                Console.WriteLine("Digite um número válido.");
-                return;
-            }
-            for (int i = 1; i <= 10; i++)
-            {
-                Console.WriteLine($"{numero} x {i} = {numero * i}");
-            }
-        }
-
         //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
         //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
         //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
@@ -614,8 +570,9 @@ namespace Biblioteca.Manutencao
             return false;
         }
 
+        #endregion
 
-
+        #region Metodos para processar tentativa do jogo da forca
 
         public void ProcessarTentativa(string palavraEscolhida, char[] progresso, List<char> letrasTentadas, ref int tentativasRestantes)
         {
@@ -660,6 +617,94 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
+
+        #region Metodo que simula caixa eletrônico e mostra as notas necessárias
+
+        //Solicitar o valor do saque.
+        //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
+        //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
+        //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
+
+
+        public double Sacar(double saldoTotal)
+        {
+            Console.WriteLine("Digite o valor do saque: ");
+            if (!double.TryParse(Console.ReadLine(), out double saque) || saque <= 0)
+            {
+                Console.WriteLine("Digite um valor válido.");
+                return saldoTotal;
+            }
+            else if (saque > saldoTotal)
+            {
+                Console.WriteLine("Saldo insuficiente.");
+                return saldoTotal;
+            }
+            else if (saque % 10 != 0)
+            {
+                Console.WriteLine("O valor do saque deve ser múltiplo de 10.");
+                return saldoTotal;
+            }
+            else
+            {
+                saldoTotal -= saque;
+                Console.WriteLine("Saque realizado com sucesso!");
+                ExibirNotas(saque);
+                return saldoTotal;
+            }
+        }
+
+        public void ExibirNotas(double valorSaque)
+        {
+            int[] notas = new int[] { 100, 50, 20, 10 };
+            int[] quantidadeNotas = new int[notas.Length];
+
+            for (int i = 0; i < notas.Length; i++)
+            {
+                if (valorSaque >= notas[i])
+                {
+                    quantidadeNotas[i] = (int)(valorSaque / notas[i]);
+                    valorSaque %= notas[i];
+                }
+            }
+
+            if (valorSaque == 0)
+            {
+                Console.WriteLine("\nNotas necessárias para o saque:");
+                for (int i = 0; i < notas.Length; i++)
+                {
+                    if (quantidadeNotas[i] > 0)
+                    {
+                        Console.WriteLine($"Notas de {notas[i]}: {quantidadeNotas[i]}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Não foi possível realizar o saque com as notas disponíveis.");
+            }
+        }
+
+        #endregion
+
+        #region Metodo para gerar tabuada
+        public void GerarTabuada()
+        {
+            Console.WriteLine("Digite o número para gerar a tabuada: ");
+            if (!int.TryParse(Console.ReadLine(), out int numero))
+            {
+                Console.WriteLine("Digite um número válido.");
+                return;
+            }
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine($"{numero} x {i} = {numero * i}");
+            }
+        }
+
+        #endregion
+
+        #region Metodos para resolver a questão de POO do PODCAST
         public Episodio AdicionarEpisodio(int totalEp)
         {
             try
@@ -769,6 +814,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
     }
 }
 

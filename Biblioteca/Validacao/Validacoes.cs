@@ -4,6 +4,8 @@ namespace Biblioteca.Validacao
 {
     public class Validacoes
     {
+
+        #region Validar numero primo
         public bool ValidaNumeroPrimo(int num)
         {
             try
@@ -22,6 +24,10 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Validar numero par ou impar
+
         public bool ValidaNumeroParImpar(int numero)
         {
             try
@@ -38,6 +44,9 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Valida os multiplos de 3
         public bool ValidaMultiplosDeTres(int numero)
         {
             try
@@ -54,19 +63,19 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
-   
 
+        #endregion
 
-
+        #region Valida se o user já existe
         public bool ValidaUsuarioExistente(string login, string senha)
         {
             try
             {
                 var usuarioPreCadastrado = new Usuario
                 {
-                    Nome = "emy",
-                    NomeUsuario = "emylinda",
-                    Senha = "amogatos"
+                    Nome = "maria eduarda",
+                    NomeUsuario = "meubemlinda",
+                    Senha = "amoamora"
                 };
 
                 if (login == usuarioPreCadastrado.NomeUsuario && senha == usuarioPreCadastrado.Senha)
@@ -77,6 +86,9 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Valida se a senha segue as restrições
 
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
         //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
@@ -133,5 +145,7 @@ namespace Biblioteca.Validacao
 
             return true;
         }
+        #endregion
     }
+
 }

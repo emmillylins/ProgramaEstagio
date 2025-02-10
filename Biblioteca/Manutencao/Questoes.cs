@@ -8,6 +8,8 @@ using System.Security.Cryptography;
 
 namespace Biblioteca.Manutencao
 {
+
+    #region FORMS 31/01 & LIVE CODE
     public class Questoes
     {
         public void VerificaNumeroPrimo()
@@ -489,6 +491,9 @@ namespace Biblioteca.Manutencao
         // Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
         // Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
 
+        #endregion
+
+        #region FORMS LOOP
         public void JogoAdvinharNumero()
         {
             Metodos metodos = new Metodos();
@@ -928,6 +933,9 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
         #region QUESTÃO DO MESTRE POO
         //Questão do mestre
         //crie três classes para manter podcasts, episódios e convidados.

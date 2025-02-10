@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
+using System.Linq;
 
 
 namespace Biblioteca.Manutencao
@@ -47,7 +48,7 @@ namespace Biblioteca.Manutencao
 
         }
 
-        
+
 
         public Usuario CadastrarUsuario()
         {
@@ -705,7 +706,7 @@ namespace Biblioteca.Manutencao
         #endregion
 
         #region Metodos para resolver a questão de POO do PODCAST
-        public Episodio AdicionarEpisodio(int episodiosListados) // parametro -> num de eps ja listados
+        public Episodio AdicionarEpisodio(List<Episodio> episodiosListados) // parametro -> lista de eps ja listados
         {
             try
             {
@@ -716,12 +717,14 @@ namespace Biblioteca.Manutencao
                 if (!int.TryParse(Console.ReadLine(), out var numero) || numero <= 0)
                 {
                     Console.WriteLine("Número do episódio inválido.");
-                    Console.WriteLine("Retornando ao menu inicial..."); 
+                    Console.WriteLine("Retornando ao menu inicial...");
                     Console.ReadKey();
                     Console.Clear();
                     return null;
                 }
-                if(numero == episodiosListados)
+
+                // lambda para verificar se o numero do episodio ja existe (any pega qualquer elemento da sequencia)
+                if (episodiosListados.Any(ep => ep.Numero == numero))
                 {
                     Console.WriteLine("Número do episódio já existe.");
                     Console.WriteLine("Retornando ao menu inicial...");
@@ -798,7 +801,6 @@ namespace Biblioteca.Manutencao
                         }
                         // adiciona um novo objeto Convidado à lista de convidados com um código e nome fornecidos.
                         convidados.Add(new Convidado(i + 1, nomeConvidado));
-
                     }
                 }
 
@@ -824,7 +826,7 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine($"Episódio {ep.Numero}: {ep.Titulo}");
                     Console.WriteLine($"Resumo: {ep.Resumo}\n");
                     Console.WriteLine($"Duração: {ep.Duracao}\n");
-                    
+
 
                     if (ep.Convidado.Count > 0)
                     {
@@ -832,13 +834,13 @@ namespace Biblioteca.Manutencao
                         foreach (Convidado convidado in ep.Convidado)
                         {
                             Console.WriteLine($"Nome: {convidado.Nome}");
-                        } 
+                        }
                     }
                     else
                     {
                         Console.WriteLine("Não há convidados para este episódio.");
                     }
-                    
+
                 }
 
                 Console.WriteLine($"\nO total de episódios é: {podcast.TotalEpisodios}\n");

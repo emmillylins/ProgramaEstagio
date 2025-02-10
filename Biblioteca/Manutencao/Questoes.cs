@@ -996,7 +996,8 @@ namespace Biblioteca.Manutencao
                                 }
                                 break;
                             case 2:
-                                Episodio novoEpisodio = metodos.AdicionarEpisodio(podcast.TotalEpisodios);
+                                // deve ser instanciado, logo cria-se a instancia novoEpisodio
+                                Episodio novoEpisodio = metodos.AdicionarEpisodio(podcast.Episodios);
                                 if (novoEpisodio != null)
                                 {
                                     podcast.Episodios.Add(novoEpisodio); // add o episódio à lista

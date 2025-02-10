@@ -8,6 +8,7 @@ class Program
         {
             var manutencao = new Questoes();
 
+            #region Formulário #2
             //manutencao.VerificaNumeroPrimo();
             //manutencao.ExibirNumParImpar();
             //manutencao.ListarNumerosPositivo();
@@ -16,8 +17,9 @@ class Program
             //manutencao.CaixaEletronico(3500.95);
             //manutencao.ListaProdutoPreco();
             //manutencao.GenrenciamentoALunos();
+            #endregion
 
-            // Formulário 3
+            #region Formulário 3
             //manutencao.JogoAdivinhacao(); //1
             //manutencao.ClassificacaoNumeros(); //2
             //manutencao.VerificaSenha(); //3
@@ -26,10 +28,11 @@ class Program
             //manutencao.SimuladorCaixaEletronico(); //6
             //manutencao.GeradorTabuada(); //8
 
+            #endregion
 
-            // Desafio do Mestre (Alura)
+            #region Desafio do Mestre (Alura)
             manutencao.GestaoPodcast();
-            
+            #endregion
 
             Console.ReadKey();
 

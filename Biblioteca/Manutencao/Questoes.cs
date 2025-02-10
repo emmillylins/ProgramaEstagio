@@ -503,6 +503,8 @@ namespace Biblioteca.Manutencao
 
         #endregion
 
+        #endregion
+
         #region FORMULÁRIO C# 3
 
         #region Questão 1: Como posso criar um jogo simples de adivinhação em C#
@@ -965,7 +967,7 @@ namespace Biblioteca.Manutencao
 
         #endregion
 
-        #region Questão do Mestre (Alura)
+        #region Questão do Mestre (Alura) 07/02
         //Questão do mestre
         //crie três classes para manter podcasts, episódios e convidados.
         //convidado deve ter um Codigo e um Nome
@@ -1031,6 +1033,6 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        #endregion
+        
     }
 }

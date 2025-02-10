@@ -8,6 +8,7 @@ namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
+        #region Questão de Clara
         //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
@@ -22,6 +23,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Menu Interativo
 
         public void MostrarUsuario(List<Usuario> usuarios)
         {
@@ -70,6 +75,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Caixa Eletrônico Simples
         public double Depositar()
         {
             try
@@ -109,6 +117,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Cadastro de Produtos
         public Produto CadastrarProduto()
         {
             try
@@ -179,6 +191,8 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
             }
         }
+
+        #endregion
 
         #region Gerenciamento de Alunos e Notas
         public Aluno CadastrarAluno()
@@ -491,7 +505,7 @@ namespace Biblioteca.Manutencao
                     }
                     else
                     {
-                        if (podcast.Episodios.Any(e => e.Numero == numeroInserido))
+                        if (podcast.Episodios.Any(e => e.Numero == numeroInserido)) // Percorre a lista de episódios procurando o número
                         {
                             Console.WriteLine("\nNúmero do episódio já inserido!");
                         }

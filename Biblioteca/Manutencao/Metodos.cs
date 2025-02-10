@@ -759,14 +759,16 @@ namespace Biblioteca.Manutencao
 
                     for (int i = 0; i < numConvidados; i++)
                     {
-                        Console.WriteLine($"Digite o nome do convidado {i + 1}: ");
+                        Console.WriteLine($"Digite o nome do convidado {i + 1}: "); //mostra o numero do convidado
                         string nomeConvidado = Console.ReadLine();
                         if (string.IsNullOrEmpty(nomeConvidado))
                         {
                             Console.WriteLine("Nome do convidado inválido.");
                             return null;
                         }
+                        // adiciona um novo objeto Convidado à lista de convidados com um código e nome fornecidos.
                         convidados.Add(new Convidado(i + 1, nomeConvidado));
+
                     }
                 }
 

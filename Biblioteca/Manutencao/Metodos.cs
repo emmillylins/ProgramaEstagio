@@ -705,15 +705,22 @@ namespace Biblioteca.Manutencao
         #endregion
 
         #region Metodos para resolver a questão de POO do PODCAST
-        public Episodio AdicionarEpisodio(int totalEp)
+        public Episodio AdicionarEpisodio(int episodiosListados) // parametro -> num de eps ja listados
         {
             try
             {
+                List<Convidado> convidados = new List<Convidado>();
+
                 Console.WriteLine("\nAdicionar Episódio!");
                 Console.WriteLine("\nDigite o número do episódio: ");
                 if (!int.TryParse(Console.ReadLine(), out var numero) || numero <= 0)
                 {
                     Console.WriteLine("Número do episódio inválido.");
+                    return null;
+                }
+                if(numero == episodiosListados)
+                {
+                    Console.WriteLine("Número do episódio já existe.");
                     return null;
                 }
 
@@ -740,7 +747,6 @@ namespace Biblioteca.Manutencao
                     return null;
                 }
 
-                List<Convidado> convidados = new List<Convidado>();
                 Console.WriteLine("\nEsse episódio possui convidados? ");
                 Console.WriteLine("1 - Sim\n2 - Não");
                 if (!int.TryParse(Console.ReadLine(), out var opcao) || (opcao != 1 && opcao != 2))

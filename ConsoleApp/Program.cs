@@ -16,7 +16,7 @@ class Program
             //manutencao.CaixaEletronico(3500.95);
             // manutencao.ListaProdutoPreco();
 
-            manutencao.GerenciadorPodcast();
+            manutencao.GeradorTabuada();
 
             Console.ReadKey();
             

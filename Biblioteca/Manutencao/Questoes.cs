@@ -1,13 +1,12 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+    #region  Questões do segundo formulário
         public void VerificaNumeroPrimo()
         {
             try
@@ -480,6 +479,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+    #endregion
+
     #region  Formulário 3
 
         #region Questão jogo de adivinhação
@@ -616,10 +617,33 @@ namespace Biblioteca.Manutencao
         {
             try
             {
+                Console.Clear();
+
+                Validacoes validacao = new();
+
                 Console.WriteLine("Sistema de validação de senha");
+
+                Console.Write("\nDIgite sua senha:");
+                var senha = Console.ReadLine()!;
+
+                var senhaEValida = validacao.VerificaSenha(senha);
+
+                if (senhaEValida)
+                {
+                    Console.WriteLine("A senha é válida");
+                }
+                else 
+                {
+                    Console.WriteLine("A senha é inválida.");
+                }
+                
             }
-            catch (Exception) { throw; }
+            catch (Exception e) 
+            { 
+                Console.WriteLine(e.Message);
+            }
         }
+
         #endregion
 
         #region Questao Calculadora
@@ -701,7 +725,6 @@ namespace Biblioteca.Manutencao
         }
         #endregion
 
-        
         #region Questao validação de CPF
         /* 
             Questão 5: Validação de CPF
@@ -778,7 +801,57 @@ namespace Biblioteca.Manutencao
         }
         #endregion    
 
-       
+        #region Questão Gerador de tabuada
+        /* 
+            Crie um programa que gera a tabuada de um número fornecido pelo usuário.O programa deve:
+            1. Solicitar ao usuário um número inteiro entre 1 e 10.
+            2. Validar se o número está dentro do intervalo permitido.
+            3. Gerar a tabuada do número, exibindo os resultados de 1 a 10.
+            4. Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.).
+            5. Permitir que o usuário gere outra tabuada ou encerre o programa. 
+        */
+
+        public void GeradorTabuada()
+        {
+            bool condicao = true;
+            List<int> listaNumeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            
+            Console.Clear();
+            Console.WriteLine("Gerador de tabuada");
+
+            while(condicao)
+            {
+                try
+                {
+                    Console.Write("Digite o numero da tabuada que você deseja gerar: ");
+                    if(!int.TryParse(Console.ReadLine(), out var numeroEscolhido) || numeroEscolhido > 10 || numeroEscolhido < 1)
+                    {
+                        throw new Exception("O valor inserido deve ser numérico e entre 1 e 10");
+                    }
+
+                    foreach(int numero  in listaNumeros)
+                    {
+                        Console.WriteLine($"{numeroEscolhido} x {numero} = {numeroEscolhido * numero}");
+                    }
+
+                    Console.WriteLine("\nDeseja gerar uma nova tabuada? (Sim - Não)");
+                    var resposta = Console.ReadLine();
+
+                    if(resposta!.ToLower() == "não")
+                    {
+                        return;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+
+        #endregion
+        
     #endregion   
         
     #region Desafio - alura    

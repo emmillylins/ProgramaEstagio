@@ -1,4 +1,5 @@
-﻿using Biblioteca.Classes;
+﻿using System.Text.RegularExpressions;
+using Biblioteca.Classes;
 
 namespace Biblioteca.Validacao
 {
@@ -91,6 +92,42 @@ namespace Biblioteca.Validacao
                 return false;
             }
         }
+
+        #region Metodo referente a questao do formulário 3 de validação de senha
+        public bool VerificaSenha(string senha)
+        {
+            try 
+            {
+                if (senha.Length < 8) 
+                {
+                    Console.WriteLine("Senha não atende aos critérios, deve ter mais de oito caracteres");
+                    return false;
+                }
+
+                if(!senha.Any(Char.IsUpper)) 
+                {
+                    Console.WriteLine("Senha não atende aos critérios, deve ter pelo menos um caractere maiusculo");
+                    return false;
+                }
+
+                if(!senha.Any(Char.IsLower)) 
+                {
+                    Console.WriteLine("Senha não atende aos critérios, deve ter pelo menos um caractere minusculo");
+                    return false;
+                }
+
+                if (!Regex.IsMatch(senha, @"[!@#$%^&*(),.?""{}|<>]"))
+                {
+                    Console.WriteLine("Senha não atende aos critérios, Deve conter pelo menos um caractere especial.");
+                    return false;
+                }
+
+                return true;
+
+            } catch { throw; }
+        }
+
+        #endregion
 
     }
 }

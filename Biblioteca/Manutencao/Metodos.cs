@@ -394,22 +394,38 @@ namespace Biblioteca.Manutencao
             try
             {
                 Console.Clear();
+                var condicao = true;
 
-                Console.WriteLine($"Adicione um Episodio ao podcast {podcast.Nome}: ");
-                
-                Console.Write($"\nAdicione um título ao episódio {podcast.Nome}: ");
-                string tituloEpisodio = Console.ReadLine()!;
-                
-                Console.Write("Qual a duração do episódio que deseja adicionar: ");
-                if(!int.TryParse(Console.ReadLine(), out int duracaoEpisodio) || duracaoEpisodio <= 0)
+                string tituloEpisodio = "";
+                int duracaoEpisodio = 0;
+                string resumoEpisodio = "";
+
+                while(condicao) 
                 {
-                  throw new Exception("A duração precisa ser um valor numérico maior que zero");
+                    Console.WriteLine($"Adicione um Episodio ao podcast {podcast.Nome}: ");
+                    
+                    Console.Write($"\nAdicione um título ao episódio {podcast.Nome}: ");
+                    tituloEpisodio = Console.ReadLine()!;
+                    if(tituloEpisodio == null || tituloEpisodio.Length < 3)
+                    {
+                        Console.WriteLine("É necessario cadastrar um titulo com mais de 3 caracteres");
+                        continue;
+                    }
+                    
+                    Console.Write("Qual a duração do episódio que deseja adicionar - (minutos): ");
+                    if(!int.TryParse(Console.ReadLine(), out duracaoEpisodio) || duracaoEpisodio <= 0)
+                    {
+                        Console.WriteLine("A duração precisa ser um valor numérico maior que zero");
+                        continue;
+                    }
+
+                    Console.Write($"Adicione um resumo ao episódio {podcast.Nome}: ");
+                    resumoEpisodio = Console.ReadLine()!;
+
+                    condicao = false;
                 }
 
-                Console.Write($"Adicione um resumo ao episódio {podcast.Nome}: ");
-                string resumoEpisodio = Console.ReadLine()!;
-
-                Episodio episodio = new(tituloEpisodio, duracaoEpisodio, resumoEpisodio);
+                Episodio episodio = new(tituloEpisodio!, duracaoEpisodio, resumoEpisodio);
 
                 podcast.Episodios.Add(episodio);
 
@@ -421,7 +437,7 @@ namespace Biblioteca.Manutencao
                     AdicionaConvidado(episodio);
                 }
 
-                Console.WriteLine($"Episódio {episodio.Titulo} adicionado ao Podcast {podcast.Nome}");
+                Console.WriteLine($"Episódio {episodio.Titulo} adicionado ao Podcast {podcast.Nome}");        
             }
             catch (Exception) { throw; }
             
@@ -446,28 +462,41 @@ namespace Biblioteca.Manutencao
 
         public void AdicionaConvidado(Episodio episodio)
         {
-            if(episodio == null)
+            try
             {
-                throw new Exception("Episódio não foi encontrado");
-            }
+                int quantidadeConvidado = 0;
+                var condicao = true;
+                if(episodio == null)
+                {
+                    throw new Exception("Episódio não foi encontrado");
+                }
 
-            Console.Write("Digite a quantidade de convidados que voce deseja adicionar: ");
-            if (!int.TryParse(Console.ReadLine(), out var quantidadeConvidado) || quantidadeConvidado <= 0)
-            {
-               throw new Exception("Digite um valor numérico válido e maior que zero para a quantidade de convidados.");
-            }
+                Console.Write("Digite a quantidade de convidados que voce deseja adicionar: ");
+                while(condicao) 
+                {
+                    if (!int.TryParse(Console.ReadLine(), out quantidadeConvidado) || quantidadeConvidado <= 0)
+                    {
+                        Console.WriteLine("Digite um valor numérico válido e maior que zero para a quantidade de convidados.");
+                        continue;
+                    }
 
-            for (int i = 0; i < quantidadeConvidado; i++)
-            {
-                Console.Write("Digite o nome do convidado: ");
-                var convdidadoNome =  Console.ReadLine()!;
+                    condicao = false;
 
-                Convidado convidado = new(convdidadoNome);
+                }
 
-                episodio.Convidados.Add(convidado);
+                for (int i = 0; i < quantidadeConvidado; i++)
+                {
+                    Console.Write("Digite o nome do convidado: ");
+                    var convdidadoNome =  Console.ReadLine()!;
 
-                Console.WriteLine($"O convidado {convidado.Nome} foi adicionado ao episodio {episodio.Titulo}");
-            }
+                    Convidado convidado = new(convdidadoNome);
+
+                    episodio.Convidados.Add(convidado);
+
+                    Console.WriteLine($"O convidado {convidado.Nome} foi adicionado ao episodio {episodio.Titulo}");
+                }
+
+            } catch { throw; }
         }
 
 

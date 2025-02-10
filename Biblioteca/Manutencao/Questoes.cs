@@ -745,8 +745,12 @@ namespace Biblioteca.Manutencao
                 while (true)
                 {
                     //Criação de variáveis e verificação com base no valor retornado do método.
-                    Console.Write("\nDigite o seu CPF: ");
-                    string? cpfInserido = Console.ReadLine();
+                    Console.Write("\nCaso queira sair digite sair, caso queira continuar digite o seu CPF: ");
+                    string? cpfInserido = Console.ReadLine().ToLower();
+                    if (cpfInserido == "sair")
+                    {
+                        return;
+                    }
                     if (validacao.ValidarCpf(cpfInserido))
                     {
                         Console.WriteLine($"O CPF inserido {cpfInserido} é válido!");

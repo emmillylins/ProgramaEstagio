@@ -19,8 +19,8 @@ class Program
             //manutencao.JogoAdivinhacao();
             //manutencao.VerificaNumerosInseridos();
             //manutencao.VerificarSenha();
-            manutencao.Calculadora();
-            //manutencao.VerificarCpf();
+            //manutencao.Calculadora();
+            manutencao.VerificarCpf();
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();

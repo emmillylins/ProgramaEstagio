@@ -24,7 +24,7 @@ class Program
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
-            manutencao.VerificaCnpj();
+            //manutencao.VerificaCnpj();
             //manutencao.QuestaoPodcast();
 
             Console.ReadKey();

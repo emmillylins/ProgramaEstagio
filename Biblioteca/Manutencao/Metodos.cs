@@ -660,13 +660,118 @@ namespace Biblioteca.Manutencao
             }
         }
 
-        public void AdicionarEpisodios()
+        public Episodio AdicionarEpisodio(int totalEp)
         {
-            
+            try
+            {
+                Console.WriteLine("\nAdicionar Episódio!");
+                Console.WriteLine("\nDigite o número do episódio: ");
+                if (!int.TryParse(Console.ReadLine(), out var numero) || numero <= 0)
+                {
+                    Console.WriteLine("Número do episódio inválido.");
+                    return null;
+                }
 
+                Console.WriteLine("\nDigite o título do episódio: ");
+                string tituloEpisodio = Console.ReadLine();
+                if (string.IsNullOrEmpty(tituloEpisodio))
+                {
+                    Console.WriteLine("Título do episódio inválido.");
+                    return null;
+                }
+
+                Console.WriteLine("\nInsira a duração do episódio em minutos: ");
+                if (!int.TryParse(Console.ReadLine(), out var duracao) || duracao <= 0)
+                {
+                    Console.WriteLine("Duração do episódio inválida.");
+                    return null;
+                }
+
+                Console.WriteLine("\nInsira o resumo do episódio: ");
+                string resumo = Console.ReadLine();
+                if (resumo.Length < 10)
+                {
+                    Console.WriteLine("Seu resumo dever ter mais de 10 letras.");
+                    return null;
+                }
+
+                List<Convidado> convidados = new List<Convidado>();
+                Console.WriteLine("\nEsse episódio possui convidados? ");
+                Console.WriteLine("1 - Sim\n2 - Não");
+                if (!int.TryParse(Console.ReadLine(), out var opcao) || (opcao != 1 && opcao != 2))
+                {
+                    Console.WriteLine("Opção inválida.");
+                    return null;
+                }
+                if (opcao == 1)
+                {
+                    Console.WriteLine("Digite o número de convidados: ");
+                    if (!int.TryParse(Console.ReadLine(), out var numConvidados) || numConvidados <= 0)
+                    {
+                        Console.WriteLine("Número de convidados inválido.");
+                        return null;
+                    }
+
+                    for (int i = 0; i < numConvidados; i++)
+                    {
+                        Console.WriteLine($"Digite o nome do convidado {i + 1}: ");
+                        string nomeConvidado = Console.ReadLine();
+                        if (string.IsNullOrEmpty(nomeConvidado))
+                        {
+                            Console.WriteLine("Nome do convidado inválido.");
+                            return null;
+                        }
+                        convidados.Add(new Convidado(i + 1, nomeConvidado));
+                    }
+                }
+
+                return new Episodio(numero, tituloEpisodio, duracao, resumo, convidados);
+            }
+            catch (Exception) { throw; }
+        }
+
+
+
+        //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+
+        public void ExibirInformacoesPodcast(Podcast podcast)
+        {
+            try
+            {
+                Console.WriteLine($"Nome do Podcast: {podcast.Nome}, Apresentador: {podcast.Apresentador}");
+
+                Console.WriteLine("Episódios: ");
+                foreach (Episodio ep in podcast.Episodios)
+                {
+                    Console.WriteLine($"Episódio {ep.Numero}: {ep.Titulo}");
+                    Console.WriteLine($"Resumo: {ep.Resumo}\n");
+                    Console.WriteLine($"Duração: {ep.Duracao}\n");
+                    
+
+                    if (ep.Convidado.Count > 0)
+                    {
+                        Console.WriteLine("Convidados: ");
+                        foreach (Convidado convidado in ep.Convidado)
+                        {
+                            Console.WriteLine($"Nome: {convidado.Nome}");
+                        }
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Não há convidados para este episódio.");
+                    }
+                    
+                }
+
+                Console.WriteLine($"\nO total de episódios é: {podcast.TotalEpisodios}\n");
+            }
+            catch (Exception) { throw; }
         }
     }
 }
+
 
 
 

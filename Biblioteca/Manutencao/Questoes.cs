@@ -930,14 +930,15 @@ namespace Biblioteca.Manutencao
         }
         #region QUESTÃO DO MESTRE POO
         //Questão do mestre
-        //crie duas classes para manter podcasts e episódios.
-        //O podcast possui um nome, um apresentador e um total de episódios.
+        //crie três classes para manter podcasts, episódios e convidados.
+        //convidado deve ter um Codigo e um Nome
+        //O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
+        //O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
         //Um podcast nasce com um nome e um apresentador definido.
         //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
         //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
         //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
         //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
-        //O episódio deve ter um número, um título, uma duração e um resumo.
         //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
         //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
 
@@ -949,19 +950,81 @@ namespace Biblioteca.Manutencao
         {
             try
             {
-                
+                Metodos metodos = new Metodos();
+                Podcast podcast = new()
+                {
+                    Apresentador = "Davisson",
+                    Nome = "Sem Lógica",
+                    Episodios = new List<Episodio>() // inicializa a lista de episódios
+                };
+
+                while (true)
+                {
+                    if (podcast.Nome != null)
+                    {
+                        Console.WriteLine($"Bem vindo ao {podcast.Nome}");
+                        Console.WriteLine("\nSelecione uma das opções abaixo: ");
+                        Console.WriteLine("1 - Exibir detalhes do Podcast\n2 - Adicionar episódio\n3 - Sair");
+                        if (!int.TryParse(Console.ReadLine(), out int opcao))
+                        {
+                            Console.WriteLine("Escolha uma opção válida!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            continue;
+                        }
+                        switch (opcao)
+                        {
+                            case 1:
+                                if (podcast.TotalEpisodios == 0)
+                                {
+                                    Console.WriteLine("Nenhum episódio cadastrado");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+                                else
+                                {
+                                    metodos.ExibirInformacoesPodcast(podcast);
+                                }
+                                break;
+                            case 2:
+                                Episodio novoEpisodio = metodos.AdicionarEpisodio(podcast.TotalEpisodios);
+                                if (novoEpisodio != null)
+                                {
+                                    podcast.Episodios.Add(novoEpisodio); // add o episódio à lista
+                                    podcast.TotalEpisodios++; // incrementa o total de episódios
+                                    Console.WriteLine("\nEpisódio adicionado com sucesso!");
+                                }
+                                break;
+                            case 3:
+                                Console.WriteLine("Saindo...");
+                                return;
+                            default:
+                                Console.WriteLine("\nEscolha uma opção válida!");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Podcast não encontrado");
+                        return;
+                    }
+                }
             }
             catch (Exception)
             {
                 throw;
             }
-            
-           
         }
-
-        #endregion
     }
+
+
 }
+
+    #endregion
+
 
 
 

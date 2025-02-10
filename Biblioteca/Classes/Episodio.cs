@@ -1,6 +1,6 @@
 ﻿namespace Biblioteca.Classes
 {
-    class Episodio
+    public class Episodio
     {
         public Episodio(int numero, string titulo, int duracao, string resumo, List<Convidado> convidado)
         {

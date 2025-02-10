@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Biblioteca.Classes
+﻿namespace Biblioteca.Classes
 {
     public class Convidado
     {

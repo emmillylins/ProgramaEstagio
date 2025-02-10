@@ -25,6 +25,7 @@ class Program
             //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
             //manutencao.ValidarCnpj();
+            manutencao.ExibirPodcast();
 
             Console.ReadKey();
         }

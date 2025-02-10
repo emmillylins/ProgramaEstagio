@@ -499,6 +499,8 @@ namespace Biblioteca.Manutencao
         {
             try
             {
+                Console.Clear();
+
                 var validacoes = new Validacoes();
 
                 Random numeroSecreto = new();
@@ -521,6 +523,9 @@ namespace Biblioteca.Manutencao
                     {
                         return;
                     }
+                    
+                    Console.WriteLine($"Numero de tentativas: {5 - 1}");
+
                 }
 
                 Console.Clear();
@@ -553,7 +558,7 @@ namespace Biblioteca.Manutencao
                     Console.Write($"Adicione o {i + 1}° número: ");
                     if (!int.TryParse(Console.ReadLine(), out int numeroAdicionado))
                     {
-                        Console.WriteLine("O valor precisa ser numérico.");
+                        Console.WriteLine("O valor precisa ser um número inteiro.");
                         i--;
                         continue;
                     }
@@ -601,6 +606,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
         #endregion
 
         #region Questão de validação de senha
@@ -660,25 +666,24 @@ namespace Biblioteca.Manutencao
 
                 Console.WriteLine("Calculadora");
 
-                Console.WriteLine("\nEscolha operação matemática que você deseja.");
-                Console.WriteLine("1 - Adição");
-                Console.WriteLine("2 - Subtração");
-                Console.WriteLine("3 - Multiplicação");
-                Console.WriteLine("4 - Divisão");
-                Console.WriteLine("5 - Potencialização");
-                Console.WriteLine("6 - Radiciação");
-                Console.WriteLine("7 - Sair");
-
                 var metodos = new Metodos();
 
                 var condicao =  true;
 
                 while(condicao)
                 {
-                    
-                    if(!int.TryParse(Console.ReadLine(), out int operação) || operação < 1 || operação > 5)
+                    Console.WriteLine("\nEscolha operação matemática que você deseja.");
+                    Console.WriteLine("1 - Adição");
+                    Console.WriteLine("2 - Subtração");
+                    Console.WriteLine("3 - Multiplicação");
+                    Console.WriteLine("4 - Divisão");
+                    Console.WriteLine("5 - Potencialização");
+                    Console.WriteLine("6 - Radiciação");
+                    Console.WriteLine("7 - Sair");
+
+                    if(!int.TryParse(Console.ReadLine(), out int operação) || operação < 1 || operação > 7)
                     {
-                        Console.WriteLine("Digite um valor numérico válido");
+                        Console.WriteLine("Digite um valor numérico válido entre 1 e 7");
                         continue;
                     }
 
@@ -694,17 +699,17 @@ namespace Biblioteca.Manutencao
                         case 2:
                             Console.WriteLine("Subtração");
                             var (numero3, numero4) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"Resultado: {numero3} + {numero4} = {numero3 - numero4}");
+                            Console.WriteLine($"Resultado: {numero3} - {numero4} = {numero3 - numero4}");
                             break;
                         case 3:
                             Console.WriteLine("Multiplicação");
                             var (numero5, numero6) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"Resultado: {numero5} + {numero6} = {numero5 * numero6}");
+                            Console.WriteLine($"Resultado: {numero5} * {numero6} = {numero5 * numero6}");
                             break;
                         case 4:
                             Console.WriteLine("Divisão");
                             var (numero7, numero8) = metodos.PegaDoisNumeros();
-                            Console.WriteLine($"Resultado: {numero7} + {numero8} = {numero7 / numero8}");
+                            Console.WriteLine($"Resultado: {numero7} / {numero8} = {numero7 / numero8}");
                             break;
                         case 5:
                             Console.WriteLine("Potência");
@@ -712,16 +717,20 @@ namespace Biblioteca.Manutencao
                             break;
                         case 6:
                             Console.WriteLine("Radiciação");
-                            metodos.Radiciação();
+                            metodos.Radiciacao();
                             break;
                         case 7:
-                            return;
+                            condicao = false;
+                            break;
                     }
 
                 }
 
             }
-            catch (Exception) { throw; }
+            catch (Exception e) 
+            { 
+                Console.WriteLine(e.Message); 
+            }
         }
         #endregion
 

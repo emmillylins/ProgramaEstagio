@@ -289,6 +289,7 @@ namespace Biblioteca.Manutencao
             }
         }
     
+        #region Metodos referente a questao do formulário 3 da calculadora
         public (int?, int?) PegaDoisNumeros()
         {
             int num1, num2;
@@ -297,13 +298,13 @@ namespace Biblioteca.Manutencao
                 Console.Write("\nDigite o primeiro número: ");
                 if(!int.TryParse(Console.ReadLine(), out num1))
                 {
-                    Console.WriteLine("Digite um valor numérico válido");
+                    Console.WriteLine("Digite um valor numérico inteiro válido");
                     continue;
                 }
                 Console.Write("Digite o segundo número: ");
                 if(!int.TryParse(Console.ReadLine(), out num2))
                 {
-                    Console.WriteLine("Digite um valor numérico válido");
+                    Console.WriteLine("Digite um valor numérico inteiro válido");
                     continue;
                 }
                 break;
@@ -339,32 +340,34 @@ namespace Biblioteca.Manutencao
             Console.WriteLine($"O número {num1} elevado a {num2}° é {resultado}");            
         }
 
-        public void Radiciação()
+        public void Radiciacao()
         {
             int num1, num2;
-            while(true)
+            
+            while (true)
             {
                 Console.Write("Digite o número / radical: ");
-                if(!int.TryParse(Console.ReadLine(), out num1))
+                if (!int.TryParse(Console.ReadLine(), out num1) || num1 < 0)
                 {
-                    Console.WriteLine("Digite um valor numérico válido");
+                    Console.WriteLine("Digite um valor numérico válido e não negativo.");
                     continue;
                 }
 
-                Console.Write("Digite o indice: ");
-                if(!int.TryParse(Console.ReadLine(), out num2))
+                Console.Write("Digite o índice da raiz (maior que 0): ");
+                if (!int.TryParse(Console.ReadLine(), out num2) || num2 <= 0)
                 {
-                    Console.WriteLine("Digite um valor numérico válido");
+                    Console.WriteLine("Digite um índice válido (maior que 0).");
                     continue;
                 }
 
                 break;
             }
 
-            var resultado = Math.Sqrt(num1 / num2);
-
-            Console.WriteLine($"O número {num1} elevado a {num2}° é {resultado}");            
+            double resultado = Math.Pow(num1, 1.0 / num2);
+            Console.WriteLine($"A raiz {num2} de {num1} é {resultado}");
         }
+
+        #endregion
 
         public int CalculaDigitoVerificador(int peso, string cadeiaDeCaracteres)
         {

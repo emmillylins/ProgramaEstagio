@@ -78,6 +78,7 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #region Metodo referente a questao do formulário 3 do jogo da adivinhação
         public bool VerificaNumerosIguais(int numeroUsuario, int numeroSecreto)
         {
 
@@ -88,10 +89,20 @@ namespace Biblioteca.Validacao
             }
             else
             {
-                Console.WriteLine($"Você errou, o número não é {numeroUsuario}");
+                if(numeroUsuario > numeroSecreto)
+                {
+                    Console.WriteLine($"Você errou, você inseriu o número {numeroUsuario}, este valor é maior que o número secreto");
+
+                }
+                else 
+                {
+                    Console.WriteLine($"Você errou, você inseriu o número {numeroUsuario}, este valor é menor que o número secreto");
+                }
                 return false;
             }
         }
+
+        #endregion
 
         #region Metodo referente a questao do formulário 3 de validação de senha
         public bool VerificaSenha(string senha)

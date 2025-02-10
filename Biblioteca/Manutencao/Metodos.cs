@@ -716,11 +716,17 @@ namespace Biblioteca.Manutencao
                 if (!int.TryParse(Console.ReadLine(), out var numero) || numero <= 0)
                 {
                     Console.WriteLine("Número do episódio inválido.");
+                    Console.WriteLine("Retornando ao menu inicial..."); 
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
                 if(numero == episodiosListados)
                 {
                     Console.WriteLine("Número do episódio já existe.");
+                    Console.WriteLine("Retornando ao menu inicial...");
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
 
@@ -729,6 +735,9 @@ namespace Biblioteca.Manutencao
                 if (string.IsNullOrEmpty(tituloEpisodio))
                 {
                     Console.WriteLine("Título do episódio inválido.");
+                    Console.WriteLine("Retornando ao menu inicial...");
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
 
@@ -736,6 +745,9 @@ namespace Biblioteca.Manutencao
                 if (!int.TryParse(Console.ReadLine(), out var duracao) || duracao <= 0)
                 {
                     Console.WriteLine("Duração do episódio inválida.");
+                    Console.WriteLine("Retornando ao menu inicial...");
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
 
@@ -744,6 +756,9 @@ namespace Biblioteca.Manutencao
                 if (resumo.Length < 10)
                 {
                     Console.WriteLine("Seu resumo dever ter mais de 10 letras.");
+                    Console.WriteLine("Retornando ao menu inicial...");
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
 
@@ -752,6 +767,9 @@ namespace Biblioteca.Manutencao
                 if (!int.TryParse(Console.ReadLine(), out var opcao) || (opcao != 1 && opcao != 2))
                 {
                     Console.WriteLine("Opção inválida.");
+                    Console.WriteLine("Retornando ao menu inicial...");
+                    Console.ReadKey();
+                    Console.Clear();
                     return null;
                 }
                 if (opcao == 1)
@@ -760,6 +778,9 @@ namespace Biblioteca.Manutencao
                     if (!int.TryParse(Console.ReadLine(), out var numConvidados) || numConvidados <= 0)
                     {
                         Console.WriteLine("Número de convidados inválido.");
+                        Console.WriteLine("Retornando ao menu inicial...");
+                        Console.ReadKey();
+                        Console.Clear();
                         return null;
                     }
 
@@ -770,6 +791,9 @@ namespace Biblioteca.Manutencao
                         if (string.IsNullOrEmpty(nomeConvidado))
                         {
                             Console.WriteLine("Nome do convidado inválido.");
+                            Console.WriteLine("Retornando ao menu inicial...");
+                            Console.ReadKey();
+                            Console.Clear();
                             return null;
                         }
                         // adiciona um novo objeto Convidado à lista de convidados com um código e nome fornecidos.

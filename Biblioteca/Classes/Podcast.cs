@@ -12,9 +12,9 @@ namespace Biblioteca.Classes
 
         public string Nome { get; }
         public string Apresentador { get; }
-        private List<Epsodio> Epsodios = new();
+        public List<Episodio> Episodios = new();
+        public double DuracaoTotal => Episodios.Sum(epsodio => epsodio.DuracaoMinutos);
+        public int TotalEpsodios => Episodios.Count(epsodio => epsodio.Numero != 0);        
 
-        public int DuracaoTotal => Epsodios.Sum(epsodio => epsodio.DuracaoSegundos);
-        public int TotalEpsodios => Epsodios.Max(epsodio => epsodio.Numero);
     }
 }

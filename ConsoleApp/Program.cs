@@ -22,9 +22,13 @@ class Program
             //manutencao.ClassificacaoNumeros(); //2
             //manutencao.VerificaSenha(); //3
             //manutencao.CalculadoraAvancada(); //4
-            manutencao.VerificaCPF(); //5
+            //manutencao.VerificaCPF(); //5
             //manutencao.SimuladorCaixaEletronico(); //6
             //manutencao.GeradorTabuada(); //8
+
+
+            // Desafio do Mestre (Alura)
+            manutencao.GestaoPodcast();
             
 
             Console.ReadKey();

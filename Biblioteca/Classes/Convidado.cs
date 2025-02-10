@@ -3,9 +3,9 @@
     public class Convidado
     {
         public Convidado() { }
-        public Convidado(int codigo, string nome)
+        public Convidado(int contador, string nome)
         {
-            Codigo = codigo;
+            Codigo = contador;
             Nome = nome;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Classes;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
 
@@ -289,6 +290,7 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #region Calculadora Avançada
         public void Soma()
         {
             // Lista para armazenar os números inseridos
@@ -435,6 +437,9 @@ namespace Biblioteca.Manutencao
             }
         }
 
+#endregion
+
+        #region Método Questão 8
         public void ExibeTabuada()
         {
             try
@@ -461,13 +466,190 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        public void AdicionarConvidados()
+        #endregion
+
+        #region Métodos do Podcast
+
+        #region Adicionar Episódio
+        public void AdicionarEpisodio(Podcast podcast)
         {
             try
             {
+                Console.WriteLine("\nAdicionar Episódio.");
 
+                while (true)
+                {
+                    Console.WriteLine("\nInfome o número do episódio:");
+                    Console.Write("Número: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out var numeroInserido) || numeroInserido < 1)
+                    {
+                        Console.WriteLine("\nValor inserido inválido!");
+                    }
+                    else
+                    {
+                        if (podcast.Episodios.Any(e => e.Numero == numeroInserido))
+                        {
+                            Console.WriteLine("\nNúmero do episódio já inserido!");
+                        }
+                        else
+                        {
+                            while (true)
+                            {
+                                // Solicitando título
+                                Console.WriteLine($"\nInforme o título do episódio #{numeroInserido}");
+                                Console.Write("Título: ");
+
+                                string? tituloInserido = Console.ReadLine();
+
+                                if (!string.IsNullOrEmpty(tituloInserido))
+                                {
+                                    while (true)
+                                    {
+                                        // Solicitando resumo
+                                        Console.WriteLine("\nInforme o resumo do episódio.");
+                                        Console.Write("Resumo: ");
+
+                                        string? resumoInsrido = Console.ReadLine();
+
+                                        if (!string.IsNullOrEmpty(resumoInsrido))
+                                        {
+                                            while (true)
+                                            {
+                                                // Solicitando duracao minutos
+                                                Console.WriteLine("\nInforme a duração do episódio em minutos: ");
+                                                Console.Write("Duração: ");
+
+                                                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture,out var duracaoInserida))
+                                                {
+                                                    Console.WriteLine("\nValor inserido para a duração inválido!");
+                                                }
+                                                else
+                                                {
+                                                    Episodio episodio = new(numeroInserido, tituloInserido, resumoInsrido, duracaoInserida);
+
+                                                    // Contador para Id do convidado
+                                                    int contador = 1;
+
+                                                    while (true)
+                                                    {
+                                                        Console.WriteLine("\nDeseja adicionar convidado? \nPara SIM digite: s \nPara NÃO digite: n");
+                                                        Console.Write("Resposta: ");
+
+                                                        string opcaoInserida = Console.ReadLine().ToLower();
+
+                                                        switch (opcaoInserida)
+                                                        {
+                                                            case "s":
+                                                                AdicionarConvidados(episodio, contador);
+                                                                contador++;
+                                                                break;
+                                                            case "n":
+                                                                podcast.Episodios.Add(episodio);
+                                                                return;
+                                                            default:
+                                                                Console.WriteLine("Opção inserida inválida!");
+                                                                break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("O resumo não pode ser nulo!");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nO título não pode ser nulo!");
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Exibir Detalhes
+        public void ExibirDetalhes(Podcast podcast)
+        {
+            try
+            {
+                Console.WriteLine($"\nPodcast: {podcast.Nome}, apresentado por: {podcast.Apresentador}");
+
+                // Verificação da quantidade de epsodios do podcast
+                if (podcast.TotalEpsodios == 0)
+                {
+                    Console.WriteLine("Esse podcast ainda não possui episódios!");
+                }
+                else
+                {
+                    foreach (var ep in podcast.Episodios.OrderBy(e => e.Numero))
+                    {
+                        if (ep.Convidados.Count == 0)
+                        {
+                            Console.WriteLine($"\nResumo: {ep.Resumo}. \nEpisódio: #{ep.Numero}, Título: {ep.Titulo}, Duração: {ep.DuracaoMinutos}min");
+                            Console.WriteLine("O episódio não possui convidados!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\nResumo: {ep.Resumo}. \nEpisódio: #{ep.Numero}, Título: {ep.Titulo}, Duração: {ep.DuracaoMinutos}min");
+                            Console.WriteLine("Convidados:");
+
+                            //Exibindo lista de convidados e ordenando pelo código
+                            foreach (var convidado in ep.Convidados.OrderBy(convidado => convidado.Codigo))
+                            {
+                                Console.WriteLine($"{convidado.Codigo}: {convidado.Nome}");
+                            }
+                        }
+                    }
+                    
+                    Console.WriteLine($"\nTotal de Episódios: {podcast.TotalEpsodios}");
+                    Console.WriteLine($"Duração total do {podcast.Nome}: {podcast.DuracaoTotal} minutos.");
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
+
+        #region Adicionar Convidados
+        public void AdicionarConvidados(Episodio episodio, int contador)
+        {
+            try
+            {
+                Console.WriteLine("\nInforme o nome do convidado");
+                Console.Write("Nome: ");
+
+                string nomeInserido = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(nomeInserido))
+                {
+                    if (episodio.Convidados.Any(c => c.Nome.Equals(nomeInserido, StringComparison.OrdinalIgnoreCase)))
+                        Console.WriteLine("O convidado já foi adicionado!");
+                    else
+                    {
+                        // Estânciando um novo convidado
+                        Convidado convidado = new(contador,nomeInserido);
+                        // Adicionando o convidado criado a lista de convidados
+                        episodio.Convidados.Add(convidado);
+
+                        Console.WriteLine($"\nConvidado, {nomeInserido}, adicionado com sucesso!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("O nome do convidado não pode ser nulo!");
+                    return;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        #endregion
+
+        #endregion
     }
 }

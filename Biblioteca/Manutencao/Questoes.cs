@@ -6,6 +6,7 @@ namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region Formulário
         public void VerificaNumeroPrimo()
         {
             try
@@ -479,9 +480,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
 
-
-        // FORMULÁRIO C# 3
+        #region FORMULÁRIO C# 3
 
         //Questão 1: Como posso criar um jogo simples de adivinhação em C#
         //onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
@@ -683,7 +684,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //Questão 4: Calculadora com Operações Avançadas:
+        #region Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
         //e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
         public void CalculadoraAvancada()
@@ -736,8 +737,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
 
-        //Questão 5: Validação de CPF
+        #region Questão 5: Validação de CPF
+
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
         //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.
         //Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
@@ -796,8 +799,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
 
-        //Questão 6: Simulador de Caixa Eletrônico
+        #region Questão 6: Simulador de Caixa Eletrônico
+
         //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         //O programa deve:
         //Solicitar o valor do saque.
@@ -858,8 +863,10 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
 
-        //Questão 7: Jogo da Forca
+        #region Questão 7: Jogo da Forca
+
         //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra,
         //letra por letra.O usuário tem 6 tentativas para acertar a palavra.
         //O programa deve:
@@ -867,8 +874,9 @@ namespace Biblioteca.Manutencao
         //Contar as tentativas restantes.
         //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
 
+        #endregion
 
-        //Questão 8: Gerador de Tabuada Personalizado
+        #region Questão 8: Gerador de Tabuada Personalizado
         //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
         //O programa deve:
         //Solicitar ao usuário um número inteiro entre 1 e 10. 
@@ -912,8 +920,9 @@ namespace Biblioteca.Manutencao
 
         }
 
+        #endregion
 
-        //Questão 9: Validação de CNPJ
+        #region Questão 9: Validação de CNPJ
         //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.O CNPJ deve ter 14 dígitos,
         //e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
         //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
@@ -924,31 +933,74 @@ namespace Biblioteca.Manutencao
         //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
         //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
 
+        #endregion
+
+        #endregion
+
         #region Questão do Mestre (Alura)
         //Questão do mestre
-        //crie duas classes para manter podcasts e episódios.
-        //O podcast possui um nome, um apresentador e um total de episódios. OK
+        //crie três classes para manter podcasts, episódios e convidados.
+        //convidado deve ter um Codigo e um Nome
+
+        //O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
+
+        //O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
+
         //Um podcast nasce com um nome e um apresentador definido.
         //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+
         //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
         //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
         //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
-        //O episódio deve ter um número, um título, uma duração e um resumo.
-
         //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
         //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
 
+        //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
         //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
         //e também se precisamos utilizar get e set para todos os valores.
+
         public void GestaoPodcast()
         {
             try
             {
+                Metodos metodos = new();
 
+                // Crindo um novo podcast com nome e apresentador
+                Podcast podcast = new("Sem Lógica", "João");
+
+                Console.WriteLine("Gestão de Podcast.");
+
+                while (true)
+                {
+                    Console.WriteLine("\n=== MENU === \n1 - Adicionar episódio \n2 - ExibirDetalhes \n3 - Sair");
+                    Console.Write("Opcão: ");
+
+                    // tryparse para a entrada + switch com chamada dos métodos!
+                    if (!int.TryParse(Console.ReadLine(), out var opcao) || opcao < 1 || opcao > 3)
+                    {
+                        Console.WriteLine("Insira apenas números válidos!");
+                    }
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                metodos.AdicionarEpisodio(podcast);
+                                break;
+                            case 2:
+                                metodos.ExibirDetalhes(podcast);
+                                break;
+                            case 3:
+                                return;
+                            default:
+                                Console.WriteLine("Opção inserida inválida! Escolha uma opção existente no menu.");
+                                break;
+                        }
+                    }
+                }
             }
             catch (Exception) { throw; }
         }
         #endregion
     }
 }
-

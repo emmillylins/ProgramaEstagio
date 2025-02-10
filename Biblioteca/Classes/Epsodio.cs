@@ -1,20 +1,25 @@
-﻿namespace Biblioteca.Classes
+﻿using System.Numerics;
+
+namespace Biblioteca.Classes
 {
-    public class Epsodio
+    public class Episodio
     {
         //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
         
-        public Epsodio() { }
-        public Epsodio(int numero, string titulo, int duracaoSegundos)
+        public Episodio() { }
+
+        public Episodio(int numero, string titulo, string resumo, double duracaoMinutos)
         {
             Numero = numero;
             Titulo = titulo;
-            DuracaoSegundos = duracaoSegundos;
+            Resumo = resumo;
+            DuracaoMinutos = duracaoMinutos;
         }
 
         public int Numero { get; }
         public string Titulo { get; }
-        public int DuracaoSegundos { get; }
-        private List<Convidado> Convidados = new();
+        public string Resumo { get; }
+        public double DuracaoMinutos { get; }
+        public List<Convidado> Convidados = new();
     }
 }

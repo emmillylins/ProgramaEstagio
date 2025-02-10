@@ -370,6 +370,7 @@ namespace Biblioteca.Manutencao
             catch (Exception ex) { throw; }
 
         }
+        #region metodos calculadora
         public double? Soma()
         {
             try
@@ -524,6 +525,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion 
 
         public void Tabuada()
         {
@@ -569,7 +571,7 @@ namespace Biblioteca.Manutencao
 
 
         }
-
+        #region Validar CPF/CNPJ
         public void ValidarCpf(String cpf)
         {
 
@@ -740,11 +742,24 @@ namespace Biblioteca.Manutencao
 
 
         }
+        #endregion 
 
         #region METODOS PARA O DESAFIOS POO
-        
-        public void AdicionarEpisodio()
+
+        public void AdicionarEpisodio(Podcasts podcast)
         {
+
+            while (true) {
+
+                Console.WriteLine("Insira um episódio!! ");
+
+                Console.WriteLine("Insira o número do episodio");
+
+
+
+                
+            }
+
 
 
 
@@ -757,7 +772,7 @@ namespace Biblioteca.Manutencao
             {
                 Console.WriteLine(podcats1.NomePodcast, podcats1.ApresentadorPodcast);
 
-                var episodios =  podcats1.Episodio.OrderBy(podcats1 = )
+             
 
 
 

@@ -927,13 +927,43 @@ namespace Biblioteca.Manutencao
                 Podcasts podcast1 = new("SemLogica", "Loca");
                 var metodos = new Metodos();
 
-                
+                Console.WriteLine("Gestão de Podcast");
+
+                while (true)
+                {
+                    Console.WriteLine("Insira umas das opções abaixo:\n1-Adicionar Episódio\n2-Exibir Detalhes\n3-Adicionar convidados\n4-Sair");
+                    if (!int.TryParse(Console.ReadLine(), out var opcao))
+                    {
+                        Console.WriteLine("Insira uma opção válida");
+                    }
+                    switch (opcao)
+                    {
+
+                        case 1:
+                            // adicionar episodio
+                            break;
+                        case 2:
+                            // exibir detalhes do podcast
+                            break;
+                        case 3:
+                            // adicionar convidados
+                            break;
+                        case 4:
+                            Console.WriteLine("Saindo do programa...");
+                            return;
+                        default:
+                            Console.WriteLine("Insira apenas umas das opções mostradas acima\n");
+                            break;
+                    }
 
 
 
 
 
 
+
+
+                }
             }
             catch (Exception) { throw; }
         }

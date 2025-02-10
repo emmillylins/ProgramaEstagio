@@ -24,11 +24,14 @@ class Program
             //manutencao.ListaNumeros();
             //manutencao.CadastrarSenha();
             //manutencao.CalculadoraAvancada();
-            manutencao.CaixaEletronico();
+            //manutencao.CaixaEletronico();
             //manutencao.Tabuada();
             //manutencao.JogoForca();
             //manutencao.Cpf();
             //manutencao.Cnpj();
+            manutencao.GerarPodcast();
+
+            Console.ReadKey();
 
 
 

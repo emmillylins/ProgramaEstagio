@@ -686,11 +686,17 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("4 - divisão");
                     Console.WriteLine("5 - potenciação");
                     Console.WriteLine("6 - raiz quadrada");
+                    Console.WriteLine("7 - sair");
                     string? numeroInserido = Console.ReadLine();
                     //Verificando número inserido no menu.
-                    if (!int.TryParse(numeroInserido, out var numero) || numero < 1 || numero > 6)
+                    if (!int.TryParse(numeroInserido, out var numero) || numero < 1 || numero > 7)
                     {
                         Console.WriteLine("Número inválido, pedimos para que digite um número válido.");
+                    }
+                    //Verificação para sair do menu.
+                    else if (numero == 7)
+                    {
+                        return;
                     }
                     else
                     {

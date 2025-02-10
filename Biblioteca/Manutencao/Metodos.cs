@@ -364,8 +364,16 @@ namespace Biblioteca.Manutencao
                                 Console.WriteLine($"O resultado da multiplicação é {(primeiroNumero * segundoNumero):F2}");
                                 break;
                             case 4:
-                                Console.WriteLine($"O resultado da divisão é {(primeiroNumero / segundoNumero):F2}");
-                                break;
+                                if (primeiroNumero == 0 || segundoNumero == 0)
+                                {
+                                    Console.WriteLine("Não é possível dividir por zero.");
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"O resultado da divisão é {(primeiroNumero / segundoNumero):F2}");
+                                    break;
+                                }
                             case 5:
                                 Console.WriteLine($"O resultado da exponeciação é {(Math.Pow(primeiroNumero, segundoNumero)):F2}");
                                 break;

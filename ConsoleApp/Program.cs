@@ -19,13 +19,13 @@ class Program
             //manutencao.JogoAdivinhacao();
             //manutencao.VerificaNumerosInseridos();
             //manutencao.VerificarSenha();
-            //manutencao.Calculadora();
+            manutencao.Calculadora();
             //manutencao.VerificarCpf();
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
             //manutencao.VerificaCnpj();
-            manutencao.QuestaoPodcast();
+            //manutencao.QuestaoPodcast();
 
             Console.ReadKey();
 

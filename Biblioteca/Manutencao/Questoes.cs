@@ -1,9 +1,8 @@
-﻿using Biblioteca.Classes;
+﻿
+//Atividade Code Review
+using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
 namespace Biblioteca.Manutencao
 {
     public class Questoes
@@ -293,7 +292,7 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Número de tentativas excedido.");
             }
             catch (Exception) { throw; }
-            ;
+            
         }
 
 
@@ -420,8 +419,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-
-        //Gerenciamento de Alunos e Notas
+// Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
         //O sistema deve permitir:
         //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
@@ -480,7 +478,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+    
 
+
+     //Forms3
         //QUESTÃO 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
 
         //Regras:
@@ -541,10 +542,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
-        //QUESTÃO 2: Crie um programa que leia uma 
+    
+     //Questão 2: Leitor de Números Inteiros
+        //Crie um programa que leia uma 
         //lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
-
-
         public void LeiaListaNumerosInteiros()
         {
             try
@@ -569,13 +570,12 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
-        //QUESTÃO 3:  Validação de Senha:
+      
+// Questão 3:  Validação de Senha:
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
         //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
         //O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
-
         public void ProgramaDeValidarSenha()
 
         {
@@ -614,22 +614,152 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; };
         }
-
         //PADRÃO EXPRESSÕES REGULARES - REGEX
         //^(?=.* [a - z]): Exige pelo menos uma letra minúscul;
         //(?=.*[A-Z]): Exige pelo menos uma letra maiúscula;
         //(?=.*[\W_]): Exige pelo menos um caractere especial (isso inclui qualquer caractere não alfanumérico);
         //.{8,}$: Exige no mínimo 8 caracteres.
 
-        //Questão 4: Calculadora com Operações Avançadas:
+        
+       //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração,
         // multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas
         //usando um menu e estruturas de controle(switch/case).
 
+        public static void ExibirMenu()
+        {
+            Console.WriteLine("Programa Calculadora com Operações Básicas e Avançadas.");
+            Console.WriteLine("\nEscolha uma operação:");
+            Console.WriteLine("1 - Adição");
+            Console.WriteLine("2 - Subtração");
+            Console.WriteLine("3 - Multiplicação");
+            Console.WriteLine("4 - Divisão");
+            Console.WriteLine("5 - Potenciação");
+            Console.WriteLine("6 - Raiz Quadrada");
+            Console.WriteLine("7 - Sair");
+            Console.Write("Escolha uma opção (1-7): ");
+        }
 
+        public void CalculadoraAvancada()
+        {
+            try
+            {
+                int opcao = 0;
+                double numero1, numero2, resultado;
 
+                //A condição while será verificada antes de cada operação.
+                while (opcao != 7)
+                {
+                    ExibirMenu();
+                    string opcaoEscolhidaPeloUsuario = Console.ReadLine();
 
-        //QUESTÃO 5: Validação de CPF
+                    //Valida se a entrada é um número
+                    if (!int.TryParse(opcaoEscolhidaPeloUsuario, out opcao))
+                    {
+                        Console.WriteLine("Opção inválida, por favor escolha uma opção de 1 a 7.");
+                        continue;
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1: //Adição
+                            Console.Write("Digite o primeiro número: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+                            Console.Write("Digite o segundo número: ");
+                            numero2 = Convert.ToDouble(Console.ReadLine());
+                            resultado = numero1 + numero2;
+                            Console.WriteLine($"Resultado: {numero1} + {numero2} = {resultado}");
+                            break;
+
+                        case 2: //Subtração
+                            Console.Write("Digite o primeiro número: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+                            Console.Write("Digite o segundo número: ");
+                            numero2 = Convert.ToDouble(Console.ReadLine());
+                            resultado = numero1 - numero2;
+                            Console.WriteLine($"Resultado: {numero1} - {numero2} = {resultado}");
+                            break;
+
+                        case 3: //Multiplicação
+                            Console.Write("Digite o primeiro número: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+                            Console.Write("Digite o segundo número: ");
+                            numero2 = Convert.ToDouble(Console.ReadLine());
+                            resultado = numero1 * numero2;
+                            Console.WriteLine($"Resultado: {numero1} * {numero2} = {resultado}");
+                            break;
+
+                        case 4: //Divisão
+                            Console.Write("Digite o primeiro número: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+                            Console.Write("Digite o segundo número: ");
+                            numero2 = Convert.ToDouble(Console.ReadLine());
+
+                            //Verifica divisão por zero
+                            if (numero2 == 0)
+                            {
+                                Console.WriteLine("Não é possível dividir por zero.");
+                            }
+                            else
+                            {
+                                resultado = numero1 / numero2;
+                                Console.WriteLine($"Resultado: {numero1} / {numero2} = {resultado}");
+                            }
+                            break;
+
+                        case 5: //Potenciação
+                            Console.Write("Digite a base: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+                            Console.Write("Digite o expoente: ");
+                            numero2 = Convert.ToDouble(Console.ReadLine());
+                            resultado = Math.Pow(numero1, numero2);
+                            Console.WriteLine($"Resultado: {numero1} ^ {numero2} = {resultado}");
+                            break;
+
+                        case 6: //Raiz Quadrada
+                            Console.Write("Digite o número: ");
+                            numero1 = Convert.ToDouble(Console.ReadLine());
+
+                            //Verifica se o número é negativo
+                            if (numero1 < 0)
+                            {
+                                Console.WriteLine("Erro: Não é possível calcular a raiz quadrada de um número negativo.");
+                            }
+                            else
+                            {
+                                resultado = Math.Sqrt(numero1);
+                                Console.WriteLine($"Resultado: Raiz quadrada de {numero1} = {resultado}");
+                            }
+                            break;
+
+                        case 7://Sair
+                            Console.WriteLine("Saindo da calculadora...");
+                            break;
+
+                        default:
+                            Console.WriteLine("Opção inválida! Por favor, escolha uma opção de 1 a 7.");
+                            break;
+                    }
+
+                    //Solicita ao usuário se deseja continuar
+                    if (opcao != 7)
+                    {
+                        Console.WriteLine("Pressione qualquer tecla para continuar...");
+                        Console.ReadKey();
+                        Console.Clear();
+
+                    }
+                }
+
+                //Finaliza o programa
+                Console.WriteLine("Obrigado por usar a calculadora!");
+
+            }
+            catch (Exception) { throw; }
+        }
+       
+
+        //Questão 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
         //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize
         //tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
@@ -682,7 +812,7 @@ namespace Biblioteca.Manutencao
         }
 
 
-        ////Questão 6: Simulador de Caixa Eletrônico
+        //Questão 6: Simulador de Caixa Eletrônico
         ////Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         ////O programa deve:
         ////Solicitar o valor do saque.
@@ -696,22 +826,24 @@ namespace Biblioteca.Manutencao
             {
                 var metodos = new Metodos();
                 Console.WriteLine("Programa para simular saque!");
-                decimal valorSaque;
+                decimal valorSaque = 0; //Atribuição inicial
+
                 bool saqueValido = false;
 
                 //Solicitar valor de saque ao usuário até que seja válido
                 while (!saqueValido)
                 {
-                    Console.Write("Digite o valor do saque: ");
+                    Console.Write("\nDigite o valor do saque: ");
                     string valorInserido = Console.ReadLine();
 
                     //Tenta converter o valor digitado para decimal
                     if (!decimal.TryParse(valorInserido, CultureInfo.CurrentCulture, out valorSaque))
                     {
-                        Console.WriteLine("Erro: O valor digitado não é válido. Digite um número válido.");
+                        Console.WriteLine("O valor digitado não é válido. Digite um número válido.");
                         continue;
                     }
-                    //verifica se o valor é maior que 0 e é múltiplo de 10
+
+                    // Verifica se o valor é maior que 0 e é múltiplo de 10
                     if (valorSaque <= 0)
                     {
                         Console.WriteLine("O valor do saque deve ser positivo.");
@@ -725,51 +857,68 @@ namespace Biblioteca.Manutencao
                         saqueValido = true;
                     }
                 }
+
+                //Com o valor  validado, chama o método para calcular as notas
+                if (saqueValido)
+                {
+                    Metodos.CalcularNotas(valorSaque); //Chama o método de cálculo de notas
+                }
             }
-            catch (Exception) { throw; }
-        }
-        public static void CalcularNotas(decimal valorSaque)
-        {
-            try
+            catch (Exception ex)
             {
-                //Define as notas disponíveis no caixa eletrônico
-                int[] notasDisponiveis = { 100, 50, 20, 10 };
-
-                Console.WriteLine($"Você solicitou um saque de R${valorSaque}. A seguir, a quantidade de notas:");
-
-                // Calcula a quantidade de cada nota
-                foreach (int nota in notasDisponiveis)
-                {
-                    int quantidadeNotas = (int)(valorSaque / nota); //Quantidade de notas de determinado valor
-                    if (quantidadeNotas > 0)
-                    {
-                        Console.WriteLine($"{quantidadeNotas} nota(s) de R${nota}");
-                        valorSaque -= quantidadeNotas * nota; //Subtrai o valor das notas do saque restante
-                    }
-                }
-
-                //Caso sobre algum valor não sacado, exibe uma mensagem
-                if (valorSaque > 0)
-                {
-                    Console.WriteLine("Infelizmente não conseguimos realizar o saque com as notas disponíveis.");
-                }
-                else
-                {
-                    Console.WriteLine("Saque realizado com sucesso!");
-                }
+                Console.WriteLine($"Não foi possível realizar a transação, tente novamente mais tarde: {ex.Message}");
             }
-            catch (Exception) { throw; }
         }
 
 
-        //Questão 7: Jogo da Forca
+      // Questão 7: Jogo da Forca
         //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra, letra por letra.O usuário tem 6 tentativas para acertar a palavra.
         //O programa deve:
         //Exibir o progresso do usuário (letras acertadas e letras faltando). 
         //Contar as tentativas restantes.
         //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
+        public void JogoDaForca()
+        {
+            var metodos = new Metodos();
+            string[] palavras = { "programacao", "desenvolvimento", "computador", "software", "jogo" };
+            string palavraEscolhida = Metodos.EscolherPalavra(palavras);
+            char[] palavraOculta = Metodos.CriarPalavraOculta(palavraEscolhida.Length);
+            int tentativas = 6;
 
-        
+            Console.WriteLine("Bem-vindo ao Jogo da Forca!");
+            Console.WriteLine("\nVocê tem 6 tentativas para adivinhar a palavra.");
+            Console.WriteLine("A palavra tem " + palavraEscolhida.Length + " letras.");
+            Metodos.ExibirPalavraOculta(palavraOculta);
+
+            while (tentativas > 0 && new string(palavraOculta) != palavraEscolhida)
+            {
+                try
+                {
+                    char letra = Metodos.PedirLetra();
+                    bool acertou = Metodos.VerificarLetra(palavraEscolhida, letra, ref palavraOculta);
+
+                    if (acertou)
+                    {
+                        Console.WriteLine("Boa! Você acertou uma letra.");
+                    }
+                    else
+                    {
+                        tentativas--;
+                        Console.WriteLine("A letra não está na palavra. Tentativas restantes: " + tentativas);
+                    }
+
+                    Metodos.ExibirPalavraOculta(palavraOculta);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            Metodos.FinalizarJogo(palavraEscolhida, palavraOculta);
+        }
+     
+
         //Questão 8: Gerador de Tabuada Personalizado
         //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
         //O programa deve:
@@ -780,139 +929,137 @@ namespace Biblioteca.Manutencao
         //Tratar exceções para entradas inválidas (números fora do intervalo, caracteres não numéricos, etc.). 
         //Permitir que o usuário gere outra tabuada ou encerre o programa.
 
-        public void CriarTabuada()
+        public void GeradorTabuadaPersonalizada()
         {
             try
-
             {
-                Console.WriteLine("Programa para criar tabuada!");
-
+                Console.WriteLine("Programa para gerar tabuada personalizada!");
                 while (true)
                 {
-
-                    var metodos = new Metodos();
                     int numero;
 
                     Console.Write("\nDigite um número entre 1 e 10 para gerar a tabuada: ");
-                    string numeroDigitadoPeloUsuario = Console.ReadLine();
+                    string input = Console.ReadLine();
 
-
-                    //Tenta converter a entrada para um número inteiro
-                    if (!int.TryParse(numeroDigitadoPeloUsuario, out numero))
+                    try
                     {
-                        throw new Exception("Entrada inválida! Por favor, insira um número inteiro.");
-                    }
+                        // Tenta converter o input para um número inteiro
+                        if (!int.TryParse(input, out numero))
+                        {
+                            throw new FormatException("Entrada inválida! Por favor, insira um número inteiro.");
+                        }
 
-                    //Verifica se o número está dentro do intervalo permitido
-                    if (numero < 1 || numero > 10)
+                        // Verifica se o número está dentro do intervalo permitido
+                        if (numero < 1 || numero > 10)
+                        {
+                            throw new ArgumentOutOfRangeException("O número deve estar entre 1 e 10.");
+                        }
+
+                        // Gerar e exibir a tabuada do número
+                        Console.WriteLine($"Tabuada do {numero}:");
+                        for (int i = 1; i <= 10; i++)
+                        {
+                            Console.WriteLine($"{numero} x {i} = {numero * i}");
+                        }
+
+                        // Pergunta se o usuário deseja gerar outra tabuada
+                        string resposta;
+                        while (true)
+                        {
+                            Console.Write("Deseja gerar outra tabuada? (s/n): ");
+                            resposta = Console.ReadLine().ToLower();
+
+                            if (resposta == "s" || resposta == "n")
+                            {
+                                break; // Sai do loop quando a resposta for válida
+                            }
+                            else
+                            {
+                                Console.WriteLine("Resposta inválida! Por favor, digite 's' para sim ou 'n' para não.");
+                            }
+                        }
+
+                        if (resposta != "s")
+                        {
+                            Console.WriteLine("Programa encerrado.");
+                            break;
+                        }
+                    }
+                    catch (FormatException ex)
                     {
-                        Console.WriteLine("O número deve estar entre 1 e 10.");
+                        // Captura exceção de formato e exibe mensagem
+                        Console.WriteLine(ex.Message);
                     }
-                    //Gerar e exibir a tabuada do número
-                    Console.WriteLine($"Tabuada do {numero}:");
-                    for (int i = 1; i <= 10; i++)
+                    catch (ArgumentOutOfRangeException)
                     {
-                        Console.WriteLine($"{numero} x {i} = {numero * i}");
-                    }
-                    // Pergunta se o usuário deseja gerar outra tabuada
-                    Console.Write("Deseja gerar outra tabuada? (s/n): ");
-                    string resposta = Console.ReadLine().ToLower();
-
-                    if (resposta != "s")
-                    {
-                        Console.WriteLine("Programa encerrado.");
-                        break;
+                        //Captura exceção caso o número não esteja no intervalo permitido
+                        Console.WriteLine("Digite um valor dentro do intervalo especificado, 1 a 10.");
                     }
                 }
-            }
-            catch (Exception) { throw; };
-        }
-
-
-        //Questão 9: Validação de CNPJ
-        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
-        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
-        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
-        //Regras de Validação de CNPJ:
-        //O CNPJ deve ter 14 dígitos.
-        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
-        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
-        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
-        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
-
-
-        public void ValidacaoDeCNPJ()
-        {
-            try
-            {
-                Console.WriteLine("Programa para validar CNPJ.");
-                var metodos = new Metodos();
-                string cnpj;
-                Console.Write("\nDigite o CNPJ (somente números): ");
-                cnpj = Console.ReadLine();
-
-                // Verifica se o CNPJ possui 14 caracteres
-                if (cnpj.Length != 14 || !long.TryParse(cnpj, out _))
-                {
-                    Console.WriteLine("CNPJ inválido. O CNPJ deve conter apenas 14 dígitos numéricos.");
-                    return;
-                }
-
-                //Validação dos dígitos verificadores
-                if (ValidarCNPJ(cnpj))
-                {
-                    Console.WriteLine("CNPJ válido.");
-                }
-                else
-                {
-                    Console.WriteLine("CNPJ inválido.");
-                }
-            }
-            catch (Exception) { throw; };
-        }
-        public static bool ValidarCNPJ(string cnpj)
-        {
-            try
-            {
-                //Cálculo do primeiro dígito verificador
-                int[] pesos1 = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-                int soma1 = 0;
-                for (int i = 0; i < 12; i++)
-                {
-                    soma1 += int.Parse(cnpj[i].ToString()) * pesos1[i];
-                }
-
-                int resto1 = soma1 % 11;
-                int digito1 = (resto1 < 2) ? 0 : 11 - resto1;
-
-                //Cálculo do segundo dígito verificador. 
-                int[] pesos2 = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-                int soma2 = 0;
-                
-                //Passa por cada um dos dos pesos
-                for (int i = 0; i < 13; i++)
-                {
-                    soma2 += int.Parse(cnpj[i].ToString()) * pesos2[i];
-                }
-
-                int resto2 = soma2 % 11;
-                int digito2 = (resto2 < 2) ? 0 : 11 - resto2;
-
-                //Verifica se os dígitos verificadores calculados são iguais aos informados
-                return cnpj[12] == digito1.ToString()[0] && cnpj[13] == digito2.ToString()[0];
             }
             catch (Exception) { throw; }
-
         }
+  
+
+   // Desafio Alura - Criação de PodCast
+        public void CriarPodCast()
+        {
+            try
+            {
+
+                var metodos = new Metodos();
+                Podcast podcast = new("SemLógica - Novo podcast para falar dos perrengues na Tecnologia", "Van");
+                Episodio episodioEscolhido = null;
+
+                bool continuar = true;
+
+                while (continuar)
+                {
+                    Console.Clear();
+                    Console.WriteLine("***MENU PRINCIPAL***");
+                    Console.WriteLine("1. Adicionar Episódio. ");
+                    Console.WriteLine("2. Escolher Episódio. ");
+                    Console.WriteLine("3. Adicionar Convidado. ");
+                    Console.WriteLine("4. Listar Convidados. ");
+                    Console.WriteLine("5. Sair. ");
+                    Console.Write("Escolha uma opção: ");
+                    string opcao = Console.ReadLine();
+
+                    switch (opcao)
+                    {
+                        case "1":
+                            Metodos.AdicionarEpisodio(podcast);
+                            break;
+                        case "2":
+                            episodioEscolhido = Metodos.EscolherEpisodio(podcast);
+                            break;
+                        case "3":
+                            if (episodioEscolhido != null)
+                                Metodos.AdicionarConvidado(episodioEscolhido);
+                            else
+                                Console.WriteLine("Escolha um episódio primeiro.");
+                            break;
+                        case "4":
+                            if (episodioEscolhido != null)
+                                Metodos.ListarConvidados(episodioEscolhido);
+                            else
+                                Console.WriteLine("Escolha um episódio primeiro.");
+                            break;
+                        case "5":
+                            continuar = false;
+                            Console.WriteLine("Você está saindo do PodCast. Pressione qualquer tecla e até logo!");
+                            break;
+                        default:
+                            Console.WriteLine("Opção inválida!");
+                            break;
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }
-
-
-
-
-
-
-
 
 
 

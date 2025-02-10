@@ -7,6 +7,7 @@ namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
+        //Encontrar Maior e Menor Número
         //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
@@ -21,7 +22,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+     
 
+      //Mostrar Usuário
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -42,7 +45,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+      
 
+     //Cadastrar Usuário
         public Usuario CadastrarUsuario()
         {
             try
@@ -68,7 +73,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+    
 
+      // Depositar
         public double Depositar()
         {
             try
@@ -83,6 +90,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+      
+
+
         public double Sacar(List<double> saldo)
         {
             try
@@ -396,81 +406,21 @@ namespace Biblioteca.Manutencao
             // Usa regex para verificar se a senha atende ao padrão
             Regex regex = new Regex(padraoSenha);
 
-            return regex.IsMatch(senha); 
+            return regex.IsMatch(senha);
             //o método IsMatch retorna um valor Booleano e é necessário informar,
             //neste caso, apenas o texto e a sintaxe da expressão regular
         }
-        //NÃO FINALIZADA
+
+
         //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração,
         // multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas
         //usando um menu e estruturas de controle(switch/case).
 
-        static void CalculadoraAvancada()
-        {
-
-            try
-            {
-                while (true)
-            {
-                int numero;
-
-                Console.Write("Digite um número entre 1 e 10 para gerar a tabuada: ");
-                string input = Console.ReadLine();
-
-                try
-                {
-                    // Tenta converter o input para um número inteiro
-                    if (!int.TryParse(input, out numero))
-                    {
-                        throw new FormatException("Entrada inválida! Por favor, insira um número inteiro.");
-                    }
-
-                    // Verifica se o número está dentro do intervalo permitido
-                    if (numero < 1 || numero > 10)
-                    {
-                        throw new ArgumentOutOfRangeException("O número deve estar entre 1 e 10.");
-                    }
-
-                    // Gerar e exibir a tabuada do número
-                    Console.WriteLine($"Tabuada do {numero}:");
-                    for (int i = 1; i <= 10; i++)
-                    {
-                        Console.WriteLine($"{numero} x {i} = {numero * i}");
-                    }
-
-                    // Pergunta se o usuário deseja gerar outra tabuada
-                    Console.Write("Deseja gerar outra tabuada? (s/n): ");
-                    string resposta = Console.ReadLine().ToLower();
-
-                    if (resposta != "s")
-                    {
-                        Console.WriteLine("Programa encerrado.");
-                        break;
-                    }
-                }
-                catch (FormatException ex)
-                {
-                    // Captura exceção de formato e exibe mensagem
-                    Console.WriteLine(ex.Message);
-                }
-                catch (ArgumentOutOfRangeException ex)
-                {
-                    // Captura exceção caso o número não esteja no intervalo permitido
-                    Console.WriteLine(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    // Captura qualquer outra exceção não esperada
-                    Console.WriteLine($"Erro inesperado: {ex.Message}");
-                }
-            }
-            }catch (Exception) { throw; }
-            
-        }
 
 
-        //NÃO FINALIZADA
+
+
         //QUESTÃO 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
 
@@ -550,6 +500,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+
         //Questão 6: Simulador de Caixa Eletrônico
         //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         //O programa deve:
@@ -560,25 +511,275 @@ namespace Biblioteca.Manutencao
 
 
 
+        public static void CalcularNotas(decimal valorSaque)
+        {
+            try
+            {
+                // Define as notas disponíveis no caixa eletrônico
+                int[] notasDisponiveis = { 100, 50, 20, 10 };
 
-        //Questão 9: Validação de CNPJ
-        //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
-        //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
-        //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
-        //Regras de Validação de CNPJ:
-        //O CNPJ deve ter 14 dígitos.
-        //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
-        //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
-        //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
-        //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
+                Console.WriteLine($"Você solicitou um saque de R${valorSaque}. A seguir, a quantidade de notas:");
 
-       
+                //Calcula a quantidade de cada nota
+                foreach (int nota in notasDisponiveis)
+                {
+                    int quantidadeNotas = (int)(valorSaque / nota);// Quantidade de notas de determinado valor
+                    if (quantidadeNotas > 0)
+                    {
+                        Console.WriteLine($"{quantidadeNotas} nota(s) de R${nota}");
+                        valorSaque -= quantidadeNotas * nota; // Subtrai o valor das notas do saque restante
+                    }
+                }
+
+                // Caso sobre algum valor não sacado, exibe uma mensagem
+                if (valorSaque > 0)
+                {
+                    Console.WriteLine("Infelizmente não conseguimos realizar o saque com as notas disponíveis.");
+                }
+                else
+                {
+                    Console.WriteLine("Saque realizado com sucesso!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Não foi possível prosseguir, tente novamente mais tarde: {ex.Message}");
+            }
+        }
+
+
+        //Questão 7: Jogo da Forca
+        // Método para escolher uma palavra aleatória
+        public static string EscolherPalavra(string[] palavras)
+        {
+            Random rand = new Random();
+            return palavras[rand.Next(palavras.Length)];
+        }
+
+        // Método para criar a palavra oculta
+        public static char[] CriarPalavraOculta(int comprimento)
+        {
+            return new string('_', comprimento).ToCharArray();
+        }
+
+        // Método para exibir o progresso da palavra oculta
+        public static void ExibirPalavraOculta(char[] palavraOculta)
+        {
+            Console.WriteLine(new string(palavraOculta));
+        }
+
+
+        // Método para pedir a letra do usuário
+        public static char PedirLetra()
+        {
+            string entrada;
+            char letra;
+
+            while (true)
+            {
+                Console.Write("\nDigite uma letra: ");
+                entrada = Console.ReadLine();
+
+                // Verificar se a entrada é válida
+                if (entrada.Length == 1 && char.IsLetter(entrada[0]))
+                {
+                    letra = char.ToLower(entrada[0]); // Converte a letra para minúscula
+                    return letra;
+                }
+                else
+                {
+                    Console.WriteLine("Entrada inválida! Digite apenas uma letra.");
+                }
+            }
+        }
+
+        // Método para verificar se a letra existe na palavra
+        public static bool VerificarLetra(string palavraEscolhida, char letra, ref char[] palavraOculta)
+        {
+            bool acertou = false;
+
+            for (int i = 0; i < palavraEscolhida.Length; i++)
+            {
+                if (palavraEscolhida[i] == letra)
+                {
+                    palavraOculta[i] = letra;
+                    acertou = true;
+                }
+            }
+
+            return acertou;
+        }
+
+        // Método para finalizar o jogo e mostrar o resultado
+        public static void FinalizarJogo(string palavraEscolhida, char[] palavraOculta)
+        {
+            if (new string(palavraOculta) == palavraEscolhida)
+            {
+                Console.WriteLine("Parabéns! Você adivinhou a palavra: " + palavraEscolhida);
+            }
+            else
+            {
+                Console.WriteLine("Você perdeu! A palavra era: " + palavraEscolhida);
+            }
+        }//Questão 9: Validação de CNPJ
+         //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.
+         //O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos.
+         //O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
+         //Regras de Validação de CNPJ:
+         //O CNPJ deve ter 14 dígitos.
+         //Os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. 
+         //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
+         //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
+         //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2
+
+
+        //Podcast
+        //Questão do mestre
+        //crie duas classes para manter podcasts e episódios.OK
+
+
+        //PODCAST
+        //O podcast possui um nome, um apresentador e um total de episódios.OK
+        //Um podcast nasce com um nome e um apresentador definido.
+        //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+        //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().OK
+        //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas
+        //vezes forem necessárias.
+        //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
+        //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa
+        //ser uma propriedade e também se precisamos utilizar get e set para todos os valores.
+
+        //EPISODIO
+        //O episódio deve ter um número, um título, uma duração e um resumo.OK
+        //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+        //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.OK
+        //
+        //
+        public static void AdicionarEpisodio(Podcast podcast)
+        {
+            try
+            {
+
+                Console.Clear();
+                Console.Write("Número do Episódio: ");
+                int numero = int.Parse(Console.ReadLine());
+
+                Console.Write("Título do Episódio: ");
+                string titulo = Console.ReadLine();
+
+                Console.Write("Duração do Episódio (em minutos): ");
+                int duracao = int.Parse(Console.ReadLine());
+
+                Episodio episodio = new Episodio(numero, duracao * 60000, titulo); // Convertendo para milissegundos
+
+                podcast.AdicionarEpisodio(episodio);
+
+                Console.WriteLine($"Episódio {numero} - {titulo} adicionado com sucesso!");
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+            }
+            catch (Exception) { throw; }
+        }
+        public static Episodio EscolherEpisodio(Podcast podcast)
+        {
+            try
+
+            {
+                if (podcast.TotalEpsodios == 0)
+                {
+                    Console.WriteLine("Não há episódios adicionados.");
+                    Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                    Console.ReadKey();
+                    return null;
+                }
+
+                bool continuarEscolhendo = true;
+                Episodio episodioEscolhido = null;
+                while (continuarEscolhendo)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Escolha um Episódio:");
+                    for (int i = 0; i < podcast.TotalEpsodios; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. Episódio {podcast.EpisodiosList[i].Numero} - {podcast.EpisodiosList[i].Titulo}");
+                    }
+
+                    Console.Write("Escolha o número do episódio (ou 0 para voltar ao menu): ");
+                    int escolha = int.Parse(Console.ReadLine()) - 1;
+
+                    if (escolha == -1)
+                    {
+                        continuarEscolhendo = false;
+                    }
+                    else if (escolha >= 0 && escolha < podcast.TotalEpsodios)
+                    {
+                        episodioEscolhido = podcast.EpisodiosList[escolha];
+                        Console.WriteLine($"Episódio {episodioEscolhido.Numero} - {episodioEscolhido.Titulo} selecionado!");
+                        continuarEscolhendo = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Episódio inválido.");
+                        Console.WriteLine("Pressione qualquer tecla para tentar novamente...");
+                        Console.ReadKey();
+                    }
+                }
+                return episodioEscolhido;
+            }
+            catch (Exception) { throw; }
+        }
+        public static void ListarConvidados(Episodio episodio)
+        {
+            try
+            {
+
+
+                Console.Clear();
+                if (episodio.TotalConvidados == 0)
+                {
+                    Console.WriteLine("Este episódio não possui convidados.");
+                }
+                else
+                {
+                    Console.WriteLine($"Convidados do Episódio {episodio.Numero}:");
+                    foreach (var convidado in episodio.ConvidadosList)
+                    {
+                        Console.WriteLine($"- {convidado.Nome} ({convidado.Profissao})");
+                    }
+                }
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+            }
+            catch (Exception) { throw; }
+        }
+
+        public static void AdicionarConvidado(Episodio episodio)
+        {
+            try
+            {
+
+                Console.Clear();
+                Console.Write("Nome do Convidado: ");
+                string nomeConvidado = Console.ReadLine();
+
+                Console.Write("Profissão do Convidado: ");
+                string profissaoConvidado = Console.ReadLine();
+
+                Convidado convidado = new Convidado(nomeConvidado, profissaoConvidado);
+                episodio.AdicionarConvidado(convidado);
+
+                Console.WriteLine($"Convidado {nomeConvidado} - {profissaoConvidado} adicionado ao Episódio {episodio.Numero}.");
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+
+            }
+            catch (Exception) { throw; }
+
+        }
+
 
     }
+    
 }
 
-
-
-
-
-//

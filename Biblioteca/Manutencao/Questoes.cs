@@ -730,10 +730,16 @@ namespace Biblioteca.Manutencao
                     Console.Write("\nInsira seu CPF: ");
                     string cpf = Console.ReadLine();
 
+                    if (!long.TryParse(cpf, out _))
+                    {
+                        Console.WriteLine("CPF deve conter apenas números. Tente novamente.");
+                        continue;
+                    }
+
                     var validacao = metodos.VerificaCpf(cpf);
                     if (validacao)
                     {
-                        Console.WriteLine($"\nSeu CPF: {cpf} é valido!");
+                        Console.WriteLine($"\nSeu CPF: {cpf} é válido!");
                         return;
                     }
                     else
@@ -744,7 +750,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
             }
         }
 
@@ -915,6 +921,11 @@ namespace Biblioteca.Manutencao
                 {
                     Console.Write("\nInsira seu CNPJ: ");
                     string cnpj = Console.ReadLine();
+                    if (!long.TryParse(cnpj, out _))
+                    {
+                        Console.WriteLine("CPF deve conter apenas números. Tente novamente.");
+                        continue;
+                    }
 
                     var validacao = metodos.VerificaCnpj(cnpj);
                     if (validacao)

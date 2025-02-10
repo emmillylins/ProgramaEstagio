@@ -260,7 +260,7 @@ namespace Biblioteca.Manutencao
                 for (int i = 0; i < tentativas; i++)
                 {
                     Console.Write("Insira seu nome de usuário: ");
-                    string nomeUsuario = Console.ReadLine();
+                    string nomeUsuario = Console.ReadLine()!;
 
                     if (string.IsNullOrEmpty(nomeUsuario))
                     {
@@ -271,7 +271,7 @@ namespace Biblioteca.Manutencao
                     {
 
                         Console.Write("Insira sua senha: ");
-                        var senha = Console.ReadLine();
+                        var senha = Console.ReadLine()!;
 
                         if (string.IsNullOrEmpty(senha))
                         {
@@ -480,8 +480,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+    #region  Formulário 3
 
-
+        #region Questão jogo de adivinhação
         /* 
             Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
 
@@ -528,6 +529,9 @@ namespace Biblioteca.Manutencao
 
         }
 
+        #endregion
+
+        #region Questão classificação de números positivos e negativos
         /* 
             Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros. 
         */
@@ -596,7 +600,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Questão de validação de senha
         /* 
             Questão 3: Validação de Senha:
             Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, 
@@ -614,7 +620,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Questao Calculadora
         /* 
             Desenvolva uma calculadora que permita ao usuário realizar operações básicas (adição, subtração, multiplicação, divisão) e 
             operações avançadas (potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle (switch/case).
@@ -691,7 +699,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        
+        #region Questao validação de CPF
         /* 
             Questão 5: Validação de CPF
             Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto (11 dígitos numéricos). 
@@ -717,39 +728,138 @@ namespace Biblioteca.Manutencao
         */
         public void ValidacaoCPF()
         {
-            Console.Clear();
-            Console.WriteLine("Validador de CPF");
-
-            Console.Write("Digite seu cpf: ");
-            var cpf = Console.ReadLine()!;
-
-            if (cpf.Length != 11 || !cpf.All(char.IsDigit)) 
+            while(true)
             {
-                Console.WriteLine("O CPF deve ter 11 caracteres");
-                return;
-            }
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("Validador de CPF");
 
-            var penultimoDigito = cpf[9];
-            var ultimoDIgito = cpf[10];
+                    var metodos = new Metodos();
 
-            string noveCaracteresCpf = cpf[..9]; // Esta variavel armazena os nove primeiros caracteres.
-            string dezCaracteresCpf = cpf[..10]; // Esta variavel armazena os nove primeiros caracteres.
+                    Console.Write("Digite seu cpf: ");
+                    var cpf = Console.ReadLine()!;
 
-            List<int> resultado = []; // primeira validação             
-            int resultadoMultiplicacaoDigitoPeso = 0;// vai armazenar a soma da multiplicacao do digito pelo peso
+                    // valida se cpf nao tem 11 caracteres e se os caracteres não sao digitos numericos
+                    if (cpf.Length != 11 || !cpf.All(char.IsDigit)) 
+                    {
+                        throw new Exception("O CPF deve ter 11 caracteres");
+                    }
 
-            int peso = 10;
+                    var penultimoDigitoCpfInserido = int.Parse(cpf[9].ToString());
+                    var ultimoDigitoCpfInserido = int.Parse(cpf[10].ToString());
 
+                    string noveCaracteresCpfInserido = cpf[..9]; // Esta variavel armazena os nove primeiros caracteres.
+                    string dezCaracteresCpfInserido = cpf[..10]; // Esta variavel armazena os dez primeiros caracteres.
+
+                    var primeiroDigitoVerificador = metodos.CalculaDigitoVerificador(10, noveCaracteresCpfInserido);
+                    var segundoDigitoVerificador = metodos.CalculaDigitoVerificador(11, dezCaracteresCpfInserido);
+
+                    // Valida se os dígitos batem
+                    if (primeiroDigitoVerificador == penultimoDigitoCpfInserido && segundoDigitoVerificador == ultimoDigitoCpfInserido)
+                    {
+                        Console.WriteLine("CPF inserido está em um formato válido.");
+                        return;
+                    }
+                    else
+                    {
+                        throw new Exception("CPF inserido está em um formato inválido.");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    
+                    Console.WriteLine(e.Message);
+                    Thread.Sleep(2000);
+                }
+            }           
             
-            for(int i = 0; i < noveCaracteresCpf.Length; i++) 
-            {
-                var numeroInteiro = int.Parse(noveCaracteresCpf[i].ToString());
-                resultadoMultiplicacaoDigitoPeso = numeroInteiro * peso;
-                resultado.Add(resultadoMultiplicacaoDigitoPeso);
-                peso--;
-            }                     
-            Console.WriteLine(resultado.Sum() % 11);
         }
+        #endregion    
+
+       
+    #endregion   
+        
+    #region Desafio - alura    
+
+        #region Gerenciador de podcasts
+        /* 
+            Questão do mestre
+            crie três classes para manter podcasts, episódios e convidados.
+            convidado deve ter um Codigo e um Nome
+            O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
+            O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
+            Um podcast nasce com um nome e um apresentador definido.
+            Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+            Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
+            O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+            seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+            O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
+            Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
+
+            Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
+            Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
+            e também se precisamos utilizar get e set para todos os valores.
+        */
+        public void GerenciadorPodcast()
+        {
+            bool condicao = true;
+            Podcast podcast = new("Sem-lógica", "Thiago");
+            Metodos metodos = new();
+
+            while(condicao)
+            {
+                try
+                {
+
+                    Console.Clear();
+                    Console.WriteLine($"Bem vindo ao gerenciador do podcast {podcast.Nome}");
+                    
+                    Console.WriteLine("1 - Adicionar episódio ao podcast");
+                    Console.WriteLine("2 - Exibir detalhes do podcast");
+                    Console.WriteLine("3 - Adicionar convidado ao episódio.");
+                    Console.WriteLine("4 - Sair.");
+
+                    Console.WriteLine("\nSelecione a ação: ");
+                    if(!int.TryParse(Console.ReadLine(), out int opcao) || opcao < 1 || opcao > 4)
+                    {
+                        Console.WriteLine("Insira um valor numérico entre 1 e 3");
+                        Thread.Sleep(2000);
+                        continue;
+                    }
+
+                    switch (opcao)
+                    {
+                        case 1:
+                            metodos.AdicionarEpisodio(podcast);
+                            Console.ReadKey();
+                            break;
+                        case 2:
+                            metodos.ExibirDetalhes(podcast);
+                            Console.ReadKey();
+                            break;
+                        case 3:
+                            Console.WriteLine("Adicionar convidado ao episódio.");
+                            Thread.Sleep(2000);
+                            break;
+                        case 4:
+                            Console.WriteLine("Sair");
+                            condicao = false;
+                            break;
+                    }
+                }
+                catch (Exception e)
+                { 
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        #endregion
+
+    #endregion    
+   
     }
 }
 

@@ -366,9 +366,84 @@ namespace Biblioteca.Manutencao
             Console.WriteLine($"O número {num1} elevado a {num2}° é {resultado}");            
         }
 
-        public void ValidaCPF(int peso, string cadeiaDeCaracteres)
+        public int CalculaDigitoVerificador(int peso, string cadeiaDeCaracteres)
+        {
+            try
+            {
+                List<int> resultado = []; // lista para armazenar a multiplicação do dígito pelo peso.
+            
+                for(int i = 0; i < cadeiaDeCaracteres.Length; i++) 
+                {
+                    var numeroInteiro = int.Parse(cadeiaDeCaracteres[i].ToString());
+                    var resultadoMultiplicacaoDigitoPeso = numeroInteiro * peso;
+                    resultado.Add(resultadoMultiplicacaoDigitoPeso);
+                    peso--;
+                }      
+
+                var resto = resultado.Sum() % 11; 
+                
+                return (resto < 2) ? 0 : 11 - resto;
+            }
+            catch (Exception) { throw; }
+            
+        }
+
+        #region Métodos referentes ao desafio da alura de orientação a objetos
+        public void AdicionarEpisodio(Podcast podcast)
+        {
+            try
+            {
+                Console.Clear();
+
+                Console.WriteLine($"Adicione um Episodio ao podcast {podcast.Nome}: ");
+                
+                Console.Write($"\nAdicione um título ao episódio {podcast.Nome}: ");
+                string tituloEpisodio = Console.ReadLine()!;
+                
+                Console.Write("Qual a duração do episódio que deseja adicionar: ");
+                if(!int.TryParse(Console.ReadLine(), out int duracaoEpisodio) || duracaoEpisodio <= 0)
+                {
+                  throw new Exception("A duração precisa ser um valor numérico maior que zero");
+                }
+
+                Console.Write($"Adicione um resumo ao episódio {podcast.Nome}: ");
+                string resumoEpisodio = Console.ReadLine()!;
+
+                Episodio episodio = new(tituloEpisodio, duracaoEpisodio, resumoEpisodio);
+
+                podcast.Episodios.Add(episodio);
+
+                Console.WriteLine($"Episódio {episodio.Titulo} adicionado ao Podcast {podcast.Nome}");
+            }
+            catch (Exception) { throw; }
+            
+        }
+
+        public void ExibirDetalhes(Podcast podcast) 
+        {
+            Console.WriteLine($"Podcast: {podcast.Nome}. Apresentador: {podcast.Apresentador}");
+            Console.WriteLine($"Total de episódios: {podcast.Episodios.Count}");
+
+            var listEpisodiosOrdenada = podcast.Episodios.OrderBy(e => e.Id).ToList();
+            foreach(Episodio episodio in listEpisodiosOrdenada) 
+            {
+                Console.WriteLine($"{episodio.Titulo}");
+                foreach(Convidado convidado in episodio.Convidados)
+                {
+                    Console.WriteLine($"Ficha técnica - Resumo: {episodio.Resumo} - Número: {episodio.Id} - Título: {episodio.Titulo} - Duração: {episodio.Duracao} - Convidados: {convidado}");
+                }
+
+                Console.WriteLine($"Total de episódios: {podcast.Episodios.Count}");
+            }            
+        }
+
+        public void AdicionaConvidadoAoEpisodio(Episodio episodio)
         {
 
         }
+
+
+
+        #endregion
     }
 }

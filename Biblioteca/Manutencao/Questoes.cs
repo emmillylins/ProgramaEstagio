@@ -818,8 +818,7 @@ namespace Biblioteca.Manutencao
                     
                     Console.WriteLine("1 - Adicionar episódio ao podcast");
                     Console.WriteLine("2 - Exibir detalhes do podcast");
-                    Console.WriteLine("3 - Adicionar convidado ao episódio.");
-                    Console.WriteLine("4 - Sair.");
+                    Console.WriteLine("3 - Sair.");
 
                     Console.WriteLine("\nSelecione a ação: ");
                     if(!int.TryParse(Console.ReadLine(), out int opcao) || opcao < 1 || opcao > 4)
@@ -840,10 +839,6 @@ namespace Biblioteca.Manutencao
                             Console.ReadKey();
                             break;
                         case 3:
-                            Console.WriteLine("Adicionar convidado ao episódio.");
-                            Thread.Sleep(2000);
-                            break;
-                        case 4:
                             Console.WriteLine("Sair");
                             condicao = false;
                             break;

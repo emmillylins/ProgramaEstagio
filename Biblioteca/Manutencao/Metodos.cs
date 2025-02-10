@@ -413,6 +413,14 @@ namespace Biblioteca.Manutencao
 
                 podcast.Episodios.Add(episodio);
 
+                Console.WriteLine("Deseja adicionar um convidado ao podcast? (Sim - Não)");
+                var resposta = Console.ReadLine()!;
+
+                if(resposta.ToLower() == "sim")
+                {
+                    AdicionaConvidado(episodio);
+                }
+
                 Console.WriteLine($"Episódio {episodio.Titulo} adicionado ao Podcast {podcast.Nome}");
             }
             catch (Exception) { throw; }
@@ -424,22 +432,42 @@ namespace Biblioteca.Manutencao
             Console.WriteLine($"Podcast: {podcast.Nome}. Apresentador: {podcast.Apresentador}");
             Console.WriteLine($"Total de episódios: {podcast.Episodios.Count}");
 
-            var listEpisodiosOrdenada = podcast.Episodios.OrderBy(e => e.Id).ToList();
+            var listEpisodiosOrdenada = podcast.Episodios.OrderBy(e => e.Numero).ToList();
             foreach(Episodio episodio in listEpisodiosOrdenada) 
             {
                 Console.WriteLine($"{episodio.Titulo}");
+                Console.WriteLine($"Ficha técnica - Resumo: {episodio.Resumo} - Número: {episodio.Numero} - Título: {episodio.Titulo} - Duração: {episodio.Duracao}");
                 foreach(Convidado convidado in episodio.Convidados)
                 {
-                    Console.WriteLine($"Ficha técnica - Resumo: {episodio.Resumo} - Número: {episodio.Id} - Título: {episodio.Titulo} - Duração: {episodio.Duracao} - Convidados: {convidado}");
+                    Console.WriteLine($"Convidado: {convidado.Nome} - Código: {convidado.Codigo}");
                 }
-
-                Console.WriteLine($"Total de episódios: {podcast.Episodios.Count}");
             }            
         }
 
-        public void AdicionaConvidadoAoEpisodio(Episodio episodio)
+        public void AdicionaConvidado(Episodio episodio)
         {
+            if(episodio == null)
+            {
+                throw new Exception("Episódio não foi encontrado");
+            }
 
+            Console.Write("Digite a quantidade de convidados que voce deseja adicionar: ");
+            if (!int.TryParse(Console.ReadLine(), out var quantidadeConvidado) || quantidadeConvidado <= 0)
+            {
+               throw new Exception("Digite um valor numérico válido e maior que zero para a quantidade de convidados.");
+            }
+
+            for (int i = 0; i < quantidadeConvidado; i++)
+            {
+                Console.Write("Digite o nome do convidado: ");
+                var convdidadoNome =  Console.ReadLine()!;
+
+                Convidado convidado = new(convdidadoNome);
+
+                episodio.Convidados.Add(convidado);
+
+                Console.WriteLine($"O convidado {convidado.Nome} foi adicionado ao episodio {episodio.Titulo}");
+            }
         }
 
 

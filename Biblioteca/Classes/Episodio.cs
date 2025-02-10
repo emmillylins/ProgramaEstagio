@@ -4,7 +4,7 @@
 public class Episodio
 {
     private static int contadorId;
-    public int Id = 0;
+    public int Numero = 0;
     public string? Titulo { get; }
     public int Duracao { get; }
     public string Resumo { get; }
@@ -15,7 +15,7 @@ public class Episodio
 
     public Episodio(string titulo, int duracao, string resumo) 
     {
-        this.Id =  ++contadorId;
+        this.Numero =  ++contadorId;
         this.Titulo = titulo;
         this.Duracao = duracao;
         this.Resumo = resumo;

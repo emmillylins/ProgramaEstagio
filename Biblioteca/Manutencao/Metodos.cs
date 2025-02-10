@@ -412,39 +412,56 @@ namespace Biblioteca.Manutencao
         {
             try
             {
-                Console.WriteLine("Digite o título do episódio: ");
-                string? titulo = Console.ReadLine();
-                Console.WriteLine("Digite a duração do episódio: ");
-                if (!int.TryParse(Console.ReadLine(), out var duracao))
+                while (true)
                 {
-                    Console.WriteLine("Digite um valor numérico válido");
-                }
-                else
-                {
-                    Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
-                    episodio.Duracao = duracao;
-                    pod.Episodios.Add(episodio);
-                    pod.TotalEpisodios++;
-                    while (true)
+                    Console.WriteLine("Digite o título do episódio: ");
+                    string? titulo = Console.ReadLine();
+                    if (string.IsNullOrEmpty(titulo))
                     {
-                        Console.WriteLine("Deseja adicionar mais algum convidado a este episódio ?");
-                        Console.Write("\nDigite sim ou nao: ");
-                        string? opcaoDigitada = Console.ReadLine().ToLower();
-                        if (opcaoDigitada == "sim")
+                        Console.WriteLine("O título do episódio não pode ser nulo ou vazio");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Digite a duração do episódio: ");
+                        if (!int.TryParse(Console.ReadLine(), out var duracao))
                         {
-                            Console.Write("\nDigite o nome do convidado: ");
-                            string? nomeConvidado = Console.ReadLine();
-                            Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
-                            episodio.Convidados.Add(convidado);
-                            episodio.TotalConvidados++;
-                        }
-                        else if (opcaoDigitada == "nao")
-                        {
-                            break;
+                            Console.WriteLine("Digite um valor numérico válido");
                         }
                         else
                         {
-                            Console.WriteLine("Opção digita é inválida.");
+                            Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
+                            episodio.Duracao = duracao;
+                            pod.Episodios.Add(episodio);
+                            pod.TotalEpisodios++;
+                            while (true)
+                            {
+                                Console.WriteLine("Deseja adicionar algum convidado a este episódio ?");
+                                Console.Write("\nDigite sim ou nao: ");
+                                string? opcaoConvidadoDigitada = Console.ReadLine().ToLower();
+                                if (opcaoConvidadoDigitada == "sim")
+                                {
+                                    Console.Write("\nDigite o nome do convidado: ");
+                                    string? nomeConvidado = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(nomeConvidado))
+                                    {
+                                        Console.WriteLine("O nome do convidado não pode ser nulo ou vazio");
+                                    }
+                                    else
+                                    {
+                                        Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
+                                        episodio.Convidados.Add(convidado);
+                                        episodio.TotalConvidados++;
+                                    }
+                                }
+                                else if (opcaoConvidadoDigitada == "nao")
+                                {
+                                    return;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Opção digita é inválida.");
+                                }
+                            }
                         }
                     }
                 }
@@ -464,44 +481,70 @@ namespace Biblioteca.Manutencao
                 if (pod.Episodios.Count == 0)
                 {
                     Console.WriteLine("Não há episódios cadastrados");
-                    Console.Write("\nDeseja adicionar um episódio ?\n Digite sim ou nao: ");
-                    string? opcaoDigitada = Console.ReadLine();
-                    if (opcaoDigitada == "sim")
+                    while (true)
                     {
-                        Console.WriteLine("Digite o título do episódio: ");
-                        string? titulo = Console.ReadLine();
-                        Console.WriteLine("Digite a duração do episódio: ");
-                        if (!int.TryParse(Console.ReadLine(), out var duracao))
+                        Console.Write("\nDeseja adicionar um episódio ?\n Digite sim ou nao: ");
+                        string? opcaoDigitada = Console.ReadLine();
+                        if (opcaoDigitada == "sim")
                         {
-                            Console.WriteLine("Digite um valor numérico válido");
-                            return;
-                        }
-                        Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
-                        episodio.Duracao = duracao;
-                        pod.Episodios.Add(episodio);
-                        pod.TotalEpisodios++;
-                        while (true)
-                        {
-                            Console.WriteLine("Deseja adicionar algum convidado a este episódio ?");
-                            Console.Write("\nDigite sim ou nao: ");
-                            string? opcaoConvidadoDigitada = Console.ReadLine().ToLower();
-                            if (opcaoConvidadoDigitada == "sim")
+                            Console.WriteLine("Digite o título do episódio: ");
+                            string? titulo = Console.ReadLine();
+                            if (string.IsNullOrEmpty(titulo))
                             {
-                                Console.Write("\nDigite o nome do convidado: ");
-                                string? nomeConvidado = Console.ReadLine();
-                                Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
-                                episodio.Convidados.Add(convidado);
-                                episodio.TotalConvidados++;
-                            }
-                            else if (opcaoConvidadoDigitada == "nao")
-                            {
-                                ExibirDetalhes(pod);
-                                break;
+                                Console.WriteLine("O título do episódio não pode ser nulo ou vazio");
                             }
                             else
                             {
-                                Console.WriteLine("Opção digita é inválida.");
+                                Console.WriteLine("Digite a duração do episódio: ");
+                                if (!int.TryParse(Console.ReadLine(), out var duracao))
+                                {
+                                    Console.WriteLine("Digite um valor numérico válido");
+                                }
+                                else
+                                {
+                                    Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
+                                    episodio.Duracao = duracao;
+                                    pod.Episodios.Add(episodio);
+                                    pod.TotalEpisodios++;
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Deseja adicionar algum convidado a este episódio ?");
+                                        Console.Write("\nDigite sim ou nao: ");
+                                        string? opcaoConvidadoDigitada = Console.ReadLine().ToLower();
+                                        if (opcaoConvidadoDigitada == "sim")
+                                        {
+                                            Console.Write("\nDigite o nome do convidado: ");
+                                            string? nomeConvidado = Console.ReadLine();
+                                            if (string.IsNullOrEmpty(nomeConvidado))
+                                            {
+                                                Console.WriteLine("O nome do convidado não pode ser nulo ou vazio");
+                                            }
+                                            else
+                                            {
+                                                Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
+                                                episodio.Convidados.Add(convidado);
+                                                episodio.TotalConvidados++;
+                                            }
+                                        }
+                                        else if (opcaoConvidadoDigitada == "nao")
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Opção digita é inválida.");
+                                        }
+                                    }
+                                }
                             }
+                        }
+                        else if (opcaoDigitada == "nao")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Digite uma opção válida!");
                         }
                     }
                 }
@@ -510,11 +553,19 @@ namespace Biblioteca.Manutencao
                     foreach (Episodio episodio in pod.Episodios)
                     {
                         Console.WriteLine(episodio.Resumo);
-                        foreach (Convidado convidado in episodio.Convidados)
+                        if (episodio.Convidados.Count > 0)
                         {
-                            Console.WriteLine(convidado.Resumo);
+                            foreach (Convidado convidado in episodio.Convidados)
+                            {
+                                Console.WriteLine(convidado.Resumo);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"O episodio {episodio.Numero} não possui convidados.");
                         }
                     }
+                    Console.WriteLine($"Houveram no total {pod.Episodios.Count} episódios.");
                 }
             }
             catch (Exception)

@@ -23,7 +23,7 @@ class Program
             //manutencao.ValidarCpf();
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
-            //manutencao.GeradorTabuada();
+            manutencao.GeradorTabuada();
             //manutencao.ValidarCnpj();
             //manutencao.ExibirPodcast();
 

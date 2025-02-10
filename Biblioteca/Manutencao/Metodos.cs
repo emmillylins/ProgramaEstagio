@@ -697,6 +697,11 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Digite um número válido.");
                 return;
             }
+            if (numero < 1 || numero > 10)
+            {
+                Console.WriteLine("A tabuada só calcula números de 1 a 10.");
+                return;
+            }
             for (int i = 1; i <= 10; i++)
             {
                 Console.WriteLine($"{numero} x {i} = {numero * i}");

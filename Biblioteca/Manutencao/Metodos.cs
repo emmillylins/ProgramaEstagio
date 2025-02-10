@@ -832,8 +832,7 @@ namespace Biblioteca.Manutencao
                         foreach (Convidado convidado in ep.Convidado)
                         {
                             Console.WriteLine($"Nome: {convidado.Nome}");
-                        }
-                        
+                        } 
                     }
                     else
                     {

@@ -180,6 +180,7 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #region Gerenciamento de Alunos e Notas
         public Aluno CadastrarAluno()
         {
             try
@@ -289,6 +290,8 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+
+        #endregion
 
         #region Calculadora Avançada
         public void Soma()
@@ -520,7 +523,7 @@ namespace Biblioteca.Manutencao
                                                 Console.WriteLine("\nInforme a duração do episódio em minutos: ");
                                                 Console.Write("Duração: ");
 
-                                                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture,out var duracaoInserida))
+                                                if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture,out var duracaoInserida) || duracaoInserida < 0)
                                                 {
                                                     Console.WriteLine("\nValor inserido para a duração inválido!");
                                                 }

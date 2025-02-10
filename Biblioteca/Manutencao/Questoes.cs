@@ -7,6 +7,8 @@ namespace Biblioteca.Manutencao
     public class Questoes
     {
         #region Formulário
+
+        #region Verifica se o número é primo
         public void VerificaNumeroPrimo()
         {
             try
@@ -32,7 +34,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //Questão de João Gabriel
+        #endregion
+
+        #region Questão de João Gabriel
+
         // Escreva um programa C# que solicite ao usuário 5 números inteiros 
         // O programa deve armazenar esses números em uma lista e, ao final,
         // exibir os números pares e a soma dos números ímpares
@@ -81,7 +86,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //Questão de Elton
+        #endregion
+
+        #region Questão de Elton
         //Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
         // apenas os números positivos em uma lista.
         // Se um número negativo for inserido ele deve ser ignorado e o programa deve solicitar
@@ -113,8 +120,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-        // Questão de Vanessa
+        #region Questão de Vanessa
+
         //Escreva um programa que solicite ao usuario 5 números inteiros
         // Determine quantos deles são múltiplo de 3
         public void ExibeQtdMultiplosDeTres()
@@ -144,8 +153,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-        // Questão de Clara
+        #region Questão de Clara
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
         //  e qual é o menor digitado
         //  Caso o número não seja válido, ele deve pedir novamente.
@@ -188,6 +198,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Programa com menu interativo
         //Crie um programa que exiba um menu interativo com as seguintes opções:
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
@@ -239,8 +252,9 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
 
-        //Sistema de Login com Tentativas Limitadas
+        #region Sistema de Login com Tentativas Limitadas
         //Crie um programa que simule um sistema de login.
         //O usuário deve fornecer um nome de usuário e senha.
         //O programa deve validar se as credenciais correspondem a um usuário pré-cadastrado.
@@ -295,8 +309,10 @@ namespace Biblioteca.Manutencao
             ;
         }
 
+        #endregion
 
-        //Caixa Eletrônico Simples
+        #region Caixa Eletrônico Simples
+
         //Desenvolva um programa que simule um caixa eletrônico.
         //O usuário começa com um saldo inicial.
         //Ele pode escolher entre as opções:
@@ -366,7 +382,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //Cadastro de Produtos com Preços e Cálculo de Total
+        #endregion
+
+        #region Cadastro de Produtos com Preços e Cálculo de Total
+
         //Crie um programa que permita cadastrar produtos com nome e preço.        
         //O usuário pode cadastrar quantos produtos desejar.
         //Ao final, o programa deve exibir a lista de produtos cadastrados e o valor total da compra.
@@ -419,8 +438,8 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #region Gerenciamento de Alunos e Notas
 
-        //Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
         //O sistema deve permitir:
         //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
@@ -482,9 +501,11 @@ namespace Biblioteca.Manutencao
 
         #endregion
 
+        #endregion
+
         #region FORMULÁRIO C# 3
 
-        //Questão 1: Como posso criar um jogo simples de adivinhação em C#
+        #region Questão 1: Como posso criar um jogo simples de adivinhação em C#
         //onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
         //Regras:
         //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
@@ -564,8 +585,11 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
 
-        //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
+        #region Questão 2: Programa que classifica números inteiros
+
+        //Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
         public void ClassificacaoNumeros()
         {
             try
@@ -647,7 +671,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-        //Questão 3: Validação de Senha:
+        #endregion
+
+        #region Questão 3: Validação de Senha:
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula,
         //uma letra minúscula e um caractere especial.O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
@@ -683,6 +709,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
 
         #region Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão)
@@ -1001,6 +1029,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
         #endregion
     }
 }

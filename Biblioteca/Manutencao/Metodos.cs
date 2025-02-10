@@ -1,14 +1,11 @@
 ﻿using Biblioteca.Classes;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
-using System.Xml;
-
 
 namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
-        //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
             try
@@ -22,7 +19,6 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -43,7 +39,6 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
-
         public Usuario CadastrarUsuario()
         {
             try
@@ -69,7 +64,6 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
         public double Depositar()
         {
             try
@@ -109,7 +103,7 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-        public Produto CadastrarProduto()
+        public Produto? CadastrarProduto()
         {
             try
             {
@@ -179,8 +173,7 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
             }
         }
-
-        public Aluno CadastrarAluno()
+        public Aluno? CadastrarAluno()
         {
             try
             {
@@ -217,7 +210,6 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
-
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
@@ -248,7 +240,6 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
-
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
@@ -289,7 +280,6 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
-
         public void ExibirMenu()
         {
             Console.WriteLine("\nSelecione uma opcao abaixo: ");
@@ -298,7 +288,6 @@ namespace Biblioteca.Manutencao
             Console.WriteLine("3 - Sair\n");
             Console.Write("Digite a opção escolhida: ");
         }
-
         public bool ValidarSenha(string senha)
         {
             if (senha.Length < 8)
@@ -306,12 +295,12 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Precisa ter ao menos 8 caracteres");
                 return false;
             }
-            if(!senha.Any(char.IsUpper))
+            if (!senha.Any(char.IsUpper))
             {
                 Console.WriteLine("Precisa ter ao menos uma letra maiuscula");
                 return false;
             }
-            if (!senha.Any(char.IsLower)) 
+            if (!senha.Any(char.IsLower))
             {
                 Console.WriteLine("Precisa ter ao menos uma letra minuscula");
                 return false;
@@ -345,8 +334,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    Console.Write($"Digite o {i + 1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num))
                     {
                         Console.WriteLine("Digite apenas numeros validos");
                         i--;
@@ -367,8 +356,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    Console.Write($"Digite o {i + 1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num))
                     {
                         Console.WriteLine("Digite apenas numeros validos");
                         i--;
@@ -390,8 +379,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    Console.Write($"Digite o {i + 1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num))
                     {
                         Console.WriteLine("Digite apenas numeros validos");
                         i--;
@@ -413,8 +402,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    Console.Write($"Digite o {i+1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num))
                     {
                         Console.WriteLine("Digite apenas numeros validos");
                         i--;
@@ -422,10 +411,21 @@ namespace Biblioteca.Manutencao
                     }
                     lista.Add(num);
                 }
+
+                if (lista[1] == 0)
+                {
+                    Console.WriteLine("O numero nao pode ser divisivel por zero");
+                    return double.NaN;
+                }
+
                 double resultadoDivisao = lista[0] / lista[1];
                 return resultadoDivisao;
             }
-            catch (Exception) { throw; }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return double.NaN; // Return NaN in case of an unexpected exception
+            }
         }
         public double MenuCalculadoraPotenciacao(List<double> lista)
         {
@@ -437,8 +437,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num))
+                    Console.Write($"Digite o {i + 1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num))
                     {
                         Console.WriteLine("Digite apenas numeros validos");
                         i--;
@@ -460,8 +460,8 @@ namespace Biblioteca.Manutencao
 
                 for (int i = 0; i < 1; i++)
                 {
-                    Console.Write("Digite o numero: ");
-                    if (!double.TryParse(Console.ReadLine(), out var num) || num < 0)
+                    Console.Write($"Digite o {i + 1}º numero: ");
+                    if (!double.TryParse(Console.ReadLine(), CultureInfo.InvariantCulture, out var num) || num < 0)
                     {
                         Console.WriteLine("Digite apenas numeros validos e positivos");
                         i--;
@@ -479,7 +479,7 @@ namespace Biblioteca.Manutencao
             Console.WriteLine("Digite o valor do saque: ");
             Console.WriteLine("(Multiplos de 10)");
 
-            if(!int.TryParse(Console.ReadLine(),out var valorSaque) || valorSaque <= 0 || valorSaque % 10 != 0)
+            if (!int.TryParse(Console.ReadLine(), out var valorSaque) || valorSaque <= 0 || valorSaque % 10 != 0)
             {
                 Console.WriteLine("Valor invalido, favor digite um valor valido e positivo");
                 return 0;
@@ -493,12 +493,12 @@ namespace Biblioteca.Manutencao
 
             Metodos metodos = new Metodos();
             metodos.CalcularNotas(valorSaque);
-                
+
             return valorSaque;
         }
-        public void CalcularNotas (int valorSaque)
+        public void CalcularNotas(int valorSaque)
         {
-            List<int> notas = new List<int> { 100, 50, 20, 10};
+            List<int> notas = new List<int> { 100, 50, 20, 10 };
 
             Console.WriteLine("Notas disponiveis");
 

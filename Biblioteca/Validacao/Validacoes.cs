@@ -79,5 +79,14 @@ namespace Biblioteca.Validacao
 
             return true;
         }
+        public void MenuDesafioAlura()
+        {
+            Console.WriteLine("\nDesafio Podcast\n");
+            Console.WriteLine("1 - Adicionar Episódio");
+            Console.WriteLine("2 - Adicionar Convidado a um Episódio");
+            Console.WriteLine("3 - Exibir Detalhes do Podcast");
+            Console.WriteLine("4 - Sair");
+            Console.Write("\nEscolha uma opção: ");
+        }
     }
 }

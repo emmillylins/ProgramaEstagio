@@ -24,8 +24,8 @@ class Program
             //manutencao.SolicitarSaque(3500.50);
             //manutencao.GeradorTabuadaPersonalizado();
             //manutencao.JogoForca();
+            manutencao.DesafioAlura();
             Console.ReadKey();
-            
         }
         catch (Exception e)
         {

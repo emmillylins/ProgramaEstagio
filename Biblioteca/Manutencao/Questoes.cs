@@ -6,6 +6,7 @@ namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region : teste inicial
         public void VerificaNumeroPrimo()
         {
             try
@@ -477,7 +478,8 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
+        #endregion
+        #region : teste 3
         //Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário
         ////tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
 
@@ -524,10 +526,8 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-
         //Questão 2: Crie um programa que leia uma 
         //lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
-
         public void LerListaNumeros()
         {
             try
@@ -551,7 +551,7 @@ namespace Biblioteca.Manutencao
                         Console.Write("Digite quantos numeros voce deseja inserir: ");
                         if (!int.TryParse(Console.ReadLine(), out int quantidade) || quantidade <= 0)
                         {
-                            Console.WriteLine("Quantidade invalida. Digite um numero maior que zero.");
+                            Console.WriteLine("Favor informar apenas numeros inteiros positivos.");
                             continue;
                         }
 
@@ -612,7 +612,6 @@ namespace Biblioteca.Manutencao
         //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
         //O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
-
         public void ValidacaoSenha()
         {
             try
@@ -636,13 +635,11 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
-
         //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas
         //(adição, subtração, multiplicação, divisão)
         //e operações avançadas(potenciação, raiz quadrada)
         //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
-
         public void CalculadoraAvancada()
         {
             try
@@ -731,7 +728,6 @@ namespace Biblioteca.Manutencao
         //Soma-se os resultados.
         //O dígito verificador é o resto da divisão dessa soma por 11. 
         //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
-
         public void ValidacaoCpf()
         {
             try
@@ -744,7 +740,6 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-
         //Questão 6: Simulador de Caixa Eletrônico
         //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         //O programa deve:
@@ -752,7 +747,6 @@ namespace Biblioteca.Manutencao
         //Verificar se o valor é múltiplo de 10 (já que o caixa só trabalha com notas de 10, 20, 50 e 100).
         //Calcular a quantidade de notas necessárias para o saque, priorizando as notas de maior valor.
         //Tratar exceções para valores inválidos (negativos, não múltiplos de 10, etc.).
-
         public void SolicitarSaque(double saldoInicial)
         {
             try
@@ -812,7 +806,6 @@ namespace Biblioteca.Manutencao
         //Exibir o progresso do usuário (letras acertadas e letras faltando). 
         //Contar as tentativas restantes.
         //Tratar exceções para entradas inválidas (mais de uma letra, caracteres não alfabéticos, etc.).
-
         public void JogoForca()
         {
             try
@@ -830,31 +823,37 @@ namespace Biblioteca.Manutencao
                     resultado[i] = "_ ";
                 }
 
-                Console.WriteLine("Digite uma letra: ");
-
                 while (erros < 7)
                 {
                     Console.WriteLine(string.Join("", resultado));
                     Console.WriteLine($"\nErros: {erros} | Acertos: {acertos}");
+                    Console.Write("Digite uma letra: ");
 
                     char letra = char.ToLower(Console.ReadLine()![0]);
 
                     if (palavra.Contains(letra))
                     {
+                        bool letraCorreta = false;
+
                         for (int i = 0; i < palavra.Length; i++)
                         {
-                            if(palavra[i] == letra)
+                            if (palavra[i] == letra && resultado[i] == "_ ")
                             {
-                                //palavra[i] = letra
+                                resultado[i] = letra.ToString();
+                                acertos++;
+                                letraCorreta = true;
                             }
+                        }
+                        if (!letraCorreta)
+                        {
+                            erros++;
                         }
                     }
                     else
                     {
                         erros++;
                     }
-
-                    if (!resultado.Contains("_ "))
+                    if (!Array.Exists(resultado, e => e == "_ "))
                     {
                         Console.WriteLine(string.Join("", resultado));
                         Console.WriteLine("Você ganhou!");
@@ -876,7 +875,6 @@ namespace Biblioteca.Manutencao
         //Tratar exceções para entradas inválidas (números fora do intervalo,
         //caracteres não numéricos, etc.). 
         //Permitir que o usuário gere outra tabuada ou encerre o programa.
-
         public void GeradorTabuadaPersonalizado()
         {
             try
@@ -906,18 +904,16 @@ namespace Biblioteca.Manutencao
 
                     if (escolha == "1")
                     {
-                        Console.WriteLine("Encerrando o programa...");
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Opção inválida. O programa será reiniciado.");
+                        Console.WriteLine("Encerrando programa.");
                     }
                 }
             }
             catch (Exception) { throw; }
         }
-
 
         //Questão 9: Validação de CNPJ
         //Crie um programa que valida um CNPJ de acordo com as regras oficiais.
@@ -932,5 +928,140 @@ namespace Biblioteca.Manutencao
         //O cálculo dos dígitos verificadores é semelhante ao do CPF, mas com pesos diferentes: 
         //Para o primeiro dígito verificador, os pesos são: 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2. 
         //Para o segundo dígito verificador, os pesos são: 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2.
+
+        #endregion
+        #region : desafio alura OPP
+        //Questão do mestre
+        //crie duas classes para manter podcasts e episódios.
+        //O podcast possui um nome, um apresentador e um total de episódios.
+        //Um podcast nasce com um nome e um apresentador definido.
+        //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+        //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
+        //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+        //O episódio deve ter um número, um título, uma duração e um resumo.
+        //O resumo do episódio será concatenado com os valores de número, título,
+        //duração e convidados do episódio.
+        //Para finalizar, todo episódio possui um método AdicionarConvidados(),
+        //que será chamado quantas vezes forem necessárias.
+
+        //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo
+        //ou se precisa ser uma propriedade
+        //e também se precisamos utilizar get e set para todos os valores.
+
+        public void DesafioAlura()
+        {
+            try
+            {
+                var podcast = new Podcast("Sem Logica", "Conrado");
+
+                while (true)
+                {
+                    Validacoes validacao = new();
+                    validacao.MenuDesafioAlura();
+
+                    if (!int.TryParse(Console.ReadLine(), out int opcao))
+                    {
+                        Console.WriteLine("\nEscolher entre os numeros 1 e 4");
+                    }
+
+                    if (opcao == 1)
+                    {
+                        while (true)
+                        {
+                            Console.Write("Número do Episódio: ");
+                            if (!int.TryParse(Console.ReadLine(), out int numero) || numero < 1)
+                            {
+                                Console.WriteLine("\nEscolher apenas numeros inteiros positivos");
+                                continue;
+                            }
+                            Console.Write("Título do Episódio: ");
+                            string titulo = Console.ReadLine();
+
+                            Console.Write("Duração do Episódio (minutos): ");
+                            if (!int.TryParse(Console.ReadLine(), out int duracao) || duracao < 1)
+                            {
+                                Console.WriteLine("\nEscolher apenas numeros inteiros positivos");
+                                Console.WriteLine("Voltando ao menu inicial...");
+                                Console.ReadKey();
+                                Console.Clear();
+                                break;
+                            }
+
+                            var episodio = new Episodio(numero, titulo, duracao);
+                            podcast.AdicionarEpisodio(episodio);
+                            Console.WriteLine("Episódio adicionado com sucesso!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        }
+                    }
+                    else if (opcao == 2)
+                    {
+                        if (podcast.TotalEpisodios == 0)
+                        {
+                            Console.WriteLine("Nenhum episódio criado. Crie um novo episódio.");
+                            Console.ReadKey();
+                            Console.Clear();
+                            return;
+                        }
+
+                        Console.Write("Número do Episódio para adicionar convidado: ");
+                        if (!int.TryParse(Console.ReadLine(), out int numeroEpisodio) || numeroEpisodio < 1)
+                        {
+                            Console.WriteLine("Informar apenas numeros inteiros positivos");
+                            Console.ReadKey();
+                            Console.Clear();
+                            continue;
+                        }
+                        var episodio = podcast.BuscarEpisodioPorNumero(numeroEpisodio);
+
+                        if (episodio != null)
+                        {
+                            Console.Write("Nome do Convidado: ");
+                            string nomeConvidado = Console.ReadLine();
+                            if (string.IsNullOrEmpty(nomeConvidado))
+                            {
+                                Console.WriteLine("Convidado não adicionado");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                            }
+                            else
+                            {
+                                episodio.AdicionarConvidado(new Convidado(nomeConvidado));
+                                Console.WriteLine("Convidado adicionado com sucesso!");
+                            }
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Episódio não encontrado.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                    }
+                    else if (opcao == 3)
+                    {
+                        podcast.ExibirDetalhes();
+                    }
+                    else if (opcao == 4)
+                    {
+                        Console.WriteLine("O programa será encerrado...");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        #endregion
     }
 }

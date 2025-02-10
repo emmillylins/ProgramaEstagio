@@ -1,22 +1,12 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
-using Microsoft.VisualBasic;
-using System.Drawing;
-using System;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.Intrinsics.X86;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Metrics;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region Questões 2° Desafio C#
         public void VerificaNumeroPrimo()
         {
             try
@@ -489,6 +479,11 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Questões 3° Desafio C#
+
+        #region 1° Questão Jogo de Adivinhação
         // Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
         // Regras:
         // Caso o palpite não seja um valor válido, não deve ser contado como tentativa
@@ -536,7 +531,10 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        #endregion
 
+
+        #region 2° Questão Verifica Numeros Positivos, Negativos e Zeros
         //Questão 2: Crie um programa que leia uma lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
         public void VerificaNumerosInseridos()
         {
@@ -617,6 +615,12 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region 3° Questão Validação de Senha
+
         //Questão 3: Validação de Senha:
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.O programa deve informar se a senha fornecida atende aos critérios.
         //Regras: Utilize método para validar a senha inserida.
@@ -656,6 +660,11 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region 4° Questão Calculadora com Operações Avançadas
         //Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) 
         //com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
@@ -695,6 +704,12 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region 5° Questão Validação de CPF
+
         //Questão 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
 
@@ -741,6 +756,12 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region 6° Questão Simulador de Caixa Eletrônico
+
         //        Questão 6: Simulador de Caixa Eletrônico
         //Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         //O programa deve:
@@ -825,6 +846,12 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+
+        #region 7° Questão Jogo da Forca
+
         //        Questão 7: Jogo da Forca
         //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra, letra por letra.O usuário tem 6 tentativas para acertar a palavra.
         //O programa deve:
@@ -915,6 +942,11 @@ namespace Biblioteca.Manutencao
 
             }
         }
+
+        #endregion
+
+
+        #region 8° Questão Gerador de Tabuada Personalizado
         //        Questão 8: Gerador de Tabuada Personalizado
         //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
         //O programa deve:
@@ -959,6 +991,12 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+
+        #endregion
+
+
+        #region 9° Questão Validação de CNPJ
         //        Questão 9: Validação de CNPJ
         //Crie um programa que valida um CNPJ(Cadastro Nacional da Pessoa Jurídica) de acordo com as regras oficiais.O CNPJ deve ter 14 dígitos, e os dois últimos dígitos são verificadores, calculados com base nos 12 primeiros dígitos. O programa deve permitir que o usuário insira o CNPJ e informe se ele é válido ou inválido.
         //Regras de Validação de CNPJ:
@@ -990,6 +1028,71 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        #endregion
+
+        #endregion
+
+        #region Desafio Alura Podcast e Episódio
+        //Questão do mestre
+        //crie três classes para manter podcasts, episódios e convidados.
+        //convidado deve ter um Codigo e um Nome
+        //O podcast possui um Nome, um Apresentador e um TotalEpisodios e uma List<Episodio>.
+        //O episódio deve ter um Número, um Título, uma Duracao, um Resumo, TotalConvidados e uma List<Convidado>.
+        //Um podcast nasce com um nome e um apresentador definido.
+        //Assim, conforme os episódios forem criados, vamos adicioná-los ao podcast.
+        //Um podcast também terá dois métodos, um AdicionarEpisodio() e outro ExibirDetalhes().
+        //O método ExibirDetalhes() deve mostrar o nome do podcast e o apresentador na primeira linha,
+        //seguido pela lista de episódios ordenados por sequência e por fim o total de episódios.
+        //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.
+        //Para finalizar, todo episódio possui um método AdicionarConvidados(), que será chamado quantas vezes forem necessárias.
+
+        //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
+        //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
+        //e também se precisamos utilizar get e set para todos os valores.
+        public void QuestaoPodcast()
+        {
+            try
+            {
+                //Instanciando as classes
+                Console.WriteLine("Menu Podcast");
+                Podcast podcast = new Podcast("PodSemLógica", "Elton John");
+                Episodio episodio = new Episodio();
+                Metodos metodos = new Metodos();
+                while (true)
+                {
+                    Console.WriteLine("Caso deseje adicionar um novo episódio ao podcast digite 1, caso queira exibir os detalhes do podcast digite 2, caso queira sair digite (sair).");
+                    string? opcaoDigitada = Console.ReadLine().ToLower();
+                    if (opcaoDigitada == "sair")
+                    {
+                        break;
+                    }
+                    else if (!int.TryParse(opcaoDigitada, out var opcao))
+                    {
+                        Console.WriteLine("Digite uma opção válida.");
+                    }
+                    else
+                    {
+                        switch (opcao)
+                        {
+                            case 1:
+                                metodos.AdicionarEpisodio(podcast);
+                                break;
+                            case 2:
+                                metodos.ExibirDetalhes(podcast);
+                                break;
+                            default:
+                                Console.WriteLine("Digite uma opção válida.");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }
 

@@ -7,6 +7,7 @@ namespace Biblioteca.Manutencao
 {
     public class Metodos
     {
+        #region Método Retorna Maior e Menor número
         //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
@@ -22,6 +23,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Método Mostrar o Usuário
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -42,7 +46,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+        #endregion
 
+        #region Método Cadastrar Usuário
         public Usuario CadastrarUsuario()
         {
             try
@@ -69,6 +75,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Método Depositar
         public double Depositar()
         {
             try
@@ -83,6 +92,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+        #endregion
+
+        #region Método Sacar
         public double Sacar(List<double> saldo)
         {
             try
@@ -108,6 +120,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Método Cadastrar novo Produto
         public Produto CadastrarProduto()
         {
             try
@@ -147,6 +162,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+
+        #endregion
+
+        #region Método Calcular Valor Total
         public double CalcularValorTotal(List<Produto> produtos)
         {
             try
@@ -171,6 +190,10 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+        #region Método Exibir lista de produtos
         public void ExibirListaProdutos(List<Produto> produtos)
         {
             foreach (Produto produto in produtos)
@@ -178,6 +201,10 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
             }
         }
+
+        #endregion
+
+        #region Método Cadastrar Aluno
 
         public Aluno CadastrarAluno()
         {
@@ -217,6 +244,9 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
+
+        #region Método Exibir Alunos
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
             Console.WriteLine("\nLista de Alunos:");
@@ -248,6 +278,9 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
+
+        #region Método Buscar Aluno por Id
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
             Console.WriteLine("\nBusca aluno pelo seu Id.");
@@ -288,6 +321,10 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+
+        #endregion
+
+        #region Método Calcular
         public void Calcular(int numeroMenu)
         {
             //Pedindo o primeiro número a ser calculado
@@ -337,6 +374,10 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
+
+        #endregion
+
+        #region Método gerar Palavra Misteriosa
         public string PalavraMisteriosa()
         {
             try
@@ -351,6 +392,10 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+
+        #endregion
+
+        #region Método Gerar Tabuada
         public void GerarTabuada(int numeroInserido)
         {
             Console.WriteLine($"Tabuada do {numeroInserido}\n");
@@ -359,5 +404,124 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"{numeroInserido} x {i} = {(numeroInserido * i)}");
             }
         }
+
+        #endregion
+
+        #region Método Adicionar Episódio
+        public void AdicionarEpisodio(Podcast pod)
+        {
+            try
+            {
+                Console.WriteLine("Digite o título do episódio: ");
+                string? titulo = Console.ReadLine();
+                Console.WriteLine("Digite a duração do episódio: ");
+                if (!int.TryParse(Console.ReadLine(), out var duracao))
+                {
+                    Console.WriteLine("Digite um valor numérico válido");
+                }
+                else
+                {
+                    Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
+                    episodio.Duracao = duracao;
+                    pod.Episodios.Add(episodio);
+                    pod.TotalEpisodios++;
+                    while (true)
+                    {
+                        Console.WriteLine("Deseja adicionar mais algum convidado a este episódio ?");
+                        Console.Write("\nDigite sim ou nao: ");
+                        string? opcaoDigitada = Console.ReadLine().ToLower();
+                        if (opcaoDigitada == "sim")
+                        {
+                            Console.Write("\nDigite o nome do convidado: ");
+                            string? nomeConvidado = Console.ReadLine();
+                            Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
+                            episodio.Convidados.Add(convidado);
+                            episodio.TotalConvidados++;
+                        }
+                        else if (opcaoDigitada == "nao")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opção digita é inválida.");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            { throw; }
+        }
+
+        #endregion
+
+        #region Método Exibir Detalhes do podcast e episódio
+        public void ExibirDetalhes(Podcast pod)
+        {
+            try
+            {
+                Console.WriteLine(pod.Resumo);
+                if (pod.Episodios.Count == 0)
+                {
+                    Console.WriteLine("Não há episódios cadastrados");
+                    Console.Write("\nDeseja adicionar um episódio ?\n Digite sim ou nao: ");
+                    string? opcaoDigitada = Console.ReadLine();
+                    if (opcaoDigitada == "sim")
+                    {
+                        Console.WriteLine("Digite o título do episódio: ");
+                        string? titulo = Console.ReadLine();
+                        Console.WriteLine("Digite a duração do episódio: ");
+                        if (!int.TryParse(Console.ReadLine(), out var duracao))
+                        {
+                            Console.WriteLine("Digite um valor numérico válido");
+                            return;
+                        }
+                        Episodio episodio = new Episodio(pod.TotalEpisodios + 1, titulo);
+                        episodio.Duracao = duracao;
+                        pod.Episodios.Add(episodio);
+                        pod.TotalEpisodios++;
+                        while (true)
+                        {
+                            Console.WriteLine("Deseja adicionar algum convidado a este episódio ?");
+                            Console.Write("\nDigite sim ou nao: ");
+                            string? opcaoConvidadoDigitada = Console.ReadLine().ToLower();
+                            if (opcaoConvidadoDigitada == "sim")
+                            {
+                                Console.Write("\nDigite o nome do convidado: ");
+                                string? nomeConvidado = Console.ReadLine();
+                                Convidado convidado = new Convidado(nomeConvidado, episodio.TotalConvidados + 1);
+                                episodio.Convidados.Add(convidado);
+                                episodio.TotalConvidados++;
+                            }
+                            else if (opcaoConvidadoDigitada == "nao")
+                            {
+                                ExibirDetalhes(pod);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Opção digita é inválida.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Episodio episodio in pod.Episodios)
+                    {
+                        Console.WriteLine(episodio.Resumo);
+                        foreach (Convidado convidado in episodio.Convidados)
+                        {
+                            Console.WriteLine(convidado.Resumo);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }

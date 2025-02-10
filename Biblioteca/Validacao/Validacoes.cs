@@ -5,6 +5,8 @@ namespace Biblioteca.Validacao
 {
     public class Validacoes
     {
+
+        #region Valida número primo
         public bool ValidaNumeroPrimo(int num)
         {
             try
@@ -23,6 +25,10 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Valida número par ou ímpar
+
         public bool ValidaNumeroParImpar(int numero)
         {
             try
@@ -39,6 +45,9 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Valida número multiplo de 3
         public bool ValidaMultiplosDeTres(int numero)
         {
             try
@@ -54,6 +63,10 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Valida número multiplo de 10
 
         //Validador para saber se número é múltiplo de dez.
         public bool ValidaMultiploDeDez(double valorSaque)
@@ -72,7 +85,9 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
         }
 
+        #endregion
 
+        #region Valida se o usuário existe
 
         public bool ValidaUsuarioExistente(string login, string senha)
         {
@@ -92,6 +107,10 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Valida senha
         public bool ValidarSenha(string senha)
         {
             try
@@ -136,6 +155,10 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Valida CPF
         public bool ValidarCpf(string cpf)
         {
             try
@@ -207,6 +230,10 @@ namespace Biblioteca.Validacao
             }
             catch (Exception) { throw; }
         }
+
+        #endregion
+
+        #region Valida CNPJ
         public bool ValidarCnpj(string cnpj)
         {
             try
@@ -279,5 +306,6 @@ namespace Biblioteca.Validacao
             catch (Exception) { throw; }
 
         }
+        #endregion
     }
 }

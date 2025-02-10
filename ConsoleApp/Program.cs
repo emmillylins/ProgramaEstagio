@@ -25,6 +25,7 @@ class Program
             //manutencao.JogoDaForca();
             //manutencao.GeradorTabuada();
             //manutencao.VerificaCnpj();
+            manutencao.QuestaoPodcast();
 
             Console.ReadKey();
 
@@ -32,6 +33,7 @@ class Program
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            Console.ReadKey();
         }
     }
 }

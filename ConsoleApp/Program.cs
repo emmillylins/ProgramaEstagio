@@ -18,7 +18,8 @@ class Program
             //manutencao.ProgramaLeitorNumeros();
             //manutencao.ProgramaValidarSenha();
             //manutencao.ProgramaValidarCPF();
-            manutencao.ProgramaValidarCNPJ();
+            //manutencao.ProgramaValidarCNPJ();
+            manutencao.MenuPodcast();
 
             Console.ReadKey();
         }

@@ -488,9 +488,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-//        Questão 3: Validação de Senha:
-//Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial. O programa deve informar se a senha fornecida atende aos critérios.
-//        Regras: Utilize método para validar a senha inserida.
+        //        Questão 3: Validação de Senha:
+        //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial. O programa deve informar se a senha fornecida atende aos critérios.
+        //        Regras: Utilize método para validar a senha inserida.
 
         public void ProgramaValidarSenha()
         {
@@ -512,10 +512,10 @@ namespace Biblioteca.Manutencao
 
         }
 
-//        Questão 4: Calculadora com Operações Avançadas:
+        //        Questão 4: Calculadora com Operações Avançadas:
 
-//Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
-//COMECEI MAS NAO CONSEGUI TERMINAR
+        //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração, multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas usando um menu e estruturas de controle(switch/case).
+        //COMECEI MAS NAO CONSEGUI TERMINAR
 
         public void CalculadoraAvancada()
         {
@@ -538,31 +538,31 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("* - Multiplicação");
                     Console.WriteLine("* - Multiplicação");
 
-                    
+
                 }
             }
             catch (Exception) { throw; }
         }
 
-//Questão 5: Validação de CPF
+        //Questão 5: Validação de CPF
 
-//Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
+        //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos). O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
 
-//Regras de Validação de CPF
-//        O CPF deve ter 11 dígitos.
-//Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
-//O cálculo dos dígitos verificadores é feito da seguinte forma: 
+        //Regras de Validação de CPF
+        //        O CPF deve ter 11 dígitos.
+        //Os dois últimos dígitos são verificadores, calculados com base nos 9 primeiros dígitos. 
+        //O cálculo dos dígitos verificadores é feito da seguinte forma: 
 
-//Para o primeiro dígito verificador: 
-//Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
-//Soma-se os resultados.
-//O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        //Para o primeiro dígito verificador: 
+        //Multiplica-se cada um dos 9 primeiros dígitos por um peso que começa em 10 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
 
-//Para o segundo dígito verificador: 
-//Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
-//Soma-se os resultados.
-//O dígito verificador é o resto da divisão dessa soma por 11. 
-//Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
+        //Para o segundo dígito verificador: 
+        //Multiplica-se cada um dos 10 primeiros dígitos(9 originais + primeiro dígito verificador) por um peso que começa em 11 e diminui até 2. 
+        //Soma-se os resultados.
+        //O dígito verificador é o resto da divisão dessa soma por 11. 
+        //Se o resto for menor que 2, o dígito é 0; caso contrário, é 11 menos o resto.
 
         public void ProgramaValidarCPF()
         {
@@ -643,15 +643,50 @@ namespace Biblioteca.Manutencao
         //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
         //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
         //e também se precisamos utilizar get e set para todos os valores.
-        public void CriarPodcast()
+        public void MenuPodcast()
         {
             try
             {
-                Podcasts podcast1 = new("Sem Lógica", "Clarinha");
-                var metodos = new Metodos();
+                // Criação de uma instância de GerarPodcast
+                GerarPodcast podcast = new GerarPodcast();
 
-            } catch (Exception) { throw; }
+                while (true)
+                {
+                    Console.WriteLine("Bem vindo ao menu do Podcast!");
+                    Console.WriteLine("O que você deseja fazer?\n1 - Exibir detalhes do Podcast\n2 - Adicionar episódio\n3 - Sair");
+
+                    var escolhasMenuPodcast = Console.ReadLine();
+
+                    // Tentar converter a entrada para um inteiro
+                    if (!int.TryParse(escolhasMenuPodcast, out int escolhasMenu))
+                    {
+                        Console.WriteLine("Responda apenas com números.");
+                        continue; 
+                    }
+
+                    
+                    switch (escolhasMenu)
+                    {
+                        case 1:
+                            podcast.ExibirDetalhes();
+                            break;
+                        case 2:
+                            podcast.AdicionarEpisodio();
+                            break;
+                        case 3:
+                            return; 
+                        default:
+                            Console.WriteLine("Opção inválida. Tente novamente.");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
+
         #endregion
 
     }

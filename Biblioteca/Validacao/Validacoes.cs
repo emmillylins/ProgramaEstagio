@@ -240,14 +240,14 @@ namespace Biblioteca.Validacao
             {
                 int[] pesosPrimeiraVerificacao = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
                 int[] pesosSegundaVerificacao = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-                if (cnpj.Length < 14 || cnpj.Length > 14)
-                {
-                    Console.WriteLine("O CNPJ deve possuir 14 caracteres.\n");
-                    return false;
-                }
-                if (int.TryParse(cnpj, out int a))
+                if (!int.TryParse(cnpj, out int a))
                 {
                     Console.WriteLine("O CNPJ só pode possuir números.\n");
+                    return false;
+                }
+                else if (cnpj.Length < 14 || cnpj.Length > 14)
+                {
+                    Console.WriteLine("O CNPJ deve possuir 14 caracteres.\n");
                     return false;
                 }
                 else

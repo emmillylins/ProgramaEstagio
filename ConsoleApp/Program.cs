@@ -23,8 +23,8 @@ class Program
             //manutencao.VerificarCpf();
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
-            manutencao.GeradorTabuada();
-            //manutencao.VerificaCnpj();
+            //manutencao.GeradorTabuada();
+            manutencao.VerificaCnpj();
             //manutencao.QuestaoPodcast();
 
             Console.ReadKey();

@@ -20,10 +20,10 @@ class Program
             //manutencao.VerificaNumerosInseridos();
             //manutencao.VerificarSenha();
             //manutencao.Calculadora();
-            manutencao.VerificarCpf();
+            //manutencao.VerificarCpf();
             //manutencao.SimuladorCaixaEletronico();
             //manutencao.JogoDaForca();
-            //manutencao.GeradorTabuada();
+            manutencao.GeradorTabuada();
             //manutencao.VerificaCnpj();
             //manutencao.QuestaoPodcast();
 

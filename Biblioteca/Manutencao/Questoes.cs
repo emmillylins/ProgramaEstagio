@@ -979,16 +979,14 @@ namespace Biblioteca.Manutencao
                     {
                         return;
                     }
-                    else if (!int.TryParse(numeroInserido, out int numero) || numero < 1 || numero > 10)
+                    else if (!int.TryParse(numeroInserido, out int numero))
                     {
-                        if (numero < 1 || numero > 10)
-                        {
-                            Console.WriteLine("Número fora do invervalo.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Digite somente números inteiros.");
-                        }
+                        Console.WriteLine("Digite somente números inteiros.");
+
+                    }
+                    else if (numero < 1 || numero > 10)
+                    {
+                        Console.WriteLine("Digite somente um número de 1 a 10.");
                     }
                     else
                     {

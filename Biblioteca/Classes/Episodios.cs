@@ -1,26 +1,36 @@
-﻿
+﻿using System.Globalization;
+using Biblioteca.Classes;
 
-namespace Biblioteca.Classes
+public class Episodios
 {
-
-   
-    public class Episodios
+    public Episodios(int numero, string titulo, double duracao)
     {
-        public Episodios(int numero, string titulo, int duracao, string resumo, int totalConvidados, List<Convidado> convidados)
-        {
-            this.numero = numero;
-            Titulo = titulo;
-            Duracao = duracao;
-            Resumo = resumo;
-            TotalConvidados = totalConvidados;
-            Convidados = convidados;
-        }
+        Numero = numero;
+        Titulo = titulo;
+        Duracao = duracao;
+        Convidados = new List<Convidado>();
+    }
 
-        public int numero { get; set; }
-        public string Titulo { get; set; }
-        public int Duracao { get; set; }
-        public string Resumo { get; set; }
-        public int TotalConvidados { get; set; }
-        public List<Convidado> Convidados { get; set; } = [];
+    public int Numero { get; }
+    public string Titulo { get; }
+    public double Duracao { get; }
+    public int TotalConvidados => Convidados.Count();
+    public List<Convidado> Convidados = new List<Convidado>();
+
+    public void AdicionarConvidado(Convidado convidado)
+    {
+        Convidados.Add(convidado);
+    }
+    
+
+    public string Resumo
+    {
+        get
+        {
+            string convidados = Convidados.Any()
+                ? string.Join(", ", Convidados.Select(c => c.Nome))
+                : "Nenhum convidado";
+            return $"Episódio {Numero}: {Titulo} ({Duracao} min) - Convidados: {convidados}";
+        }
     }
 }

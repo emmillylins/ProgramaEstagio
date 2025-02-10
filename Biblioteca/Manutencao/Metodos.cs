@@ -1,14 +1,17 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
-using System.Reflection.Metadata.Ecma335;
 
 
 namespace Biblioteca.Manutencao
 {
+
+    #region Metodos
     public class Metodos
     {
         //O primeiro vai ser sempre o maior e o segundo vai ser sempre o menor.
+
+        #region retonar numero maior
         public (double, double) RetornaNumeroMaiorMenor(List<double> listaNumeros)
         {
             try
@@ -22,7 +25,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Metodo Mostrar Usuario
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -43,7 +48,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+        #endregion
 
+        #region Metodo Cadastrar Usuario
         public Usuario CadastrarUsuario()
         {
             try
@@ -69,7 +76,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Metodo Depositar
         public double Depositar()
         {
             try
@@ -84,6 +93,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+        #endregion
+
+        #region Metodo Sacar
         public double Sacar(List<double> saldo)
         {
             try
@@ -109,6 +121,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Metodo Cadastrar Produto
         public Produto CadastrarProduto()
         {
             try
@@ -148,6 +163,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
+        #endregion
+
+        #region Metodo calcular Valor total
         public double CalcularValorTotal(List<Produto> produtos)
         {
             try
@@ -172,6 +190,9 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        #endregion
+
+        #region Metodo exibir lista de produtos
         public void ExibirListaProdutos(List<Produto> produtos)
         {
             foreach (Produto produto in produtos)
@@ -179,6 +200,9 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"\n Nome do Produto: {produto.Nome}\nPreço: {produto.Preco}");
             }
         }
+        #endregion
+
+        #region Metodo Cadastrar aluno
 
         public Aluno CadastrarAluno()
         {
@@ -217,6 +241,9 @@ namespace Biblioteca.Manutencao
                 throw;
             }
         }
+        #endregion
+
+        #region Metodo exibir alunos
 
         public void ExibirAlunos(List<Aluno> listaAlunos)
         {
@@ -248,6 +275,9 @@ namespace Biblioteca.Manutencao
                 }
             }
         }
+        #endregion
+
+        #region Metodo Buscar alunos por ID
 
         public void BuscaAlunoPorId(List<Aluno> alunos)
         {
@@ -289,8 +319,9 @@ namespace Biblioteca.Manutencao
                     break;
             }
         }
+        #endregion
 
-        // metodo para inserir numero na lista
+        #region metodo para inserir numero na lista
         public void InserirNumeroLista(List<int> listaInteiros)
         {
             try
@@ -307,7 +338,9 @@ namespace Biblioteca.Manutencao
             catch (Exception ex) { throw; }
 
         }
-        // metodo para mostrar o numero na lista e seus tipos 
+        #endregion
+
+        #region metodo para mostrar o numero na lista e seus tipos 
         public void MostrarNumerosLista(List<int> listaInteiros)
         {
             try
@@ -342,6 +375,9 @@ namespace Biblioteca.Manutencao
             catch (Exception ex) { throw; }
         }
 
+        #endregion
+
+        #region metodo validar senha
         public void ValidarSenha()
         {
             try
@@ -370,6 +406,8 @@ namespace Biblioteca.Manutencao
             catch (Exception ex) { throw; }
 
         }
+        #endregion
+
         #region metodos calculadora
         public double? Soma()
         {
@@ -525,8 +563,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-        #endregion 
+        #endregion
 
+        #region metodo tabuada
         public void Tabuada()
         {
             try
@@ -546,8 +585,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
 
-
+            #endregion
         }
+        #region metodo validar entada usuario
         public void ValidarEntradaUsuario()
         {
             var metodos = new Validacoes();
@@ -571,6 +611,8 @@ namespace Biblioteca.Manutencao
 
 
         }
+        #endregion
+
         #region Validar CPF/CNPJ
         public void ValidarCpf(String cpf)
         {
@@ -742,50 +784,142 @@ namespace Biblioteca.Manutencao
 
 
         }
-        #endregion 
+        #endregion
 
         #region METODOS PARA O DESAFIOS POO
 
-        public void AdicionarEpisodio(Podcasts podcast)
-        {
-
-            while (true) {
-
-                Console.WriteLine("Insira um episódio!! ");
-
-                Console.WriteLine("Insira o número do episodio");
-
-
-
-                
-            }
-
-
-
-
-        }
-
-
-        public static void ExibirDetalhes(Podcasts podcats1)
+        #region Adicionar Episodio 
+        public void AdicionarEpisodio(Podcasts podcasts)
         {
             try
             {
-                Console.WriteLine(podcats1.NomePodcast, podcats1.ApresentadorPodcast);
-
-             
 
 
+                while (true)
+                {
+                    Console.WriteLine("\nDigite o número do episódio (ou 0 para sair):");
+
+                    if (!int.TryParse(Console.ReadLine(), out int numeroEpisodio) || numeroEpisodio < 0 || podcasts.ListaEpisodios.Any(podcasts => podcasts.Numero == numeroEpisodio))
+                    {
+                        Console.WriteLine("Entrada Inválida. Tente novamente!");
+                        continue;
+                    }
+
+
+                    if (numeroEpisodio == 0)
+                    {
+                        break;
+                    }
+
+                    Console.WriteLine("Digite o título do episódio:");
+                    string tituloEpisodio = Console.ReadLine()!;
+
+                    if (string.IsNullOrEmpty(tituloEpisodio))
+                    {
+                        Console.WriteLine("O titulo não pode ser nulo! ");
+                        break;
+                    }
+
+                    Console.WriteLine("Digite a duração do episódio (em minutos):");
+
+
+                    if (!double.TryParse(Console.ReadLine(),CultureInfo.InvariantCulture, out double duracaoEpisodio) || duracaoEpisodio < 0)
+                    {
+                        Console.WriteLine("Duração inválida. Tente novamente.");
+                        continue;
+                    }
+
+                    Episodios novoEpisodio = new Episodios(numeroEpisodio, tituloEpisodio, duracaoEpisodio);
+
+                    int contador = 1;
+                    while (true)
+                    {
+                        Console.WriteLine("\nDeseja inserir convidados?");
+                        Console.WriteLine("1 - SIM\n2 - NÃO");
+
+                        if (!int.TryParse(Console.ReadLine(), out int opcao) || opcao < 1 || opcao > 2)
+                        {
+                            Console.WriteLine("Opção inválida! Digite 1 ou 2.");
+                            continue;
+                        }
+
+                        if (opcao == 2)
+                        {
+                            break;
+                        }
+
+
+                        while (true)
+                        {
+                            Console.Write("\nCódigo do convidado (ou 0 para parar): ");
+
+                            if (!int.TryParse(Console.ReadLine(), out int codigo))
+                            {
+                                Console.WriteLine("Código inválido. Tente novamente.");
+                                continue;
+                            }
+
+                            if (codigo == 0)
+                            {
+                                break;
+                            }
+
+                            Console.Write("Nome do convidado: ");
+                            string nomeConvidado = Console.ReadLine()!;
+                            if (string.IsNullOrEmpty(nomeConvidado))
+                            {
+                                Console.WriteLine("O nome do convidado não pode ser nulo! ");
+                                break;
+                            }
+                            else
+                            {
+
+                                novoEpisodio.AdicionarConvidado(new Convidado(contador, nomeConvidado));
+                                contador++;
+                            }
+
+                            break;
+                        }
+
+
+                        podcasts.AdicionarEpisodio(novoEpisodio);
+                        Console.WriteLine("Episódio adicionado com sucesso!");
+                    }
+                }
+            }
+            catch (Exception ex) { throw; }
+            }
+        #endregion
+
+        #region Exibir Detalhes
+        public void ExibirDetalhes(Podcasts podcasts)
+        {
+            try
+            {
+                Console.WriteLine($"Podcast: {podcasts.NomePodcast}");
+                Console.WriteLine($"Apresentador: {podcasts.ApresentadorPodcast}");
+                Console.WriteLine("Episódios:");
+
+
+                foreach (var episodio in podcasts.ListaEpisodios)
+                {
+                    Console.WriteLine(episodio.Resumo);
+                }
+
+                Console.WriteLine($"Total de Episódios: {podcasts.ListaEpisodios.Count()}");
+
+            }
+            catch (Exception) { throw; }
 
 
 
-            }catch (Exception) { throw; }
-          
-
-           
         }
-
+        #endregion
 
 
         #endregion
+
+        #endregion
+
     }
 }

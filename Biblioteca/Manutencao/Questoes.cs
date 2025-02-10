@@ -1,12 +1,12 @@
 ﻿using Biblioteca.Classes;
 using Biblioteca.Validacao;
 using System.Globalization;
-using System.Runtime.Intrinsics.X86;
 
 namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region Verifica Numero primo
         public void VerificaNumeroPrimo()
         {
             try
@@ -31,7 +31,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Exibir numero par e impar
         //Questão de João Gabriel
         // Escreva um programa C# que solicite ao usuário 5 números inteiros 
         // O programa deve armazenar esses números em uma lista e, ao final,
@@ -80,7 +82,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Listar numeros positvos
         //Questão de Elton
         //Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
         // apenas os números positivos em uma lista.
@@ -113,7 +117,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Exibe quantidade de multiplos de tres
         // Questão de Vanessa
         //Escreva um programa que solicite ao usuario 5 números inteiros
         // Determine quantos deles são múltiplo de 3
@@ -144,7 +150,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Informa numero Maior e menor
         // Questão de Clara
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
         //  e qual é o menor digitado
@@ -187,12 +195,16 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region menu Interativo
 
         //Crie um programa que exiba um menu interativo com as seguintes opções:
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
         //3 - Sair
         //O programa deve validar as opções digitadas e permitir que o usuário cadastre nomes em uma lista até escolher a opção de sair.
+
 
         public void MenuInterativo()
         {
@@ -239,7 +251,9 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"Ocorreu um erro: {ex.Message}");
             }
         }
+        #endregion
 
+        #region Sistema de login
 
         //Sistema de Login com Tentativas Limitadas
         //Crie um programa que simule um sistema de login.
@@ -293,10 +307,11 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Número de tentativas excedido.");
             }
             catch (Exception) { throw; }
-            ;
+
         }
+        #endregion
 
-
+        #region Caixa eletronico Simples
         //Caixa Eletrônico Simples
         //Desenvolva um programa que simule um caixa eletrônico.
         //O usuário começa com um saldo inicial.
@@ -366,6 +381,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Listar Produto preços
 
         //Cadastro de Produtos com Preços e Cálculo de Total
         //Crie um programa que permita cadastrar produtos com nome e preço.        
@@ -419,8 +437,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-
+        #region Gereciamento Alunos
         //Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
         //O sistema deve permitir:
@@ -480,19 +499,20 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Forms 3
+
+        #region QUESTÃO 1
         //Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um
         // número secreto entre 1 e 100?
         //Regras:
         //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
         //Se o palpite for maior que o número secreto: mostre uma mensagem personalizada;
         // Se o palpite for menor que o número secreto: mostre uma mensagem personalizada;
-
-        #region Forms 3
-
-        #region QUESTÃO 1
         public void JogoNumeroAdvinhação()
         {
+
             try
             {
                 // numeros aleatórios 
@@ -890,9 +910,6 @@ namespace Biblioteca.Manutencao
 
         #endregion
 
-
-
-
         #region POO ALURA DESAFIO 
 
         //Questão do mestre
@@ -916,7 +933,6 @@ namespace Biblioteca.Manutencao
         //Esse é o desafio! O objetivo é colocar tudo o que aprendemos em prática.
         //Isso inclui o construtor, a verificação se o atributo pode ser apenas um atributo ou se precisa ser uma propriedade
         //e também se precisamos utilizar get e set para todos os valores.
-        #endregion
 
 
 
@@ -931,7 +947,7 @@ namespace Biblioteca.Manutencao
 
                 while (true)
                 {
-                    Console.WriteLine("Insira umas das opções abaixo:\n1-Adicionar Episódio\n2-Exibir Detalhes\n3-Adicionar convidados\n4-Sair");
+                    Console.WriteLine("Insira umas das opções abaixo:\n1-Adicionar Episódio\n2-Exibir Detalhes\n3-Sair\n");
                     if (!int.TryParse(Console.ReadLine(), out var opcao))
                     {
                         Console.WriteLine("Insira uma opção válida");
@@ -940,15 +956,12 @@ namespace Biblioteca.Manutencao
                     {
 
                         case 1:
-                            // adicionar episodio
+                            metodos.AdicionarEpisodio(podcast1);
                             break;
                         case 2:
-                            // exibir detalhes do podcast
+                            metodos.ExibirDetalhes(podcast1);
                             break;
                         case 3:
-                            // adicionar convidados
-                            break;
-                        case 4:
                             Console.WriteLine("Saindo do programa...");
                             return;
                         default:
@@ -967,10 +980,12 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
     }
 }
 
-    
+
 
 
 

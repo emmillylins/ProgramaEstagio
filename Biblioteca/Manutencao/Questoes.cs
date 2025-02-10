@@ -7,6 +7,7 @@ namespace Biblioteca.Manutencao
 {
     public class Questoes
     {
+        #region Verificação de Números Primos
         public void VerificaNumeroPrimo()
         {
             try
@@ -31,7 +32,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Exibir Numeros Pares e Impares
         //Questão de João Gabriel
         // Escreva um programa C# que solicite ao usuário 5 números inteiros 
         // O programa deve armazenar esses números em uma lista e, ao final,
@@ -80,7 +83,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Listar Números Positivos
         //Questão de Elton
         //Escreva um program em C# que solicita ao usuário 7 números inteiros e armazene
         // apenas os números positivos em uma lista.
@@ -113,6 +118,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Exibição de Múltiplos de Três
 
         // Questão de Vanessa
         //Escreva um programa que solicite ao usuario 5 números inteiros
@@ -145,6 +153,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
         }
 
+        #endregion
+
+        #region Informar Número Maior e Menor
         // Questão de Clara
         //Escreva um programa que solicite ao usuário 5 números e informe qual é o maior digitado
         //  e qual é o menor digitado
@@ -187,7 +198,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
+        #region Menu Interativo
         //Crie um programa que exiba um menu interativo com as seguintes opções:
         //1 - Cadastrar usuário
         //2 - Listar usuários cadastrados
@@ -238,7 +251,9 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"Ocorreu um erro: {ex.Message}");
             }
         }
+        #endregion
 
+        #region Sistema de Login
 
         //Sistema de Login com Tentativas Limitadas
         //Crie um programa que simule um sistema de login.
@@ -294,8 +309,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
             
         }
+        #endregion
 
-
+        #region Caixa Eletrônico Simples
         //Caixa Eletrônico Simples
         //Desenvolva um programa que simule um caixa eletrônico.
         //O usuário começa com um saldo inicial.
@@ -365,6 +381,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+
+        #region Cadastro de Produtos
 
         //Cadastro de Produtos com Preços e Cálculo de Total
         //Crie um programa que permita cadastrar produtos com nome e preço.        
@@ -418,8 +437,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
 
-// Gerenciamento de Alunos e Notas
+        #region Gerenciamento de Alunos e Notas
+        // Gerenciamento de Alunos e Notas
         //Crie um sistema de gerenciamento de alunos e notas.
         //O sistema deve permitir:
         //1. Cadastro de Alunos: O usuário poderá cadastrar alunos informando o nome e adicionar suas 4 notas.
@@ -478,11 +499,12 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-    
 
+        #endregion
 
-     //Forms3
-        //QUESTÃO 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
+        #region Forms3
+
+        # region Questão 1: Como posso criar um jogo simples de adivinhação em C# onde o usuário tenha 5 tentativas para adivinhar um número secreto entre 1 e 100?
 
         //Regras:
         //Caso o palpite não seja um valor válido, não deve ser contado como tentativa
@@ -542,8 +564,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
-    
-     //Questão 2: Leitor de Números Inteiros
+        #endregion
+
+
+        #region Questão 2: Leitor de Números Inteiros
         //Crie um programa que leia uma 
         //lista de números inteiros do usuário e classifique-os em positivos, negativos e zeros.
         public void LeiaListaNumerosInteiros()
@@ -570,8 +594,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-      
-// Questão 3:  Validação de Senha:
+        #endregion
+
+        #region Questão 3:  Validação de Senha:
         //Implemente um sistema de validação de senha que exige pelo menos 8 caracteres,
         //pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.
         //O programa deve informar se a senha fornecida atende aos critérios.
@@ -620,8 +645,10 @@ namespace Biblioteca.Manutencao
         //(?=.*[\W_]): Exige pelo menos um caractere especial (isso inclui qualquer caractere não alfanumérico);
         //.{8,}$: Exige no mínimo 8 caracteres.
 
-        
-       //Questão 4: Calculadora com Operações Avançadas:
+        #endregion
+
+
+        #region Questão 4: Calculadora com Operações Avançadas:
         //Desenvolva uma calculadora que permita ao usuário realizar operações básicas(adição, subtração,
         // multiplicação, divisão) e operações avançadas(potenciação, raiz quadrada) com base em escolhas feitas
         //usando um menu e estruturas de controle(switch/case).
@@ -757,9 +784,12 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-       
 
-        //Questão 5: Validação de CPF
+        #endregion
+
+
+       
+        #region Questão 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
         //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize
         //tratamento de exceções para garantir que o CPF contenha apenas números e tenha o tamanho correto.
@@ -811,8 +841,10 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; };
         }
 
+        #endregion
 
-        //Questão 6: Simulador de Caixa Eletrônico
+
+        # region Questão 6: Simulador de Caixa Eletrônico
         ////Crie um simulador de caixa eletrônico que permite ao usuário sacar dinheiro.
         ////O programa deve:
         ////Solicitar o valor do saque.
@@ -870,8 +902,10 @@ namespace Biblioteca.Manutencao
             }
         }
 
+        #endregion
 
-      // Questão 7: Jogo da Forca
+
+        # region Questão 7: Jogo da Forca
         //Crie um jogo da forca em que o programa escolhe uma palavra aleatória de uma lista e o usuário tenta adivinhar a palavra, letra por letra.O usuário tem 6 tentativas para acertar a palavra.
         //O programa deve:
         //Exibir o progresso do usuário (letras acertadas e letras faltando). 
@@ -917,9 +951,9 @@ namespace Biblioteca.Manutencao
 
             Metodos.FinalizarJogo(palavraEscolhida, palavraOculta);
         }
-     
+        #endregion
 
-        //Questão 8: Gerador de Tabuada Personalizado
+        #region Questão 8: Gerador de Tabuada Personalizado
         //Crie um programa que gera a tabuada de um número fornecido pelo usuário.
         //O programa deve:
 
@@ -999,9 +1033,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-  
+        #endregion
 
-   // Desafio Alura - Criação de PodCast
+        #region Desafio Alura - Criação de PodCast
         public void CriarPodCast()
         {
             try
@@ -1057,6 +1091,38 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+        #endregion
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        #endregion
 
     }
 }

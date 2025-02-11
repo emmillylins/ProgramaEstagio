@@ -14,8 +14,21 @@ public class GerarPodcast
     public void AdicionarEpisodio()
     {
         Console.WriteLine("Adicione um novo episódio ao podcast!");
-        Console.Write("Título: ");
-        string titulo = Console.ReadLine();
+
+        string titulo;
+
+        while (true)
+        {
+            Console.Write("Título: ");
+            titulo = Console.ReadLine(); 
+
+            if (!string.IsNullOrWhiteSpace(titulo))
+            {
+                break; 
+            }
+
+            Console.WriteLine("Digite um título válido.");
+        }
 
         double duracao;
         while (true)
@@ -29,33 +42,77 @@ public class GerarPodcast
             }
             else
             {
-                Console.WriteLine("Erro: Digite um número válido para a duração.");
+                Console.WriteLine("Digite um número válido para a duração.");
             }
         }
 
-        Console.Write("Resumo: ");
-        string resumo = Console.ReadLine();
+        string resumo;
+
+        while (true)
+        {
+            Console.Write("Resumo: ");
+            resumo = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(resumo))
+            {
+                break;
+            }
+
+            Console.WriteLine("Digite um resumo válido.");
+        }
 
         List<Convidado> listaConvidados = new List<Convidado>();
 
-        Console.Write("Deseja adicionar um convidado? Digite sim ou não: ");
-        string respostaConvidadoInserido = Console.ReadLine().ToLower();
+        string respostaConvidadoInserido;
+        while (true)
+        {
+            Console.Write("Deseja adicionar um convidado? Digite sim ou não: ");
+            respostaConvidadoInserido = Console.ReadLine()?.Trim().ToLower();
+
+            if (respostaConvidadoInserido == "sim" || respostaConvidadoInserido == "não")
+            {
+                break;
+            }
+
+            Console.WriteLine("Resposta inválida. Digite apenas 'sim' ou 'não'.");
+        }
 
         if (respostaConvidadoInserido == "sim")
         {
-            while (true)
+            bool continuarAdicionando = true;
+
+            while (continuarAdicionando)
             {
-                Console.Write("Digite o nome do convidado: ");
-                string nomeConvidado = Console.ReadLine();
+                string nomeConvidado;
+                do
+                {
+                    Console.Write("Digite o nome do convidado: ");
+                    nomeConvidado = Console.ReadLine()?.Trim();
+
+                    if (string.IsNullOrWhiteSpace(nomeConvidado))
+                    {
+                        Console.WriteLine("O nome do convidado não pode ser vazio.");
+                    }
+                } while (string.IsNullOrWhiteSpace(nomeConvidado));
 
                 listaConvidados.Add(new Convidado(contadorCodigoConvidado++, nomeConvidado));
 
-                Console.Write("Deseja adicionar mais um? Digite sim ou não: ");
-                string adicionarMaisConvidados = Console.ReadLine().ToLower();
-
-                if (adicionarMaisConvidados == "não")
+                while (true)
                 {
-                    break;
+                    Console.Write("Deseja adicionar mais um? Digite sim ou não: ");
+                    string adicionarMaisConvidados = Console.ReadLine()?.Trim().ToLower();
+
+                    if (adicionarMaisConvidados == "sim")
+                    {
+                        break; 
+                    }
+                    else if (adicionarMaisConvidados == "não")
+                    {
+                        continuarAdicionando = false;
+                        break;
+                    }
+
+                    Console.WriteLine("Resposta inválida. Digite apenas sim ou não.");
                 }
             }
         }
@@ -64,6 +121,7 @@ public class GerarPodcast
         Episodios novoEpisodio = new Episodios(TotalEpisodios + 1, titulo, duracao, resumo, listaConvidados);
         Episodios.Add(novoEpisodio);
         TotalEpisodios++;
+
     }
 
     public void ExibirDetalhes()

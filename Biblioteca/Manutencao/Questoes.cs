@@ -307,7 +307,7 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine("Número de tentativas excedido.");
             }
             catch (Exception) { throw; }
-            
+
         }
         #endregion
 
@@ -788,7 +788,7 @@ namespace Biblioteca.Manutencao
         #endregion
 
 
-       
+
         #region Questão 5: Validação de CPF
         //Crie um programa que solicita ao usuário um CPF e valida se ele está no formato correto(11 dígitos numéricos).
         //O programa deve permitir que o usuário tente novamente caso o formato esteja incorreto.Utilize
@@ -1036,11 +1036,11 @@ namespace Biblioteca.Manutencao
         #endregion
 
         #region Desafio Alura - Criação de PodCast
+        
         public void CriarPodCast()
         {
             try
             {
-
                 var metodos = new Metodos();
                 Podcast podcast = new("SemLógica - Novo podcast para falar dos perrengues na Tecnologia", "Van");
                 Episodio episodioEscolhido = null;
@@ -1055,31 +1055,48 @@ namespace Biblioteca.Manutencao
                     Console.WriteLine("2. Escolher Episódio. ");
                     Console.WriteLine("3. Adicionar Convidado. ");
                     Console.WriteLine("4. Listar Convidados. ");
-                    Console.WriteLine("5. Sair. ");
+                    Console.WriteLine("5. Listar Episódios. ");
+                    Console.WriteLine("6. Sair. ");
                     Console.Write("Escolha uma opção: ");
-                    string opcao = Console.ReadLine();
+
+                    int opcao;
+                    while (true)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out opcao) && opcao >= 1 && opcao <= 6)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opção inválida! Por favor, escolha um número entre 1 e 6.");
+                            Console.Write("Escolha uma opção: ");
+                        }
+                    }
 
                     switch (opcao)
                     {
-                        case "1":
+                        case 1:
                             Metodos.AdicionarEpisodio(podcast);
                             break;
-                        case "2":
+                        case 2:
                             episodioEscolhido = Metodos.EscolherEpisodio(podcast);
                             break;
-                        case "3":
+                        case 3:
                             if (episodioEscolhido != null)
                                 Metodos.AdicionarConvidado(episodioEscolhido);
                             else
                                 Console.WriteLine("Escolha um episódio primeiro.");
                             break;
-                        case "4":
+                        case 4:
                             if (episodioEscolhido != null)
                                 Metodos.ListarConvidados(episodioEscolhido);
                             else
                                 Console.WriteLine("Escolha um episódio primeiro.");
                             break;
-                        case "5":
+                        case 5:
+                            Metodos.ListarEpisodios(podcast);
+                            break;
+                        case 6:
                             continuar = false;
                             Console.WriteLine("Você está saindo do PodCast. Pressione qualquer tecla e até logo!");
                             break;
@@ -1091,37 +1108,40 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
+
+
         #endregion
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #endregion
 
     }

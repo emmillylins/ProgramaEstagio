@@ -22,9 +22,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-     
 
-      //Mostrar Usuário
+
+        //Mostrar Usuário
         public void MostrarUsuario(List<Usuario> usuarios)
         {
             try
@@ -45,9 +45,9 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
-      
 
-     //Cadastrar Usuário
+
+        //Cadastrar Usuário
         public Usuario CadastrarUsuario()
         {
             try
@@ -73,9 +73,9 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
-    
 
-      // Depositar
+
+        // Depositar
         public double Depositar()
         {
             try
@@ -90,7 +90,7 @@ namespace Biblioteca.Manutencao
             catch (Exception) { throw; }
 
         }
-      
+
 
 
         public double Sacar(List<double> saldo)
@@ -656,23 +656,36 @@ namespace Biblioteca.Manutencao
         //O resumo do episódio será concatenado com os valores de número, título, duração e convidados do episódio.OK
         //
         //
+        
         public static void AdicionarEpisodio(Podcast podcast)
         {
             try
             {
-
                 Console.Clear();
-                Console.Write("Número do Episódio: ");
-                int numero = int.Parse(Console.ReadLine());
+                int numero;
+                while (true)
+                {
+                    Console.Write("Número do Episódio: ");
+                    if (int.TryParse(Console.ReadLine(), out numero))
+                        break;
+                    else
+                        Console.WriteLine("Por favor, insira um número válido.");
+                }
 
                 Console.Write("Título do Episódio: ");
                 string titulo = Console.ReadLine();
 
-                Console.Write("Duração do Episódio (em minutos): ");
-                int duracao = int.Parse(Console.ReadLine());
+                int duracao;
+                while (true)
+                {
+                    Console.Write("Duração do Episódio (em minutos): ");
+                    if (int.TryParse(Console.ReadLine(), out duracao))
+                        break;
+                    else
+                        Console.WriteLine("Por favor, insira um número válido para a duração.");
+                }
 
                 Episodio episodio = new Episodio(numero, duracao * 60000, titulo); // Convertendo para milissegundos
-
                 podcast.AdicionarEpisodio(episodio);
 
                 Console.WriteLine($"Episódio {numero} - {titulo} adicionado com sucesso!");
@@ -681,10 +694,10 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
         public static Episodio EscolherEpisodio(Podcast podcast)
         {
             try
-
             {
                 if (podcast.TotalEpsodios == 0)
                 {
@@ -705,16 +718,23 @@ namespace Biblioteca.Manutencao
                         Console.WriteLine($"{i + 1}. Episódio {podcast.EpisodiosList[i].Numero} - {podcast.EpisodiosList[i].Titulo}");
                     }
 
-                    Console.Write("Escolha o número do episódio (ou 0 para voltar ao menu): ");
-                    int escolha = int.Parse(Console.ReadLine()) - 1;
+                    int escolha;
+                    while (true)
+                    {
+                        Console.Write("Escolha o número do episódio (ou 0 para voltar ao menu): ");
+                        if (int.TryParse(Console.ReadLine(), out escolha) && escolha >= 0 && escolha <= podcast.TotalEpsodios)
+                            break;
+                        else
+                            Console.WriteLine("Por favor, insira um número válido.");
+                    }
 
-                    if (escolha == -1)
+                    if (escolha == 0)
                     {
                         continuarEscolhendo = false;
                     }
-                    else if (escolha >= 0 && escolha < podcast.TotalEpsodios)
+                    else if (escolha >= 1 && escolha <= podcast.TotalEpsodios)
                     {
-                        episodioEscolhido = podcast.EpisodiosList[escolha];
+                        episodioEscolhido = podcast.EpisodiosList[escolha - 1];
                         Console.WriteLine($"Episódio {episodioEscolhido.Numero} - {episodioEscolhido.Titulo} selecionado!");
                         continuarEscolhendo = false;
                     }
@@ -729,16 +749,17 @@ namespace Biblioteca.Manutencao
             }
             catch (Exception) { throw; }
         }
+
         public static void ListarConvidados(Episodio episodio)
         {
             try
             {
-
-
                 Console.Clear();
-                if (episodio.TotalConvidados == 0)
+
+                // Verificar se o episódio tem convidados
+                if (episodio.ConvidadosList.Count == 0)
                 {
-                    Console.WriteLine("Este episódio não possui convidados.");
+                    Console.WriteLine("Não há convidados adicionados a este episódio.");
                 }
                 else
                 {
@@ -758,7 +779,6 @@ namespace Biblioteca.Manutencao
         {
             try
             {
-
                 Console.Clear();
                 Console.Write("Nome do Convidado: ");
                 string nomeConvidado = Console.ReadLine();
@@ -772,14 +792,33 @@ namespace Biblioteca.Manutencao
                 Console.WriteLine($"Convidado {nomeConvidado} - {profissaoConvidado} adicionado ao Episódio {episodio.Numero}.");
                 Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
                 Console.ReadKey();
-
             }
             catch (Exception) { throw; }
-
         }
 
-
+        public static void ListarEpisodios(Podcast podcast)
+        {
+            try
+            {
+                Console.Clear();
+                if (podcast.TotalEpsodios == 0)
+                {
+                    Console.WriteLine("Não há episódios adicionados.");
+                }
+                else
+                {
+                    Console.WriteLine("Episódios disponíveis:");
+                    foreach (var episodio in podcast.EpisodiosList)
+                    {
+                        Console.WriteLine($"- Episódio {episodio.Numero}: {episodio.Titulo}");
+                    }
+                }
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ReadKey();
+            }
+            catch (Exception) { throw; }
+        }
     }
-    
 }
+
 
